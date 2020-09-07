@@ -1,22 +1,7 @@
-<<<<<<< HEAD
+
 name: My Github-Page Blog And Yueque Deploy
 
-on: [push, repository_dispatch]     
-=======
-<<<<<<< HEAD
-name: My Github-Page Blog And Yueque Deploy
-
-on: [push, repository_dispatch]     
-=======
-name: Blog CI/CD
-
-on:
-  repository_dispatch:
-    branches:
-      - dev
-      
->>>>>>> master
->>>>>>> gh-page
+on: [push, repository_dispatch] 
 
 jobs:
   blog-cicd:
