@@ -38,5 +38,5 @@ jobs:
         deploy_key: ${{ secrets.SSH }}
         external_repository: dongaifeng/dongaifeng.github.io
         publish_branch: master
-        publish_dir: ./
-        commit_message: ${{ github.event.head_commit.message }}    
+        publish_dir: ./public
+        commit_message: "我的 ${{ github.event.head_commit.message }}"    
