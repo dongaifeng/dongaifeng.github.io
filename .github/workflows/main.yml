@@ -1,6 +1,6 @@
 name: My Github-Page Blog And Yueque Deploy
 
-on: [push, repository_dispatch]     
+on: [ repository_dispatch]     
 
 jobs:
   blog-cicd:
@@ -39,4 +39,4 @@ jobs:
         external_repository: dongaifeng/dongaifeng.github.io
         publish_branch: gh-page
         publish_dir: ./public
-        commit_message: "push触发action ${{ github.event.head_commit.message }}"    
+        commit_message: "push触发action ${{ github.event.head_commit.message }}"
