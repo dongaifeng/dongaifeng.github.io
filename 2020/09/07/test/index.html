@@ -17,7 +17,7 @@
 
 
 
-<title>vuex 小酌 | dongaifeng</title>
+<title>dongaifeng</title>
 
 
 
@@ -48,6 +48,7 @@
     
 
 
+    <meta name="referrer" content="no-referrer">
 </head>
 
 <body>
@@ -180,7 +181,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">vuex 小酌</h1>
+            <h1 class="post-title"></h1>
             
                 <div class="post-meta">
                     
@@ -189,7 +190,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2019-09-28,&nbsp;&nbsp;15:57:00</a>
+                        Date: <a href="#">2020-09-07,&nbsp;&nbsp;10:08:35</a>
                         </span>
                     
                     
@@ -198,77 +199,7 @@
         </header>
 
         <div class="post-content">
-            <h1 id="1-vuex-是什么"><a href="#1-vuex-是什么" class="headerlink" title="1. vuex 是什么"></a>1. vuex 是什么</h1><pre><code>github站点: https://github.com/vuejs/vuex
-在线文档: https://vuex.vuejs.org/zh-cn/
-简单来说: 对应用中组件的状态进行集中式的管理(读/写)</code></pre><h1 id="2-状态自管理应用"><a href="#2-状态自管理应用" class="headerlink" title="2. 状态自管理应用"></a>2. 状态自管理应用</h1><pre><code>state: 驱动应用的数据源
-view: 以声明方式将state映射到视图
-actions: 响应在view上的用户输入导致的状态变化(包含n个更新状态的方法)</code></pre><p><img src="https://vuex.vuejs.org/zh-cn/images/flow.png" alt="单向数据流"></p>
-<h1 id="3-多组件共享状态的问题"><a href="#3-多组件共享状态的问题" class="headerlink" title="3. 多组件共享状态的问题"></a>3. 多组件共享状态的问题</h1><pre><code>多个视图依赖于同一状态
-来自不同视图的行为需要变更同一状态
-以前的解决办法
-    * 将数据以及操作数据的行为都定义在父组件
-    * 将数据以及操作数据的行为传递给需要的各个子组件(有可能需要多级传递)
-vuex就是用来解决这个问题的</code></pre><p><img src="https://vuex.vuejs.org/zh-cn/images/vuex.png" alt="vuex结构"></p>
-<h1 id="4-vuex-的核心概念"><a href="#4-vuex-的核心概念" class="headerlink" title="4. vuex 的核心概念"></a>4. vuex 的核心概念</h1><h2 id="1-state"><a href="#1-state" class="headerlink" title="1). state"></a>1). state</h2><pre><code>vuex管理的状态对象
-它应该是唯一的
-const state = {
-    xxx: initValue
-}</code></pre><h2 id="2-mutations"><a href="#2-mutations" class="headerlink" title="2). mutations"></a>2). mutations</h2><pre><code>包含多个直接更新state的方法(回调函数)的对象
-谁来触发: action中的commit(&apos;mutation名称&apos;)
-只能包含同步的代码, 不能写异步代码
-const mutations = {
-    yyy (state, data) {
-        // 更新state的某个属性
-    }
-}</code></pre><h2 id="3-actions"><a href="#3-actions" class="headerlink" title="3). actions"></a>3). actions</h2><pre><code>包含多个事件回调函数的对象
-通过执行: commit()来触发mutation的调用, 间接更新state
-谁来触发: 组件中: $store.dispatch(&apos;action名称&apos;)  // &apos;zzz&apos;
-可以包含异步代码(定时器, ajax)
-const actions = {
-    zzz ({commit, state}, data1) {
-        commit(&apos;yyy&apos;, data2)
-    }
-}</code></pre><h2 id="4-getters"><a href="#4-getters" class="headerlink" title="4). getters"></a>4). getters</h2><pre><code>包含多个计算属性(get)的对象
-谁来读取: 组件中: $store.getters.xxx
-const getters = {
-    mmm (state) {
-        return ...
-    }
-}</code></pre><h2 id="5-modules"><a href="#5-modules" class="headerlink" title="5). modules"></a>5). modules</h2><pre><code>包含多个module
-一个module是一个store的配置对象
-与一个组件(包含有共享数据)对应</code></pre><h2 id="6-向外暴露-store-对象"><a href="#6-向外暴露-store-对象" class="headerlink" title="6). 向外暴露 store 对象"></a>6). 向外暴露 store 对象</h2><pre><code>export default new Vuex.Store({
-    state,
-    mutations,
-    actions,
-    getters
-})</code></pre><h2 id="7-组件中"><a href="#7-组件中" class="headerlink" title="7). 组件中:"></a>7). 组件中:</h2><pre><code>import {mapGetters, mapActions} from &apos;vuex&apos;
-export default {
-    computed: mapGetters([&apos;mmm&apos;])
-    methods: mapActions([&apos;zzz&apos;])
-}
-
-{{mmm}} @click=&quot;zzz(data)&quot;</code></pre><h2 id="8-映射-store"><a href="#8-映射-store" class="headerlink" title="8). 映射 store"></a>8). 映射 store</h2><pre><code>import store from &apos;./store&apos;
-new Vue({
-    store
-})</code></pre><h2 id="9-store-对象"><a href="#9-store-对象" class="headerlink" title="9). store 对象"></a>9). store 对象</h2><pre><code>1.所有用vuex管理的组件中都多了一个属性$store, 它就是一个store对象
-2.属性:
-  state: 注册的state对象
-  getters: 注册的getters对象
-3.方法:
-  dispatch(actionName, data): 分发action</code></pre><h1 id="5-将-vuex-引到项目中"><a href="#5-将-vuex-引到项目中" class="headerlink" title="5. 将 vuex 引到项目中"></a>5. 将 vuex 引到项目中</h1><h2 id="1-下载-npm-install-vuex-–save"><a href="#1-下载-npm-install-vuex-–save" class="headerlink" title="1). 下载: npm install vuex –save"></a>1). 下载: npm install vuex –save</h2><h2 id="2-使用-vuex"><a href="#2-使用-vuex" class="headerlink" title="2). 使用 vuex"></a>2). 使用 vuex</h2><pre><code>1.store.js
-    import Vuex from &apos;vuex&apos;
-    export default new Vuex.Store({
-        state,
-        mutations,
-        actions,
-        getters,
-        modules
-    })
-2.main.js
-    import store from &apos;./store.js&apos;
-    new Vue({
-        store
-    })</code></pre>
+            <h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3>
         </div>
 
         
@@ -290,10 +221,6 @@ new Vue({
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/vuex/"># vuex</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -304,8 +231,10 @@ new Vue({
         </section>
         <section class="post-nav">
             
+                <a class="prev" rel="prev" href="/2020/09/07/vue1/">vuex 小酌</a>
             
-            <a class="next" rel="next" href="/2019/09/24/first/">开篇笔记~~~</a>
+            
+            <a class="next" rel="next" href="/2020/08/27/yuque/Diff/">Diff</a>
             
         </section>
 
