@@ -31,12 +31,13 @@ jobs:
     - name: Generate files
       run: hexo generate
       
-    # from https://github.com/peaceiris/actions-gh-pages    
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.SSH }}
-        external_repository: dongaifeng/dongaifeng.github.io
-        publish_branch: master
-        publish_dir: ./public
-        commit_message: "push触发action ${{ github.event.head_commit.message }}"    
+    - name: Deploy blog
+      run: |
+        git clone "https://${{ secrets.GH_REF }}" deploy_git
+        mv ./deploy_git/.git ./public/
+        cd ./public
+        git config user.name "yichen"
+        git config user.email "1097179511@qq.com"
+        git add .
+        git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
+        git push --force --quiet "https://${{ secrets.GE_TOKEN }}@${{ secrets.GH_REF }}" master:master
