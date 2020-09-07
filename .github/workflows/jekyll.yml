@@ -1,0 +1,42 @@
+name: My Github-Page Blog And Yueque Deploy
+
+on: [push, repository_dispatch]     
+
+jobs:
+  blog-cicd:
+    name: Hexo blog build & deploy
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+    - name: Checkout codes
+      uses: actions/checkout@v2
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install dependencies
+      run: |
+        npm install hexo-cli -g
+        npm install yuque-hexo -g
+        npm install
+        yuque-hexo sync
+    - name: Generate files
+      run: hexo generate
+      
+    # from https://github.com/peaceiris/actions-gh-pages    
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.SSH }}
+        external_repository: dongaifeng/dongaifeng.github.io
+        publish_branch: master
+        publish_dir: ./public
+        commit_message: "push触发action ${{ github.event.head_commit.message }}"    
