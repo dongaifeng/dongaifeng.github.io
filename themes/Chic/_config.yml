@@ -4,12 +4,13 @@ navname: Devil Blog
 # navigatior items
 nav:
   首页: /archives
-  生活: /category
-  图片: /tag
+  生活: /life
+  # 归档: /category
+  分类: /tag
   关于: /about
 
 # favicon
-favicon: /favicon.ico
+favicon: /image/avatar.jpeg
 
 # Profile
 nickname: Dong Aifeng
@@ -17,15 +18,14 @@ nickname: Dong Aifeng
 ### this variable is MarkDown form.
 description: 前端工程师一只, **完美的理想主义者.** <br>座右铭： *读书和锻炼，一直在路上*
 avatar: /image/avatar.jpeg
+v: /image/v.jpg
 
 # main menu navigation
 ## links key words should not be changed.
 ## Complete url after key words.
 ## Unused key can be commented out.
 links:
-  Blog: /archives
-  #  Category:
-  #  Tags:
+  Blog: https://blog.csdn.net/weixin_39398244
   #  Link:
   #  Resume:
   #  Publish:
@@ -33,7 +33,6 @@ links:
   #  Gallary:
   #  RSS:
   #  AliPay:
-  ZhiHu: https://www.zhihu.com/people/sirice
   #  LinkedIn:
   #  FaceBook:
   #  Twitter:
@@ -46,9 +45,9 @@ links:
   #  Instagram:
   #  Reddit:
   #  YouTube:
-  #  QQ:
-  #  Weibo:
-  #  WeChat:
+  #  QQ: https://blog.csdn.net/weixin_39398244
+  Weibo: https://weibo.com/2757627147/profile?rightmod=1&wvr=6&mod=personinfo
+  WeChat: /weChat
   Github: https://github.com/dongaifeng
 
 # how links show: you have 2 choice--text or icon.
@@ -66,10 +65,10 @@ post_category_enable: true
 post_copyright_enable: true
 
 post_copyright_author_enable: true
-post_copyright_permalink_enable: true
-post_copyright_license_enable: true
+post_copyright_permalink_enable: false
+post_copyright_license_enable: false
 post_copyright_license_text: Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-post_copyright_slogan_enable: true
+post_copyright_slogan_enable: false
 post_copyright_slogan_text: Do you believe in <strong>DESTINY<strong>?
 ## toc
 post_toc_enable: true
@@ -81,7 +80,7 @@ page_title_enable: true
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: MMMM D, YYYY
+date_format: YYYY-MM-DD,
 time_format: H:mm:ss
 
 # stylesheets loaded in the <head>

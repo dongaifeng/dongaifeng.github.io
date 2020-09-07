@@ -17,6 +17,27 @@
     "hexo-renderer-pug": "^0.0.5",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
-    "raven-js": "^3.27.2"
+    "raven-js": "^3.27.2",
+    "yuque-hexo": "^1.6.5"
+  },
+  "yuqueConfig": {
+    "postPath": "source/_posts/yuque",
+    "cachePath": "yuque.json",
+    "mdNameFormat": "title",
+    "adapter": "hexo",
+    "concurrency": 5,
+    "baseUrl": "https://www.yuque.com/api/v2/",
+    "login": "dongaifeng",
+    "repo": "kb",
+    "token": "0qP4Ur7QKI07csVtM5HdSMBgegv4mel06356ccER",
+    "onlyPublished": false
+  },
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server",
+    "sync": "yuque-hexo sync",
+    "clean:yuque": "yuque-hexo clean"
   }
 }

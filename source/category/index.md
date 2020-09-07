@@ -1,4 +1,4 @@
-## // source\tag\index.md
+## // source\category\index.md
 
 title: Category
 layout: category
