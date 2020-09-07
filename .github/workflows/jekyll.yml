@@ -30,4 +30,5 @@ jobs:
         yuque-hexo sync
     - name: Generate files
       run: hexo generate
+           hexo deploy
     
