@@ -1,6 +1,6 @@
 name: My Github-Page Blog And Yueque Deploy
 
-on: [ repository_dispatch]     
+on: [ push, repository_dispatch]     
 
 jobs:
   blog-cicd:
