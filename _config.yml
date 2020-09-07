@@ -79,5 +79,7 @@ theme: Chic
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/dongaifeng/dongaifeng.github.io.git
+  repo: https://Travis@github.com/dongaifeng/dongaifeng.github.io.git
+  
+  # repo: https://github.com/dongaifeng/dongaifeng.github.io.git
   branch: master
