@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-name: My Github-Page Blog And Yueque Deploy
-
-on: [push, repository_dispatch]     
-=======
 name: Blog CI/CD
 
 on:
-  repository_dispatch:
+  push:
     branches:
       - dev
-      
->>>>>>> master
 
 jobs:
   blog-cicd:
@@ -41,17 +34,6 @@ jobs:
     - name: Generate files
       run: hexo generate
       
-<<<<<<< HEAD
-    # from https://github.com/peaceiris/actions-gh-pages    
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.SSH }}
-        external_repository: dongaifeng/dongaifeng.github.io
-        publish_branch: master
-        publish_dir: ./public
-        commit_message: "push触发action ${{ github.event.head_commit.message }}"    
-=======
     - name: Deploy blog
       run: |
         git clone "https://${{ secrets.GH_REF }}" deploy_git
@@ -62,4 +44,3 @@ jobs:
         git add .
         git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
         git push --force --quiet "https://${{ secrets.GH_TOKEN }}@${{ secrets.GH_REF }}" master:master
->>>>>>> master
