@@ -1,7 +1,7 @@
 ---
-title: 开篇笔记~~~
-tags: vue
-category: 日记
+title: hexo部署
+tags: 学习笔记
+category: 笔记
 date: 2019-09-24 16:48:56
 ---
 

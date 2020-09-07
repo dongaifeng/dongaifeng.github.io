@@ -4,8 +4,8 @@ navname: Devil Blog
 # navigatior items
 nav:
   首页: /archives
-  生活: /life
-  # 归档: /category
+  #生活: /life
+  归档: /category
   分类: /tag
   关于: /about
 
@@ -25,7 +25,8 @@ v: /image/v.jpg
 ## Complete url after key words.
 ## Unused key can be commented out.
 links:
-  Blog: https://blog.csdn.net/weixin_39398244
+  Blog: /archives
+  # Blog: https://blog.csdn.net/weixin_39398244
   #  Link:
   #  Resume:
   #  Publish:

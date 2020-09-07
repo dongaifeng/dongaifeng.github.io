@@ -1,6 +1,8 @@
 ---
-title: vuex 小酌
-tags: vuex
+title: vuex学习笔记
+tags: vue
+category: 总结
+date: 2019-03-24 15:48:56
 ---
 
 # 1. vuex 是什么
