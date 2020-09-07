@@ -30,14 +30,4 @@ jobs:
         yuque-hexo sync
     - name: Generate files
       run: hexo generate
-      
-    - name: Deploy blog
-      run: |
-        git clone "https://${{ secrets.GH_REF }}" deploy_git
-        mv ./deploy_git/.git ./public/
-        cd ./public
-        git config user.name "yichen"
-        git config user.email "1097179511@qq.com"
-        git add .
-        git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-        git push --force --quiet "https://${{ secrets.GE_TOKEN }}@${{ secrets.GH_REF }}" master:master
+    
