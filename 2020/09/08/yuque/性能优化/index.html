@@ -17,7 +17,7 @@
 
 
 
-<title>hexo部署 | dongaifeng</title>
+<title>性能优化 | dongaifeng</title>
 
 
 
@@ -181,7 +181,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">hexo部署</h1>
+            <h1 class="post-title">性能优化</h1>
             
                 <div class="post-meta">
                     
@@ -190,36 +190,41 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2019-09-24,&nbsp;&nbsp;16:48:56</a>
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;19:00:22</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/笔记/">笔记</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>出差去杭州，夜车卧铺，十几个小时.有点无聊，就搞一个小博客吧。<br>原来<a href="https://blog.csdn.net/weixin_39398244" target="_blank" rel="noopener">CSDN</a>上也写了一些博文。有兴趣的可以去看下，不过有些乱。<br>下面说一下基于 hexo 建立个人博客的步骤吧！</p>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h3 id="先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。"><a href="#先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。" class="headerlink" title="先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。"></a>先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli<span class="string">"</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="初始化一下-hexo"><a href="#初始化一下-hexo" class="headerlink" title="初始化一下 hexo"></a>初始化一下 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init myblog</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> myblog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h2 id="gitHub-建立仓库"><a href="#gitHub-建立仓库" class="headerlink" title="gitHub 建立仓库"></a>gitHub 建立仓库</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h4 id="创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。"><a href="#创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。" class="headerlink" title="创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。"></a>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。</h4><h3 id="修改配置文件-config-yml，"><a href="#修改配置文件-config-yml，" class="headerlink" title="修改配置文件 config.yml，"></a>修改配置文件 config.yml，</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>详细步骤看这里: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h2 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h2><h3 id="七层协议"><a href="#七层协议" class="headerlink" title="七层协议"></a>七层协议</h3><p><img src="https://cdn.nlark.com/yuque/0/2020/jpeg/462392/1597911455793-3f3fbd3f-1ccb-4b09-b28b-6d9ab3859a44.jpeg#align=left&display=inline&height=240&margin=%5Bobject%20Object%5D&name=bf3cb211955b58e803d9f8a99d744030.jpeg&originHeight=240&originWidth=423&size=18131&status=done&style=none&width=423" alt="bf3cb211955b58e803d9f8a99d744030.jpeg"></p>
+<ul>
+<li><strong>应用层</strong>，跟应用相关，不同应用解决不同问题，需要不同的应用层协议。包括：Http 协议，当然应用层协议还有很多，包括 DNS 协议（域名解析），FTP 协议（文件传输），SMTP 协议（邮件传输）等等。</li>
+<li><strong>传输层</strong>，对数据传输连接的建立和管理，包括提供面向连接和高可靠性的 TCP，以及无连接不可靠的 UDP。</li>
+<li><strong>网络层</strong>，寻址， 通过 IP 加端口来定位一个程序的位置。这就是 IP 协议。</li>
+<li><strong>链路层</strong>，处理 MAC 地址，包括操作系统的设备驱动程序和网卡，它们一起处理与传输媒介(光纤等)的物理接口细节。</li>
+</ul>
+<h4 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h4><ul>
+<li>UDP 是无连接的，即发送数据之前不需要建立连接</li>
+<li>UDP 协议是尽最大努力保证数据送到，但是不保证数据一定能够送到的</li>
+</ul>
+<h4 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h4><ul>
+<li>会保证数据的正确性的，也会保证数据的顺序性。</li>
+</ul>
+<h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><p>TCP/IP 协议族是<strong>层层封装</strong>的，从应用层到链路层，每经过一层都要添加一些额外信息（首、尾部）<br><img src="https://cdn.nlark.com/yuque/0/2020/jpeg/462392/1597913601315-e55d0611-05d3-420b-9f5a-696afe319b47.jpeg#align=left&display=inline&height=360&margin=%5Bobject%20Object%5D&name=161546025_4_2019051910552535.jpg&originHeight=360&originWidth=484&size=26120&status=done&style=none&width=484" alt="161546025_4_2019051910552535.jpg"></p>
+<h3 id="http-状态码"><a href="#http-状态码" class="headerlink" title="http 状态码"></a>http 状态码</h3><ul>
+<li>301 永久重定向</li>
+<li>302 临时重定向</li>
+<li>303 临时重定向，并且必须用 GET 方式请求。</li>
+<li>404 找不到系统资源.</li>
+<li>401 协议格式出现了问题</li>
+<li>403 服务器拒绝了请求</li>
+<li>503 服务器繁忙</li>
+<li>500 服务器程序出现了错误</li>
+</ul>
+<h3 id="TCP-三次握手，四次挥手"><a href="#TCP-三次握手，四次挥手" class="headerlink" title="TCP 三次握手，四次挥手"></a>TCP 三次握手，四次挥手</h3><p><strong>三次握手主要的目的是为了确认两台主机都具备收和发的能力。</strong><br><strong><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597912882651-bd7e782d-be2e-4374-aa0b-66836a7ee1c6.png#align=left&display=inline&height=363&margin=%5Bobject%20Object%5D&name=image.png&originHeight=518&originWidth=606&size=106949&status=done&style=none&width=425" alt="image.png"></strong><br><strong>四次挥手是确认数据发送完了</strong><br>**<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597913150564-5c7124ba-9f16-462a-9122-90f4e861bf5f.png#align=left&display=inline&height=78&margin=%5Bobject%20Object%5D&name=image.png&originHeight=85&originWidth=700&size=5534&status=done&style=none&width=645" alt="image.png"><br>参考链接：<br><a href="https://juejin.im/post/6844903510509633550" target="_blank" rel="noopener">https://juejin.im/post/6844903510509633550</a><br><a href="http://www.360doc.com/content/19/0519/22/49586_836810860.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/19/0519/22/49586_836810860.shtml</a><br><a href="https://mp.weixin.qq.com/s/W8T4MbCVVsjFbwyAkRWzYQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/W8T4MbCVVsjFbwyAkRWzYQ</a></p>
 
         </div>
 
@@ -242,10 +247,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/学习笔记/"># 学习笔记</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -256,10 +257,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/09/08/yuque/编译过程/">编译过程</a>
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/xmlhttprequest 2.0总结/">xmlhttprequest 2.0总结</a>
             
             
-            <a class="next" rel="next" href="/2019/03/24/vuex学习笔记/">vuex学习笔记</a>
+            <a class="next" rel="next" href="/2020/09/08/yuque/02-RN环境配置/">02-RN环境配置</a>
             
         </section>
 

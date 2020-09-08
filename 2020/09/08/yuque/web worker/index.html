@@ -17,7 +17,7 @@
 
 
 
-<title>hexo部署 | dongaifeng</title>
+<title>web worker | dongaifeng</title>
 
 
 
@@ -181,7 +181,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">hexo部署</h1>
+            <h1 class="post-title">web worker</h1>
             
                 <div class="post-meta">
                     
@@ -190,36 +190,31 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2019-09-24,&nbsp;&nbsp;16:48:56</a>
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;19:00:22</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/笔记/">笔记</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>出差去杭州，夜车卧铺，十几个小时.有点无聊，就搞一个小博客吧。<br>原来<a href="https://blog.csdn.net/weixin_39398244" target="_blank" rel="noopener">CSDN</a>上也写了一些博文。有兴趣的可以去看下，不过有些乱。<br>下面说一下基于 hexo 建立个人博客的步骤吧！</p>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h3 id="先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。"><a href="#先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。" class="headerlink" title="先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。"></a>先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli<span class="string">"</span></span><br></pre></td></tr></table></figure>
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>JavaScript 语言采用的是单线程模型，Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。等到 Worker 线程完成计算任务，再把结果返回给主线程。<br>Worker 线程一旦新建成功，就会始终运行，不会被主线程上的活动（比如用户点击按钮、提交表单）打断。Worker 比较耗费资源，不应该过度使用，而且一旦使用完毕，就应该关闭。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>分配给 Worker 线程运行的脚本文件，必须与主线程的脚本文件同源。</li>
+<li>无法读取 DOM 对象，无法使用 document、window、parent 这些对象。可以 navigator 对象和 location 对象。</li>
+<li>Worker 线程不能执行 alert()方法和 confirm()方法，但可以使用 XMLHttpRequest 对象发出 AJAX 请求。</li>
+<li>Worker 线程无法读取本地文件，即不能打开本机的文件系统（file://），它所加载的脚本，必须来自网络。</li>
+</ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><h4 id="主线程创建"><a href="#主线程创建" class="headerlink" title="主线程创建"></a>主线程创建</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> worker = <span class="keyword">new</span> Worker(<span class="string">"work.js"</span>);</span><br><span class="line">worker.postMessage(<span class="string">"Hello World"</span>);</span><br><span class="line">worker.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event.data);</span><br><span class="line">&#125;;</span><br><span class="line">worker.terminate(); <span class="comment">// 关闭worker</span></span><br><span class="line"></span><br><span class="line">worker.onerror(<span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
 
-<h3 id="初始化一下-hexo"><a href="#初始化一下-hexo" class="headerlink" title="初始化一下 hexo"></a>初始化一下 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init myblog</span><br></pre></td></tr></table></figure>
+<h4 id="worker-端"><a href="#worker-端" class="headerlink" title="worker 端"></a>worker 端</h4><p>self 代表子线程自身，即子线程的全局对象。也可 this，也可什么都不写。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(</span><br><span class="line">  <span class="string">"message"</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.data);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">false</span></span><br><span class="line">);</span><br><span class="line">postMessage(<span class="string">"You said: "</span> + e.data);</span><br><span class="line">self.close();</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> myblog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h4 id="worker-引入插件"><a href="#worker-引入插件" class="headerlink" title="worker 引入插件"></a>worker 引入插件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">importScripts(<span class="string">"script1.js"</span>, <span class="string">"script2.js"</span>);</span><br></pre></td></tr></table></figure>
 
-<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="主线程可以快速把数据交给-Worker。"><a href="#主线程可以快速把数据交给-Worker。" class="headerlink" title="主线程可以快速把数据交给 Worker。"></a>主线程可以快速把数据交给 Worker。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Transferable Objects 格式</span></span><br><span class="line">worker.postMessage(arrayBuffer, [arrayBuffer]);</span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="keyword">var</span> ab = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">1</span>);</span><br><span class="line">worker.postMessage(ab, [ab]);</span><br></pre></td></tr></table></figure>
 
-<h2 id="gitHub-建立仓库"><a href="#gitHub-建立仓库" class="headerlink" title="gitHub 建立仓库"></a>gitHub 建立仓库</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h4 id="创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。"><a href="#创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。" class="headerlink" title="创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。"></a>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。</h4><h3 id="修改配置文件-config-yml，"><a href="#修改配置文件-config-yml，" class="headerlink" title="修改配置文件 config.yml，"></a>修改配置文件 config.yml，</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>详细步骤看这里: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
         </div>
 
@@ -242,10 +237,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/学习笔记/"># 学习笔记</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -256,10 +247,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/09/08/yuque/编译过程/">编译过程</a>
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/TS学习2/">TS学习2</a>
             
             
-            <a class="next" rel="next" href="/2019/03/24/vuex学习笔记/">vuex学习笔记</a>
+            <a class="next" rel="next" href="/2020/09/08/yuque/webpack学习1/">webpack学习1</a>
             
         </section>
 

@@ -17,7 +17,7 @@
 
 
 
-<title>hexo部署 | dongaifeng</title>
+<title>req和res | dongaifeng</title>
 
 
 
@@ -181,7 +181,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">hexo部署</h1>
+            <h1 class="post-title">req和res</h1>
             
                 <div class="post-meta">
                     
@@ -190,36 +190,24 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2019-09-24,&nbsp;&nbsp;16:48:56</a>
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/笔记/">笔记</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>出差去杭州，夜车卧铺，十几个小时.有点无聊，就搞一个小博客吧。<br>原来<a href="https://blog.csdn.net/weixin_39398244" target="_blank" rel="noopener">CSDN</a>上也写了一些博文。有兴趣的可以去看下，不过有些乱。<br>下面说一下基于 hexo 建立个人博客的步骤吧！</p>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h3 id="先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。"><a href="#先创建一个文件夹-blog，然后-cd-到这个文件夹下，输入下面命令。" class="headerlink" title="先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。"></a>先创建一个文件夹 blog，然后 cd 到这个文件夹下，输入下面命令。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli<span class="string">"</span></span><br></pre></td></tr></table></figure>
+            <h2 id="req-代表-HTTP-请求"><a href="#req-代表-HTTP-请求" class="headerlink" title="req  代表 HTTP 请求"></a>req  代表 HTTP 请求</h2><p>###</p>
+<p>req.app<br>用 require()  方式引入模块   可在模块中通过 req.app  访问  express 实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.js</span></span><br><span class="line">app.get(<span class="string">"/viewdirectory"</span>, <span class="built_in">require</span>(<span class="string">"./mymiddleware.js"</span>));</span><br></pre></td></tr></table></figure>
 
-<h3 id="初始化一下-hexo"><a href="#初始化一下-hexo" class="headerlink" title="初始化一下 hexo"></a>初始化一下 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init myblog</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mymiddleware.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'The views directory is '</span> + req.app.get(<span class="string">'views'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> myblog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h2 id="gitHub-建立仓库"><a href="#gitHub-建立仓库" class="headerlink" title="gitHub 建立仓库"></a>gitHub 建立仓库</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h4 id="创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。"><a href="#创建一个和你用户名相同的仓库，后面加-github-io，只有这样，将来要部署到-GitHub-page-的时候，才会被识别，也就是-xxxx-github-io，其中-xxx-就是你注册-GitHub-的用户名。" class="headerlink" title="创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。"></a>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到 GitHub page 的时候，才会被识别，也就是 xxxx.github.io，其中 xxx 就是你注册 GitHub 的用户名。</h4><h3 id="修改配置文件-config-yml，"><a href="#修改配置文件-config-yml，" class="headerlink" title="修改配置文件 config.yml，"></a>修改配置文件 config.yml，</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>详细步骤看这里: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="req-baseUrl"><a href="#req-baseUrl" class="headerlink" title="req.baseUrl"></a>req.baseUrl</h3><p>安装路由器实例的 URL 路径   也就是   他的上层路径</p>
+<h3 id="req-query"><a href="#req-query" class="headerlink" title="req.query"></a>req.query</h3><p>路由中每个查询字符串参数的属性  get 方式请求 ?后面的</p>
+<h2 id="res-代表-HTTP-响应"><a href="#res-代表-HTTP-响应" class="headerlink" title="res  代表 HTTP 响应"></a>res  代表 HTTP 响应</h2><h2 id="res-locals"><a href="#res-locals" class="headerlink" title="res.locals"></a>res.locals</h2><p>包含响应局部变量的对象，该局部变量的范围仅限于该请求，因此仅可用于在该请求/响应周期（如果有）中。<br>app.locals  属性的值在应用程序的整个生命周期中保持不变，而 res.locals 属性仅在请求的生命周期内有效。</p>
 
         </div>
 
@@ -242,10 +230,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/学习笔记/"># 学习笔记</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -256,10 +240,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/09/08/yuque/编译过程/">编译过程</a>
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/node模块util/">node模块util</a>
             
             
-            <a class="next" rel="next" href="/2019/03/24/vuex学习笔记/">vuex学习笔记</a>
+            <a class="next" rel="next" href="/2020/09/08/yuque/socket.io简单使用/">socket.io简单使用</a>
             
         </section>
 

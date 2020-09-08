@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>express中间件 | dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <meta name="referrer" content="no-referrer">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">express中间件</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>1  执行任何代码   2  更改 req 和 res   3  结束请求-响应周期   4  调用堆栈中的下一个中间件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要加载中间件功能，请调用app.use()</span></span><br><span class="line"><span class="comment">//例如，以下代码myLogger在路由到根路径（/）之前加载中间件功能</span></span><br><span class="line"><span class="keyword">var</span> myLogger = <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"LOGGED"</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br><span class="line">app.use(myLogger);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">"/"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>next()</code>函数不是 Node.js 或 Express API 的一部分，  中间件函数的第三个参数， <code>next()</code>函数可以命名为任何名称，但是通常命名为 next。</p>
+<p>中间件加载的顺序很重要,  先加载的中间件功能也将先执行<br>如果<code>myLogger</code>在到达根路径的路由之后加载，则永远不会被调用，不会显示“ LOGGED”，因为根路径的路由处理程序会终止请求-响应周期。</p>
+<h3 id="requestTime-给-req-添加的属性-在下面的-路由，中间件-里都可以使用。"><a href="#requestTime-给-req-添加的属性-在下面的-路由，中间件-里都可以使用。" class="headerlink" title="requestTime  给  req 添加的属性   在下面的   路由，中间件   里都可以使用。"></a>requestTime  给  req 添加的属性   在下面的   路由，中间件   里都可以使用。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var requestTime = function (req, res, next) &#123;</span><br><span class="line">  req.requestTime = Date.now()</span><br><span class="line">  next()</span><br><span class="line">&#125;</span><br><span class="line">app.use(requestTime)</span><br><span class="line">app.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">  var responseText = &apos;Hello World!&lt;br&gt;&apos;</span><br><span class="line">  responseText += &apos;&lt;small&gt;Requested at: &apos; + req.requestTime + &apos;&lt;/small&gt;&apos;</span><br><span class="line">  res.send(responseText)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="中间件也可以传参数"><a href="#中间件也可以传参数" class="headerlink" title="中间件也可以传参数"></a>中间件也可以传参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function(options) &#123;</span><br><span class="line">  return function(req, res, next) &#123;</span><br><span class="line">    // Implement the middleware function based on the options object</span><br><span class="line">    next()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var mw = require(&apos;./my-middleware.js&apos;)</span><br><span class="line">app.use(mw(&#123; option1: &apos;1&apos;, option2: &apos;2&apos; &#125;))</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用层中间件"><a href="#应用层中间件" class="headerlink" title="应用层中间件"></a>应用层中间件</h2><p>没有设置路径的中间件，  每次应用收到请求时，都会执行该功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.use(function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;Time:&apos;, Date.now())</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>只对匹配<code>/user/:id</code>路径的 GET 请求起作用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.use(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;Request Type:&apos;, req.method)</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>中间件可传多个回调函数，不要忘记 next（）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.use(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;中间件1&apos;)</span><br><span class="line">  next()</span><br><span class="line">&#125;, function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;中间件2&apos;)</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这条很没用：<br>一个路径可以定义多个路由，第二条路由不会引起任何问题，但是它将永远不会被调用，因为第一条路由会结束请求-响应周期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;ID:&apos;, req.params.id)</span><br><span class="line">  next()</span><br><span class="line">&#125;, function (req, res, next) &#123;</span><br><span class="line">  res.send(&apos;User Info&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// handler for the /user/:id path, which prints the user ID</span><br><span class="line">app.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  res.end(req.params.id)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>next(&#39;route&#39;)</code>将控制权传递给下一条路由，仅在使用<code>app.METHOD()</code>或<code>router.METHOD()</code>函数有效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  // 如果id是0， 将去到2号路由 不会经过下面的中间件</span><br><span class="line">  if (req.params.id === &apos;0&apos;) next(&apos;route&apos;)</span><br><span class="line">  // 如果 id 不是0 将去到下面的中间件</span><br><span class="line">  else next()</span><br><span class="line">&#125;, function (req, res, next) &#123;</span><br><span class="line">  res.send(&apos;regular&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// 这里是2号路由</span><br><span class="line">app.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  res.send(&apos;special&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由器中间件"><a href="#路由器中间件" class="headerlink" title="路由器中间件"></a>路由器中间件</h2><p>使用<code>router.use()</code>和<code>router.METHOD()</code>函数加载路由器级中间件。<br>路由器级中间件与应用程序级中间件的工作方式相同，只不过它绑定到的实例<code>express.Router()</code><br>以下代码的   使用路由器   实现   上边代码功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var app = express()</span><br><span class="line">var router = express.Router()</span><br><span class="line">//// 匹配所有路径</span><br><span class="line">router.use(function (req, res, next) &#123;</span><br><span class="line">  console.log(&apos;Time:&apos;, Date.now())</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 匹配路径是 /user/:id 并且是get方法</span><br><span class="line">router.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">   // 如果id是0， 将去到2号路由 不会经过下面的中间件</span><br><span class="line">  if (req.params.id === &apos;0&apos;) next(&apos;route&apos;)</span><br><span class="line">  // 如果 id 不是0 将去到下面的中间件</span><br><span class="line">  else next()</span><br><span class="line">&#125;, function (req, res, next) &#123;</span><br><span class="line"></span><br><span class="line">  res.render(&apos;regular&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// 这里是2号路由</span><br><span class="line">router.get(&apos;/user/:id&apos;, function (req, res, next) &#123;</span><br><span class="line">  console.log(req.params.id)</span><br><span class="line">  res.render(&apos;special&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// 挂载路由</span><br><span class="line">app.use(&apos;/&apos;, router)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var app = express()</span><br><span class="line">var router = express.Router()</span><br><span class="line">// predicate the router with a check and bail out when needed</span><br><span class="line">router.use(function (req, res, next) &#123;</span><br><span class="line">  if (!req.headers[&apos;x-auth&apos;]) return next(&apos;router&apos;)</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br><span class="line">router.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">  res.send(&apos;hello, user!&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// use the router and 401 anything falling through</span><br><span class="line">app.use(&apos;/admin&apos;, router, function (req, res) &#123;</span><br><span class="line">  res.sendStatus(401)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>next(&#39;router&#39;)</code>  将控制权转回路由器实例   看清楚并不是<code>next(&#39;route&#39;) ``这里待研究</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var app = express()</span><br><span class="line">var router = express.Router()</span><br><span class="line"></span><br><span class="line">router.use(function (req, res, next) &#123;</span><br><span class="line">// 这里将退出router，并不会走1号路由以及下面所有路由 会直接走到2号中间件</span><br><span class="line">  if (!req.headers[&apos;x-auth&apos;]) return next(&apos;router&apos;)</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br><span class="line">这里是1号路由</span><br><span class="line">router.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">  res.send(&apos;hello, user!&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">// 2号中间件</span><br><span class="line">app.use(&apos;/admin&apos;, router, function (req, res) &#123;</span><br><span class="line">  res.sendStatus(401)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="错误处理中间件"><a href="#错误处理中间件" class="headerlink" title="错误处理中间件"></a>错误处理中间件</h2><p>错误处理中间件有<em>四个</em>参数。必须提供四个参数。即使不需要使用该<code>next</code>，也必须有。<br>否则，该<code>next</code>对象将被解释为常规中间件，并且将无法处理错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.use(function (err, req, res, next) &#123;</span><br><span class="line">  console.error(err.stack)</span><br><span class="line">  res.status(500).send(&apos;Something broke!&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三方中间件"><a href="#第三方中间件" class="headerlink" title="第三方中间件"></a>第三方中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var cookieParser = require(&apos;cookie-parser&apos;)</span><br><span class="line"></span><br><span class="line">app.use(cookieParser())</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/cookie和session/">cookie和session</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/express的路由/">express的路由</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

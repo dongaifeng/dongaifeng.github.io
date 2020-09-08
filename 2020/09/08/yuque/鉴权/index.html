@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>鉴权 | dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <meta name="referrer" content="no-referrer">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">鉴权</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>Header 中的 Set-Cookie 可以设置 cookie<br>req.headers.cookie 获取 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(<span class="string">'Set-Cookie'</span>, <span class="string">'cookie1=abc;'</span>)；</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'cookie:'</span>, req.headers.cookie)</span><br></pre></td></tr></table></figure>
+
+<h3 id="koa-session"><a href="#koa-session" class="headerlink" title="koa-session"></a>koa-session</h3><p>原理：<br>往 app.context 上挂载了 session 对象。这个 session 对象是由 koa-session 生成。<br>在 app.context 上定义 Symbol 变量保存 contextSession 对象，他是私有的外部访问不到。<br>定义 ctx.session 的 getter/setter。指向 contextSession 对象。<br>每次 set 的时候，判断是否传输了参数 store  如果没有就 initFromCookie。将数据存入 cookie。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">"koa"</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> koa();</span><br><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">"koa-session"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用koa-redis存储数据</span></span><br><span class="line"><span class="keyword">const</span> redisStore = <span class="built_in">require</span>(<span class="string">"koa-redis"</span>);</span><br><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">"redis"</span>);</span><br><span class="line"><span class="keyword">const</span> redisClient = redis.createClient(<span class="number">3333</span>, <span class="string">"localhost"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wrapper = <span class="built_in">require</span>(<span class="string">"co-redis"</span>);</span><br><span class="line"><span class="keyword">const</span> client = wrapper(redisClient);</span><br><span class="line"></span><br><span class="line">app.keys = [<span class="string">"13232"</span>]; <span class="comment">// 签名 用来对cookie进行签名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SESS_CONFIG = &#123;</span><br><span class="line">  key: <span class="string">"daf:sess"</span>, <span class="comment">// 键名</span></span><br><span class="line">  maxAge: <span class="number">5556</span>,</span><br><span class="line">  httpOnly: <span class="literal">true</span>, <span class="comment">// 只服务器可修改</span></span><br><span class="line">  signed: <span class="literal">true</span>, <span class="comment">// 签名cookie</span></span><br><span class="line">  <span class="comment">//store: redisStore(&#123;client&#125;) // 使用redis存数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(session(SESS_CONFIG, app));</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">  .use(<span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (ctx.path === <span class="string">"/favicon.ico"</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.session.count);</span><br><span class="line">    <span class="keyword">let</span> n = ctx.session.count || <span class="number">0</span>;</span><br><span class="line">    ctx.session.count = ++n;</span><br><span class="line">    ctx.body = n + <span class="string">"次点击率"</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="session-cookie-模式登录"><a href="#session-cookie-模式登录" class="headerlink" title="session-cookie 模式登录"></a>session-cookie 模式登录</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">"koa"</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">"koa-router"</span>)();</span><br><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">"koa-session"</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">"koa2-cors"</span>); <span class="comment">// 应答跨域请求实现</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">"koa-bodyparser"</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">static</span> = <span class="built_in">require</span>(<span class="string">"koa-static"</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="comment">// 配置session中间件</span></span><br><span class="line">app.use(</span><br><span class="line">  cors(&#123;</span><br><span class="line">    credentials: <span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 签名</span></span><br><span class="line">app.keys = [<span class="string">"secret"</span>];</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">static</span>(__dirname + <span class="string">"/"</span>));</span><br><span class="line">app.use(bodyParser());</span><br><span class="line">app.use(session(app));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 没吃请求进来 判断是login直接去下一步，不是login就判断有没有用户信息 没有就阻止请求</span></span><br><span class="line">app.use(<span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (ctx.url.indexOf(<span class="string">"login"</span>) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"session"</span>, ctx.session.userinfo);</span><br><span class="line">    <span class="keyword">if</span> (!ctx.session.userinfo) &#123;</span><br><span class="line">      ctx.body = &#123; <span class="attr">message</span>: <span class="string">"没有用户信息"</span> &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 登录验证成功 存入session</span></span><br><span class="line">router.post(<span class="string">"/login"</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; body &#125; = ctx.request;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"body"</span>, body);</span><br><span class="line">  ctx.session.userinfo = body.username;</span><br><span class="line">  ctx.body = &#123; <span class="attr">message</span>: <span class="string">"登录了 存了session"</span> &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">"/logout"</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="keyword">delete</span> ctx.session.userinfo;</span><br><span class="line">  ctx.body = &#123; <span class="attr">message</span>: <span class="string">"删除了session里的数据"</span> &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">"/getUser"</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  ctx.body = &#123;</span><br><span class="line">    message: <span class="string">"获取用户信息"</span>,</span><br><span class="line">    userinfo: ctx.session.userinfo,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(router.routes());</span><br><span class="line"><span class="comment">// allowedMethods处理的业务是当所有路由中间件执行完成之后,</span></span><br><span class="line"><span class="comment">// 若ctx.status为空或者404的时候,丰富response对象的header头</span></span><br><span class="line">app.use(router.allowedMethods());</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="token-登录"><a href="#token-登录" class="headerlink" title="token  登录"></a>token  登录</h3><ul>
+<li><ol>
+<li>客户端使⽤⽤户名跟密码请求登录</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>服务端收到请求，去验证⽤户名与密码</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>验证成功后，服务端会签发⼀个令牌(Token)，再把这个 Token 发送给客户端</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>客户端收到 Token 以后可以把它存储起来，⽐如放在 Cookie ⾥或者 Local Storage<br>⾥</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>客户端每次向服务端请求资源的时候需要带着服务端签发的 Token</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>服务端收到请求，然后去验证客户端请求⾥⾯带着的 Token，如果验证成功，就向客户端返回<br>请求的数据</li>
+</ol>
+</li>
+</ul>
+<h4 id="jwt-使用"><a href="#jwt-使用" class="headerlink" title="jwt 使用"></a>jwt 使用</h4><p>前端需要在亲求头中设置 Authorization 字段，存放 token<br>Bearer 是 JWT 的认证头部信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.headers[&quot;Authorization&quot;] = &quot;Bearer &quot; + token;</span><br></pre></td></tr></table></figure>
+
+<p>jwt 分三部分<br>Header 部分   描述 JWT 元数据<br>payload  存放要传递的数据<br>signature  签名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成token，第一个参数是数据，第二个是签名，第三个是选项 可选，回调也可选</span></span><br><span class="line">jwt.sign(&#123; <span class="attr">foo</span>: <span class="string">"bar"</span> &#125;, privateKey, &#123; <span class="attr">algorithm</span>: <span class="string">"RS256"</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  err,</span></span></span><br><span class="line"><span class="function"><span class="params">  token</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(token);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 解析token</span></span><br><span class="line">jwt.verify(token, <span class="string">"wrong-secret"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, decoded</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// err</span></span><br><span class="line">  <span class="comment">// decoded 是数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="koa-jwt"><a href="#koa-jwt" class="headerlink" title="koa-jwt"></a>koa-jwt</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.use(jwt(secret, passthrough, key&#125;))</span><br><span class="line"><span class="comment">// secret 是签名。passthrough设置是否传道下一个中间件，key 字段可代替ctx.state.user中的user字段</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">"koa"</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">"koa-router"</span>)();</span><br><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">"jsonwebtoken"</span>);</span><br><span class="line"><span class="keyword">const</span> jwtAuth = <span class="built_in">require</span>(<span class="string">"koa-jwt"</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">"koa2-cors"</span>);</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">"koa-bodyparser"</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">static</span> = <span class="built_in">require</span>(<span class="string">"koa-static"</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> secret = <span class="string">"it's a secret"</span>;</span><br><span class="line">app.keys = [<span class="string">"some secret"</span>];</span><br><span class="line">app.use(<span class="keyword">static</span>(__dirname + <span class="string">"/"</span>));</span><br><span class="line">app.use(bodyParser());</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">"/login"</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; body &#125; = ctx.request;</span><br><span class="line">  <span class="comment">// jwt使用</span></span><br><span class="line">  <span class="keyword">const</span> userinfo = body.username;</span><br><span class="line">  ctx.body = &#123;</span><br><span class="line">    message: <span class="string">"登录了"</span>,</span><br><span class="line">    userinfo: userinfo,</span><br><span class="line">    token: jwt.sign(</span><br><span class="line">      &#123;</span><br><span class="line">        data: userinfo,</span><br><span class="line">        exp: <span class="built_in">Math</span>.floor(<span class="built_in">Date</span>.now() / <span class="number">1000</span>) + <span class="number">60</span> * <span class="number">60</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      secret</span><br><span class="line">    ),</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">"/getUser"</span>, jwtAuth(&#123; secret &#125;), <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(ctx.state.user);</span><br><span class="line">  ctx.body = &#123;</span><br><span class="line">    message: <span class="string">"获取数据成功"</span>,</span><br><span class="line">    userinfo: ctx.state.user.data,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(router.routes());</span><br><span class="line">app.use(router.allowedMethods());</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="sso-单点登录"><a href="#sso-单点登录" class="headerlink" title="sso  单点登录"></a>sso  单点登录</h3><p>流程图：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/462392/1577343360057-1b2746f7-6762-4a54-89e1-2001894cdd5c.png#align=left&display=inline&height=849&name=%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png&originHeight=849&originWidth=885&size=70912&status=done&style=none&width=885" alt="未命名文件.png"><br>代码在这里：<a href="https://github.com/su37josephxia/kaikeba-code/tree/master/node/06/sso" target="_blank" rel="noopener">链接</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/全栈项目总结/">全栈项目总结</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/Diff/">Diff</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
