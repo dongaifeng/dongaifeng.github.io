@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>微前端之qiankun | dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <meta name="referrer" content="no-referrer">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微前端之qiankun</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-05-28,&nbsp;&nbsp;10:12:11</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>参考官网,不多说了</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="沙箱机制"><a href="#沙箱机制" class="headerlink" title="沙箱机制"></a>沙箱机制</h3><p><strong>ProxySandbox</strong><br>当调用 set 向子应用 proxy/window 对象设置属性时，所有的属性设置和更新都会命中 updateValueMap，存储在 updateValueMap 集合中（第 38 行），从而避免对 window 对象产生影响（旧版本则是通过 diff 算法还原 window 对象状态快照，子应用之间的状态是隔离的，而父子应用之间 window 对象会有污染）。<br>当调用 get 从子应用 proxy/window 对象取值时，会优先从子应用的沙箱状态池 updateValueMap 中取值，如果没有命中才从主应用的 window 对象中取值（第 49 行）。对于非构造函数的取值将会对 this 指针绑定到 window 对象后，再返回函数。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1618913257330-76b8ae8c-d10c-41c0-9949-357c784ce918.png#clientId=u359d20c0-691c-4&from=paste&height=756&id=u854065ba&margin=%5Bobject%20Object%5D&name=image.png&originHeight=756&originWidth=950&originalType=binary&size=513245&status=done&style=none&taskId=u12a1c44b-b0b4-4007-93d1-011aa76c5c2&width=950" alt="image.png"><br><strong>SnapshotSandbox</strong><br>我们先看 active 函数，在沙箱激活时，会先给当前 window 对象打一个快照，记录沙箱激活前的状态（第 38~40 行）。打完快照后，函数内部将 window 状态通过 modifyPropsMap 记录还原到上次的沙箱运行环境，也就是还原沙箱激活期间（历史记录）修改过的 window 属性。<br>在沙箱关闭时，调用 inactive 函数，在沙箱关闭前通过遍历比较每一个属性，将被改变的 window 对象属性值（第 54 行）记录在 modifyPropsMap 集合中。在记录了 modifyPropsMap 后，将 window 对象通过快照 windowSnapshot 还原到被沙箱激活前的状态（第 55 行），相当于是将子应用运行期间对 window 造成的污染全部清除。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1618913522875-f188f5bc-9bda-434d-8126-cbc5e0293790.png#clientId=u359d20c0-691c-4&from=paste&height=675&id=u6d08be20&margin=%5Bobject%20Object%5D&name=image.png&originHeight=675&originWidth=947&originalType=binary&size=234001&status=done&style=none&taskId=u44a017c5-3406-499c-91e3-6efa02cb27d&width=947" alt="image.png"></p>
+<h3 id="全局状态"><a href="#全局状态" class="headerlink" title="全局状态"></a>全局状态</h3><h3 id="import-html-entry"><a href="#import-html-entry" class="headerlink" title="import-html-entry"></a>import-html-entry</h3><p>通过 http 请求加载指定地址的首屏内容即 html 页面，然后解析这个 html 模版得到 template,scripts,entry,styles。<br>htmlEntry 向外暴露出一个 promise。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// template 是 link 替换为 style 后的 template</span></span><br><span class="line">	template: embedHTML,</span><br><span class="line">	<span class="comment">// 静态资源地址</span></span><br><span class="line">	assetPublicPath,</span><br><span class="line">	<span class="comment">// 获取外部脚本，最终得到所有脚本的代码内容</span></span><br><span class="line">	getExternalScripts: <span class="function"><span class="params">()</span> =&gt;</span> getExternalScripts(scripts, fetch),</span><br><span class="line">	<span class="comment">// 获取外部样式文件的内容</span></span><br><span class="line">	getExternalStyleSheets: <span class="function"><span class="params">()</span> =&gt;</span> getExternalStyleSheets(styles, fetch),</span><br><span class="line">	<span class="comment">// 脚本执行器，让 JS 代码(scripts)在指定 上下文 中运行</span></span><br><span class="line">	execScripts: <span class="function">(<span class="params">proxy, strictGlobal</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (!scripts.length) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">Promise</span>.resolve();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> execScripts(entry, scripts, proxy, &#123; fetch, strictGlobal &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>qiankun 就用了这个对象中的 template、assetPublicPath 和 execScripts 三项，将 template 通过 DOM 操作添加到主应用中，执行 execScripts 方法得到微应用导出的生命周期方法，并且还顺便解决了 JS 全局污染的问题，因为执行 execScripts 方法的时候可以通过 proxy 参数指定 JS 的执行上下文。<br>execScripts(scripts, fetch, error) 函数执行时：获取指定的所有外部脚本的内容也就是 scripts，并设置每个脚本的执行上下文 global，然后通过 eval 函数运行</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>registerMicroApps</p>
+<ol>
+<li>注册子 app，过滤 apps 数组，过滤掉已经注册的 app</li>
+<li>遍历没有注册的 app 数组，每个执行 single-spa 的 registerApplication 方法</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">注册子app</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">registerMicroApps</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">ObjectType</span>&gt;(<span class="params">apps,lifeCycles</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 过滤掉已经注册的app</span></span><br><span class="line">  <span class="keyword">const</span> unregisteredApps = apps.filter(<span class="function">(<span class="params">app</span>) =&gt;</span> !microApps.some(<span class="function">(<span class="params">registeredApp</span>) =&gt;</span> registeredApp.name === app.name));</span><br><span class="line">  microApps = [...microApps, ...unregisteredApps];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注册 没有注册的app</span></span><br><span class="line">  unregisteredApps.forEach(<span class="function">(<span class="params">app</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name, activeRule, loader = noop, props, ...appConfig &#125; = app;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用 single-spa 的 registerApplication 方法注册微应用</span></span><br><span class="line">    registerApplication(&#123;</span><br><span class="line">      name,</span><br><span class="line">      app: <span class="keyword">async</span> () =&gt; &#123;  <span class="comment">// 微应用的加载方法，Promise&lt;生命周期方法组成的对象&gt;</span></span><br><span class="line">        loader(<span class="literal">true</span>); <span class="comment">// 显示loading</span></span><br><span class="line">        <span class="comment">// 这句可以忽略，目的是在 single-spa 执行这个加载方法时让出线程，让其它微应用的加载方法都开始执行</span></span><br><span class="line">        <span class="keyword">await</span> frameworkStartedDefer.promise;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回 bootstrap、mount、unmount、update 这个几个生命周期。还有name</span></span><br><span class="line">        <span class="keyword">const</span> &#123; mount, ...otherMicroAppConfigs &#125; = (</span><br><span class="line">          <span class="keyword">await</span> loadApp(&#123; name, props, ...appConfig &#125;, frameworkConfiguration, lifeCycles)</span><br><span class="line">        )();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          mount: [<span class="keyword">async</span> () =&gt; loader(<span class="literal">true</span>), ...toArray(mount), <span class="keyword">async</span> () =&gt; loader(<span class="literal">false</span>)],</span><br><span class="line">          ...otherMicroAppConfigs,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;,</span><br><span class="line">      activeWhen: activeRule,</span><br><span class="line">      customProps: props,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>start</p>
+<ol>
+<li>合并配置项，预设开启预加载，单例模式，开启沙箱</li>
+<li>开启预加载</li>
+<li>开启沙箱</li>
+<li>执行 single-spa 的 start 方法</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">opts: FrameworkConfiguration = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 框架默认开启预加载、单例模式、样式沙箱</span></span><br><span class="line">  frameworkConfiguration = &#123;</span><br><span class="line">    prefetch: <span class="literal">true</span>,</span><br><span class="line">    singular: <span class="literal">true</span>,</span><br><span class="line">    sandbox: <span class="literal">true</span>,</span><br><span class="line">    ...opts,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> &#123; prefetch, sandbox, singular, urlRerouteOnly, ...importEntryOpts &#125; =</span><br><span class="line">    frameworkConfiguration;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 预加载</span></span><br><span class="line">  <span class="keyword">if</span> (prefetch) &#123;</span><br><span class="line">    <span class="comment">// 执行预加载策略，参数分别为微应用列表、预加载策略、&#123; fetch、getPublicPath、getTemplate &#125;</span></span><br><span class="line">    doPrefetchStrategy(microApps, prefetch, importEntryOpts);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 开启沙箱，如果不支持Proxy，使用快照沙箱。快照沙箱只能用于单例，所以没有设置单例，会提醒</span></span><br><span class="line">  <span class="keyword">if</span> (sandbox) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.Proxy) &#123;</span><br><span class="line">      <span class="built_in">console</span>.warn(</span><br><span class="line">        <span class="string">"[qiankun] Miss window.Proxy, proxySandbox will degenerate into snapshotSandbox"</span></span><br><span class="line">      );</span><br><span class="line">      frameworkConfiguration.sandbox =</span><br><span class="line">        <span class="keyword">typeof</span> sandbox === <span class="string">"object"</span></span><br><span class="line">          ? &#123; ...sandbox, <span class="attr">loose</span>: <span class="literal">true</span> &#125;</span><br><span class="line">          : &#123; <span class="attr">loose</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      <span class="keyword">if</span> (!singular) &#123;</span><br><span class="line">        <span class="built_in">console</span>.warn(</span><br><span class="line">          <span class="string">"[qiankun] Setting singular as false may cause unexpected behavior while your browser not support window.Proxy"</span></span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 执行 single-spa 的 start 方法，启动 single-spa</span></span><br><span class="line">  startSingleSpa(&#123; urlRerouteOnly &#125;);</span><br><span class="line"></span><br><span class="line">  frameworkStartedDefer.resolve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="single-spa"><a href="#single-spa" class="headerlink" title="single-spa"></a>single-spa</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><ul>
+<li><a href="https://juejin.cn/post/6885211340999229454#heading-27" target="_blank" rel="noopener">https://juejin.cn/post/6885211340999229454#heading-27</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZDO_VXFeZw6oGt1rqRRjOQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/ZDO_VXFeZw6oGt1rqRRjOQ</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/05/28/yuque/XHR和http/">XHR和http</a>
+            
+            
+            <a class="next" rel="next" href="/2021/05/28/yuque/ES6/">ES6</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
