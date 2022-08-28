@@ -108,3 +108,4 @@ deploy:
   repo: https://github.com/dongaifeng/dongaifeng.github.io.git
   branch: gh-pages
   message: 开始部署博客
+  token: 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
