@@ -4,6 +4,10 @@
 <img src="https://i.loli.net/2019/06/12/5d006bd289aa325037.png" alt="Chic theme">
 </p>
 
+
+
+
+
 > Chic, French word meaning 'Elegant' in English.
 
 <p align="center">
