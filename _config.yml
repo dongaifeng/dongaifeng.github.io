@@ -106,6 +106,6 @@ deploy:
   # repo: https://Travis@github.com/dongaifeng/dongaifeng.github.io.git
   
   repo: https://github.com/dongaifeng/dongaifeng.github.io.git
-  branch: gh-pages
+  branch: master
   message: 开始部署博客
   token: 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
