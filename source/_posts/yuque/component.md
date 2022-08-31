@@ -1,7 +1,7 @@
 ---
 title: component
-urlname: sogt53
-date: '2020-09-08 18:58:37 +0800'
+urlname: vq11m6
+date: 2020-08-24 20:47:39 +0800
 tags: []
 categories: []
 ---
@@ -35,7 +35,7 @@ propsData 组件的 props。
 
 #### createElement
 
-Vue 在 initRender 的时候挂在 $createElement 方法，会在 render 函数里用到。
+Vue 在 initRender 的时候挂在 \$createElement 方法，会在 render 函数里用到。
 
 ```javascript
 export function initRender(vm: Component) {
@@ -93,7 +93,7 @@ function createElement( context, tag, data,children, normalizationType) {
 组件的 Vnode 跟标签的 Vnode 是不一样的。
 组件的 Vnode 是父组件与子组件传递数据的桥梁，在这里可以把它叫做组件外壳 Vnode。
 组件外壳 Vnode 并不会渲染成真实 dom。
-组件外壳 Vnode 里面的**$e**l ，**Vnode.\_vnode.elm** 保存的是组件里面内容生成的真实 dom。
+组件外壳 Vnode 里面的**\$e**l ，**Vnode.\_vnode.elm** 保存的是组件里面内容生成的真实 dom。
 组件外壳 Vnode 里面的** Vnode.\_vnode** 保存的是组件里面内容生成的 Vnode。
 
 ```javascript
@@ -192,7 +192,7 @@ export function createComponentInstanceForVnode ( vnode，){
 </div>
 ```
 
-经过$mount 以后，生成 render，staticRenderFns。
+经过\$mount 以后，生成 render，staticRenderFns。
 render 函数长什么样？
 
 ```javascript
@@ -219,7 +219,7 @@ render 函数长什么样？
 
 ### createElement
 
-render 函数里的 \_c 就是 $createElement。
+render 函数里的 \_c 就是 \$createElement。
 
 ### mountComponent
 
@@ -250,7 +250,7 @@ Vue.prototype._render = function () {
 ```
 
 在上面的代码里，可以看到 render 被调用了，并且生成 vnode。
-并且传入 vm.$createElement。就是 render 函数里的 \_c 。
+并且传入 vm.\$createElement。就是 render 函数里的 \_c 。
 
 ### createElm
 

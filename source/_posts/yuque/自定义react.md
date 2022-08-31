@@ -2,8 +2,8 @@
 title: 自定义react
 urlname: trg0qh
 date: '2020-09-08 18:59:45 +0800'
-tags: []
-categories: []
+tags: [react]
+categories: [学习笔记]
 ---
 
 ### React.js

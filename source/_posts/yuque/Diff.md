@@ -1,7 +1,7 @@
 ---
 title: Diff
-urlname: kfzqgy
-date: '2020-09-08 18:58:37 +0800'
+urlname: vs2das
+date: 2020-08-27 17:01:41 +0800
 tags: []
 categories: []
 ---
@@ -605,5 +605,3 @@ Diff  比较的内核是  **节点复用**，所以 Diff  比较就是为了�
 **比较是为了修改 DOM  树，**新旧  Vnode  树是拿来比较的，页面 DOM  树是拿来根据比较结果修改的。
 
 ## 与 React 比较
-
-即将更新

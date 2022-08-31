@@ -1,7 +1,7 @@
 ---
 title: vue-router原理分析
-urlname: agyg1g
-date: '2020-09-08 18:58:37 +0800'
+urlname: vdc47u
+date: 2019-10-30 17:04:06 +0800
 tags: []
 categories: []
 ---
@@ -12,7 +12,7 @@ categories: []
 
 为什么要在 beforeCreate  的时候插入？
 
-在创建之前   为 Vue.prototype 挂载$router  方法
+在创建之前   为 Vue.prototype 挂载\$router  方法
 并触发 init 方法。
 
 ```javascript

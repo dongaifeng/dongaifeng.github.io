@@ -1,7 +1,7 @@
 ---
 title: props
-urlname: lwylxk
-date: '2020-09-08 18:58:37 +0800'
+urlname: gih9bo
+date: 2020-08-19 09:18:54 +0800
 tags: []
 categories: []
 ---
@@ -42,7 +42,7 @@ function initProps (vm, propsOptions) {
 }
 ```
 
-initProps 遍历 vm.$options.propsData 上的属性，依次给每个属性做响应式，也就是 defineReactive。
+initProps 遍历 vm.\$options.propsData 上的属性，依次给每个属性做响应式，也就是 defineReactive。
 defineReactive 在依赖收集的章节有讲，主要是设置\_props 属性的 get，set。跟 data 一样。
 
 propsData 是什么时候挂在的呢？
@@ -51,7 +51,7 @@ propsData 是什么时候挂在的呢？
 
 #### 父组件生成 vnode
 
-\_init ----> $mount ----> \_render ----> \_createElement ----> createComponent ----> extractPropsFromVNodeData
+\_init ----> \$mount ----> \_render ----> \_createElement ----> createComponent ----> extractPropsFromVNodeData
 父组件 init，生成 render 函数，可以看到子组件的 data 的 attrs 里面存放父组件传来的数据。
 
 ```javascript
@@ -129,7 +129,7 @@ export function initInternalComponent(
 }
 ```
 
-到这里我们追踪到 vm.$options.propsData 是怎么得到父组件传来的 props 的。
+到这里我们追踪到 vm.\$options.propsData 是怎么得到父组件传来的 props 的。
 
 ### 父组件改变数据
 

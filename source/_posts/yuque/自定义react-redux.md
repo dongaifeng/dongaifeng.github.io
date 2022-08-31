@@ -2,7 +2,7 @@
 title: 自定义react-redux
 urlname: oh50ry
 date: '2020-09-08 18:59:45 +0800'
-tags: []
+tags: [react]
 categories: []
 ---
 

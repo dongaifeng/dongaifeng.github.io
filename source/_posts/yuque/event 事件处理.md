@@ -1,7 +1,7 @@
 ---
 title: event 事件处理
-urlname: tehiqr
-date: '2020-09-08 18:58:37 +0800'
+urlname: gahgr3
+date: 2020-08-19 09:19:10 +0800
 tags: []
 categories: []
 ---
@@ -16,8 +16,8 @@ categories: []
 ### 方式
 
 - $on 注册事件。也可以 @click 最后也是调用 $on.
-- $emit 触发事件
-- $off 解绑事件
+- \$emit 触发事件
+- \$off 解绑事件
 
 ### 形态
 
@@ -34,14 +34,14 @@ categories: []
 #### 组件的 DOM 事件
 
 组件的 DOM 事件，需要加上 native 修饰符 例如 @click.native = ""。
-在组件的 vm.$vnode (组件的外壳节点) 上可以看绑定的 DOM 事件。
+在组件的 vm.\$vnode (组件的外壳节点) 上可以看绑定的 DOM 事件。
 同时的在父组件的 \_Node.children 里也可看到。
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/462392/1597826055440-2666c785-3152-4d4a-a677-aa63394b440a.png#align=left&display=inline&height=288&margin=%5Bobject%20Object%5D&name=image.png&originHeight=288&originWidth=528&size=21022&status=done&style=none&width=528)
 
 #### 组件的自定义事件
 
 组件的 \_events 属性是用来存放本实例上注册的自定义事件。
-在 $listeners 也可看到 自定义事件。
+在 \$listeners 也可看到 自定义事件。
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/462392/1597826782160-2bfaa8e3-4d4d-4af6-834c-c5932a0ad6e0.png#align=left&display=inline&height=87&margin=%5Bobject%20Object%5D&name=image.png&originHeight=87&originWidth=225&size=19851&status=done&style=none&width=225)
 
 ### 来龙去脉
@@ -183,7 +183,7 @@ function add() {
 父组件在生成 Vnode 的时候，遇到子组件是组件，并不会初始化子组件，而是生成**组件外壳 vnode**。
 父组件在\_update 的时候会调用 createElm。遍历到子组件的时候，发现子组件是个组件。会调用子组件 data.hook.init 初始化子组件。
 子组件初始化会生成子组件实例，并调用 $mount。也会调用initEvent。会把从父组件得到的监听事件$listener 遍历放到\_event。
-在子组件的调用$emit。会去\_event 里面找到对应的同事件名的函数调用。
+在子组件的调用\$emit。会去\_event 里面找到对应的同事件名的函数调用。
 以上的流程会在 component 里介绍到。
 **initEvents 初始化父组件监听的事件**
 
@@ -238,8 +238,8 @@ Vue.prototype.$on = function (event, fn) {
 };
 ```
 
-**$emit**
-$emit 会把事件回调函数从\_event 里拿出来，用 apply，call 调用
+**\$emit**
+\$emit 会把事件回调函数从\_event 里拿出来，用 apply，call 调用
 
 ```javascript
 Vue.prototype.$emit = function (event) {
