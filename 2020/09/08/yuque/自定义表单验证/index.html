@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>自定义表单验证 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">自定义表单验证</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:45</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li>利用高阶组件，高阶组件就是一个函数，向这个函数传入一个组件，然后给组件添加属性或者方法，然后返回这个组件，这时候这个组件可以通过 this.props 获取这些方法和属性</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> nameRules = &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&quot;please input your name!&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> passwordRules = &#123;</span><br><span class="line">  <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">message</span>: <span class="string">&quot;please input your password!&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyFrom</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  submit = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; getFieldValue &#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line">    <span class="keyword">const</span> res = &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="title function_">getFieldValue</span>(<span class="string">&quot;name&quot;</span>),</span><br><span class="line">      <span class="attr">password</span>: <span class="title function_">getFieldValue</span>(<span class="string">&quot;password&quot;</span>),</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;res&quot;</span>, res);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  handleSubmit2 = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; validateFields &#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line">    <span class="title function_">validateFields</span>(<span class="function">(<span class="params">err, values</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(err, values);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; getFieldDecorator &#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>MyFormPage<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;getFieldDecorator(&quot;name&quot;, &#123; rules: [nameRules] &#125;)(</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        )&#125;</span></span><br><span class="line"><span class="language-xml">        &#123;getFieldDecorator(&quot;password&quot;, &#123; rules: [passwordRules] &#125;)(</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">text</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        )&#125;</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleSubmit2&#125;</span>&gt;</span>提交验证<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.submit&#125;</span>&gt;</span>获取表单数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Create</span> = (<span class="params">Comp</span>) =&gt;</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">AAA</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">      <span class="variable language_">super</span>(props);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">options</span> = &#123;&#125;;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">state</span> = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    handleChange = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> &#123; name, value &#125; = e.<span class="property">target</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;</span><br><span class="line">        [name]: value,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    getFieldDecorator = <span class="function">(<span class="params">field, option</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">options</span>[field] = option;</span><br><span class="line">      <span class="keyword">return</span> <span class="function">(<span class="params">comp</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">margin:</span> &quot;<span class="attr">30px</span>&quot; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;React.cloneElement(comp, &#123;</span></span><br><span class="line"><span class="language-xml">              name: field,</span></span><br><span class="line"><span class="language-xml">              value: this.state[field] || &quot;&quot;, //控件值</span></span><br><span class="line"><span class="language-xml">              onChange: this.handleChange, //控件change事件处理</span></span><br><span class="line"><span class="language-xml">            &#125;)&#125;</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    getFieldValue = <span class="function">(<span class="params">field</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">state</span>[field];</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    validateFields = <span class="function">(<span class="params">callBack</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> res = &#123; ...<span class="variable language_">this</span>.<span class="property">state</span> &#125;;</span><br><span class="line">      <span class="keyword">const</span> err = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> <span class="variable language_">this</span>.<span class="property">options</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res[i] === <span class="literal">undefined</span>) &#123;</span><br><span class="line">          err.<span class="title function_">push</span>(&#123; [i]: <span class="string">`<span class="subst">$&#123;i&#125;</span>出错了 是空的`</span> &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (err.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="title function_">callBack</span>(err, res);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">callBack</span>(<span class="literal">false</span>, res);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">border:</span> &quot;<span class="attr">1px</span> <span class="attr">solid</span> <span class="attr">red</span>&quot; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">Comp</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            &#123;<span class="attr">...this.props</span>&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">getFieldDecorator</span>=<span class="string">&#123;this.getFieldDecorator&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">getFieldValue</span>=<span class="string">&#123;this.getFieldValue&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">validateFields</span>=<span class="string">&#123;this.validateFields&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Create</span>(<span class="title class_">MyFrom</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="自定义-redux"><a href="#自定义-redux" class="headerlink" title="自定义 redux"></a>自定义 redux</h1><ol>
+<li><p>声明一个函数 createStore  他返回一个对象   { getState, subscribe, dispatch }</p>
+</li>
+<li><p>这几个方法就是在 createStore 中定义</p>
+</li>
+<li><p>参数 1  是 reducer  把 reducer 执行下   参数随意   返回 state  保存起来   叫做  currentState</p>
+</li>
+<li><p>dispatch  就是执行 reducer  并给  currentState  重新赋值</p>
+</li>
+<li><p>subscribe 中传入的函数   会被放入一个数组   在 dispatch 中遍历调用</p>
+</li>
+<li><p>中间件的使用</p>
+</li>
+<li><p>applyMiddleware 是单独的一个函数，参数就是中间件。他会遍历每个中间件，给中间件传一个 api 对象，api 对象的 getState，dispatch 方法就是从 store 中复制来得（createStore 会判断有没有传入第二个参数，也就是 applyMiddleware，如果有就会在 applyMiddleware 创建 store，自己不在向下执行）。</p>
+</li>
+<li><p>中间件遍历的时候会执行，并返回一个函数，暂时把他叫做（中间件 dispatch）。遍历完返回（中间件 dispatch 组成的数组</p>
+</li>
+<li><p>这个数组，通过 Array.reduce 方法   叠加成聚合函数，意思就是一个函数。  返回（包含）一个（中间件 dispatch）。然后这个（中间件 dispatch）里面又   返回（包含）另一个（中间件 dispatch）。最终会调用原来 store 的那个 dispatch  知识各个中间件在中间件 dispatch）里做了些别的事。</p>
+</li>
+<li><p>然后将这个聚合函数当做 dispatch 加上在 applyMiddleware 生成的 store 一起返回出去   就是我们使用的 store。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createStore</span>(<span class="params">reducer, enhancer</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (enhancer) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">enhancer</span>(createStore)(reducer); <span class="comment">// 判断有没有中间件  有就执行他</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> currentListeners = []; <span class="comment">// subscribe里传来的回调函数组成的数组</span></span><br><span class="line">  <span class="keyword">let</span> currentState = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">dispatch</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;djfkdjf&quot;</span> &#125;);</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getState</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> currentState;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">subscribe</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">    currentListeners.<span class="title function_">push</span>(fn);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">dispatch</span>(<span class="params">action</span>) &#123;</span><br><span class="line">    currentState = <span class="title function_">reducer</span>(currentState, action);</span><br><span class="line">    currentListeners.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> <span class="title function_">item</span>());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    getState,</span><br><span class="line">    subscribe,</span><br><span class="line">    dispatch,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">applyMiddleware</span>(<span class="params">...list</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">createStore</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...arg</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> store = <span class="title function_">createStore</span>(...arg);</span><br><span class="line">      <span class="keyword">let</span> dispatch = store.<span class="property">dispatch</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> api = &#123;</span><br><span class="line">        <span class="attr">getState</span>: store.<span class="property">getState</span>,</span><br><span class="line">        <span class="attr">dispatch</span>: <span class="function">(<span class="params">...args</span>) =&gt;</span> <span class="title function_">dispatch</span>(...args),</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 调用中间件，他会返回一个函数 也就是参数是dispatch的函数</span></span><br><span class="line">      <span class="keyword">const</span> chain = list.<span class="title function_">map</span>(<span class="function">(<span class="params">middleware</span>) =&gt;</span> <span class="title function_">middleware</span>(api));</span><br><span class="line">      <span class="comment">// 再次调用中间件返回的函数把store.dispatch传入，他会返回一个函数也就是参数是action的函数</span></span><br><span class="line">      dispatch = <span class="title function_">compose</span>(...chain)(store.<span class="property">dispatch</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 这事最终返回的</span></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        ...store,</span><br><span class="line">        dispatch,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把中间件返回的dispatch函数聚合起来</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">compose</span>(<span class="params">...funcs</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (funcs.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">arg</span>) =&gt;</span> arg;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (funcs.<span class="property">length</span> === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> funcs[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> funcs.<span class="title function_">reduce</span>(</span><br><span class="line">    <span class="function">(<span class="params">a, b</span>) =&gt;</span></span><br><span class="line">      <span class="function">(<span class="params">...args</span>) =&gt;</span></span><br><span class="line">        <span class="title function_">a</span>(<span class="title function_">b</span>(...args))</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">counterReducer</span> = (<span class="params">state = <span class="number">3333</span>, action</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.<span class="property">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;add&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;minus&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> state - <span class="number">1</span>;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">logger</span>(<span class="params">...api</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">dispatch</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">action</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(action.<span class="property">type</span> + <span class="string">&quot;执行了！&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">dispatch</span>(action);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">thunk</span>(<span class="params">&#123; getState &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> <span class="function">(<span class="params">action</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> action === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">action</span>(dispatch, getState);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">dispatch</span>(action);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(counterReducer, <span class="title function_">applyMiddleware</span>(logger, thunk));</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/%E8%87%AA%E5%AE%9A%E4%B9%89react/">自定义react</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/cookie%E5%92%8Csession/">cookie和session</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

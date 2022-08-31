@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>node模块PATH | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">node模块PATH</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>path 模块用于处理文件路径和目录的工具</p>
+<p>1 <code>path.basename()</code>  方法返回  <code>path</code>  的最后一部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">basename</span>(<span class="string">&quot;/foo/bar/baz/asdf/quux.html&quot;</span>);</span><br><span class="line"><span class="comment">// 返回: &#x27;quux.html&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>2 <code>path.dirname()</code>  方法返回  <code>path</code>  的目录名   不包括   文件名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.dirname(<span class="string">&#x27;/foo/bar/baz/asdf/quux&#x27;</span>);</span><br><span class="line"><span class="comment">// 返回: &#x27;/foo/bar/baz/asdf&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>3 <code>path.extname()</code>  方法返回  <code>path</code>  的扩展名   只抓取最后一个点和后面的扩展名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.extname(&#x27;index.coffee.md&#x27;);</span><br><span class="line">// 返回: &#x27;.md&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>4 <code>path.parse()</code>  方法返回一个对象，对象的属性表示  <code>path</code>  的元素。返回的对象有以下属性：<code>root</code>、<code>dir</code>、<code>base</code>、<code>ext</code>、<code>name。</code><br><code>path.format()</code>  方法会从一个对象返回一个路径字符串。 与  <a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://nodejs.cn/api/path.html%23path_path_parse_path"><code>path.parse()</code></a>  相反。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">parse</span>(<span class="string">&#x27;/home/user/dir/file.txt&#x27;</span>);</span><br><span class="line">返回:</span><br><span class="line">&#123; <span class="attr">root</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">   <span class="attr">dir</span>: <span class="string">&#x27;/home/user/dir&#x27;</span>,</span><br><span class="line">   <span class="attr">base</span>: <span class="string">&#x27;file.txt&#x27;</span>,</span><br><span class="line">  <span class="attr">ext</span>: <span class="string">&#x27;.txt&#x27;</span>,</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;file&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5 <code>path.isAbsolute()</code>  方法检测  <code>path</code>  是否为绝对路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.isAbsolute(&#x27;/baz/..&#x27;);  // true</span><br><span class="line">path.isAbsolute(&#x27;qux/&#x27;);     // false</span><br></pre></td></tr></table></figure>
+
+<p>6 <code>path.join()</code>  方法把传入的参数连接起来形成 url。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">join</span>(<span class="string">&quot;/foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz/asdf&quot;</span>, <span class="string">&quot;quux&quot;</span>, <span class="string">&quot;..&quot;</span>);</span><br><span class="line"><span class="comment">// 返回: &#x27;/foo/bar/baz/asdf&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>7 <code>path.normalize()</code>  方法会规范化给定的  <code>path</code>，并解析  <code>&#39;..&#39;</code>  和  <code>&#39;.&#39;</code>  片段。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.normalize(&#x27;/foo/bar//baz/asdf/quux/..&#x27;);</span><br><span class="line">// 返回: &#x27;/foo/bar/baz/asdf&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>8 <code>path.resolve()</code>  方法会把一个路径或路径片段的序列解析为一个绝对路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.resolve(&#x27;/foo/bar&#x27;, &#x27;./baz&#x27;);</span><br><span class="line">// 返回: &#x27;/foo/bar/baz&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>9  path.sep  表示分隔符   posix 上是 &#x2F;     win 上是   <br>    path.delimiter    表示间隔符  posix  是： win 是；</p>
+<p>10  路径区别<br>dirname 与__filename 总是返回文件的绝对路径，即物理磁盘上的路径<br>process.cwd()总是返回执行 node 命令时所在的文件夹路径，当前在哪里启动的脚本路径<br>.&#x2F;在 require 方法中总是相对当前文件所在文件夹的路径；在其他的地方和 process.cwd()一样，相对 node 启动文件夹</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/node%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/">node实现上传文件</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/node%E6%A8%A1%E5%9D%97events/">node模块events</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

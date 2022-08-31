@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>computed | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">computed</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:58:37</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="整理流程"><a href="#整理流程" class="headerlink" title="整理流程"></a>整理流程</h2><h4 id="官网文档说明"><a href="#官网文档说明" class="headerlink" title="官网文档说明"></a>官网文档说明</h4><p>计算属性是基于它们的响应式依赖进行<strong>缓存</strong>的。只在相关响应式依赖发生改变时它们才会重新求值。<br>这就意味着只要   依赖项还没有发生改变，多次访问该计算属性会立即返回之前的计算结果，而<strong>不必再次执行函数</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">  <span class="attr">fullName</span>: &#123;</span><br><span class="line">    <span class="comment">// getter</span></span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&#x27;a&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// setter</span></span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">newValue</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="computed-是响应式的"><a href="#computed-是响应式的" class="headerlink" title="computed 是响应式的"></a>computed 是响应式的</h4><p>computed 设置的 get 和 set 函数，最终会设置到 Object.defineProperty 的 get，set 函数里。这和 vue 的响应式原理是一样的，当读取 computed 时会执行 get。，赋值的时候会执行 set 函数。</p>
+<h4 id="computed-会被缓存"><a href="#computed-会被缓存" class="headerlink" title="computed 会被缓存"></a>computed 会被缓存</h4><p>computed 根据他的依赖项进行计算(根据你设置的 get)，会把值保存到一个变量中，当在 template 中使用计算属性时，会直接返回这个变量。<br>当依赖项变化，computed 会重新计算，更新这个变量。<br>computed 控制缓存是根据一个 watcher 的一个属性 <strong>dirty（是否脏了）。</strong><br>当 dirty &#x3D; true 时，读取 computed 会重新计算。<br>当 dirty &#x3D; false 时，读取 computed 会使用缓存。</p>
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ol>
+<li>开始每个 computed 会新建自己的 watcher，并设置 watcher.dirty &#x3D; true, 但是并不会马上计算。</li>
+<li>当页面中使用了 computed，会触发 get 函数，触发 watcher.evaluate()去计算。</li>
+<li>computed  计算完成之后，会设置 watcher.dirty &#x3D; false</li>
+<li>当依赖变化，通知 computed 的 watcher，并设置 watcher.dirty &#x3D; true</li>
+</ol>
+<p>当 computed 依赖了 data 里的数据，当 data 改变。第一步会通知 computed 的 watcher 更新，其实只会重置 dirty &#x3D; true，并不会计算。第二步会通知模板的 watcher 进行更新渲染，进而重新读取 computed，然后 computed 才会重新计算。</p>
+<h4 id="依赖收集"><a href="#依赖收集" class="headerlink" title="依赖收集"></a>依赖收集</h4><p>比如 computed 使用了 data 的属性 D，data 里的属性 D 的依赖收集器会同时收集到 computed 的  watcher  和   页模板的  watcher。<br>template 在读取 computed 的时候，会趁机把 template 的 watcher 推荐给 data，data 就会收集到 template 的 watcher。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码部分我们从一开始 new Vue 的时候看。<br>流程：initMixin –&gt; _init –&gt; initState –&gt; initComputed</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Vue</span>(<span class="params">options</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&quot;production&quot;</span> &amp;&amp; !(<span class="variable language_">this</span> <span class="keyword">instanceof</span> <span class="title class_">Vue</span>)) &#123;</span><br><span class="line">    <span class="title function_">warn</span>(<span class="string">&quot;Vue is a constructor and should be called with the `new` keyword&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_init</span>(options); <span class="comment">// _init方法是在 initMixin 中加入的</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化init</span></span><br><span class="line"><span class="title function_">initMixin</span>(<span class="title class_">Vue</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initMixin</span>(<span class="params">Vue: Class&lt;Component&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">//  _init 方法</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_init</span> = <span class="keyword">function</span> (<span class="params">options?: <span class="built_in">Object</span></span>) &#123;</span><br><span class="line">    <span class="comment">// 构造函数初始化</span></span><br><span class="line">    vm.<span class="property">_self</span> = vm;</span><br><span class="line">    <span class="title function_">initLifecycle</span>(vm); <span class="comment">// $parent,$root,$children,$refs</span></span><br><span class="line">    <span class="title function_">initEvents</span>(vm); <span class="comment">// 处理父组件传递的监听器</span></span><br><span class="line">    <span class="title function_">initRender</span>(vm); <span class="comment">// $slots,$scopedSlots,_c,$createElement</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&quot;beforeCreate&quot;</span>);</span><br><span class="line">    <span class="title function_">initInjections</span>(vm); <span class="comment">// resolve injections before data/props</span></span><br><span class="line">    <span class="title function_">initState</span>(vm); <span class="comment">// 初始化props，methods，data，computed，watch 这里面又是一堆init</span></span><br><span class="line">    <span class="title function_">initProvide</span>(vm); <span class="comment">// resolve provide after data/props</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&quot;created&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initState</span>(<span class="params">vm: Component</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">computed</span>) <span class="title function_">initComputed</span>(vm, opts.<span class="property">computed</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">initComputed</span>(<span class="params">vm: Component, computed: <span class="built_in">Object</span></span>) &#123;</span><br><span class="line">  <span class="comment">// 在vm实例上保存computedWatchers</span></span><br><span class="line">  <span class="keyword">const</span> watchers = (vm.<span class="property">_computedWatchers</span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="literal">null</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> computed) &#123;</span><br><span class="line">    <span class="keyword">const</span> userDef = computed[key];</span><br><span class="line">    <span class="keyword">const</span> getter = <span class="keyword">typeof</span> userDef === <span class="string">&quot;function&quot;</span> ? userDef : userDef.<span class="property">get</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//!!!c 给每个计算属性生成一个watcher(注意key),</span></span><br><span class="line">    <span class="comment">// 在Watcher构造函数中会根据 lazy 生成computed_watcher</span></span><br><span class="line">    watchers[key] = <span class="keyword">new</span> <span class="title class_">Watcher</span>(</span><br><span class="line">      vm,</span><br><span class="line">      getter || noop,</span><br><span class="line">      noop,</span><br><span class="line">      computedWatcherOptions <span class="comment">// 在上面会声明 const computedWatcherOptions = &#123; lazy: true &#125;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义计算属性的 get set</span></span><br><span class="line">    <span class="comment">// 在vm实例上可直接访问</span></span><br><span class="line">    <span class="keyword">if</span> (!(key <span class="keyword">in</span> vm)) &#123;</span><br><span class="line">      <span class="title function_">defineComputed</span>(vm, key, userDef);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>initComputed  这段代码做了几件事<br>1、每个  computed  配发 watcher<br>2、defineComputed  定义 cumputed 响应式。<br>3、收集所有  computed  的  watcher，保存到 vm._computedWatchers。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">Watcher</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    vm: Component,</span></span><br><span class="line"><span class="params">    expOrFn: string | <span class="built_in">Function</span>,</span></span><br><span class="line"><span class="params">    cb: <span class="built_in">Function</span>,</span></span><br><span class="line"><span class="params">    options?: ?<span class="built_in">Object</span>,</span></span><br><span class="line"><span class="params">    isRenderWatcher?: boolean</span></span><br><span class="line"><span class="params">  </span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">lazy</span> = !!options.<span class="property">lazy</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dirty</span> = <span class="variable language_">this</span>.<span class="property">lazy</span>; <span class="comment">// for lazy watchers</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">getter</span> = expOrFn; <span class="comment">// 把计算属性的get 赋值给 watcher的getter</span></span><br><span class="line">    <span class="comment">//!!!c 这里并不会计算值，只有你再读取 computed，再开始计算</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> = <span class="variable language_">this</span>.<span class="property">lazy</span> ? <span class="literal">undefined</span> : <span class="variable language_">this</span>.<span class="title function_">get</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">defineComputed</span>(<span class="params"></span></span><br><span class="line"><span class="params">  target: any,</span></span><br><span class="line"><span class="params">  key: string,</span></span><br><span class="line"><span class="params">  userDef: <span class="built_in">Object</span> | <span class="built_in">Function</span></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  sharedPropertyDefinition.<span class="property">get</span> = <span class="title function_">createComputedGetter</span>(key);</span><br><span class="line">  sharedPropertyDefinition.<span class="property">set</span> = userDef.<span class="property">set</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(target, key, sharedPropertyDefinition);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createComputedGetter</span>(<span class="params">key</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">computedGetter</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> watcher = <span class="variable language_">this</span>.<span class="property">_computedWatchers</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">_computedWatchers</span>[key];</span><br><span class="line">    <span class="comment">// 在计算属性被使用时 会触发这个函数 也就是get</span></span><br><span class="line">    <span class="comment">// 通过key 获取到对应的 _computedWatcher</span></span><br><span class="line">    <span class="comment">// 根据 watcher.dirty 决定 value使用的是缓存的还是重新计算</span></span><br><span class="line">    <span class="keyword">if</span> (watcher.<span class="property">dirty</span>) &#123;</span><br><span class="line">      <span class="comment">// watcher.evaluate 用来重新计算，更新缓存值，并重置 dirty 为false，表示缓存已更新</span></span><br><span class="line">      <span class="comment">// 只有 dirty 为 true 的时候，才会执行 evaluate</span></span><br><span class="line">      watcher.evaluate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//  此时Dep.target就是当前页面的watcher，</span></span><br><span class="line">    <span class="comment">// 让data的属性(computed的依赖项)收集当前页面的watcher，也就是__ob__下面的dep的subs中</span></span><br><span class="line">    <span class="comment">// 这样data的subs中 就有了页面的watcher，computed的watcher</span></span><br><span class="line">    <span class="comment">// 这样data的数据改变 会直接分别通知 页面的watcher，computed的watcher</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Dep</span>.<span class="property">target</span>) &#123;</span><br><span class="line">      watcher.<span class="title function_">depend</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> watcher.<span class="property">value</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>defineComputed 做了哪些事？</p>
+<ol>
+<li>使用  Object.defineProperty  在实例上定义 computed  属性，所以可以直接访问</li>
+<li>createComputedGetter 包装返回 get  函数</li>
+</ol>
+<p>createComputedGetter 的作用：</p>
+<ol>
+<li>计算 computed 的值</li>
+<li>依赖收集：让 data  的依赖收集器收集到 computed-watcher 和 页面 watcher。这里有点绕：</li>
+</ol>
+<p><strong>evaluate 调用了 get，在 get 里面，</strong><br><strong>先把当前 watcher，也就是 computed-watcher 赋值给 taget。</strong><br><strong>再调用 getter 计算值，这是也就是你设置的 get，get 会用到 data 里的属性，触发 data 里的属性的 get，让 data         的属性收集到 computed-watcher。</strong><br><strong>然后 popTarget 会把 taget 设为上一个 watcher，也就是页面 watcher。</strong><br><strong>然后再进行上面的 watcher.depend()</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> evaluate () &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">value</span> = <span class="variable language_">this</span>.<span class="title function_">get</span>()</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">dirty</span> = <span class="literal">false</span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//  收集依赖</span></span><br><span class="line"> get () &#123;</span><br><span class="line">    <span class="comment">// 在这里把当前watcher给了 Dep.target</span></span><br><span class="line">   <span class="title function_">pushTarget</span>(<span class="variable language_">this</span>)</span><br><span class="line">   value = <span class="variable language_">this</span>.<span class="property">getter</span>.<span class="title function_">call</span>(vm, vm) <span class="comment">// 计算值</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// 从targetStack（watcher缓存栈）末尾删除本watcher</span></span><br><span class="line">   <span class="comment">// 并且设置target 为上一个 watcher</span></span><br><span class="line">   <span class="title function_">popTarget</span>()</span><br><span class="line">   <span class="variable language_">this</span>.<span class="title function_">cleanupDeps</span>()</span><br><span class="line">   <span class="keyword">return</span> value</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//!!!c watcher.deps存放的是data属性的dep。比如data：&#123;a.b.c&#125;  就会有a的dep  b的dep  c的dep</span></span><br><span class="line"> depend () &#123;</span><br><span class="line">   <span class="keyword">let</span> i = <span class="variable language_">this</span>.<span class="property">deps</span>.<span class="property">length</span></span><br><span class="line">   <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">deps</span>[i].<span class="title function_">depend</span>()</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1 页面更新，读取  computed  的时候，Dep.target  会设置为   页面 watcher。<br>2 computed  被读取，createComputedGetter  包装的函数触发，第一次会进行计算<br>computed-watcher.evaluted  被调用，进而 computed-watcher.get  被调用，Dep.target  被设置为  computed- watcher，旧值 页面  watcher  被缓存起来。<br>3 computed  计算会读取  data，此时  data 就收集到 computed-watcher<br>同时  computed-watcher  也会保存到  data  的依赖收集器  dep（用于下一步）。<br>computed  计算完毕，释放 Dep.target，并且 Dep.target  恢复上一个 watcher（页面 watcher）<br>4 手动  watcher.depend， 让  data  再收集一次  Dep.target，于是  data  又收集到   恢复了的页面 watcher<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1595413657995-73bfab32-8822-4232-b05a-9825024193e8.png#align=left&display=inline&height=484&margin=%5Bobject%20Object%5D&name=image.png&originHeight=484&originWidth=342&size=77839&status=done&style=none&width=342" alt="image.png"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/Diff/">Diff</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/event%20%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/">event 事件处理</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>vue-router原理分析 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">vue-router原理分析</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:58:37</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>第一步 Vue.use(Router)  的时候回去执行  install 方法</p>
+<p>在 install 方法里面   用 mixin 的方法向 Vue 写入 beforeCreate 生命周期</p>
+<p>为什么要在 beforeCreate  的时候插入？</p>
+<p>在创建之前   为 Vue.prototype 挂载$router  方法<br>并触发 init 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myRouter.<span class="property">install</span> = <span class="keyword">function</span> (<span class="params">vm</span>) &#123;</span><br><span class="line">  <span class="title class_">Vue</span> = vm;</span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">mixin</span>(&#123;</span><br><span class="line">    <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>) &#123;</span><br><span class="line">        <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$router</span> = <span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>.<span class="title function_">init</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2  在 init 方法里面   触发 3 个函数<br>  1 监听 hashChange 事件   获取 hsah 值   并赋值给   this.app.current</p>
+<p>2  解析 routes  生成 routesMap<br>  3  为 Vue 挂载全局组件  router-link  router-view</p>
+<p>在 new  的时候   内部创建 Vue 实例   利用 Vue 的数据响应式  this.app.current  当 current 改变的时候  router-view  就会重新渲染。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="title class_">Vue</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">myRouter</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$options</span> = options;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">routerMap</span> = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">app</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">      <span class="attr">data</span>: &#123; <span class="attr">current</span>: <span class="string">&quot;/&quot;</span> &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">init</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">bindEvents</span>();</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">createRouterMap</span>();</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">initComponent</span>();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">bindEvents</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;hashchange&quot;</span>, <span class="variable language_">this</span>.<span class="property">onHashChange</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">onHashChange</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">current</span> = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">slice</span>(<span class="number">1</span>) || <span class="string">&quot;/&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">createRouterMap</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   遍历用户配置路由数组</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">routes</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">route</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">routerMap</span>[route.<span class="property">path</span>] = route;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">initComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&quot;mylink&quot;</span>, &#123;</span><br><span class="line">      <span class="attr">props</span>: &#123;</span><br><span class="line">        <span class="attr">to</span>: <span class="title class_">String</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">render</span>(<span class="params">h</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">h</span>(<span class="string">&quot;a&quot;</span>, &#123; <span class="attr">attrs</span>: &#123; <span class="attr">href</span>: <span class="string">&quot;#&quot;</span> + <span class="variable language_">this</span>.<span class="property">to</span> &#125; &#125;, [</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">$slots</span>.<span class="property">default</span>,</span><br><span class="line">        ]);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&quot;myview&quot;</span>, &#123;</span><br><span class="line">      <span class="attr">render</span>: <span class="function">(<span class="params">h</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="title class_">Component</span> = <span class="variable language_">this</span>.<span class="property">routerMap</span>[<span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">current</span>].<span class="property">component</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Component</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">h</span>(<span class="title class_">Component</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myRouter.<span class="property">install</span> = <span class="keyword">function</span> (<span class="params">vm</span>) &#123;</span><br><span class="line">  <span class="title class_">Vue</span> = vm;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">mixin</span>(&#123;</span><br><span class="line">    <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>) &#123;</span><br><span class="line">        <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$router</span> = <span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$options</span>.<span class="property">router</span>.<span class="title function_">init</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> myRouter;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/props/">props</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/vue.config.js/">vue.config.js</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

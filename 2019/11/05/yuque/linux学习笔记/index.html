@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>linux学习笔记 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">linux学习笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-11-05,&nbsp;&nbsp;17:54:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h2><p><img src="https://cdn.nlark.com/yuque/0/2019/png/462392/1572947759021-110f5a05-6387-4a99-9b77-59dda89730e2.png#align=left&display=inline&height=252&margin=%5Bobject%20Object%5D&name=image.png&originHeight=252&originWidth=523&size=38225&status=done&style=none&width=523" alt="image.png"></p>
+<p><strong>&#x2F;bin  存放指令,二进制可执行文件</strong><br>&#x2F;sbin  存放系统管理员   使用的指令<br>&#x2F;root  系统管理员   超级权限者目录<br>&#x2F;boot  启动 linux 时使用的   核心文件<br><strong>&#x2F;var  存放不断扩充的东西   比如日志</strong><br>&#x2F;dev  设备管理器   硬件用文件形式存储<br>&#x2F;mnt 默认挂载别的系统的文件   外部文件挂载&#x2F;mnt&#x2F;上<br><strong>&#x2F;etc 存放配置的相关文件</strong><br>&#x2F;proc  虚拟目录  <br>&#x2F;srv  &#x2F;proc   &#x2F;sys  服务启动文件   等系统目录   别动<br>&#x2F;media U 盘   光盘出现的地方<br>&#x2F;opt  安装软件要放在这<br><strong>&#x2F;usr 安装一个软件的默认目录，相当于 windows 下的 program files</strong><br><strong>&#x2F;usr&#x2F;local    软件安装完成放在这里</strong></p>
+<h4 id="软件安装目录"><a href="#软件安装目录" class="headerlink" title="软件安装目录"></a>软件安装目录</h4><p>比如 mysql 安装会把配置文件装到&#x2F;etc&#x2F;mysql 目录下。数据会被放到&#x2F;var&#x2F;mysql 目录下。可执行文件会被放到&#x2F;bin &#x2F;mysql 目录下</p>
+<h1 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h1><h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><p>shutdown -h now（立即进行关机）<br>shutdown -r now （现在重新启动计算机）      <br>reboot （现在重新启动计算机）<br>startx  进入桌面</p>
+<h3 id="操作目录，文件"><a href="#操作目录，文件" class="headerlink" title="操作目录，文件"></a>操作目录，文件</h3><h4 id="pwd-显示路径"><a href="#pwd-显示路径" class="headerlink" title="pwd  显示路径"></a>pwd  显示路径</h4><h4 id="cd-切换到指定目录"><a href="#cd-切换到指定目录" class="headerlink" title="cd  切换到指定目录"></a>cd  切换到指定目录</h4><p>例子：<br>cd &#x2F;root  相对路径      <br>cd ..&#x2F;..&#x2F;root  绝对路径  <br>cd ..  返回上一级</p>
+<h4 id="ls-显示文件列表"><a href="#ls-显示文件列表" class="headerlink" title="ls  显示文件列表"></a>ls  显示文件列表</h4><p>参数： <br>-l  列出文件详细信息<br>-a  李处所有文件</p>
+<h4 id="mkdir-创建目录"><a href="#mkdir-创建目录" class="headerlink" title="mkdir  创建目录"></a>mkdir  创建目录</h4><p>语法：mkdir 【选项】要创建目录      <br>例子：mkdir  &#x2F;home&#x2F;dog<br>参数：-p  创建多级目录  <br>例子 mkdir -p &#x2F;home&#x2F;dog&#x2F;two</p>
+<h4 id="rmdir-删除目录"><a href="#rmdir-删除目录" class="headerlink" title="rmdir  删除目录"></a>rmdir  删除目录</h4><p>语法：rmdir  要删除目录<br>例子：rmdir  &#x2F;home&#x2F;dog    删除 dog 这个文件夹，  文件夹下不能有文件<br>参数 -rf   强制删除<br>例子：rmdir -rf &#x2F;home&#x2F;dog</p>
+<h4 id="rm-删除文件或目录"><a href="#rm-删除文件或目录" class="headerlink" title="rm  删除文件或目录"></a>rm  删除文件或目录</h4><p>参数：<br>-f  强制删除<br>-r  删除该目录下所有文件</p>
+<h4 id="mv-移动文件，目录"><a href="#mv-移动文件，目录" class="headerlink" title="mv  移动文件，目录"></a>mv  移动文件，目录</h4><h4 id="find-在文件系统中查找指定的文件"><a href="#find-在文件系统中查找指定的文件" class="headerlink" title="find  在文件系统中查找指定的文件"></a>find  在文件系统中查找指定的文件</h4><h4 id="grep-在指定的文件夹中查找指定的字符串"><a href="#grep-在指定的文件夹中查找指定的字符串" class="headerlink" title="grep  在指定的文件夹中查找指定的字符串"></a>grep  在指定的文件夹中查找指定的字符串</h4><h4 id="more-分页显示"><a href="#more-分页显示" class="headerlink" title="more  分页显示"></a>more  分页显示</h4><h4 id="touch-创建文件"><a href="#touch-创建文件" class="headerlink" title="touch  创建文件"></a>touch  创建文件</h4><p>例子：touch hello.txt    创建一个空文件</p>
+<h4 id="cp-拷贝"><a href="#cp-拷贝" class="headerlink" title="cp  拷贝"></a>cp  拷贝</h4><p>参数 -r  递归拷贝<br>例子：cp a.txt bbb&#x2F;  将当前目录下的 a.txt  拷贝到当前目录的 bbb 这个目录下<br>例子：cp -r aaa&#x2F;  bbb&#x2F;    将 home&#x2F;aaa 文件夹的（包括 aaa） 拷贝到 &#x2F;home&#x2F;bbb 文件夹里</p>
+<h4 id="cat-查看文件内容"><a href="#cat-查看文件内容" class="headerlink" title="cat  查看文件内容"></a>cat  查看文件内容</h4><h4 id="echo-生成一个带内容的文件"><a href="#echo-生成一个带内容的文件" class="headerlink" title="echo  生成一个带内容的文件"></a>echo  生成一个带内容的文件</h4><p>例子：<br>echo aaa &gt; aaa.txt     &gt;追加<br>echo bbb &gt;&gt; bbb.txt     &gt;&gt;  覆盖</p>
+<h3 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h3><p>在 linux 中每个执行程序都是一个进程，都有一个进程 ID，每个进程都有父进程。<br>进程有前台和后台之分。</p>
+<h4 id="ps-查看进程"><a href="#ps-查看进程" class="headerlink" title="ps  查看进程"></a>ps  查看进程</h4><p>例子： ps -aux | grep xxx    竖线是管道   表示先查看进程，然后再查找 xxx 的进程<br>例子： ps -aux | grep sshd   查看 sshd 进程<br>参数：</p>
+<ul>
+<li>-a 显示当前终端所有进程信息</li>
+<li>-u 以用户的格式显示进程信息</li>
+<li>-x 显示后台进程运行的参数</li>
+</ul>
+<h4 id="ps-显示内容详解"><a href="#ps-显示内容详解" class="headerlink" title="ps 显示内容详解"></a>ps 显示内容详解</h4><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1578818683111-8d7c672a-52c3-439b-8815-8abdfeab12e1.png#align=left&display=inline&height=289&margin=%5Bobject%20Object%5D&name=image.png&originHeight=470&originWidth=813&size=129870&status=done&style=none&width=500" alt="image.png"></p>
+<h4 id="常用方式：-ps-ef-more"><a href="#常用方式：-ps-ef-more" class="headerlink" title="常用方式： ps -ef | more"></a>常用方式： ps -ef | more</h4><ul>
+<li>-e 显示所有进程</li>
+<li>-f 全格式</li>
+<li>UID 是用户 ID，PID 是进程 ID，PPID 父进程 ID</li>
+</ul>
+<h4 id="kill-终止进程"><a href="#kill-终止进程" class="headerlink" title="kill 终止进程"></a>kill 终止进程</h4><p>kill [选项] 进程 id   -9：强迫进程立即停止<br>kill 3305<br>kill -9 5050<br>killall 进程名称<br>killall nginx</p>
+<h4 id="pstree-查看进程树"><a href="#pstree-查看进程树" class="headerlink" title="pstree  查看进程树"></a>pstree  查看进程树</h4><p>语法： pstree [选项] PID <br>选项：</p>
+<ul>
+<li>-p 显示进程 PID</li>
+<li>-u 进程所属用户</li>
+</ul>
+<p>例子： pstree -p</p>
+<h4 id="tar-压缩"><a href="#tar-压缩" class="headerlink" title="tar  压缩"></a>tar  压缩</h4><p>语法：tar [-cxzjvf]  压缩打包文档的名称   想要打包的目录<br>参数：</p>
+<ul>
+<li>-c  建立一个归档文件的参数指令</li>
+<li>-x  解开归档文件</li>
+<li>-z  是否使用 gzip 压缩</li>
+<li>-j  是否使用 bzip2  压缩</li>
+<li>-v  过程显示文件</li>
+<li>-f  使用档名   在 f 之后跟档名</li>
+<li>-tf  查看归档文件里面的信息</li>
+</ul>
+<p>例子：<br>压缩文件夹  tar -zcvf test.tar.gz test<br>解压缩  tar -zxvf text.tar.gz</p>
+<h3 id="rpm-包和-yum"><a href="#rpm-包和-yum" class="headerlink" title="rpm 包和 yum"></a>rpm 包和 yum</h3><p>rpm 是一种互联网下载包的管理工具，类似 npm，yum 是 rpm 的高级版</p>
+<h4 id="查看已安装-rpm-包-rpm-qa-grep-xxx"><a href="#查看已安装-rpm-包-rpm-qa-grep-xxx" class="headerlink" title="查看已安装 rpm 包 : rpm -qa|grep xxx"></a>查看已安装 rpm 包 : rpm -qa|grep xxx</h4><p>例子 rpm -qa | grep nginx</p>
+<h4 id="查询包名称"><a href="#查询包名称" class="headerlink" title="查询包名称"></a>查询包名称</h4><p>rpm -qi nginx<br>查询包安装到哪里： rpm -ql firefox <br>删除：rpm -e nginx<br>安装： rpm -ivh rpm 包全称 i&#x3D;install v&#x3D;提示信息 h&#x3D;进度条</p>
+<h4 id="yum-指令"><a href="#yum-指令" class="headerlink" title="yum 指令"></a>yum 指令</h4><p>yum list | grep xx 包<br>yum install xx 包</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/09/yuque/nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">nginx学习笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/05/yuque/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">docker学习笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

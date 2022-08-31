@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>理解FileReader | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">理解FileReader</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-01-29,&nbsp;&nbsp;9:47:37</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>FileReader 对象 其作用是从 Blob ，File 对象中读取数据。 它使用事件来传递数据，因为从磁盘读取数据可能比较费时间。所有可以从事件回调函数获取文件数据。</p>
+<p>File 对象继承自 Blob，其中 File 对象可以是来自用户在一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input"><input></a>元素上选择文件后返回的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileList">FileList</a>对象,也可以来自拖放操作生成的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer">DataTransfer</a>对象,还可以是来自在一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement">HTMLCanvasElement</a>上执行 mozGetAsFile()方法后返回结果。<br>Blob，File 对象只是二进制数据的容器，本身并不能操作二进制，所以用 FileReader 操作 Blob，File。</p>
+<h2 id="创建实例"><a href="#创建实例" class="headerlink" title="创建实例"></a>创建实例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FileReader.error</td>
+<td>只读，一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/DOMException">DOMException</a>表示在读取文件时发生的 c 错误</td>
+</tr>
+<tr>
+<td>FileReader.readState</td>
+<td>表示状态的数字。0 未加载，1 加载中，2 完场读取</td>
+</tr>
+<tr>
+<td>FileReader.result</td>
+<td>文件的内容。该属性仅在读取操作完成后才有效</td>
+</tr>
+</tbody></table>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><table>
+<thead>
+<tr>
+<th>方法定义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abort():void</td>
+<td>终止文件读取操作</td>
+</tr>
+<tr>
+<td>readAsArrayBuffer(file):void</td>
+<td>异步按字节读取文件内容，结果用 ArrayBuffer 对象表示</td>
+</tr>
+<tr>
+<td>readAsBinaryString(file):void</td>
+<td>异步按字节读取文件内容，结果为文件的二进制串</td>
+</tr>
+<tr>
+<td>readAsDataURL(file):void</td>
+<td>异步读取文件内容，结果用 data:url 的字符串形式表示</td>
+</tr>
+<tr>
+<td>readAsText(file,encoding):void</td>
+<td>异步按字符读取文件内容，结果用字符串形式表示</td>
+</tr>
+</tbody></table>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onabort</td>
+<td>当读取操作被中止时调用</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>当读取操作发生错误时调用</td>
+</tr>
+<tr>
+<td>onload</td>
+<td>当读取操作成功完成时调用</td>
+</tr>
+<tr>
+<td>onloadend</td>
+<td>当读取操作完成时调用,不管是成功还是失败</td>
+</tr>
+<tr>
+<td>onloadstart</td>
+<td>当读取操作将要开始之前调用</td>
+</tr>
+<tr>
+<td>onprogress</td>
+<td>在读取数据过程中周期性调用</td>
+</tr>
+</tbody></table>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>FileReader 通过异步的方式读取文件内容，结果均是通过事件回调获取，下面是一个读取本地 txt 文件内容的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file&quot;</span>); <span class="comment">//input file</span></span><br><span class="line">input.<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> file = <span class="variable language_">this</span>.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (!!file) &#123;</span><br><span class="line">    <span class="comment">//读取本地文件，以gbk编码方式输出</span></span><br><span class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">    reader.<span class="title function_">readAsText</span>(file, <span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">    reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">//读取完毕后输出结果</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">result</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>此外我们还可以通过注册 onprogress、onerror 等事件，记录文件读取进度或异常行为等等。<br>FileReader 提供了四种不同的读取文件的方式，如：</p>
+<ul>
+<li>readAsArrayBuffer 会将文件内容读取为 ArrayBuffer 对象，</li>
+<li>readAsBinaryString 则将文件读取为二进制串。</li>
+<li>readAsDataURL 会将文件读取成 URL 格式的字符串（base64 编码）</li>
+<li>readAsText 读取成字符串。</li>
+</ul>
+<h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><p>首先准备一张图片（6764 字节）和一个 txt 文本（51 字节）作为测试文件：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414422-81c1db64-93dc-4a1f-a1eb-e39e61dc4a1e.png#align=left&display=inline&height=47&margin=%5Bobject%20Object%5D&originHeight=47&originWidth=558&size=0&status=done&style=none&width=558"><br>接着编写测试代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line"><span class="comment">// 通过四种方式读取文件</span></span><br><span class="line"><span class="comment">//reader.readAsXXX(file);</span></span><br><span class="line">reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">//查看文件输出内容</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">result</span>);</span><br><span class="line">  <span class="comment">//查看文件内容字节大小</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Blob</span>([<span class="variable language_">this</span>.<span class="property">result</span>]));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="readAsDataURL"><a href="#readAsDataURL" class="headerlink" title="readAsDataURL"></a>readAsDataURL</h3><p>查看图片输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414443-6418934c-fd13-4174-9d44-0f89bb69c947.png#align=left&display=inline&height=35&margin=%5Bobject%20Object%5D&originHeight=48&originWidth=1014&size=0&status=done&style=none&width=746"><br>查看 txt 输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414430-aff1c9ad-8f7e-4c4b-9129-ff9ad6ad8b75.png#align=left&display=inline&height=47&margin=%5Bobject%20Object%5D&originHeight=47&originWidth=559&size=0&status=done&style=none&width=559"><br>很明显，readAsDataURL 会将文件内容进行 base64 编码后输出，这个很好区分。</p>
+<h3 id="readAsText"><a href="#readAsText" class="headerlink" title="readAsText"></a>readAsText</h3><p>此方法可以通过不同的编码方式读取字符，我们使用<code>utf-8</code>读取<br>查看图片输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414393-f665b889-e3db-467d-bf1a-22017621d522.png#align=left&display=inline&height=234&margin=%5Bobject%20Object%5D&originHeight=234&originWidth=542&size=0&status=done&style=none&width=542"><br>查看 txt 输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414417-9589e806-86c5-4d88-bd85-76f6892a9b36.png#align=left&display=inline&height=61&margin=%5Bobject%20Object%5D&originHeight=61&originWidth=271&size=0&status=done&style=none&width=271"><br>readAsText 读取文件的单位是字符，故对于文本文件，只要按规定的编码方式读取即可；<br>而对于媒体文件（图片、音频、视频），其内部组成并不是按字符排列，故采用 readAsText 读取，会产生乱码，同时也不是最理想的读取文件的方式</p>
+<h3 id="readAsBinaryString"><a href="#readAsBinaryString" class="headerlink" title="readAsBinaryString"></a>readAsBinaryString</h3><p>查看图片输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414459-9db004e4-fc6a-4e70-82d7-868a147669b0.png#align=left&display=inline&height=239&margin=%5Bobject%20Object%5D&originHeight=239&originWidth=775&size=0&status=done&style=none&width=775"><br>查看 txt 输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414415-3acb0db2-d6e2-415c-8849-c70810fd51f0.png#align=left&display=inline&height=61&margin=%5Bobject%20Object%5D&originHeight=61&originWidth=246&size=0&status=done&style=none&width=246"><br>与 readAsText 不同的是，readAsBinaryString 函数会按字节读取文件内容。<br>然而诸如 0101 的二进制数据只能被机器识别，若想对外可见，还是需要进行一次编码，而 readAsBinaryString 的结果就是读取二进制并编码后的内容。<br>尽管 readAsBinaryString 方法可以按字节读取文件，但由于读取后的内容被编码为字符，大小会受到影响，故不适合直接传输，也不推荐使用。<br>如：测试的图片文件原大小为 6764 字节，而通过 readAsBinaryString 读取后，内容被扩充到 10092 个字节</p>
+<h3 id="readAsArrayBuffer"><a href="#readAsArrayBuffer" class="headerlink" title="readAsArrayBuffer"></a>readAsArrayBuffer</h3><p>查看图片输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414438-caadc4f3-0174-4e1c-9a3c-ee605b63b6d7.png#align=left&display=inline&height=50&margin=%5Bobject%20Object%5D&originHeight=50&originWidth=252&size=0&status=done&style=none&width=252"><br>查看 txt 输出结果：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414415-3c594e86-0ede-4188-946f-6bc852e5b324.png#align=left&display=inline&height=52&margin=%5Bobject%20Object%5D&originHeight=52&originWidth=268&size=0&status=done&style=none&width=268"><br>与 readAsBinaryString 类似，readAsArrayBuffer 方法会按字节读取文件内容，并转换为 ArrayBuffer 对象。<br>我们可以关注下文件读取后大小，与原文件大小一致。<br>这也就是 readAsArrayBuffer 与 readAsBinaryString 方法的区别，readAsArrayBuffer 读取文件后，会在内存中创建一个 ArrayBuffer 对象（二进制缓冲区），将二进制数据存放在其中。通过此方式，我们可以直接在网络中传输二进制内容。<br>ArrayBuffer 中的内容对外是不可见的，若要查看其中的内容，就要引入另一个概念：类型化数组<br>我们可以尝试查看下刚刚通过 readAsArrayBuffer 方法读取的图片文件内容：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174414423-7f173d4c-79d7-48c8-88fc-a33c350cbc65.png#align=left&display=inline&height=344&margin=%5Bobject%20Object%5D&originHeight=344&originWidth=232&size=0&status=done&style=none&width=232"><br>可以看到，整个图片文件的 6764 个字节，被分别存储在长度为 6764 的数组中，而数组中每一个元素的值，为当前字节的十进制数值。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h4 id="在线预览本地文件"><a href="#在线预览本地文件" class="headerlink" title="在线预览本地文件"></a>在线预览本地文件</h4><p>我们知道，img 的 src 属性或 background 的 url 属性，可以通过被赋值为图片网络地址或 base64 的方式显示图片。<br>在文件上传中，我们一般会先将本地文件上传到服务器，上传成功后，由后台返回图片的网络地址再在前端显示。<br>通过 FileReader 的 readAsDataURL 方法，我们可以不经过后台，直接将本地图片显示在页面上。这样做可以减少前后端频繁的交互过程，减少服务器端无用的图片资源，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file&quot;</span>); <span class="comment">// input file</span></span><br><span class="line">input.<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> file = <span class="variable language_">this</span>.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (!!file) &#123;</span><br><span class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">    <span class="comment">// 图片文件转换为base64</span></span><br><span class="line">    reader.<span class="title function_">readAsDataURL</span>(file);</span><br><span class="line">    reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 显示图片</span></span><br><span class="line">      <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file_img&quot;</span>).<span class="property">src</span> = <span class="variable language_">this</span>.<span class="property">result</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>运行效果如下：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608174702852-cf830a5c-1905-4e5b-8165-bdd96c49be25.png#align=left&display=inline&height=104&margin=%5Bobject%20Object%5D&originHeight=104&originWidth=848&size=0&status=done&style=none&width=848"><br>对于图片上传，我们也可以先将图片转换为 base64 进行传输，此时由于传输的图片内容就是一段字符串，故上传接口可以当做普通 post 接口处理，当图片传输到后台后，可以在转换为文件实体存储。<br>当然，考虑到 base64 转换效率及其本身的大小，本方法还是适合于上传内容简单或所占内存较小的文件。</p>
+<h4 id="二进制数据上传"><a href="#二进制数据上传" class="headerlink" title="二进制数据上传"></a>二进制数据上传</h4><p>HTML5 体系的建立引入了一大堆新的东西，基于 XHR2，我们可以直接上传或下载二进制内容，无需像以往一样通过 form 标签由后端拉取二进制内容。<br>简单整理下上传逻辑：<br>1、通过 input[type&#x3D;”file”]标签获取本地文件 File 对象<br>2、通过 FileReader 的 readAsArrayBuffer 方法将 File 对象转换为 ArrayBuffer<br>3、创建 xhr 对象，配置请求信息<br>4、通过 xhr.sendAsBinary 直接将文件的 ArrayBuffer 内容装填至 post body 后发送<br>代码实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file&quot;</span>); <span class="comment">// input file</span></span><br><span class="line">input.<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> file = <span class="variable language_">this</span>.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (!!file) &#123;</span><br><span class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">    reader.<span class="title function_">readAsArrayBuffer</span>(file);</span><br><span class="line">    reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> binary = <span class="variable language_">this</span>.<span class="property">result</span>;</span><br><span class="line">      <span class="title function_">upload</span>(binary);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//文件上传</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">upload</span>(<span class="params">binary</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://xxxx/opload&quot;</span>);</span><br><span class="line">  xhr.<span class="title function_">overrideMimeType</span>(<span class="string">&quot;application/octet-stream&quot;</span>);</span><br><span class="line">  <span class="comment">//直接发送二进制数据</span></span><br><span class="line">  <span class="keyword">if</span> (xhr.<span class="property">sendAsBinary</span>) &#123;</span><br><span class="line">    xhr.<span class="title function_">sendAsBinary</span>(binary);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    xhr.<span class="title function_">send</span>(binary);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监听变化</span></span><br><span class="line">  xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="comment">// 响应成功</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>File 对象继承自 Blob。除了 Blob 方法和属性外，File 对象还有 name 和 lastModified 属性，以及从文件系统读取的内部功能。我们通常从用户输入如 <input> 或拖放事件来获取 File 对象。</p>
+<p>FileReader 对象可以从文件或 blob 中读取数据，可以读取为以下三种格式：</p>
+<ul>
+<li>字符串（readAsText）。</li>
+<li>ArrayBuffer（readAsArrayBuffer）。</li>
+<li>data url，base-64 编码（readAsDataURL）。</li>
+</ul>
+<p>使用 URL.createObjectURL(file) 创建一个短的 url，并将其赋给 <a> 或 <img>。这样，文件便可以下载文件或者将其呈现为图像，作为 canvas 等的一部分。</p>
+<p>通过网络发送一个 File， XMLHttpRequest 或 fetch 等网络 API 本身就接受 File 对象。</p>
+<h5 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h5><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/readAsDataURL">CDN</a><br><a target="_blank" rel="noopener" href="https://zh.javascript.info/file">https://zh.javascript.info/file</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/29/yuque/http%E6%80%BB%E7%BB%93/">http总结</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/29/yuque/%E7%90%86%E8%A7%A3Blob%EF%BC%8CFile/">理解Blob，File</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

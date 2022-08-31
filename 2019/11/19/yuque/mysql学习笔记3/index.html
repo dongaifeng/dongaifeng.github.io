@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>mysql学习笔记3 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">mysql学习笔记3</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-11-19,&nbsp;&nbsp;9:36:17</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="DML-数据操作语言"><a href="#DML-数据操作语言" class="headerlink" title="DML  数据操作语言"></a>DML  数据操作语言</h2><h3 id="插入-insert"><a href="#插入-insert" class="headerlink" title="插入 insert"></a>插入 insert</h3><h4 id="insert-into-表名-列名-…-values-值-1-…"><a href="#insert-into-表名-列名-…-values-值-1-…" class="headerlink" title="insert into  表名(列名, …) values(值 1,….)"></a>insert into  表名(列名, …) values(值 1,….)</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#插入的值的类型要与列的类型一致或兼容,不可以为<span class="keyword">null</span>的列必须插入值</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> beauty(id, NAME, sex, borndate, phone, photo, boyfriend_id)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">23</span>, <span class="string">&#x27;赵丽颖&#x27;</span>, <span class="string">&#x27;女&#x27;</span>, <span class="string">&#x27;1990-12.14&#x27;</span>, <span class="string">&#x27;45646545&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> beauty</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">213</span>, <span class="string">&#x27;赵丽颖&#x27;</span>, <span class="string">&#x27;女&#x27;</span>, <span class="string">&#x27;1990-12.14&#x27;</span>, <span class="string">&#x27;45646545&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">3</span>)</span><br><span class="line"># 插入多行</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> beauty</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">23</span>,<span class="string">&#x27;唐艺昕1&#x27;</span>,<span class="string">&#x27;女&#x27;</span>,<span class="string">&#x27;1990-4-23&#x27;</span>,<span class="string">&#x27;1898888888&#x27;</span>,<span class="keyword">NULL</span>,<span class="number">2</span>)</span><br><span class="line">,(<span class="number">25</span>,<span class="string">&#x27;唐艺昕3&#x27;</span>,<span class="string">&#x27;女&#x27;</span>,<span class="string">&#x27;1990-4-23&#x27;</span>,<span class="string">&#x27;1898888888&#x27;</span>,<span class="keyword">NULL</span>,<span class="number">2</span>);</span><br><span class="line">#将boys表id<span class="operator">&lt;</span><span class="number">3</span> 的列 插入到beauty表</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> beauty(id,NAME,phone)</span><br><span class="line"><span class="keyword">SELECT</span> id,boyname,<span class="string">&#x27;1234567&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> boys <span class="keyword">WHERE</span> id<span class="operator">&lt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="insert-into-表名-set-列名-x3D-值-列名-x3D-值-…"><a href="#insert-into-表名-set-列名-x3D-值-列名-x3D-值-…" class="headerlink" title="insert into 表名 set 列名&#x3D;值,列名&#x3D;值,…"></a>insert into 表名 set 列名&#x3D;值,列名&#x3D;值,…</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> beauty</span><br><span class="line"><span class="keyword">SET</span> id<span class="operator">=</span><span class="number">19</span>,NAME<span class="operator">=</span><span class="string">&#x27;刘涛&#x27;</span>,phone<span class="operator">=</span><span class="string">&#x27;999&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-update"><a href="#修改-update" class="headerlink" title="修改 update"></a>修改 update</h2><h3 id="update-表名-set-列-x3D-新值-列-x3D-新值-…-where-筛选条件"><a href="#update-表名-set-列-x3D-新值-列-x3D-新值-…-where-筛选条件" class="headerlink" title="update  表名 set  列&#x3D;新值,列&#x3D;新值,…  where  筛选条件"></a>update  表名 set  列&#x3D;新值,列&#x3D;新值,…  where  筛选条件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> beauty <span class="keyword">SET</span> phone <span class="operator">=</span> <span class="string">&#x27;13899888899&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> NAME <span class="keyword">LIKE</span> <span class="string">&#x27;唐%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update-表-1-别名-inner-left-right-join-表-2-别名-on-连接条件-set-列-x3D-值，…-where-筛选条件"><a href="#update-表-1-别名-inner-left-right-join-表-2-别名-on-连接条件-set-列-x3D-值，…-where-筛选条件" class="headerlink" title="update  表 1  别名  inner|left|right join  表 2  别名  on  连接条件  set  列&#x3D;值，… where  筛选条件"></a>update  表 1  别名  inner|left|right join  表 2  别名  on  连接条件  set  列&#x3D;值，… where  筛选条件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#案例 修改张无忌的女朋友的手机号为<span class="number">114</span></span><br><span class="line"><span class="keyword">UPDATE</span> beauty b</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> boys bo</span><br><span class="line"><span class="keyword">ON</span> b.boyfriend_id<span class="operator">=</span>bo.id</span><br><span class="line"><span class="keyword">SET</span> b.phone<span class="operator">=</span><span class="string">&#x27;110&#x27;</span>,bo.userCP<span class="operator">=</span><span class="string">&#x27;222&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> bo.boyName<span class="operator">=</span><span class="string">&#x27;张无忌&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除-delete"><a href="#删除-delete" class="headerlink" title="删除 delete"></a>删除 delete</h2><h3 id="delete-from-表名-where-筛选条件"><a href="#delete-from-表名-where-筛选条件" class="headerlink" title="delete from  表名  where  筛选条件"></a>delete from  表名  where  筛选条件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#案例：删除手机号以<span class="number">9</span>结尾的女神信息</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> beauty <span class="keyword">WHERE</span> phone <span class="keyword">LIKE</span> <span class="string">&#x27;%9&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="delete-表-1-的别名-表-2-的别名-from-表-1-别名-inner-left-right-join-表-2-on-连接条件-where-筛选条件"><a href="#delete-表-1-的别名-表-2-的别名-from-表-1-别名-inner-left-right-join-表-2-on-连接条件-where-筛选条件" class="headerlink" title="delete  表 1 的别名, 表 2 的别名  from  表 1  别名  inner|left|right join  表 2 on  连接条件  where  筛选条件"></a>delete  表 1 的别名, 表 2 的别名  from  表 1  别名  inner|left|right join  表 2 on  连接条件  where  筛选条件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#案例：删除张无忌的女朋友的信息</span><br><span class="line"><span class="keyword">DELETE</span> b,bo</span><br><span class="line"><span class="keyword">FROM</span> beauty b</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> boys bo</span><br><span class="line"><span class="keyword">ON</span> b.boyfriend_id<span class="operator">=</span>bo.id</span><br><span class="line"><span class="keyword">WHERE</span> bo.id<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="truncate-table-表名"><a href="#truncate-table-表名" class="headerlink" title="truncate table  表名"></a>truncate table  表名</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#案例：将男神信息删除  相当于格式化</span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> boys ;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>delete 可以加 where 条件，truncate 不能加</li>
+<li>truncate 删除，效率高一丢丢</li>
+<li>假如要删除的表中有自增长列，如果用 delete 删除后，再插入数据，自增长列的值从断点开始，而 truncate 删除后，再插入数据，自增长列的值从 1 开始。</li>
+<li>truncate 删除没有返回值，delete 删除有返回值</li>
+<li>truncate 删除不能回滚，delete 删除可以回滚</li>
+</ul>
+<h2 id="DDL-数据定义语言"><a href="#DDL-数据定义语言" class="headerlink" title="DDL  数据定义语言"></a>DDL  数据定义语言</h2><p>库和表的管理</p>
+<h3 id="库的管理"><a href="#库的管理" class="headerlink" title="库的管理"></a>库的管理</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#创建库Books</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> books ;</span><br><span class="line">#修改库的名称</span><br><span class="line">RENAME DATABASE books <span class="keyword">TO</span> 新库名;</span><br><span class="line"># 修改库的字符集</span><br><span class="line"><span class="keyword">ALTER</span> DATABASE books <span class="type">CHARACTER</span> <span class="keyword">SET</span> gbk;</span><br><span class="line">#库的删除</span><br><span class="line"><span class="keyword">DROP</span> DATABASE IF <span class="keyword">EXISTS</span> books;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表的管理"><a href="#表的管理" class="headerlink" title="表的管理"></a>表的管理</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>create table 表名(<br>列名 列的类型【(长度) 约束】,<br>…<br>列名 列的类型【(长度) 约束】<br>)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book(</span><br><span class="line">	id <span class="type">INT</span>,#编号</span><br><span class="line">	bName <span class="type">VARCHAR</span>(<span class="number">20</span>),#图书名</span><br><span class="line">	price <span class="keyword">DOUBLE</span>,#价格</span><br><span class="line">	authorId  <span class="type">INT</span>,#作者编号</span><br><span class="line">	publishDate DATETIME#出版日期</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h4><p>alter table 表名 add|drop|modify|change column 列名 【列类型 约束】</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#修改列名</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> book CHANGE <span class="keyword">COLUMN</span> publishdate pubDate DATETIME;</span><br><span class="line">#修改列的类型或约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> book MODIFY <span class="keyword">COLUMN</span> pubdate <span class="type">TIMESTAMP</span>;</span><br><span class="line">#添加新列</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> author <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> annual <span class="keyword">DOUBLE</span>;</span><br><span class="line">#删除列</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> book_author <span class="keyword">DROP</span> <span class="keyword">COLUMN</span>  annual;</span><br><span class="line">#修改表名</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> author RENAME <span class="keyword">TO</span> book_author;</span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">DESC</span> book;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> book_author;</span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#<span class="number">1.</span>仅仅复制表的结构</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> new_table <span class="keyword">LIKE</span> author;</span><br><span class="line">#<span class="number">2.</span>复制表的结构<span class="operator">+</span>数据</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> copy2</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> author;</span><br><span class="line">#只复制部分数据</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> copy3</span><br><span class="line"><span class="keyword">SELECT</span> id,au_name</span><br><span class="line"><span class="keyword">FROM</span> author</span><br><span class="line"><span class="keyword">WHERE</span> nation<span class="operator">=</span><span class="string">&#x27;中国&#x27;</span>;</span><br><span class="line">#仅仅复制某些字段</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> copy4</span><br><span class="line"><span class="keyword">SELECT</span> id,au_name</span><br><span class="line"><span class="keyword">FROM</span> author</span><br><span class="line"><span class="keyword">WHERE</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h3><h4 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h4><p>分类：tinyint、smallint、mediumint、int&#x2F;integer、bigint</p>
+<ul>
+<li>默认是有符号，如果想设置无符号，需要添加 unsigned 关键字</li>
+<li>如果插入的数值超出了整型的范围,会报 out of range 异常，并且插入临界值</li>
+<li>有默认的长度，长度代表了显示的最大宽度，如果不够会用 0 在左边填充，但必须搭配 zerofill 使用！</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name(</span><br><span class="line">		t1 <span class="type">INT</span>(<span class="number">7</span>) ZEROFILL,</span><br><span class="line">  	t2 <span class="type">FLOAT</span>,</span><br><span class="line">		t3 <span class="type">INT</span>(<span class="number">7</span>) ZEROFILL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h4><p>浮点型：float(M, D)   double(M, D)        M，D 根据插入的数值来决定<br>定点型：dec(M，D)   decimal(M,D)        M 默认为 10，D 默认为 0，精确度较高<br>M：整数部位+小数部位，D：小数部位，如果超过范围，则插入临界值</p>
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><ul>
+<li>较短的文本：<ul>
+<li>char  固定长度的字符。写法：char(M)。  M 为最大的字符数，可省略，默认为 1。  比较耗费空间   效率高</li>
+<li>varchar  可变长度。M 不可省略，节省空间，效率低。</li>
+</ul>
+</li>
+<li>较长的文本：<ul>
+<li>text，blob(较大的二进制)</li>
+</ul>
+</li>
+<li>其他：<ul>
+<li>binary 和 varbinary 用于保存较短的二进制</li>
+<li>enum 用于保存枚举</li>
+<li>set 用于保存集合</li>
+</ul>
+</li>
+</ul>
+<h3 id="日期型"><a href="#日期型" class="headerlink" title="日期型"></a>日期型</h3><ul>
+<li>date 保存日期</li>
+<li>time 只保存时间</li>
+<li>year  只保存年</li>
+<li>datetime  保存日期+时间   不受时区影响</li>
+<li>timestamp  保存日期+时间   受时区影响</li>
+</ul>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>用于限制表中的数据，为了保证表中的数据的准确和可靠性<br>分类：六大约束</p>
+<ul>
+<li><pre><code>NOT NULL：非空，用于保证该字段的值不能为空，比如姓名、学号等
+</code></pre>
+</li>
+<li><pre><code>DEFAULT:默认，用于保证该字段有默认值，比如性别
+</code></pre>
+</li>
+<li><pre><code>PRIMARY KEY:主键，用于保证该字段的值具有唯一性，并且非空，比如学号、员工编号等
+</code></pre>
+</li>
+<li><pre><code>UNIQUE:唯一，用于保证该字段的值具有唯一性，可以为空，可以设置多个。比如座位号 
+</code></pre>
+</li>
+<li><pre><code>CHECK:检查约束【mysql中不支持】，比如年龄、性别
+</code></pre>
+</li>
+<li><pre><code>FOREIGN KEY:外键，用于限制两个表的关系，用于保证该字段的值必须来自于主表的关联列的值，在从表添加外键约束，用于引用主表中某列的值，比如学生表的专业编号，员工表的部门编号，员工表的工种编号
+</code></pre>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 列级约束：六大约束语法上都支持，但外键约束没有效果</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,#主键</span><br><span class="line">	stuName <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span>,#非空</span><br><span class="line">	gender <span class="type">CHAR</span>(<span class="number">1</span>) <span class="keyword">CHECK</span>(gender<span class="operator">=</span><span class="string">&#x27;男&#x27;</span> <span class="keyword">OR</span> gender <span class="operator">=</span><span class="string">&#x27;女&#x27;</span>),#检查</span><br><span class="line">	seat <span class="type">INT</span> <span class="keyword">UNIQUE</span>,#唯一</span><br><span class="line">	age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>,#默认约束</span><br><span class="line">	majorId <span class="type">INT</span> <span class="keyword">REFERENCES</span> major(id)#外键</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 表级约束：除了非空、默认，其他的都支持</span><br><span class="line"># 【<span class="keyword">constraint</span> 约束名】 约束类型(字段名)</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">	id <span class="type">INT</span>,</span><br><span class="line">	stuname <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	gender <span class="type">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">	seat <span class="type">INT</span>,</span><br><span class="line">	age <span class="type">INT</span>,</span><br><span class="line">	majorid <span class="type">INT</span>,</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> pk <span class="keyword">PRIMARY</span> KEY(id),#主键</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> uq <span class="keyword">UNIQUE</span>(seat),#唯一键</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> ck <span class="keyword">CHECK</span>(gender <span class="operator">=</span><span class="string">&#x27;男&#x27;</span> <span class="keyword">OR</span> gender  <span class="operator">=</span> <span class="string">&#x27;女&#x27;</span>),#检查</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> KEY(majorid) <span class="keyword">REFERENCES</span> major(id)#外键</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 添加非空约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY <span class="keyword">COLUMN</span> stuname <span class="type">VARCHAR</span>(<span class="number">20</span>)  <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br><span class="line"># 添加默认约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY <span class="keyword">COLUMN</span> age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
+
+<p>主键：不能为 null，最多一个，从表外键类型必须和主表的一致，一般是主表的主键和唯一列。先插入主表，先删除从表。</p>
+<h3 id="标识列，自增长，序号"><a href="#标识列，自增长，序号" class="headerlink" title="标识列，自增长，序号"></a>标识列，自增长，序号</h3><p>标识列可以通过 SET auto_increment_increment&#x3D;3;设置步长。可以通过 手动插入值，设置起始值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tab_identity(</span><br><span class="line">	id <span class="type">INT</span> AUTO_INCREMENT</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="TCL-事务"><a href="#TCL-事务" class="headerlink" title="TCL  事务"></a>TCL  事务</h2><p>一个或一组 sql 语句组成一个执行单元，这个执行单元要么全部执行，要么全部不执行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">SET</span> autocommit<span class="operator">=</span><span class="number">0</span>;  #设置自动提交功能为禁用</span><br><span class="line"><span class="keyword">START</span> TRANSACTION; #开启事务</span><br><span class="line"></span><br><span class="line">#编写一组事务的语句</span><br><span class="line"><span class="keyword">UPDATE</span> account <span class="keyword">SET</span> balance <span class="operator">=</span> <span class="number">1000</span> <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;张无忌&#x27;</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> account <span class="keyword">SET</span> balance <span class="operator">=</span> <span class="number">1000</span> <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;赵敏&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ROLLBACK</span>; #回滚事务 回滚也代表结束事务</span><br><span class="line"><span class="keyword">commit</span>; #结束事务</span><br><span class="line"></span><br><span class="line">#演示<span class="keyword">savepoint</span> 的使用</span><br><span class="line"><span class="keyword">SET</span> autocommit<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> account <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">25</span>;</span><br><span class="line"><span class="keyword">SAVEPOINT</span> a;#设置保存点</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> account <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">28</span>;</span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> a;#回滚到保存点</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/21/yuque/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/">mysql学习笔记4</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/13/yuque/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">mysql学习笔记2</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

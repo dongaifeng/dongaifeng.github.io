@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>Docker Compose | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Docker Compose</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-01-20,&nbsp;&nbsp;16:20:15</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>通过一个 docker-compose.yml 文件管理多个容器。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>官网下载，安装教程<br><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a></p>
+<h4 id="linux-安装"><a href="#linux-安装" class="headerlink" title="linux  安装"></a>linux  安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>输入命令  ll  发现 docker-compose 没有执行权限<br>输入一下命令   设置可执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<h4 id="检验安装是否成功"><a href="#检验安装是否成功" class="headerlink" title="检验安装是否成功"></a>检验安装是否成功</h4><p>docker-compose version</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h4 id="docker-compose-up-d-构建、启动容器"><a href="#docker-compose-up-d-构建、启动容器" class="headerlink" title="docker-compose up -d    构建、启动容器"></a>docker-compose up -d    构建、启动容器</h4><ul>
+<li>-d  是守护进程方式</li>
+</ul>
+<h4 id="docker-compose-down"><a href="#docker-compose-down" class="headerlink" title="docker-compose down"></a>docker-compose down</h4><h4 id="docker-compose-kill-myserve-通过发送-SIGKILL-信号来停止指定服务的容器"><a href="#docker-compose-kill-myserve-通过发送-SIGKILL-信号来停止指定服务的容器" class="headerlink" title="docker-compose kill myserve     通过发送 SIGKILL 信号来停止指定服务的容器"></a>docker-compose kill myserve     通过发送 SIGKILL 信号来停止指定服务的容器</h4><h4 id="docker-compose-scale-myserve-x3D-3-设置指定服务运气容器的个数，以-service-x3D-num-形式指定"><a href="#docker-compose-scale-myserve-x3D-3-设置指定服务运气容器的个数，以-service-x3D-num-形式指定" class="headerlink" title="docker-compose scale myserve&#x3D;3    设置指定服务运气容器的个数，以 service&#x3D;num 形式指定"></a>docker-compose scale myserve&#x3D;3    设置指定服务运气容器的个数，以 service&#x3D;num 形式指定</h4><h4 id="docker-rm-myserve-删除指定服务的容器"><a href="#docker-rm-myserve-删除指定服务的容器" class="headerlink" title="docker rm myserve  删除指定服务的容器"></a>docker rm myserve  删除指定服务的容器</h4><h4 id="docker-start-myserve-启动指定服务已存在的容器"><a href="#docker-start-myserve-启动指定服务已存在的容器" class="headerlink" title="docker start myserve 启动指定服务已存在的容器"></a>docker start myserve 启动指定服务已存在的容器</h4><h4 id="docker-build-构建或者重新构建服务"><a href="#docker-build-构建或者重新构建服务" class="headerlink" title="docker build  构建或者重新构建服务"></a>docker build  构建或者重新构建服务</h4><h4 id="docker-compose-stop-myserve-停止已运行的服务的容器"><a href="#docker-compose-stop-myserve-停止已运行的服务的容器" class="headerlink" title="docker-compose stop myserve    停止已运行的服务的容器"></a>docker-compose stop myserve    停止已运行的服务的容器</h4><h4 id="docker-compose-run-web-bash-在一个服务上执行一个命令"><a href="#docker-compose-run-web-bash-在一个服务上执行一个命令" class="headerlink" title="docker-compose run web bash    在一个服务上执行一个命令"></a>docker-compose run web bash    在一个服务上执行一个命令</h4><h4 id="docker-logs-查看日志"><a href="#docker-logs-查看日志" class="headerlink" title="docker logs  查看日志"></a>docker logs  查看日志</h4><p>原样粘贴   vim 打开文件以后   输入 :set paste</p>
+<h1 id="YAML-配置文件"><a href="#YAML-配置文件" class="headerlink" title="YAML  配置文件"></a>YAML  配置文件</h1><p>YAML 专门用来写配置文件的，类似 json。</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>大小写敏感</li>
+<li>使用缩进表示层级关系</li>
+<li>缩进不允许用 tab，只能用空格</li>
+<li>缩进空格数目不重要，只要同层级元素左侧对齐，能够展现层级关系</li>
+<li>#表示注释</li>
+</ul>
+<h4 id="YAML-对象"><a href="#YAML-对象" class="headerlink" title="YAML 对象"></a>YAML 对象</h4><p>对象是一组键值对，用冒号表示结构<br>object: myobject</p>
+<h4 id="YAML-数组"><a href="#YAML-数组" class="headerlink" title="YAML  数组"></a>YAML  数组</h4><p>一组以中划线开头的行，构成一个数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- Cat</span><br><span class="line">- Dog</span><br><span class="line">- Fish</span><br></pre></td></tr></table></figure>
+
+<p>如果数组的某一元素是数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- Array</span><br><span class="line">  - Cat</span><br><span class="line">  - Dog</span><br></pre></td></tr></table></figure>
+
+<h1 id="docker-compose-yml-属性"><a href="#docker-compose-yml-属性" class="headerlink" title="docker-compose.yml 属性"></a>docker-compose.yml 属性</h1><ul>
+<li>version  指定 docker-compose.yml 文件的写法格式</li>
+<li>services  容器的集合</li>
+<li>build  配置构建时，Compose 会利用它自动构建镜像，该值可以是一个路径，也可以是一个对象，用于指定 Dockerfile 参数</li>
+<li>command  覆盖容器启动后默认执行的命令</li>
+<li>environment  环境变量配置，可以用数组或字典两种方式</li>
+<li>expose   暴露端口，只将端口暴露给连接的服务，而不暴露给主机</li>
+<li>volumes  数据卷</li>
+</ul>
+<h1 id="部署-MySQL"><a href="#部署-MySQL" class="headerlink" title="部署 MySQL"></a>部署 MySQL</h1><p>在&#x2F;usr&#x2F;local&#x2F;mydocker&#x2F;mysql  目录下新建 docker-compose.yml 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  db:</span><br><span class="line">    image: mysql <span class="comment"># 使用这个镜像去构建</span></span><br><span class="line">    restart: always <span class="comment">#表示总是重启</span></span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: 123456 <span class="comment"># 初始化密码</span></span><br><span class="line">    <span class="built_in">command</span>: <span class="comment">#这些是myaql的一些变量</span></span><br><span class="line">      --default-authentication-plugin=mysql_native_password</span><br><span class="line">      --character-set-server=utf8mb4</span><br><span class="line">      --explicit_defaults_for_timestamp=<span class="literal">true</span></span><br><span class="line">      --lower_case_table_names=1</span><br><span class="line">    ports:</span><br><span class="line">      - 3305:3306 // 端口号 左边是linux主机暴露的端口号，右边是容器的端口号</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data:/var/lib/mysql  <span class="comment"># 数据卷 冒号左边是linux主机目录，右边是容器目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个页面版的数据谷工具</span></span><br><span class="line">  adminer:</span><br><span class="line">    image: adminer</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - 7777:8080</span><br></pre></td></tr></table></figure>
+
+<p>运行  docker-compose up  运行</p>
+<h1 id="部署-gitLab"><a href="#部署-gitLab" class="headerlink" title="部署 gitLab"></a>部署 gitLab</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">gitlab:</span><br><span class="line">  image: <span class="string">&#x27;twang2218/gitlab-ce-zh:11.1.4&#x27;</span></span><br><span class="line">  restart: unless-stopped</span><br><span class="line">  hostname: <span class="string">&#x27;47.105.185.203&#x27;</span></span><br><span class="line">  environment:</span><br><span class="line">    TZ: <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">    GITLAB_OMNIBUS_CONFIG: |</span><br><span class="line">      external_url <span class="string">&#x27;http://47.105.185.203&#x27;</span></span><br><span class="line">      gitlab_rails[<span class="string">&#x27;time_zone&#x27;</span>] = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">      gitlab_rails[<span class="string">&#x27;gitlab_shell_port&#x27;</span>] = 2222</span><br><span class="line">      unicorn[<span class="string">&#x27;port&#x27;</span>] = 8888</span><br><span class="line">      nginx[<span class="string">&#x27;listen_port&#x27;</span>] = 80</span><br><span class="line">  ports:</span><br><span class="line">    - <span class="string">&#x27;8081:80&#x27;</span></span><br><span class="line">    - <span class="string">&#x27;443:443&#x27;</span></span><br><span class="line">    - <span class="string">&#x27;2222:22&#x27;</span></span><br><span class="line">  volumes:</span><br><span class="line">    - config:/etc/gitlab</span><br><span class="line">    - data:/var/opt/gitlab</span><br><span class="line">    - logs:/var/log/gitlab</span><br></pre></td></tr></table></figure>
+
+<p>更多配置可以查看 dockerHub 上的镜像<a target="_blank" rel="noopener" href="https://hub.docker.com/r/twang2218/gitlab-ce-zh">gitlab</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/01/31/yuque/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">网站部署笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/17/yuque/npm%20%E6%8F%92%E4%BB%B6%E5%8F%91%E5%B8%83/">npm 插件发布</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

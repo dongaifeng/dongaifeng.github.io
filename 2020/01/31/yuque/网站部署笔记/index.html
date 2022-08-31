@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>网站部署笔记 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">网站部署笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-01-31,&nbsp;&nbsp;14:29:58</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>mysql 安装两种方法</p>
+<ul>
+<li>YUM 安装</li>
+<li>压缩包方法</li>
+</ul>
+<h4 id="YUM-安装"><a href="#YUM-安装" class="headerlink" title="YUM 安装"></a>YUM 安装</h4><p>从 CentOS 7 开始，MariaDB 成为 Yum 源中默认的数据库安装包。也就是说在 CentOS 7 及以上的系统中使用 yum 安装 MySQL 默认安装的会是 MariaDB（MySQL 的一个分支）。如果想安装官方 MySQL 版本，需要使用 MySQL 提供的 Yum 源。<br>所有需要先下载 yum repo 配置文件。<br>这里直接下载的是 mysql5.7 版本的 rpm，也可以选其他的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>然后进行 repo 安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql57-community-release-el7-9.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>然后才能安装 mysql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server</span><br></pre></td></tr></table></figure>
+
+<p>详细操作可以参考一下链接<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wohiusdashi/article/details/89358071">https://blog.csdn.net/wohiusdashi/article/details/89358071</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000019507071">https://segmentfault.com/a/1190000019507071</a></p>
+<h4 id="压缩包安装"><a href="#压缩包安装" class="headerlink" title="压缩包安装"></a>压缩包安装</h4><p>从官网下载压缩包，上传到 centOS 上<br>官网 5.7 版本：<a target="_blank" rel="noopener" href="https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar">https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar</a><br>然后解压。<br>然后安装。<br>参考链接。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/raicho/p/12511998.html#%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%https://www.cnblogs.com/raicho/p/12511998.html">https://www.cnblogs.com/raicho/p/12511998.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bsw-zhen/p/11022565.html">https://www.cnblogs.com/bsw-zhen/p/11022565.html</a></p>
+<p>设置 root 远程登录出错：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1612419357373-7a10dc5c-55a6-4961-bca9-47a7d3d41a8c.png#align=left&display=inline&height=218&margin=%5Bobject%20Object%5D&name=image.png&originHeight=218&originWidth=1162&size=32169&status=done&style=none&width=1162" alt="image.png"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fan-yuan/p/9979252.html">https://www.cnblogs.com/fan-yuan/p/9979252.html</a><br>也可参考下面链接的解决办法：<br><a target="_blank" rel="noopener" href="http://blog.itpub.net/69948194/viewspace-2668406/">http://blog.itpub.net/69948194/viewspace-2668406/</a></p>
+<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><h4 id="通过-Yum-安装-Nginx"><a href="#通过-Yum-安装-Nginx" class="headerlink" title="通过 Yum 安装 Nginx"></a>通过 Yum 安装 Nginx</h4><p>这种方式是非常简单方便，nginx 官网上也有介绍<a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a><br>官方说明就是在&#x2F;etc&#x2F;yum.repo.d 目录下面创建一个 nginx 的 yum 源，然后就可以直接用 yum install nginx 安装了，超级简单，这种方式就直接帮你把服务、都安装好了。<br>默认情况 Centos7 中无 Nginx 的源，最近发现 Nginx 官网提供了 Centos 的源地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136824395">https://zhuanlan.zhihu.com/p/136824395</a></p>
+<h4 id="压缩包安装-1"><a href="#压缩包安装-1" class="headerlink" title="压缩包安装"></a>压缩包安装</h4><p>如果没有 nginx 源，需要自己下载压缩包安装。<br>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/boonya/p/7907999.html">https://www.cnblogs.com/boonya/p/7907999.html</a></p>
+<h3 id="node-环境安装"><a href="#node-环境安装" class="headerlink" title="node 环境安装"></a>node 环境安装</h3><p>node 环境安装参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tengqf/articles/14220444.html">https://www.cnblogs.com/tengqf/articles/14220444.html</a></p>
+<h4 id="pm2"><a href="#pm2" class="headerlink" title="pm2"></a>pm2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br></pre></td></tr></table></figure>
+
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><h2 id="前后端分开部署"><a href="#前后端分开部署" class="headerlink" title="前后端分开部署"></a>前后端分开部署</h2><h4 id="前端-react-项目"><a href="#前端-react-项目" class="headerlink" title="前端  react 项目"></a>前端  react 项目</h4><ul>
+<li>设置接口地址： let base &#x3D; “<a href="http://47.105.185.203:7001&quot;">http://47.105.185.203:7001&quot;</a>;</li>
+<li>删除 package.json  的  proxy， homepage  设置。</li>
+<li>代码打包好以后放到   阿里云上的 nginx 里面的 html 里。</li>
+<li>nginx.conf 里面加入以下配置反向代理（如果后端设置 cors 也可不用）。</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">7001</span>;</span><br><span class="line">        <span class="attribute">server_name</span>  <span class="number">47.105.185.203</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   html;</span><br><span class="line">            <span class="comment">#访问nginx的7001 转发到 http://47.105.185.203:7001</span></span><br><span class="line">            <span class="attribute">proxy_pass</span>  http://47.105.185.203:7001;</span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><ul>
+<li>egg-cors 设置跨域</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bocongbo/article/details/83656506">egg-cors 教程</a></p>
+<h5 id="另一种方式"><a href="#另一种方式" class="headerlink" title="另一种方式"></a>另一种方式</h5><p>1 前端不设置 baseUrl，还是请求 本端口。然后用 nginx 代理到后台端口 7000.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       <span class="number">80</span>;</span><br><span class="line">       server_name  <span class="number">8.141</span><span class="number">.49</span><span class="number">.190</span>;</span><br><span class="line">       root        /home/tucao/frontend;</span><br><span class="line"></span><br><span class="line">       # <span class="title class_">Load</span> configuration files <span class="keyword">for</span> the <span class="keyword">default</span> server block.</span><br><span class="line">       include /etc/nginx/<span class="keyword">default</span>.<span class="property">d</span><span class="comment">/*.conf;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">       location /api &#123;</span></span><br><span class="line"><span class="comment">        # root   frontend;</span></span><br><span class="line"><span class="comment">        proxy_pass  http://8.141.49.190:7000;</span></span><br><span class="line"><span class="comment">        # index  index.html index.htm;</span></span><br><span class="line"><span class="comment">       &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        location /public &#123;</span></span><br><span class="line"><span class="comment">           # root   frontend;</span></span><br><span class="line"><span class="comment">           proxy_pass  http://8.141.49.190:7000;</span></span><br><span class="line"><span class="comment">           # index  index.html index.htm;</span></span><br><span class="line"><span class="comment">       &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">       error_page 404 /404.html;</span></span><br><span class="line"><span class="comment">       location = /404.html &#123;</span></span><br><span class="line"><span class="comment">       &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">       error_page 500 502 503 504 /50x.html;</span></span><br><span class="line"><span class="comment">       location = /50x.html &#123;</span></span><br><span class="line"><span class="comment">       &#125;</span></span><br><span class="line"><span class="comment">   &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="前端代码放到后端项目"><a href="#前端代码放到后端项目" class="headerlink" title="前端代码放到后端项目"></a>前端代码放到后端项目</h2><h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><p>在 package.json 里设置  “homepage”: “&#x2F;public”,<br>设置接口地址   <em>let base &#x3D; ‘’</em></p>
+<h4 id="后端-1"><a href="#后端-1" class="headerlink" title="后端"></a>后端</h4><p>打包后的 index.html  放到 views 文件夹下。<br>其他的文件放到 public 文件夹下。<br>在 config.default.js 设置模板解析</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config.<span class="property">view</span> = &#123;</span><br><span class="line">  <span class="attr">defaultViewEngine</span>: <span class="string">&quot;nunjucks&quot;</span>,</span><br><span class="line">  <span class="attr">mapping</span>: &#123;</span><br><span class="line">    <span class="string">&quot;.html&quot;</span>: <span class="string">&quot;nunjucks&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/core/view.html">egg-view-nunjucks 教程</a></p>
+<h4 id="另一种方式-1"><a href="#另一种方式-1" class="headerlink" title="另一种方式"></a>另一种方式</h4><p>把前端代码放到 view 里面<br>设置 congfig.static<br>config.static &#x3D; { <br>    prefix: ‘&#x2F;public&#x2F;‘, &#x2F;&#x2F;  设置静态文件   请求时的前缀<br>    dir: [path.join(appInfo.baseDir, ‘app&#x2F;public’), path.join(appInfo.baseDir, ‘app&#x2F;view’)]&#x2F;&#x2F;  多静态文件入口<br>  };<br>修改 index.html 中引入 js，css 的路径： &#x2F;public&#x2F;umi.css</p>
+<h2 id="docker-部署-webhook"><a href="#docker-部署-webhook" class="headerlink" title="docker 部署+webhook"></a>docker 部署+webhook</h2><h3 id="在-gitee-新建仓库"><a href="#在-gitee-新建仓库" class="headerlink" title="在 gitee 新建仓库"></a>在 gitee 新建仓库</h3><p>建一个项目仓库，并在仓库 setting 设置 wehooks<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1580616088694-1ee0eeb7-28c9-49c0-abf8-1dfe67877a82.png#align=left&display=inline&height=176&margin=%5Bobject%20Object%5D&name=image.png&originHeight=352&originWidth=825&size=32997&status=done&style=none&width=412.5" alt="image.png"></p>
+<h3 id="在阿里云服务器写个-webhooks-服务"><a href="#在阿里云服务器写个-webhooks-服务" class="headerlink" title="在阿里云服务器写个 webhooks 服务"></a>在阿里云服务器写个 webhooks 服务</h3><p>在阿里云上写个 http 服务，用于监听 gitee 事件。</p>
+<ul>
+<li>使用 gitee-webhook-handler 包来监听事件。</li>
+<li>设置的接口以及签名要与 gitee 上的 webhooks 一致</li>
+<li>这里有个坑，每次修改 webhook.js 。都要重新在 gitee 新建 webhook</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webhook.js</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">&quot;gitee-webhook-handler&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> handler = <span class="title function_">createHandler</span>(&#123; <span class="attr">path</span>: <span class="string">&quot;/webhook&quot;</span>, <span class="attr">secret</span>: <span class="string">&quot;***&quot;</span> &#125;); <span class="comment">// secret 保持和 GitHub 后台设置的一致</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">run_cmd</span>(<span class="params">cmd, args, callback</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>).<span class="property">spawn</span>;</span><br><span class="line">  <span class="keyword">var</span> child = <span class="title function_">spawn</span>(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  child.<span class="property">stdout</span>.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span> (<span class="params">buffer</span>) &#123;</span><br><span class="line">    resp += buffer.<span class="title function_">toString</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">  child.<span class="property">stdout</span>.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">callback</span>(resp);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">    <span class="title function_">handler</span>(req, res, <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">      res.<span class="property">statusCode</span> = <span class="number">404</span>;</span><br><span class="line">      res.<span class="title function_">end</span>(<span class="string">&quot;no such location&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">listen</span>(<span class="number">7777</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;WebHooks Listern at 7777&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">handler.<span class="title function_">on</span>(<span class="string">&quot;error&quot;</span>, <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;Error:&quot;</span>, err.<span class="property">message</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// handler.on(&#x27;*&#x27;, function (event) &#123;</span></span><br><span class="line"><span class="comment">//     console.log(&#x27;Received *&#x27;, event.payload.action);</span></span><br><span class="line"><span class="comment">//     //   run_cmd(&#x27;sh&#x27;, [&#x27;./deploy-dev.sh&#x27;], function(text)&#123; console.log(text) &#125;);</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">handler.<span class="title function_">on</span>(<span class="string">&quot;Push Hook&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="string">&quot;Received a push event for %s to %s&quot;</span>,</span><br><span class="line">    event.<span class="property">payload</span>.<span class="property">repository</span>.<span class="property">name</span>,</span><br><span class="line">    event.<span class="property">payload</span>.<span class="property">ref</span></span><br><span class="line">  );</span><br><span class="line">  <span class="comment">// 分支判断</span></span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">payload</span>.<span class="property">ref</span> === <span class="string">&quot;refs/heads/master&quot;</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;deploy master..&quot;</span>);</span><br><span class="line">    <span class="title function_">run_cmd</span>(<span class="string">&quot;sh&quot;</span>, [<span class="string">&quot;./deploy-dev.sh&quot;</span>], <span class="keyword">function</span> (<span class="params">text</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(text);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// handler.on(&#x27;issues&#x27;, function (event) &#123;</span></span><br><span class="line"><span class="comment">//     console.log(&#x27;Received an issue event for % action=%s: #%d %s&#x27;,</span></span><br><span class="line"><span class="comment">//         event.payload.repository.name,</span></span><br><span class="line"><span class="comment">//         event.payload.action,</span></span><br><span class="line"><span class="comment">//         event.payload.issue.number,</span></span><br><span class="line"><span class="comment">//         event.payload.issue.title)</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="deploy-脚本"><a href="#deploy-脚本" class="headerlink" title="deploy 脚本"></a>deploy 脚本</h3><p>当 push 事件触发 执行 deploy.sh 脚本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="title class_">Deploy</span> <span class="title class_">Project</span></span><br><span class="line"># docker-compose up -d --force-recreate --build</span><br><span class="line"></span><br><span class="line"># 获取最新版代码</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"># 强制重新编译容器</span><br><span class="line">docker-compose down</span><br><span class="line">docker-compose up -d --force-recreate --build</span><br><span class="line"></span><br><span class="line"># 定制镜像</span><br><span class="line"># docker build -t <span class="attr">myapp</span>:pm2 ./backend</span><br><span class="line"></span><br><span class="line"># 重启启动容器</span><br><span class="line"># docker stop myapp</span><br><span class="line"># docker rm myapp</span><br><span class="line"># docker run --name myapp -p <span class="number">3000</span>:<span class="number">3000</span>  -d <span class="attr">myapp</span>:pm2</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-centOS-配置-git-以及-remote，密匙"><a href="#在-centOS-配置-git-以及-remote，密匙" class="headerlink" title="在 centOS 配置 git 以及 remote，密匙"></a>在 centOS 配置 git 以及 remote，密匙</h3>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/14/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/20/yuque/Docker%20Compose/">Docker Compose</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

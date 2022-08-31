@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>webpack学习2 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">webpack学习2</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;19:00:22</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h4 id="优化-loader-配置"><a href="#优化-loader-配置" class="headerlink" title="优化 loader 配置"></a>优化 loader 配置</h4><p>include exclude 字段来缩小 loader 范围</p>
+<h4 id="优化-resolve-modules-配置"><a href="#优化-resolve-modules-配置" class="headerlink" title="优化 resolve.modules 配置"></a>优化 resolve.modules 配置</h4><p>resolve.modules ⽤于配置 webpack 去哪些⽬录下寻找第三⽅模块，默认是<br>[‘node_modules’]寻找第三⽅模块，默认是在当前项⽬⽬录下的 node_modules ⾥⾯去找，如果没有找<br>到，就会去上⼀级⽬录..&#x2F;node_modules 找。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="attr">modules</span>: [path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;./node_modules&quot;</span>)],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化-resolve-alias-配置"><a href="#优化-resolve-alias-配置" class="headerlink" title="优化 resolve.alias 配置"></a>优化 resolve.alias 配置</h4><h4 id="优化-resolve-extensions-配置"><a href="#优化-resolve-extensions-配置" class="headerlink" title="优化 resolve.extensions 配置"></a>优化 resolve.extensions 配置</h4><h4 id="使⽤静态资源路径-publicPath-CDN"><a href="#使⽤静态资源路径-publicPath-CDN" class="headerlink" title="使⽤静态资源路径 publicPath(CDN)"></a>使⽤静态资源路径 publicPath(CDN)</h4><h3 id="css-⽂件的处理"><a href="#css-⽂件的处理" class="headerlink" title="css ⽂件的处理"></a>css ⽂件的处理</h3><h4 id="借助-MiniCssExtractPlugin-完成抽离-css"><a href="#借助-MiniCssExtractPlugin-完成抽离-css" class="headerlink" title="借助 MiniCssExtractPlugin 完成抽离 css"></a>借助 MiniCssExtractPlugin 完成抽离 css</h4><h4 id="压缩-css"><a href="#压缩-css" class="headerlink" title="压缩 css"></a>压缩 css</h4><h4 id="压缩-HTML"><a href="#压缩-HTML" class="headerlink" title="压缩 HTML"></a>压缩 HTML</h4><h4 id="优化⽂件监听的性能"><a href="#优化⽂件监听的性能" class="headerlink" title="优化⽂件监听的性能"></a>优化⽂件监听的性能</h4><h2 id="模式区分打包"><a href="#模式区分打包" class="headerlink" title="模式区分打包"></a>模式区分打包</h2><h4 id="webpack-merge"><a href="#webpack-merge" class="headerlink" title="webpack-merge"></a>webpack-merge</h4><h4 id="基于环境变量区分"><a href="#基于环境变量区分" class="headerlink" title="基于环境变量区分"></a>基于环境变量区分</h4><h2 id="tree-Shaking"><a href="#tree-Shaking" class="headerlink" title="tree Shaking"></a>tree Shaking</h2><h3 id="副作⽤"><a href="#副作⽤" class="headerlink" title="副作⽤"></a>副作⽤</h3><h3 id="代码分割-code-Splitting"><a href="#代码分割-code-Splitting" class="headerlink" title="代码分割 code Splitting"></a>代码分割 code Splitting</h3><h3 id="DllPlugin-插件打包第三⽅类库-优化构建性能"><a href="#DllPlugin-插件打包第三⽅类库-优化构建性能" class="headerlink" title="DllPlugin 插件打包第三⽅类库 优化构建性能"></a>DllPlugin 插件打包第三⽅类库 优化构建性能</h3><h3 id="使⽤-happypack-并发执⾏任务"><a href="#使⽤-happypack-并发执⾏任务" class="headerlink" title="使⽤ happypack 并发执⾏任务"></a>使⽤ happypack 并发执⾏任务</h3><h3 id="多⼊⼝打包配置通⽤⽅案"><a href="#多⼊⼝打包配置通⽤⽅案" class="headerlink" title="多⼊⼝打包配置通⽤⽅案"></a>多⼊⼝打包配置通⽤⽅案</h3><h2 id="如何⾃⼰编写⼀个-Loader"><a href="#如何⾃⼰编写⼀个-Loader" class="headerlink" title="如何⾃⼰编写⼀个 Loader"></a>如何⾃⼰编写⼀个 Loader</h2><h2 id="如何⾃⼰编写⼀个-Plugin"><a href="#如何⾃⼰编写⼀个-Plugin" class="headerlink" title="如何⾃⼰编写⼀个 Plugin"></a>如何⾃⼰编写⼀个 Plugin</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/webpack%E5%AD%A6%E4%B9%A01/">webpack学习1</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/webpack%E7%9A%84require.context/">webpack的require.context</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

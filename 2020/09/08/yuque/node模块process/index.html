@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>node模块process | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">node模块process</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>process 对象是一个全局变量，提供进程的信息并对其进行控制。 无需使用 require()。</p>
+<h4 id="process-argv-返回一个数组，包含启动-node-进程的-命令-中的参数"><a href="#process-argv-返回一个数组，包含启动-node-进程的-命令-中的参数" class="headerlink" title="process.argv  返回一个数组，包含启动 node 进程的   命令   中的参数"></a>process.argv  返回一个数组，包含启动 node 进程的   命令   中的参数</h4><ul>
+<li>其中第一个元素 argv[0], 是  process.execPath</li>
+<li>第二个参数是执行文件的路径</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ node apiTest/process.js one=1 --inspect --version // 当输入这个命令时</span><br><span class="line">argv返回：</span><br><span class="line">0: /usr/local/bin/node</span><br><span class="line">1: /Users/mobike/Documents/webProjects/testNode/apiTest/process.js</span><br><span class="line">2: one=1</span><br><span class="line">3: --inspect</span><br><span class="line">4: --version</span><br><span class="line">/usr/local/bin/node // 这是process.execPath输出的</span><br></pre></td></tr></table></figure>
+
+<h4 id="process-env-属性返回包含用户环境的对象"><a href="#process-env-属性返回包含用户环境的对象" class="headerlink" title="process.env  属性返回包含用户环境的对象"></a>process.env  属性返回包含用户环境的对象</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  TERM: &#x27;xterm-256color&#x27;,</span><br><span class="line">  SHELL: &#x27;/usr/local/bin/bash&#x27;,</span><br><span class="line">  USER: &#x27;maciej&#x27;,</span><br><span class="line">  PATH: &#x27;~/.bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin&#x27;,</span><br><span class="line">  PWD: &#x27;/Users/maciej&#x27;,</span><br><span class="line">  EDITOR: &#x27;vim&#x27;,</span><br><span class="line">  SHLVL: &#x27;1&#x27;,</span><br><span class="line">  HOME: &#x27;/Users/maciej&#x27;,</span><br><span class="line">  LOGNAME: &#x27;maciej&#x27;,</span><br><span class="line">  _: &#x27;/usr/local/bin/node&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 webpack 打包过程中常用<code>process.env.NODE_ENV</code>判断生产环境或开发环境，<code>process.env</code>是没有<code>NODE_ENV</code>这个属性的，你可以在系统环境变量中配置。也可以在项目程序直接设置<code>process.env.NODE_ENV=‘dev’</code>。</p>
+<h4 id="process-cwd-方法返回-Node-js-进程的当前工作目录。和-linux-的-pwd-命令类似"><a href="#process-cwd-方法返回-Node-js-进程的当前工作目录。和-linux-的-pwd-命令类似" class="headerlink" title="process.cwd() 方法返回 Node.js 进程的当前工作目录。和 linux  的 $ pwd  命令类似"></a>process.cwd() 方法返回 Node.js 进程的当前工作目录。和 linux  的 $ pwd  命令类似</h4><h4 id="process-nextTick-fn-将-fn-添加到下一个时间点的队列"><a href="#process-nextTick-fn-将-fn-添加到下一个时间点的队列" class="headerlink" title="process.nextTick(fn)将 fn 添加到下一个时间点的队列"></a>process.nextTick(fn)将 fn 添加到下一个时间点的队列</h4><p>Timers 是 node 中定时器<br>    setImmediate  当前回合的  node 时间循环结束后   才去调用它的回调函数<br>    返回 immediate  用于   <a target="_blank" rel="noopener" href="http://nodejs.cn/s/tn26EY">clearImmediate()</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面举例说明process.nextTick(fn)与setImmediate(fn)与setTimeout(fn,0)之间的区别</span></span><br><span class="line"><span class="title function_">setImmediate</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setImmediate&quot;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 0&quot;</span>)</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 100&quot;</span>)</span><br><span class="line">&#125;,<span class="number">100</span>);</span><br><span class="line">process.<span class="title function_">nextTick</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;nextTick&quot;</span>)</span><br><span class="line">  process.<span class="title function_">nextTick</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;nextTick inner&quot;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">-----输出-----</span><br><span class="line">nextTick</span><br><span class="line">nextTick inner</span><br><span class="line"><span class="built_in">setTimeout</span> <span class="number">0</span></span><br><span class="line">setImmediate</span><br><span class="line"><span class="built_in">setTimeout</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>process.nextTick()中的回调函数最快执行，因为它将异步事件插入到当前执行队列的末尾<br>但如果 process.nextTick()中的事件执行时间过长，后面的异步事件就被延迟。<br>setImmediate()执行最慢，因为它将事件插入到下一个事件队列的队首，不会影响当前事件队列的执行。当 setTimeout(fn, 0)是在 setImmediate()之前执行。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/node%E6%A8%A1%E5%9D%97util/">node模块util</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/req%E5%92%8Cres/">req和res</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

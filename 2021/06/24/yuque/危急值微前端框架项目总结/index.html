@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>危急值微前端框架项目总结 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">危急值微前端框架项目总结</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-06-24,&nbsp;&nbsp;9:48:55</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前期使用-iframe-postMessage-架构"><a href="#前期使用-iframe-postMessage-架构" class="headerlink" title="前期使用 iframe + postMessage 架构"></a>前期使用 iframe + postMessage 架构</h2><h3 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h3><p>postMessage 是 html5 引入的 API，postMessage()方法允许来自不同源的脚本采用异步方式进行有效的通信。提供了一种<strong>受控机制</strong>来规避此限制，只要正确的使用，这种方法就很安全。<br>可以实现跨文本文档,多窗口,跨域消息传递.多用于窗口间数据通信,这也使它成为跨域通信的一种有效的解决方案。<br>除 IE 浏览器的支持度比较低外,,其他浏览器的支持度良好。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otherWindow.postMessage(message, targetOrigin, [transfer]);</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>otherWindow：窗口的一个引用,比如 iframe 的 contentWindow 属性,执行 window.open 返回的窗口对象,或者是命名过的或数值索引的 window.frames.</li>
+<li>message：要发送到其他窗口的数据。它将会被序列化。而无需自己序列化。</li>
+<li>targetOrigin：通过窗口的 origin 属性来指定哪些窗口能接收到消息事件，设置为通配符”*“表示可以发送到任何窗口,但通常处于安全性考虑不建议这么做.如果想要发送到与当前窗口同源的窗口,可设置为”&#x2F;“。</li>
+<li>transfer：可选属性。是一串和 message 同时传递的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Transferable">Transferable</a> 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;message&quot;</span>, receiveMessage, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">receiveMessage</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> origin = event.<span class="property">origin</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>event 对象：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1621923122455-cbaf86c0-f967-47f1-ae9b-9eb93390f96b.png#clientId=uf9f7e612-05d7-4&from=paste&id=uad522c4e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=447&originWidth=1091&originalType=binary%E2%88%B6=1&size=51215&status=done&style=shadow&taskId=u20db4258-8e35-4b4e-b8af-7087cc4b5f7" alt="image.png"><br>一些常用的属性：</p>
+<ul>
+<li>data : 指的是从其他窗口发送过来的消息对象;</li>
+<li>type: 指的是发送消息的类型;</li>
+<li>source: 指的是发送消息的窗口对象;</li>
+<li>origin: 指的是发送消息的窗口的源</li>
+</ul>
+<p>postMessage 缺点：</p>
+<ul>
+<li>postMessage 是向一个窗口 Post 一个消息，并且不再关注该消息是否被处理。直接返回。</li>
+<li>PostMessage 函数将一个消息放入与创建这个窗口的消息队列相关的线程中，并立刻返回不等待线程处理消息。PostMessage 只是将消息放到消息队列中。</li>
+</ul>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><p>在 appMain 展示区嵌入 iframe 用来展示页面<br>监听路由的改变，触发 postMessage 向指定的 iframe 发送路由信息<br>在 appMain 组件 mounted 的时候 addEventListener 监听 message 事件。destoryed 时候销毁事件。<br>根据 message 消息的 cmd 属性，分别调用封装的 api。openModel，closeModel，routerPush 等方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;iframe</span><br><span class="line">    ref=&quot;iframe&quot;</span><br><span class="line">    :src=&quot;src&quot;</span><br><span class="line">    width=&quot;100%&quot;</span><br><span class="line">    frameborder=&quot;0&quot;</span><br><span class="line">    style=&quot;background: #fff;height: 90vh;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  watch: &#123;</span><br><span class="line">    $route() &#123;</span><br><span class="line">      this.postMessage();</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    window.addEventListener(&quot;message&quot;, this.handleMessage);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;</span><br><span class="line">    postMessage() &#123;</span><br><span class="line">      this.$refs.iframe.contentWindow.postMessage(</span><br><span class="line">        &#123;</span><br><span class="line">          cmd: this.key,</span><br><span class="line">          params: &#123;&#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;*&quot;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    handleMessage(event) &#123;</span><br><span class="line">      const data = event.data;</span><br><span class="line"></span><br><span class="line">      if (data.cmd === &quot;showModel&quot;) &#123;</span><br><span class="line">        this.$showModel();</span><br><span class="line">      &#125; else if (data.cmd === &quot;closeModel&quot;) &#123;</span><br><span class="line">        this.$closeModel();</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        this.$router.push(data.cmd);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// 子程序中main.js window.addEventListener(&#x27;message&#x27;, function(event) &#123;</span><br><span class="line">window.location.hash = event.data.cmd &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>登录状态无法共享， 模态框不能全局，iframe 无法同步全局点击状态。<br>开发，打包体验不好。<br>iframe 页面无法缓存页面。</p>
+<h2 id="qiankun-方案"><a href="#qiankun-方案" class="headerlink" title="qiankun 方案"></a>qiankun 方案</h2><p>将前端分解成一些更小，更简单的应用，能独立开发，部署，测试。而在界面上看仍然是一个内聚的单一的产品。<br>核心价值：与技术栈无关，独立开发，独立部署，增量升级（通常很难对一个已存在的系统做完整的升级重构，而微前端可以做渐进式的更新重构），每个微应用之间状态独立，独立运行，独立部署。<br>解决多个团队维护同一个项目，技术栈不同，人员差异大的问题，项目在很长的时间跨度下，需求不断增多的问题。</p>
+<h3 id="为什么使用？"><a href="#为什么使用？" class="headerlink" title="为什么使用？"></a>为什么使用？</h3><p>与技术栈无关，vue，react，jquery 都可以。<br>样式隔离，微应用之前样式互不干扰。<br>js 沙箱，确保全局变量不冲突。<br>资源预加载，浏览器空闲时间预加载未打开的微应用资源，加速微应用打开速度。<br>基于 single-spa 提供开箱即用的 api。<br>html entry 方式接入微应用。</p>
+<h3 id="做了什么？"><a href="#做了什么？" class="headerlink" title="做了什么？"></a>做了什么？</h3><h4 id="定义概念"><a href="#定义概念" class="headerlink" title="定义概念"></a>定义概念</h4><p><strong>基座</strong>：主程序，承载项目菜单权限，用户登录登出功能。具有数据中心模块，与子程序共享登录态。<br><strong>微程序</strong>：子程序。并不是以页面划分，如果几个页面之间有业务联系，我们就认为它们是同一子应用。<br><strong>数据中心</strong>：存在于基座中的一个 vuex 的 state，基座和子应用都可获取，修改。数据被修改后会同步到子应用。(去中心化，即每个应用都有一个完整的数据中心)。<br>我的做法是：<br>在子应用，手动注册一个 vuex 的 state，叫做 global。使用的是 vuex 的 store.registerModule 方法。<br>提供一个 action：setGlobalState。它会触发 prop.setGlobalState 去通知基座更新 state，并且修改自己的 globalState。<br>提供一个 initGlobalState 初始化自己的 state，只用于 mount 时同步父应用的数据。</p>
+<p>初始化状态就是基座中的 vuex 的 globalState 的引用。我们会在基座中封装一个 getGlobalState 方法，导出基座的 globalState 的引用，通过 prop 下发到每个子应用中。<br>另一种方案：就是通过 prop.onGlobalStateChange 去 dispatch 子应用的 setGlobalState 。</p>
+<h4 id="定义-cli"><a href="#定义-cli" class="headerlink" title="定义 cli"></a>定义 cli</h4><p>commander 命令行界面<br>download-git-repo 从 github 上下载项目<br>inquirer 交互式命令行，可以让用户输入</p>
+<p>详细步骤：<a target="_blank" rel="noopener" href="https://www.yuque.com/dongaifeng/notes/qtofeg">https://www.yuque.com/dongaifeng/notes/qtofeg</a></p>
+<h4 id="common-模块，公共代码"><a href="#common-模块，公共代码" class="headerlink" title="common 模块，公共代码"></a>common 模块，公共代码</h4><p>一些每个项目都会用的工具函数，公共方法，组件提取成 common 模块，统一维护。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提取请求接口的方法函数，通过函数传参的方式定制化每个项目的baseUrl</span></span><br><span class="line">function createRequest(axios<span class="punctuation">,</span> Message<span class="punctuation">,</span> store<span class="punctuation">,</span> getToken<span class="punctuation">,</span> baseURL) <span class="punctuation">&#123;</span></span><br><span class="line">  const service = axios.create(<span class="punctuation">&#123;</span></span><br><span class="line">    baseURL<span class="punctuation">,</span></span><br><span class="line">    withCredentials<span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    timeout<span class="punctuation">:</span> <span class="number">10000</span></span><br><span class="line">  <span class="punctuation">&#125;</span>)</span><br><span class="line">  return service</span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提取注册全局状态的方法，并提供修改，初始化全局状态的action</span></span><br><span class="line">function registerGlobalModule (store<span class="punctuation">,</span> props = <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span>) <span class="punctuation">&#123;</span></span><br><span class="line"></span><br><span class="line">  if (!store || !store.hasModule) <span class="punctuation">&#123;</span></span><br><span class="line">    return;</span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line">  actions = <span class="punctuation">&#123;</span></span><br><span class="line">    setGlobalState (<span class="punctuation">&#123;</span> commit <span class="punctuation">&#125;</span><span class="punctuation">,</span> payload) <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span>  <span class="comment">// 子应用改变state并通知父应用</span></span><br><span class="line"></span><br><span class="line">    initGlobalState (<span class="punctuation">&#123;</span> commit <span class="punctuation">&#125;</span><span class="punctuation">,</span> payload) <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span>  <span class="comment">// 初始化，只用于mount时同步父应用的数据</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line">  store.registerModule(&#x27;global&#x27;<span class="punctuation">,</span> globalModule);</span><br><span class="line"><span class="punctuation">&#125;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提取公共组件</span></span><br><span class="line">Com-Form</span><br><span class="line">Com-Table</span><br><span class="line">Com-Header</span><br><span class="line">Com-Tree</span><br><span class="line">Com-Icon</span><br></pre></td></tr></table></figure>
+
+<p>公共模块的引入方式有以下三种方案：</p>
+<h5 id="webpack-的联邦模块"><a href="#webpack-的联邦模块" class="headerlink" title="webpack 的联邦模块"></a>webpack 的联邦模块</h5><h5 id="npm-发布后使用"><a href="#npm-发布后使用" class="headerlink" title="npm 发布后使用"></a>npm 发布后使用</h5><p>发布道 npm 仓库后使用</p>
+<h5 id="npm-link"><a href="#npm-link" class="headerlink" title="npm link"></a>npm link</h5><ol>
+<li>首先进入 common 文件夹，控制台输入 npm link</li>
+<li>然后进入项目 project1，控制台输入 npm link common</li>
+<li>这就将这个公共的项目通过软连接的方式引入到项目里面来了。下图可以看到在 node_modules 中 common 包和其他的包文件夹样式是不一样的，common 文件夹只是一个软链接。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1621997577058-4b03a08f-9bb6-48ef-b1d7-2bca5a9feefc.png#clientId=uf9f7e612-05d7-4&from=paste&height=442&id=u44a89a7c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=442&originWidth=638&originalType=binary%E2%88%B6=1&size=46544&status=done&style=none&taskId=u7f33b952-83c3-4c30-b13f-ff7a0c41dfe&width=638" alt="image.png"><br>这时修改 common 项目下面的任意代码都会实时生效，不用打包，不用更新引入包，也不用重启。<br>需要注意的是，当项目包依赖更新后，也就是执行了 npm install xxx 之后，需要重新 link common 项目。而且使用 npm link 后本地 package.json 里没有记录，无法直观的查看本地包的引用。</p>
+<h5 id="npm-本地-file-引用"><a href="#npm-本地-file-引用" class="headerlink" title="npm 本地 file 引用"></a>npm 本地 file 引用</h5><p>在项目根目录，输入命令： npm install ..&#x2F;common&#x2F;<br>其中…&#x2F;common&#x2F;是 common 的相对路径，这里也可以输入绝对路径。<br>这样就将 common 这个工程以 node_module 的方式引入到 project1 和 project2 项目中了。可以正常使用 common 在 index.js 中导出的组件了。<br>命令执行完后，package.json 里会多一条记录</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;common&quot;</span><span class="punctuation">:</span> <span class="string">&quot;file:../common&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;core-js&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.3.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vue&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^2.6.10&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vue-router&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.1.3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vuex&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.0.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;we-vue&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^2.3.3&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>也可以在 package.json 里加上”ak-commonjs”: “file:…&#x2F;common” 这一行再执行 npm install 命令。<br>同样这时修改 common 项目下面的任意代码都会实时生效，不用打包，不用更新引入包，也不用重启。而且在 package.json 中有引入记录。<br>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/milugloomy/article/details/103187370?utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&dist_request_id=1331973.8062.16185626323224421&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">链接</a></p>
+<h4 id="统一命令"><a href="#统一命令" class="headerlink" title="统一命令"></a>统一命令</h4><p>npm-run-all<br>npm-run-all 提供一下子运行多条命令的功能。主要参数有：</p>
+<ul>
+<li>–parallel: 并行运行多个命令，例如：npm-run-all –parallel lint build</li>
+<li>–serial: 多个命令按排列顺序执行，例如：npm-run-all –serial clean lint build:**</li>
+<li>–continue-on-error: 是否忽略错误，添加此参数 npm-run-all 会自动退出出错的命令，继续运行正常的</li>
+<li>–race: 添加此参数之后，只要有一个命令运行出错，那么 npm-run-all 就会结束掉全部的命令</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm-run-all --parallel start:*&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;start:main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cd main &amp;&amp; npm start&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm-run-all --parallel dev:**&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dev:start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;nodemon --watch build exec node \&quot;build/bundle.js\&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dev:build:client&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config webpack.config.client.js --watch&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dev:build:server&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config webpack.config.server.js --watch&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="模块生成"><a href="#模块生成" class="headerlink" title="模块生成"></a>模块生成</h4><ul>
+<li>微程序项目的生成，拒绝复制粘贴。使用公司的 cli。</li>
+<li>命令行生成，page，router，model。</li>
+</ul>
+<h4 id="数据-mock"><a href="#数据-mock" class="headerlink" title="数据 mock"></a>数据 mock</h4><h2 id="组件的封装？"><a href="#组件的封装？" class="headerlink" title="组件的封装？"></a>组件的封装？</h2><h2 id="项目的优化？"><a href="#项目的优化？" class="headerlink" title="项目的优化？"></a>项目的优化？</h2><h2 id="总结？"><a href="#总结？" class="headerlink" title="总结？"></a>总结？</h2><p>遇到的问题，如何解决</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/24/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/01/yuque/koa%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">koa源码分析</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

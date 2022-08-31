@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>ES6之Proxy | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES6之Proxy</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-11-01,&nbsp;&nbsp;14:53:22</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，也可叫做 “代理器”。<br>使用方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123; <span class="attr">name</span>: <span class="string">&quot;hello Proxy&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">  <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params">target, propKey</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(target, propKey);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">35</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newObj = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line">newObj.<span class="property">age</span>; <span class="comment">// 35</span></span><br></pre></td></tr></table></figure>
+
+<p>Proxy 接受两个参数：</p>
+<ul>
+<li>target 目标对象，就是你要代理的对象。包括原生数组，函数，甚至另一个代理。</li>
+<li>handler 配置对象，就是对目标对象的一些操作的拦截。</li>
+</ul>
+<p><strong>注意：要使得 Proxy 起作用，必须针对 Proxy 实例进行操作(newObj)，而不是针对目标对象（target）进行操作</strong><br>handler 所具有的属性：</p>
+<h3 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h3><p>拦截某个属性的读取操作，可以接受三个参数，依次为目标对象、属性名和 proxy 实例本身（严格地说，是操作行为所针对的对象），其中最后一个参数可选。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 犀牛书上给的一个特别绕的例子</span></span><br><span class="line"><span class="keyword">var</span> pipe = <span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> funcStack = [];</span><br><span class="line">  <span class="keyword">var</span> oproxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params">pipeObject, fnName</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fnName === <span class="string">&quot;get&quot;</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> funcStack.<span class="title function_">reduce</span>(<span class="keyword">function</span> (<span class="params">val, fn</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">fn</span>(val);</span><br><span class="line">          &#125;, value);</span><br><span class="line">        &#125;</span><br><span class="line">        funcStack.<span class="title function_">push</span>(<span class="variable language_">window</span>[fnName]);</span><br><span class="line">        <span class="keyword">return</span> oproxy;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> oproxy;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">double</span> = (<span class="params">n</span>) =&gt; n * <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">pow</span> = (<span class="params">n</span>) =&gt; n * n;</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">reverseInt</span> = (<span class="params">n</span>) =&gt; n.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&quot;&quot;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>) | <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">pipe</span>(<span class="number">3</span>).<span class="property">double</span>.<span class="property">pow</span>.<span class="property">reverseInt</span>.<span class="property">get</span>; <span class="comment">// 63</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个例子表示 receiver 指向 Proxy实例</span></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> receiver;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line">proxy.<span class="property">getReceiver</span> === proxy; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则通过 Proxy 对象访问该属性会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = <span class="title class_">Object</span>.<span class="title function_">defineProperties</span>(</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">foo</span>: &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="number">123</span>,</span><br><span class="line">      <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, propKey</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">foo</span>;</span><br><span class="line"><span class="comment">// TypeError: Invariant check failed</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h3><p>拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身，其中最后一个参数可选。<br>注意：</p>
+<ul>
+<li>set 代理应当返回一个布尔值。严格模式下，set 代理如果没有返回 true，就会报错。</li>
+<li>如果目标对象自身的某个属性不可写，那么 set 方法将不起作用。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个验证第四个参数的例子</span></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">obj, prop, value, receiver</span>) &#123;</span><br><span class="line">    obj[prop] = receiver;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(&#123;&#125;, handler);</span><br><span class="line">proxy.<span class="property">foo</span> = <span class="string">&quot;bar&quot;</span>;</span><br><span class="line">proxy.<span class="property">foo</span> === proxy; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h3><p>拦截函数的调用、call 和 apply 操作。接受三个参数，分别是目标对象、目标对象的上下文对象（this）和目标对象的参数数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twice = &#123;</span><br><span class="line">  <span class="title function_">apply</span>(<span class="params">target, ctx, args</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">apply</span>(...<span class="variable language_">arguments</span>) * <span class="number">2</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">left, right</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> left + right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(sum, twice);</span><br><span class="line"><span class="title function_">proxy</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 6</span></span><br><span class="line">proxy.<span class="title function_">call</span>(<span class="literal">null</span>, <span class="number">5</span>, <span class="number">6</span>); <span class="comment">// 22</span></span><br><span class="line">proxy.<span class="title function_">apply</span>(<span class="literal">null</span>, [<span class="number">7</span>, <span class="number">8</span>]); <span class="comment">// 30</span></span><br><span class="line"><span class="title class_">Reflect</span>.<span class="title function_">apply</span>(proxy, <span class="literal">null</span>, [<span class="number">9</span>, <span class="number">10</span>]); <span class="comment">// 38</span></span><br><span class="line"><span class="comment">// 另外，直接调用Reflect.apply方法，也会被拦截。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="construct"><a href="#construct" class="headerlink" title="construct()"></a>construct()</h3><p>拦截 new 命令, 接受三个参数：目标对象，构造函数的参数数组， 创建实例时，new 命令作用的构造函数（Proxy 的实例）。<br>目标对象必须是函数，方法返回的必须是一个对象，否则会报错。</p>
+<h3 id="deleteProperty"><a href="#deleteProperty" class="headerlink" title="deleteProperty()"></a>deleteProperty()</h3><p>拦截 delete 操作，如果这个方法抛出错误或者返回 false，当前属性就无法被 delete 命令删除。</p>
+<h3 id="defineProperty"><a href="#defineProperty" class="headerlink" title="defineProperty()"></a>defineProperty()</h3><p>拦截了 Object.defineProperty()操作。</p>
+<h3 id="其他的属性："><a href="#其他的属性：" class="headerlink" title="其他的属性："></a>其他的属性：</h3><ul>
+<li>**has(target, propKey)**：拦截 propKey in proxy 的操作，返回一个布尔值。</li>
+<li>**ownKeys(target)**：拦截 Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for…in 循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而 Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</li>
+<li>**getOwnPropertyDescriptor(target, propKey)**：拦截 Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
+<li>**getPrototypeOf(target)**：拦截 Object.getPrototypeOf(proxy)，返回一个对象。</li>
+</ul>
+<h3 id="this-指向"><a href="#this-指向" class="headerlink" title="this 指向"></a>this 指向</h3><p>一旦 proxy 代理 target，target.m()内部的 this 就是指向 proxy，而不是 target</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">m</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === proxy);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> handler = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line">target.<span class="title function_">m</span>(); <span class="comment">// false</span></span><br><span class="line">proxy.<span class="title function_">m</span>(); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p>Math 是数学函数，但又属于对象数据类型 typeof Math &#x3D;&gt; ‘object’<br>console.dir(Math) 查看 Math 的所有函数方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1，Math.abs() 获取绝对值</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">abs</span>(-<span class="number">12</span>) = <span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2，Math.ceil() and Math.floor() 向上取整和向下取整</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">ceil</span>(<span class="number">12.03</span>));<span class="comment">//13</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">ceil</span>(<span class="number">12.92</span>));<span class="comment">//13</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="number">12.3</span>));<span class="comment">//12</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="number">12.9</span>));<span class="comment">//12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3，Math.round() 四舍五入</span></span><br><span class="line"><span class="comment">// 注意：正数时，包含5是向上取整，负数时包含5是向下取整。</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">round</span>(-<span class="number">16.3</span>)  <span class="comment">//16</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">round</span>(-<span class="number">16.5</span>)  <span class="comment">//16</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">round</span>(-<span class="number">16.51</span>) <span class="comment">//17</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 4，Math.random() 取[0,1)的随机小数</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">10</span>);  <span class="comment">// [0, 10)</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">10</span>+<span class="number">1</span>);<span class="comment">// [1, 10]</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">10</span>);<span class="comment">// [0, 10]</span></span><br><span class="line"><span class="comment">// 获取[n,m]之间的随机整数</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*(m-n)+n)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5，Math.max() and Max.min() 获取一组数据中的最大值和最小值</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">10</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">45</span>,<span class="number">78</span>); <span class="comment">//100</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">10</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">45</span>,<span class="number">78</span>); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 6，Math.pow() 获取一个值的多少次幂</span></span><br><span class="line"><span class="comment">//    Math.sqrt() 对数值开方</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">10</span>，<span class="number">2</span>) <span class="comment">// 100</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">sqrt</span>(<span class="number">100</span>)  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/05/yuque/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">docker学习笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/10/28/yuque/fovever/">fovever</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

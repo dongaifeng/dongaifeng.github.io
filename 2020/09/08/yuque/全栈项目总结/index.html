@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>全栈项目总结 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">全栈项目总结</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="生成验证码图"><a href="#生成验证码图" class="headerlink" title="生成验证码图"></a>生成验证码图</h4><p><a target="_blank" rel="noopener" href="https://github.com/produck/svg-captcha/blob/1.x/README_CN.md">svg-captcha</a></p>
+<h4 id="密码加密"><a href="#密码加密" class="headerlink" title="密码加密"></a>密码加密</h4><p>md5</p>
+<h4 id="邮箱验证"><a href="#邮箱验证" class="headerlink" title="邮箱验证"></a>邮箱验证</h4><p><a target="_blank" rel="noopener" href="https://nodemailer.com/about/">nodemailer</a></p>
+<h4 id="jwt"><a href="#jwt" class="headerlink" title="jwt"></a>jwt</h4><p><a target="_blank" rel="noopener" href="https://github.com/auth0/node-jsonwebtoken">jsonwebtoken</a></p>
+<h4 id="使用-egg-router-group-把路由分模块"><a href="#使用-egg-router-group-把路由分模块" class="headerlink" title="使用 egg-router-group 把路由分模块"></a>使用 egg-router-group 把路由分模块</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function">(<span class="params">app</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; router, controller &#125; = app;</span><br><span class="line">  router.<span class="title function_">get</span>(<span class="string">&quot;/&quot;</span>, controller.<span class="property">home</span>.<span class="property">index</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// /user 回去找user模块 =&gt; controller.user</span></span><br><span class="line">  router.<span class="title function_">group</span>(&#123; <span class="attr">name</span>: <span class="string">&quot;user&quot;</span>, <span class="attr">prefix</span>: <span class="string">&quot;/user&quot;</span> &#125;, <span class="function">(<span class="params">router</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; info, login, register, verify &#125; = controller.<span class="property">user</span>;</span><br><span class="line"></span><br><span class="line">    router.<span class="title function_">post</span>(<span class="string">&quot;/login&quot;</span>, login);</span><br><span class="line">    router.<span class="title function_">post</span>(<span class="string">&quot;/register&quot;</span>, register);</span><br><span class="line">    router.<span class="title function_">get</span>(<span class="string">&quot;/info&quot;</span>, info);</span><br><span class="line">    router.<span class="title function_">get</span>(<span class="string">&quot;/verify&quot;</span>, verify);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="egg-validate-验证请求的参数"><a href="#egg-validate-验证请求的参数" class="headerlink" title="egg-validate 验证请求的参数"></a>egg-validate 验证请求的参数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">BaseController</span> = <span class="built_in">require</span>(<span class="string">&quot;./base&quot;</span>); <span class="comment">// 这是自定义的基础类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> createRule = &#123;</span><br><span class="line">  <span class="attr">email</span>: &#123; <span class="attr">type</span>: <span class="string">&quot;email&quot;</span> &#125;,</span><br><span class="line">  <span class="attr">passwd</span>: &#123; <span class="attr">type</span>: <span class="string">&quot;string&quot;</span> &#125;,</span><br><span class="line">  <span class="attr">captcha</span>: &#123; <span class="attr">type</span>: <span class="string">&quot;string&quot;</span> &#125;,</span><br><span class="line">  <span class="attr">nickname</span>: &#123; <span class="attr">type</span>: <span class="string">&quot;string&quot;</span> &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserController</span> <span class="keyword">extends</span> <span class="title class_ inherited__">BaseController</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">register</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; ctx &#125; = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ctx.<span class="title function_">validate</span>(createRule); <span class="comment">// 使用</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">UserController</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><h4 id="在声明的-controller-类里，我们通过-this-可以获取到"><a href="#在声明的-controller-类里，我们通过-this-可以获取到" class="headerlink" title="在声明的 controller 类里，我们通过 this 可以获取到:"></a>在声明的 controller 类里，我们通过 this 可以获取到:</h4><ul>
+<li>ctx 上下文 Context 的实例对象，它上面有框架封装好的 处理当前请求的属性和方法。</li>
+<li>app 应用  Application  的实例对象，它上面有框架提供的全局对象和方法。</li>
+<li>service 就是自己定义的 Service 的实例对象，等价于  <code>this.ctx.service``。</code></li>
+<li>config 应用运行时的<a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/basics/config.html">配置项</a>。config 文件夹下的所有配置。</li>
+<li>logger logger 对象，上面有四个方法（<code>debug</code>，<code>info</code>，<code>warn</code>，<code>error</code>）等价于 ctx.logger。</li>
+</ul>
+<h4 id="其实-controller-也可以写成一个个的函数形式，不推荐"><a href="#其实-controller-也可以写成一个个的函数形式，不推荐" class="headerlink" title="其实 controller 也可以写成一个个的函数形式，不推荐"></a>其实 controller 也可以写成一个个的函数形式，不推荐</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/controller/post.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">create</span> = <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">update</span> = <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h4><ul>
+<li>this.ctx.query get 请求的参数，?后面的。</li>
+<li>this.ctx.queries 获取全部的 get 参数，包括参数名重复的。</li>
+<li>this.ctx.params 获取路由里的参数，比如：&#x2F;user&#x2F;:id&#x2F;detail&#x2F;:code.就是 this.ctx.params &#x3D; {id: ‘’, code: ‘’}</li>
+<li>this.ctx.request.body post 的参数</li>
+<li>this.ctx.body 是设置响应的数据，相当于 this.ctx.response.body</li>
+<li>this.ctx.request.files[0 获取上传的文件。对于多个文件，我们借助  ctx.request.files  属性进行遍历。</li>
+<li>this.ctx.getFileStream() 获取到上传的文件流.</li>
+<li>this.ctx.headers 获取 header 对象。ctx.headers，ctx.header，ctx.request.headers，ctx.request.header 是一样的</li>
+<li>this.ctx.get(name) 获取请求 header 中的一个字段的值。等价于 ctx.request.get(name)</li>
+</ul>
+<h4 id="设置响应"><a href="#设置响应" class="headerlink" title="设置响应"></a>设置响应</h4><ul>
+<li>ctx.status &#x3D; 201 设置状态码 http 的状态码，不是自己的。</li>
+<li>ctx.body &#x3D; “” || {} 设置返回数据。</li>
+<li>ctx.render(‘home.tpl’, { name: ‘egg’ }) 返回渲染模板。</li>
+<li>ctx.set(key, value) 设置一个响应头。</li>
+<li>ctx.set(headers)  设置多个 Header。</li>
+<li>ctx.redirect(url)  重定向。</li>
+</ul>
+<h4 id="Application-全局应用对象。"><a href="#Application-全局应用对象。" class="headerlink" title="Application 全局应用对象。"></a>Application 全局应用对象。</h4><p>全局对象上的事件：</p>
+<ul>
+<li><code>server</code>: 该事件一个 worker 进程只会触发一次，在 HTTP 服务完成启动后，会将 HTTP server 通过这个事件暴露出来给开发者。</li>
+<li><code>error</code>: 运行时有任何的异常被 onerror 插件捕获后，都会触发 <code>error</code> 事件，将错误对象和关联的上下文（如果有）暴露给开发者，可以进行自定义的日志记录上报等处理。</li>
+<li><code>request</code> 和 <code>response</code>: 应用收到请求和响应请求时，分别会触发 <code>request</code> 和 <code>response</code> 事件，并将当前请求上下文暴露出来，开发者可以监听这两个事件来进行日志记录。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function">(<span class="params">app</span>) =&gt;</span> &#123;</span><br><span class="line">  app.<span class="title function_">once</span>(<span class="string">&quot;server&quot;</span>, <span class="function">(<span class="params">server</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// websocket</span></span><br><span class="line">  &#125;);</span><br><span class="line">  app.<span class="title function_">on</span>(<span class="string">&quot;error&quot;</span>, <span class="function">(<span class="params">err, ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// report error</span></span><br><span class="line">  &#125;);</span><br><span class="line">  app.<span class="title function_">on</span>(<span class="string">&quot;request&quot;</span>, <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// log receive request</span></span><br><span class="line">  &#125;);</span><br><span class="line">  app.<span class="title function_">on</span>(<span class="string">&quot;response&quot;</span>, <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ctx.starttime is set by framework</span></span><br><span class="line">    <span class="keyword">const</span> used = <span class="title class_">Date</span>.<span class="title function_">now</span>() - ctx.<span class="property">starttime</span>;</span><br><span class="line">    <span class="comment">// log total cost</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在 Controller，Service，Schedule 等这些类里都可获取到 app。也可在这些文件夹下 export 一个函数，参数就是 app。也可在类里通过：this.app， this.ctx.app 获取。</p>
+<h4 id="Context-请求级别的对象。"><a href="#Context-请求级别的对象。" class="headerlink" title="Context 请求级别的对象。"></a>Context 请求级别的对象。</h4><p>每一次请求都会实例化一个 Context 上下文对象。这个对象封装了这次用户请求的信息，并提供了许多便捷的方法来获取请求参数或者设置响应信息。框架会将所有的  <a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/basics/service.html">Service</a>  挂载到 Context 实例上，一些插件也会将一些其他的方法和对象挂载到它上面（<a target="_blank" rel="noopener" href="https://github.com/eggjs/egg-sequelize">egg-sequelize</a>  会将所有的 model 挂载在 Context 上）。</p>
+<p>在  <a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/basics/middleware.html">Middleware</a>, <a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/basics/controller.html">Controller</a>  以及  <a target="_blank" rel="noopener" href="https://eggjs.org/zh-cn/basics/service.html">Service</a>  中 通过 this.ctx 获取到。</p>
+<h4 id="nuxt-插件"><a href="#nuxt-插件" class="headerlink" title="nuxt 插件"></a>nuxt 插件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nuxt 插件机制 可以导出一个函数，这个函数第一个参数是context，它上边包含app，store，route等很多东西</span></span><br><span class="line"><span class="comment">// 第二个参数 是 inject 调用这个函数 可以将 方法同时注入到 context，Vue，vuex</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app, store, redirect &#125;, inject) =&gt; &#123;</span><br><span class="line">  <span class="title function_">inject</span>(<span class="string">&quot;myInjectedFunction&quot;</span>, <span class="function">(<span class="params">string</span>) =&gt;</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;That was easy!&quot;</span>, string)</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="拖拽上传和进度条"><a href="#拖拽上传和进度条" class="headerlink" title="拖拽上传和进度条"></a>拖拽上传和进度条</h4><ul>
+<li>利用 axios 的 onUploadProgress 监听上传事件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// `onUploadProgress` 允许为上传处理进度事件</span></span><br><span class="line">  <span class="attr">onUploadProgress</span>: <span class="keyword">function</span> (<span class="params">progressEvent</span>) &#123;</span><br><span class="line">    <span class="comment">// 对原生进度事件的处理</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// `onDownloadProgress` 允许为下载处理进度事件</span></span><br><span class="line">  <span class="attr">onDownloadProgress</span>: <span class="keyword">function</span> (<span class="params">progressEvent</span>) &#123;</span><br><span class="line">    <span class="comment">// 对原生进度事件的处理</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.kancloud.cn/yunye/axios/234845">axios 官网</a></p>
+<ul>
+<li>利用 drag 事件 实现拖拽上传。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hsl0530hsl/article/details/88344225">drag 事件</a></p>
+<h4 id="判断图片格式"><a href="#判断图片格式" class="headerlink" title="判断图片格式"></a>判断图片格式</h4><p>判断前 gif 格式，截取 file 前六个字符，通过 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/wkrbky/p/6243286.html">FileReader</a> 的 readAsBinaryString 方法 把字符换成二进制，再 charCodeAt() 变成 ascii 码，再 toString(16) 变成十六进制。再跟 gif 格式文件的头信息比较<br><em>‘47 49 46 38 37 61’  “47 49 46 38 39 61” 可以判断是不是 gif 格式。</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">isgif</span>(<span class="params">file</span>) &#123;</span><br><span class="line">  <span class="comment">// &#x27;47 49 46 38 37 61&#x27;  &quot;47 49 46 38 39 61&quot;</span></span><br><span class="line">  <span class="comment">//  G  I  F  8  9(7) a</span></span><br><span class="line">  <span class="keyword">let</span> str = file.<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">6</span>)</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">blobToString</span>(str)</span><br><span class="line">  <span class="keyword">const</span> isgif = (res === <span class="string">&#x27;47 49 46 38 37 61&#x27;</span>) || (res === <span class="string">&#x27;47 49 46 38 39 61&#x27;</span>)</span><br><span class="line">  <span class="keyword">return</span> isgif</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="title function_">blobToString</span>(<span class="params">blob</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">rsolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> render = <span class="keyword">new</span> <span class="title class_">FileReader</span>()</span><br><span class="line">    render.<span class="title function_">readAsBinaryString</span>(blob)</span><br><span class="line">    render.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params">e</span>)&#123;</span><br><span class="line">      <span class="keyword">const</span> ret = e.<span class="property">target</span>.<span class="property">result</span>.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">map</span>(<span class="function"><span class="params">v</span> =&gt;</span> v.<span class="title function_">charCodeAt</span>())</span><br><span class="line">      .<span class="title function_">map</span>(<span class="function"><span class="params">v</span> =&gt;</span> v.<span class="title function_">toString</span>(<span class="number">16</span>))</span><br><span class="line">      .<span class="title function_">join</span>( <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;---&gt;&quot;</span>,ret)</span><br><span class="line"></span><br><span class="line">      <span class="title function_">rsolve</span>(ret)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//十进制转其他</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">110</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x.<span class="title function_">toString</span>(<span class="number">2</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x.<span class="title function_">toString</span>(<span class="number">8</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x.<span class="title function_">toString</span>(<span class="number">16</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x.<span class="title function_">toString</span>(<span class="number">32</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//其他转十进制</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&quot;1101110&quot;</span>, <span class="number">2</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&quot;156&quot;</span>, <span class="number">8</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&quot;6e&quot;</span>, <span class="number">16</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串转ascii码，用charCodeAt();</span></span><br><span class="line"><span class="comment">//ascii码转字符串，用fromCharCode();</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;A&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> code = str.<span class="title function_">charCodeAt</span>();</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(code);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(code, str2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将字符串转换成二进制形式  多个字符的 中间用空格隔开</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;我&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">charCodeAt</span>()); <span class="comment">//25105</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">charCodeAt</span>().<span class="title function_">toString</span>(<span class="number">2</span>)); <span class="comment">//110001000010001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//将二进制字符串转换成Unicode字符串</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="string">&quot;110001000010001&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> asciiCode = <span class="built_in">parseInt</span>(b, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> charValue = <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(asciiCode);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(asciiCode, charValue);</span><br></pre></td></tr></table></figure>
+
+<h4 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h4><p>**<code>window.requestIdleCallback()</code>**方法将在浏览器的空闲时段内调用的函数排队。这使我们能够在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间<code>timeout</code>，则有可能为了在超时前执行函数而打乱执行顺序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// handle 返回一个唯一 id</span></span><br><span class="line"><span class="comment">// timeout 表示超过这个时间后，如果任务还没执行，则强制执行，不必等待空闲。</span></span><br><span class="line"><span class="keyword">var</span> handle = <span class="variable language_">window</span>.<span class="title function_">requestIdleCallback</span>(callback，timeout);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">callback</span> = (<span class="params">deadline</span>) =&gt; &#123;</span><br><span class="line">  deadline.<span class="title function_">timeRemaining</span>() <span class="comment">// 剩余时间</span></span><br><span class="line">  deadline.<span class="property">didTmieout</span> <span class="comment">// 布尔值，表示任务是否超时</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903848981577735">参考链接</a> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestIdleCallback">MDN</a></p>
+<h4 id="分片上传文件"><a href="#分片上传文件" class="headerlink" title="分片上传文件"></a>分片上传文件</h4><p>1 拿到上传文件的对象 file，是一个二进制文件，可以当作字符串。直接用字符串的 slice 方法切割成多个碎片。<br>2 利用 web woker 或者空余时间，计算出文件的的唯一表示 hash 值，这是通过 MD5 计算二进制流得到的。<br>3 把每个碎片依次发送到后端。FormData 格式。<br>4 后端接到每个碎片，以 hash 值创建文件夹，把碎片依次放到这个文件夹。<br>5 前端发出合并文件请求，后端通过 fse.readdir 把碎片读出 变成数组，然后排序，然后把这个数组换成碎片的路径。<br>6 通过 fse.createReadStream 把碎片读成 stream 流，然后通过 fse.createWriteStream 把流依次写入要生成的文件。</p>
+<h4 id="md-编辑器"><a href="#md-编辑器" class="headerlink" title="md 编辑器"></a>md 编辑器</h4><p>使用插件 <a target="_blank" rel="noopener" href="https://github.com/markedjs/marked">marked</a><br>高亮代码插件 <a target="_blank" rel="noopener" href="https://github.com/highlightjs/highlight.js/#getting-the-library">高亮 highlight</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/socket.io%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">socket.io简单使用</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">全栈项目学习笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

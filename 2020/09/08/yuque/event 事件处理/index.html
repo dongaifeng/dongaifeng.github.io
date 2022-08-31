@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>event 事件处理 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">event 事件处理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:58:37</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="vue-的事件分四种"><a href="#vue-的事件分四种" class="headerlink" title="vue 的事件分四种"></a>vue 的事件分四种</h3><ul>
+<li>原生标签的原生 DOM 事件</li>
+<li>原生标签的自定义事件</li>
+<li>组件的原生 DOM 事件</li>
+<li>组件的的自定义事件</li>
+</ul>
+<h3 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h3><ul>
+<li>$on 注册事件。也可以 @click 最后也是调用 $on.</li>
+<li>$emit 触发事件</li>
+<li>$off 解绑事件</li>
+</ul>
+<h3 id="形态"><a href="#形态" class="headerlink" title="形态"></a>形态</h3><h4 id="标签的-DOM-事件"><a href="#标签的-DOM-事件" class="headerlink" title="标签的 DOM 事件"></a>标签的 DOM 事件</h4><p>在 div 标签的 VNode 里 data 属性中，可以看到我们绑定的 DOM 事件。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597825569865-216e4505-3c37-41fd-a7ee-502c800ae96f.png#align=left&display=inline&height=117&margin=%5Bobject%20Object%5D&name=image.png&originHeight=117&originWidth=271&size=23251&status=done&style=none&width=271" alt="image.png"></p>
+<h4 id="标签自定义事件"><a href="#标签自定义事件" class="headerlink" title="标签自定义事件"></a>标签自定义事件</h4><p>同样的自定义事件 myevent 在这里也可以看到<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597825912298-b3d8bcc4-d0a6-4024-baea-042af478cb83.png#align=left&display=inline&height=191&margin=%5Bobject%20Object%5D&name=image.png&originHeight=191&originWidth=320&size=10216&status=done&style=none&width=320" alt="image.png"></p>
+<h4 id="组件的-DOM-事件"><a href="#组件的-DOM-事件" class="headerlink" title="组件的 DOM 事件"></a>组件的 DOM 事件</h4><p>组件的 DOM 事件，需要加上 native 修饰符 例如 @click.native &#x3D; “”。<br>在组件的 vm.$vnode (组件的外壳节点) 上可以看绑定的 DOM 事件。<br>同时的在父组件的 _Node.children 里也可看到。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597826055440-2666c785-3152-4d4a-a677-aa63394b440a.png#align=left&display=inline&height=288&margin=%5Bobject%20Object%5D&name=image.png&originHeight=288&originWidth=528&size=21022&status=done&style=none&width=528" alt="image.png"></p>
+<h4 id="组件的自定义事件"><a href="#组件的自定义事件" class="headerlink" title="组件的自定义事件"></a>组件的自定义事件</h4><p>组件的 _events 属性是用来存放本实例上注册的自定义事件。<br>在 $listeners 也可看到 自定义事件。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597826782160-2bfaa8e3-4d4d-4af6-834c-c5932a0ad6e0.png#align=left&display=inline&height=87&margin=%5Bobject%20Object%5D&name=image.png&originHeight=87&originWidth=225&size=19851&status=done&style=none&width=225" alt="image.png"></p>
+<h3 id="来龙去脉"><a href="#来龙去脉" class="headerlink" title="来龙去脉"></a>来龙去脉</h3><h4 id="原生标签-DOM-事件"><a href="#原生标签-DOM-事件" class="headerlink" title="原生标签 DOM 事件"></a>原生标签 DOM 事件</h4><p>template 被解析变成渲染函数。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597975739183-5e79f63a-50df-4a60-aa2b-c5d118cb966d.png#align=left&display=inline&height=239&margin=%5Bobject%20Object%5D&name=image.png&originHeight=239&originWidth=360&size=45684&status=done&style=none&width=360" alt="image.png"><br>渲染函数在执行的时候会变成 Vnode。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597975820185-9da249fc-b18e-4e03-864f-6f5f73242ec1.png#align=left&display=inline&height=219&margin=%5Bobject%20Object%5D&name=image.png&originHeight=219&originWidth=312&size=28323&status=done&style=none&width=312" alt="image.png"><br>这部分是发生在更新函数执行的时候。updateComponent 被传入组件的 Watcher，mount 的时候 new Watcher 会执行此函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">updateComponent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// _render 主要用于生成vnode</span></span><br><span class="line">  <span class="comment">// _update 拿到Vnode 会进行新旧Vnode对比，然后更新dom。</span></span><br><span class="line">  vm.<span class="title function_">_update</span>(vm.<span class="title function_">_render</span>(), hydrating);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>下面我们从<em>update 里面开始探索。<br>_upload 里面调用<strong>patch</strong>。<br>**</em> **_<em><em>patch</em>**</em>  是在 \src\platforms\web\runtime\index.js 文件中挂载到 Vue 的原型上的。<br>真正的代码在 src\core\vdom\patch.js 中。<br>在 patch 函数中进行新旧 dom 对比，调用 <strong>createElm</strong> 创建新节点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createElm</span>(<span class="params">vnode, insertedVnodeQueue, parentElm, refElm</span>) &#123;</span><br><span class="line">  <span class="comment">// 创建孩子节点</span></span><br><span class="line">  <span class="comment">// 判断有无data数据 有的话调用 invokeCreateHooks 处理节点属性</span></span><br><span class="line">  <span class="title function_">createChildren</span>(vnode, children, insertedVnodeQueue);</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isDef</span>(data)) &#123;</span><br><span class="line">    <span class="title function_">invokeCreateHooks</span>(vnode, insertedVnodeQueue);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 把这个节点插入到父节点</span></span><br><span class="line">  <span class="title function_">insert</span>(parentElm, vnode.<span class="property">elm</span>, refElm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>invokeCreateHooks 用于处理节点属性</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">invokeCreateHooks</span>(<span class="params">vnode, insertedVnodeQueue</span>) &#123;</span><br><span class="line">  <span class="comment">// 遍历cbs.create 依次执行里面处理节点属性的方法</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; cbs.<span class="property">create</span>.<span class="property">length</span>; ++i) &#123;</span><br><span class="line">    cbs.<span class="property">create</span>[i](emptyNode, vnode);</span><br><span class="line">  &#125;</span><br><span class="line">  i = vnode.<span class="property">data</span>.<span class="property">hook</span>; <span class="comment">// Reuse variable</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isDef</span>(i)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isDef</span>(i.<span class="property">create</span>)) i.<span class="title function_">create</span>(emptyNode, vnode);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isDef</span>(i.<span class="property">insert</span>)) insertedVnodeQueue.<span class="title function_">push</span>(vnode);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>cbs 里有什么？ cbs 是一个大包，里面包含着对节点属性的添加，更新，删除等一系列方法。<br>我们看到了 updateDomListeners<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1597978827616-50586b8d-0fe6-4337-9a54-ecbbe8d81011.png#align=left&display=inline&height=284&margin=%5Bobject%20Object%5D&name=image.png&originHeight=284&originWidth=352&size=18294&status=done&style=none&width=352" alt="image.png"><br>到这里我们看下流程<br>_upload—-&gt;<strong><em>patch</em></strong> ——&gt; createElm —–&gt;invokeCreateHooks ——&gt; updateDomListeners</p>
+<p><strong>updateDomListeners</strong> 才是终极大佬。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateDOMListeners</span>(<span class="params">oldVnode, vnode</span>) &#123;</span><br><span class="line">  <span class="comment">// 拿到 本节点 的 新旧 事件对象 on</span></span><br><span class="line">  <span class="keyword">const</span> on = vnode.<span class="property">data</span>.<span class="property">on</span> || &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> oldOn = oldVnode.<span class="property">data</span>.<span class="property">on</span> || &#123;&#125;;</span><br><span class="line">  target = vnode.<span class="property">elm</span>;</span><br><span class="line">  <span class="comment">// 规范一下事件回调函数</span></span><br><span class="line">  <span class="title function_">normalizeEvents</span>(on);</span><br><span class="line">  <span class="comment">// 更新 处理 事件</span></span><br><span class="line">  <span class="title function_">updateListeners</span>(on, oldOn, add, remove, createOnceHandler, vnode.<span class="property">context</span>);</span><br><span class="line">  target = <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>updateListeners</strong> 函数做了新旧事件对比<br>1、新旧事件相同，替换旧事件<br>2、新事件不存在旧事件中，绑定新事件<br>3、旧事件不存在新事件中，解绑旧事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">updateListeners</span>(<span class="params">on, oldOn, add, remove, createOnceHandler, vm</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> name, def, cur, old, event;</span><br><span class="line">  <span class="keyword">for</span> (name <span class="keyword">in</span> on) &#123;</span><br><span class="line">    def = cur = on[name];</span><br><span class="line">    old = oldOn[name];</span><br><span class="line">    event = <span class="title function_">normalizeEvent</span>(name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果新事件有 老事件没有 就给节点添加事件 add</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isUndef</span>(old)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">isUndef</span>(cur.<span class="property">fns</span>)) &#123;</span><br><span class="line">        cur = on[name] = <span class="title function_">createFnInvoker</span>(cur, vm);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 处理 .once 标识符</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">isTrue</span>(event.<span class="property">once</span>)) &#123;</span><br><span class="line">        cur = on[name] = <span class="title function_">createOnceHandler</span>(event.<span class="property">name</span>, cur, event.<span class="property">capture</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">add</span>(event.<span class="property">name</span>, cur, event.<span class="property">capture</span>, event.<span class="property">passive</span>, event.<span class="property">params</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果老事件 和 新事件不同 就把新事件函数 给 老事件</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (cur !== old) &#123;</span><br><span class="line">      old.<span class="property">fns</span> = cur;</span><br><span class="line">      on[name] = old;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历老事件对象 如果在新事件对象里没有 就删除此事件</span></span><br><span class="line">  <span class="keyword">for</span> (name <span class="keyword">in</span> oldOn) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isUndef</span>(on[name])) &#123;</span><br><span class="line">      event = <span class="title function_">normalizeEvent</span>(name);</span><br><span class="line">      <span class="title function_">remove</span>(event.<span class="property">name</span>, oldOn[name], event.<span class="property">capture</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>add</strong> 方法 就是 addEventListener<br>**remove **就是 removeEventListener</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params"></span>) &#123;</span><br><span class="line">  target.<span class="title function_">addEventListener</span>(</span><br><span class="line">    name,</span><br><span class="line">    handler,</span><br><span class="line">    supportsPassive ? &#123; capture, passive &#125; : capture</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="原生标签自定义事件"><a href="#原生标签自定义事件" class="headerlink" title="原生标签自定义事件"></a>原生标签自定义事件</h4><p>原生标签编译成 Vnode 后自定义事件和原生事件存放在同一地方。也会调用 addEventListener。</p>
+<h4 id="组件自定义事件"><a href="#组件自定义事件" class="headerlink" title="组件自定义事件"></a>组件自定义事件</h4><p>父组件在生成 Vnode 的时候，遇到子组件是组件，并不会初始化子组件，而是生成<strong>组件外壳 vnode</strong>。<br>父组件在_update 的时候会调用 createElm。遍历到子组件的时候，发现子组件是个组件。会调用子组件 data.hook.init 初始化子组件。<br>子组件初始化会生成子组件实例，并调用 $mount。也会调用initEvent。会把从父组件得到的监听事件$listener 遍历放到_event。<br>在子组件的调用$emit。会去_event 里面找到对应的同事件名的函数调用。<br>以上的流程会在 component 里介绍到。<br><strong>initEvents 初始化父组件监听的事件</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initEvents</span>(<span class="params">vm: Component</span>) &#123;</span><br><span class="line">  vm.<span class="property">_events</span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 拿到父组件绑定的事件函数，调用updateComponentListeners</span></span><br><span class="line">  <span class="keyword">const</span> listeners = vm.<span class="property">$options</span>.<span class="property">_parentListeners</span>;</span><br><span class="line">  <span class="title function_">updateComponentListeners</span>(vm, listeners);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>updateComponentListeners</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">updateComponentListeners</span>(<span class="params">vm, listeners, oldListeners</span>) &#123;</span><br><span class="line">  target = vm;</span><br><span class="line">  <span class="title function_">updateListeners</span>(</span><br><span class="line">    listeners,</span><br><span class="line">    oldListeners || &#123;&#125;,</span><br><span class="line">    add,</span><br><span class="line">    remove,</span><br><span class="line">    createOnceHandler,</span><br><span class="line">    vm</span><br><span class="line">  );</span><br><span class="line">  target = <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>updateListeners</strong><br>最终也是调用 updateListeners 函数 只是传入的 add，remove 方法不同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">event, fn</span>) &#123;</span><br><span class="line">  target.$on(event, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// $on 是监听事件 其实就是把父组件的事件加入到子组件的_event里面</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$on</span> = <span class="keyword">function</span> (<span class="params">event, fn</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="comment">// 递归调用</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(event)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = event.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">      vm.$on(event[i], fn);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 遍历event 把回调函数fn push到 vm._events[event]</span></span><br><span class="line">    (vm.<span class="property">_events</span>[event] || (vm.<span class="property">_events</span>[event] = [])).<span class="title function_">push</span>(fn);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> vm;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>$emit</strong><br>$emit 会把事件回调函数从_event 里拿出来，用 apply，call 调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$emit</span> = <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> cbs = vm.<span class="property">_events</span>[event];</span><br><span class="line">  <span class="keyword">if</span> (cbs) &#123;</span><br><span class="line">    cbs = cbs.<span class="property">length</span> &gt; <span class="number">1</span> ? <span class="title function_">toArray</span>(cbs) : cbs;</span><br><span class="line">    <span class="keyword">const</span> args = <span class="title function_">toArray</span>(<span class="variable language_">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = cbs.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">      <span class="title function_">invokeWithErrorHandling</span>(cbs[i], vm, args, vm, info);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> vm;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用回调函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">invokeWithErrorHandling</span>(<span class="params">handler, context, args</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> res;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    res = args ? handler.<span class="title function_">apply</span>(context, args) : handler.<span class="title function_">call</span>(context);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="title function_">handleError</span>(e, vm, info);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="组件的-DOM-事件-1"><a href="#组件的-DOM-事件-1" class="headerlink" title="组件的 DOM 事件"></a>组件的 DOM 事件</h4><p>在创建组件外壳 vnode 的时候，会使用_c<br>_c 里面调用 createComponent，可以看到一行代码<br>data.on &#x3D; data.nativeOn<br>剩下的流程，就和前面的一样了<br>createElm—&gt;createComponent—&gt;initComponent—-&gt;invokeCreateHooks——&gt;updateDOMListeners</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>原生 dom 事件最后都是在 vnode.elm 上用 addEventListener 监听。</li>
+<li>自定事件 保存在_event 里面，当调用 emit 时，回去_event 找对应的事件执行，事件可能是一个数组，遍历调用。</li>
+<li>patch 里面的 createComponent 调用 创建组件里面的实例。</li>
+<li>createElement 里面的 createComponent 是创建组件的外壳 vnode。</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/computed/">computed</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/component/">component</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

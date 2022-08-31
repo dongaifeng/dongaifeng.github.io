@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>node模块fs | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">node模块fs</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="fs-watch"><a href="#fs-watch" class="headerlink" title="fs.watch"></a>fs.watch</h4><p>用于以函数的方式与文件系统进行交互.监控文件夹变化.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入fs模块</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="comment">// 通过fs.watch方法可以创建一个fs.FSWatcher类的实例。</span></span><br><span class="line"><span class="keyword">let</span> watcher = fs.<span class="title function_">watch</span>(</span><br><span class="line">  __dirname, <span class="comment">// 监控的文件夹，这里用了一个模块的变量，当前js文件所在的目录</span></span><br><span class="line">  &#123; <span class="attr">recursive</span>: <span class="literal">true</span> &#125;, <span class="comment">// 是否监控子文件夹，还可以设置编码，具体参考官网文档</span></span><br><span class="line">  <span class="function">(<span class="params">eventName, fileName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 回调函数接受两个参数：事件名字和文件名</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`事件名字：<span class="subst">$&#123;eventName&#125;</span>, 文件名字： <span class="subst">$&#123;fileName&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以单独注册事件，回调函数跟watch方法一致。还可以监听：error事件。</span></span><br><span class="line">watcher.<span class="title function_">on</span>(<span class="string">&quot;change&quot;</span>, <span class="function">(<span class="params">eventType, fileName</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;事件名：%s , 文件名： %s&quot;</span>, eventType, fileName);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置13秒后，退出监控文件夹</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 关闭监控。</span></span><br><span class="line">  watcher.<span class="title function_">close</span>(<span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;关闭watch&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, <span class="number">13000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/********</span></span><br><span class="line"><span class="comment">以下是输出的结果：当js文件修改的时候</span></span><br><span class="line"><span class="comment">事件名字：change, 文件名字： 05filewatch.js</span></span><br><span class="line"><span class="comment">事件名：change , 文件名： 05filewatch.js</span></span><br><span class="line"><span class="comment">事件名字：change, 文件名字： 05filewatch.js</span></span><br><span class="line"><span class="comment">事件名：change , 文件名： 05filewatch.js</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="fs-readFile-x2F-fs-readFileSync"><a href="#fs-readFile-x2F-fs-readFileSync" class="headerlink" title="fs.readFile &#x2F; fs.readFileSync"></a>fs.readFile &#x2F; fs.readFileSync</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="comment">// 把当前js所在的目录中的a.html文件的路径赋值给 fileName</span></span><br><span class="line"><span class="keyword">let</span> fileName = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;a.html&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取a.html文件，按照utf8的编码方式读取。</span></span><br><span class="line"><span class="comment">// 回调函数第一个参数是err(这个是一个默认的约定规范，</span></span><br><span class="line"><span class="comment">// 大多数node的回调函数第一个参数都是异常的err，如果为空则表示没有错误)</span></span><br><span class="line"><span class="comment">// 第二个参数是文件的所有内容。</span></span><br><span class="line">fs.<span class="title function_">readFile</span>(fileName, &#123; <span class="attr">encoding</span>: <span class="string">&quot;utf8&quot;</span> &#125;, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err; <span class="comment">// 判断是否读取错误</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data); <span class="comment">// 文件内容读取并打印到控制台。</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//readFileSync方法是readFile的同步版本，没有回调函数，函数的返回值就是文件内容。</span></span><br><span class="line"><span class="comment">// 以下代码是同步读取，不使用回调函数，此方法不是用的： libuv 的线程池的线程执行，所以慎用！！</span></span><br><span class="line"><span class="keyword">let</span> fileContent = fs.<span class="title function_">readFileSync</span>(fileName, &#123; <span class="attr">encoding</span>: <span class="string">&quot;utf8&quot;</span> &#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fileContent);</span><br></pre></td></tr></table></figure>
+
+<h4 id="fs-writeFile-x2F-writeFileSync"><a href="#fs-writeFile-x2F-writeFileSync" class="headerlink" title="fs.writeFile &#x2F; writeFileSync"></a>fs.writeFile &#x2F; writeFileSync</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="comment">// 把当前js所在的目录中的a.html文件的路径赋值给 fileName</span></span><br><span class="line"><span class="keyword">let</span> fileName = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;a.html&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入文件</span></span><br><span class="line">fs.<span class="title function_">writeFile</span>(</span><br><span class="line">  fileName, <span class="comment">// 文件名</span></span><br><span class="line">  <span class="string">&quot;&lt;h1&gt;我要把这些内容写入fileName文件里&lt;/h1&gt;&quot;</span>, <span class="comment">// 写入文件data，可以字符串或者Buffer</span></span><br><span class="line">  <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 写入成功后的回调函数</span></span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;文件内容已经写入！&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步的方式写入文件</span></span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(fileName, data, options);</span><br></pre></td></tr></table></figure>
+
+<h3 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h3><p>stream 是处理数据流的一种抽象接口。stream 模块   构建 流接口   的   对象。<br>流可以分四类：</p>
+<ul>
+<li>Readable–可读的流(比如 fs.createReadStream().</li>
+<li>Writable–可写的流(比如 fs.createWriteStream().</li>
+<li>Duplex–可读写的流</li>
+<li>Transform—在读写过程中可以修改和变换数据的 Duplex 流。</li>
+</ul>
+<h4 id="fs-createReadStream"><a href="#fs-createReadStream" class="headerlink" title="fs.createReadStream"></a>fs.createReadStream</h4><p>fs.createReadStream 创建可读流。读取大文件。<br>可读流有监听事件: close, data, end, error, readable</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="comment">// 把当前js所在的目录中的a.html文件的路径赋值给 fileName</span></span><br><span class="line"><span class="keyword">let</span> fileName = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;a.html&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建可读流</span></span><br><span class="line"><span class="keyword">let</span> readStream = fs.<span class="title function_">createReadStream</span>(fileName, &#123;</span><br><span class="line">  <span class="attr">flags</span>: <span class="string">&#x27;r&#x27;</span>,       <span class="comment">// 设置文件只读模式打开文件</span></span><br><span class="line">  <span class="attr">encoding</span>: <span class="string">&#x27;utf8&#x27;</span>  <span class="comment">// 设置读取文件的内容的编码</span></span><br><span class="line">  <span class="attr">start</span>: <span class="number">0</span>, <span class="comment">// 通过start 和 end 设置 文件 可读取的字节数范围</span></span><br><span class="line">  <span class="attr">end</span>: <span class="number">99</span>,</span><br><span class="line">  <span class="attr">autoClose</span>: <span class="literal">true</span>,   <span class="comment">// 当 &#x27;error&#x27; 或 &#x27;end&#x27; 事件时，文件描述符会被自动地关闭</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开文件流的事件。</span></span><br><span class="line">readStream.<span class="title function_">on</span>(<span class="string">&#x27;open&#x27;</span>, <span class="function"><span class="params">fd</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;文件可读流已打开&#x27;</span>, fd);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可读流打开后，会源源不断的触发此事件方法，回调函数参数就是读取的数据。</span></span><br><span class="line">readStream.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">readStream.<span class="title function_">on</span>(<span class="string">&#x27;close&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;文件可读流结束！&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="fs-createWriteStream"><a href="#fs-createWriteStream" class="headerlink" title="fs.createWriteStream"></a>fs.createWriteStream</h4><p>fs.createWriteStream 创建可写流   就是可以往这个文件写入数据<br>事件函数：finish，error。  结束方法：end() 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> fileNameSrc = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;jdk.dmg&quot;</span>); <span class="comment">// 复制的源文件</span></span><br><span class="line"><span class="keyword">let</span> fileNameDist = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;jdk1.dmg&quot;</span>); <span class="comment">// 拷贝完的目标文件名</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建可读流</span></span><br><span class="line"><span class="keyword">let</span> rs = fs.<span class="title function_">createReadStream</span>(fileNameSrc, &#123; <span class="attr">start</span>: <span class="number">0</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建可写流</span></span><br><span class="line"><span class="keyword">let</span> ws = fs.<span class="title function_">createWriteStream</span>(fileNameDist, &#123; <span class="attr">start</span>: <span class="number">0</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可读流有监听事件: close, data, end, error, readable</span></span><br><span class="line">rs.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span> (<span class="params">chunk</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (ws.<span class="title function_">write</span>(chunk) === <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="comment">// 判断数据流是否已经写入目标了</span></span><br><span class="line">    rs.<span class="title function_">pause</span>(); <span class="comment">// 可暂停data事件的触发</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  file.<span class="title function_">resume</span>(); <span class="comment">// z暂停以后 想重新读取 用此方法</span></span><br><span class="line">&#125;, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当可读流结束的时候，让可写流结束。</span></span><br><span class="line">rs.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  ws.<span class="title function_">end</span>(); <span class="comment">// 结束可写流</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;文件复制成功&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">ws.<span class="title function_">on</span>(<span class="string">&quot;drain&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  rs.<span class="title function_">resume</span>(); <span class="comment">// 继续启动读取数据流</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="实际项目用，使用-pipe（管道）的方式大文件的复制"><a href="#实际项目用，使用-pipe（管道）的方式大文件的复制" class="headerlink" title="实际项目用，使用 pipe（管道）的方式大文件的复制"></a>实际项目用，使用 pipe（管道）的方式大文件的复制</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> fileNameSrc = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;jdk.dmg&quot;</span>); <span class="comment">// 复制的源文件</span></span><br><span class="line"><span class="keyword">let</span> fileNameDist = path.<span class="title function_">join</span>(__dirname, <span class="string">&quot;jdk1.dmg&quot;</span>); <span class="comment">// 拷贝完的目标文件名</span></span><br><span class="line"><span class="keyword">let</span> rs = fs.<span class="title function_">createReadStream</span>(fileNameSrc, &#123; <span class="attr">start</span>: <span class="number">0</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> ws = fs.<span class="title function_">createWriteStream</span>(fileNameDist, &#123; <span class="attr">start</span>: <span class="number">0</span> &#125;);</span><br><span class="line">rs.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;读取完毕&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">ws.<span class="title function_">on</span>(<span class="string">&quot;finish&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;写入成功！&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可读流直接跟可写流建立管道。可读流的数据 直接通过管道流向 可写流</span></span><br><span class="line">rs.<span class="title function_">pipe</span>(ws);</span><br></pre></td></tr></table></figure>
+
+<h4 id="fs-promises"><a href="#fs-promises" class="headerlink" title="fs.promises"></a>fs.promises</h4><p>fs.promises 提过另一套 API  这一套 API 用 promise 写的   你可以用 require(‘fs’).promises 找到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fsp = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>).<span class="property">promises</span>;</span><br><span class="line">fsp.<span class="title function_">readFile</span>(<span class="string">&quot;./clone.js&quot;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="title function_">toString</span>());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="fs-exists-path-callback"><a href="#fs-exists-path-callback" class="headerlink" title="fs.exists(path, callback)"></a>fs.exists(path, callback)</h4><p>测试给定的路径是否存在。 然后调用  callback  并带上参数  <code>true</code>  或  <code>false.</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">exists</span>(<span class="string">&quot;/etc/passwd&quot;</span>, <span class="function">(<span class="params">exists</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(exists ? <span class="string">&quot;存在&quot;</span> : <span class="string">&quot;不存在&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>fs 的替代方案 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/fs-extra">fs-extra</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/node%E6%A8%A1%E5%9D%97events/">node模块events</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/node%E6%A8%A1%E5%9D%97querystring/">node模块querystring</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

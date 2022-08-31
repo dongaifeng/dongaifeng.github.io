@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>Shadow DOM | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Shadow DOM</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-05-28,&nbsp;&nbsp;10:12:10</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Shadow-DOM-是什么"><a href="#Shadow-DOM-是什么" class="headerlink" title="Shadow DOM 是什么"></a>Shadow DOM 是什么</h2><ul>
+<li>直译过来就是影子 DOM：<strong>他是独立封装的一段 html 代码块，他所包含的 html 标签、css 样式和 js 行为都可以隔离、隐藏起来。</strong></li>
+<li>与 IFrame 有点类似，不过 IFrame 是另外一个独立的 html 页面，shadow DOM 是当前 html 页面的一个代码片段。</li>
+<li>他是由<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components">Web Components</a>里提出的一项技术，其他还有 Custom elements、HTML templates、HTML Imports 这些。</li>
+<li>shadow DOM 并不是一个特别新的概念，html 中的 video 标签就是使用 shadow DOM 的一个案例。使用它时，你在 html 只会看到一个 video 标签，但实际上播放器上还有一系列按钮和其他操作，这些就都是封装到 shadow dom 中的，对外界是不可见的。</li>
+</ul>
+<h2 id="原理是什么？"><a href="#原理是什么？" class="headerlink" title="原理是什么？"></a>原理是什么？</h2><p>shadow DOM 是 Web Components 提供的一项技术，旨在构建组件应用，具有隔离 DOM，作用域 css 的功能，类似于封装的概念，比如 video 标签。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过attachShadow创建一个shadow Root</span></span><br><span class="line"><span class="comment">// open表示外部可以获取 Shadow DOM。Element.shadowRoot</span></span><br><span class="line"><span class="comment">// shadowDom获取宿主dom，shadowDom.host</span></span><br><span class="line"><span class="keyword">let</span> shadowDom = <span class="variable language_">document</span></span><br><span class="line">  .<span class="title function_">getElementById</span>(<span class="string">&quot;shadow&quot;</span>)</span><br><span class="line">  .<span class="title function_">attachShadow</span>(&#123; <span class="attr">mode</span>: <span class="string">&quot;open&quot;</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> pElement = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;p&quot;</span>);</span><br><span class="line">pElement.<span class="property">innerHTML</span> = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> styleElement = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;style&quot;</span>);</span><br><span class="line">styleElement.<span class="property">textContent</span> = <span class="string">`</span></span><br><span class="line"><span class="string">    p&#123;color:red&#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">shadowDom.<span class="title function_">appendChild</span>(pElement);</span><br><span class="line">shadowDom.<span class="title function_">appendChild</span>(styleElement);</span><br></pre></td></tr></table></figure>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>Shadow host：宿主节点，一个常规 DOM 节点，Shadow DOM 会被附加到这个节点上。</li>
+<li>Shadow tree：Shadow DOM 内部的 DOM 树。</li>
+<li>Shadow boundary：Shadow DOM 结束的地方，也是常规 DOM 开始的地方。</li>
+<li>Shadow root: Shadow tree 的根节点。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1614909307386-4dee3a3b-9c5c-45cf-9fbd-a1bbe065789b.png#height=512&id=YHn94&originHeight=512&originWidth=800&originalType=binary&size=0&status=done&style=none&width=800"><br>参考：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000019115050">https://segmentfault.com/a/1190000019115050</a></p>
+<h2 id="web-components-简单使用"><a href="#web-components-简单使用" class="headerlink" title="web components 简单使用"></a>web components 简单使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用自定义标签</span></span><br><span class="line">&lt;user-card image=<span class="string">&quot;https://semantic-ui.com/images/avatar2/large/kristy.png&quot;</span> name=<span class="string">&quot;哈哈哈&quot;</span> email=<span class="string">&quot;333333&quot;</span>&gt;&lt;/user-card&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义模板</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;userCardTemplate&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="selector-pseudo">:host</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">display</span>: flex;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">align-items</span>: center;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">width</span>: <span class="number">450px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">height</span>: <span class="number">180px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">background-color</span>: <span class="number">#d4d4d4</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#d5d5d5</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">box-shadow</span>: <span class="number">1px</span> <span class="number">1px</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>);</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">overflow</span>: hidden;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">padding</span>: <span class="number">10px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">box-sizing</span>: border-box;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">font-family</span>: <span class="string">&#x27;Poppins&#x27;</span>, sans-serif;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="selector-class">.image</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> auto;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">width</span>: <span class="number">160px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">height</span>: <span class="number">160px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">vertical-align</span>: middle;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://semantic-ui.com/images/avatar2/large/kristy.png&quot;</span> <span class="attr">class</span>=<span class="string">&quot;image&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;name&quot;</span>&gt;</span>User Name<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;email&quot;</span>&gt;</span>yourmail@some-email.com<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span>Follow<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">// 创建自定义标签</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="keyword">class</span> <span class="title class_">UserCard</span> <span class="keyword">extends</span> <span class="title class_ inherited__">HTMLElement</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">super</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> shadow = <span class="variable language_">this</span>.<span class="title function_">attachShadow</span>( &#123; <span class="attr">mode</span>: <span class="string">&#x27;closed&#x27;</span> &#125; );</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> templateElem = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;userCardTemplate&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> content = templateElem.<span class="property">content</span>.<span class="title function_">cloneNode</span>(<span class="literal">true</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      content.<span class="title function_">querySelector</span>(<span class="string">&#x27;img&#x27;</span>).<span class="title function_">setAttribute</span>(<span class="string">&#x27;src&#x27;</span>, <span class="variable language_">this</span>.<span class="title function_">getAttribute</span>(<span class="string">&#x27;image&#x27;</span>));</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      content.<span class="title function_">querySelector</span>(<span class="string">&#x27;.container&gt;.name&#x27;</span>).<span class="property">innerText</span> = <span class="variable language_">this</span>.<span class="title function_">getAttribute</span>(<span class="string">&#x27;name&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      content.<span class="title function_">querySelector</span>(<span class="string">&#x27;.container&gt;.email&#x27;</span>).<span class="property">innerText</span> = <span class="variable language_">this</span>.<span class="title function_">getAttribute</span>(<span class="string">&#x27;email&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      shadow.<span class="title function_">appendChild</span>(content);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="variable language_">window</span>.<span class="property">customElements</span>.<span class="title function_">define</span>(<span class="string">&#x27;user-card&#x27;</span>, <span class="title class_">UserCard</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/08/web_components.html">http://www.ruanyifeng.com/blog/2019/08/web_components.html</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/05/28/yuque/ES6/">ES6</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/29/yuque/http%E6%80%BB%E7%BB%93/">http总结</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>理解Blob，File | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">理解Blob，File</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-01-29,&nbsp;&nbsp;9:47:37</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>一直以来，JS 都没有比较好的可以直接处理二进制的方法。而 Blob 的存在，允许我们可以通过 JS 直接操作二进制数据。</p>
+<h2 id="Blob-是什么？怎么用？能解决什么问题？"><a href="#Blob-是什么？怎么用？能解决什么问题？" class="headerlink" title="Blob 是什么？怎么用？能解决什么问题？"></a>Blob 是什么？怎么用？能解决什么问题？</h2><h3 id="Blob-是什么"><a href="#Blob-是什么" class="headerlink" title="Blob 是什么"></a>Blob 是什么</h3><p>一个 Blob 对象 就是一个包含有 **只读原始数据 **的 <strong>类文件 <strong>对象。Blob 对象中的数据并不一定得是 JavaScript 中的原生形式。Blob 对象可以看做是存放二进制数据的容器，此外还可以通过 Blob 设置二进制数据的 MIME 类型。<br><strong>File</strong> 接口基于</strong>Blob</strong>，继承了 blob 的功能并将其扩展使其支持用户系统上的文件。</p>
+<h3 id="Blob-用法"><a href="#Blob-用法" class="headerlink" title="Blob 用法"></a>Blob 用法</h3><p>通过构造函数创建，返回一个新创建的  <code>Blob</code>  对象，其内容由参数中给定的数组串联组成。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>(<span class="attr">dataArr</span>:<span class="title class_">Array</span>&lt;any&gt;, <span class="attr">opt</span>:&#123;<span class="attr">type</span>:string&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dataArray：数组，包含了要添加到 Blob 对象中的数据，数据可以是任意多个 ArrayBuffer，ArrayBufferView， Blob，或者 DOMString 对象。</li>
+<li>opt：对象，用于设置 Blob 对象的属性（如：MIME 类型）</li>
+</ul>
+<h5 id="创建一个装填-DOMString-对象的-Blob-对象"><a href="#创建一个装填-DOMString-对象的-Blob-对象" class="headerlink" title="创建一个装填 DOMString 对象的 Blob 对象"></a>创建一个装填 DOMString 对象的 Blob 对象</h5><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608111664296-113641b9-16d4-480b-a419-cf574f7cdd2a.png#align=left&display=inline&height=95&margin=%5Bobject%20Object%5D&originHeight=95&originWidth=313&size=0&status=done&style=none&width=313"></p>
+<h5 id="创建一个装填-ArrayBuffer-对象的-Blob-对象"><a href="#创建一个装填-ArrayBuffer-对象的-Blob-对象" class="headerlink" title="创建一个装填 ArrayBuffer 对象的 Blob 对象"></a>创建一个装填 ArrayBuffer 对象的 Blob 对象</h5><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608111706109-c5f684af-b99b-4d9f-b27c-bbea1b61ca7d.png#align=left&display=inline&height=96&margin=%5Bobject%20Object%5D&originHeight=96&originWidth=339&size=0&status=done&style=none&width=339"></p>
+<h5 id="创建一个装填-ArrayBufferView-对象的-Blob-对象（ArrayBufferView-可基于-ArrayBuffer-创建，返回值是一个类数组。如下：创建一个-8-字节的-ArrayBuffer，在其上创建一个每个数组元素为-2-字节的“视图”）"><a href="#创建一个装填-ArrayBufferView-对象的-Blob-对象（ArrayBufferView-可基于-ArrayBuffer-创建，返回值是一个类数组。如下：创建一个-8-字节的-ArrayBuffer，在其上创建一个每个数组元素为-2-字节的“视图”）" class="headerlink" title="创建一个装填 ArrayBufferView 对象的 Blob 对象（ArrayBufferView 可基于 ArrayBuffer 创建，返回值是一个类数组。如下：创建一个 8 字节的 ArrayBuffer，在其上创建一个每个数组元素为 2 字节的“视图”）"></a>创建一个装填 ArrayBufferView 对象的 Blob 对象（ArrayBufferView 可基于 ArrayBuffer 创建，返回值是一个类数组。如下：创建一个 8 字节的 ArrayBuffer，在其上创建一个每个数组元素为 2 字节的“视图”）</h5><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608111706210-0297b93d-cbe1-4805-837d-781ff3d51567.png#align=left&display=inline&height=112&margin=%5Bobject%20Object%5D&originHeight=112&originWidth=325&size=0&status=done&style=none&width=325"></p>
+<h5 id="Blob-的属性"><a href="#Blob-的属性" class="headerlink" title="Blob 的属性"></a>Blob 的属性</h5><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/size"><code>Blob.size</code></a> ：只读 <code>Blob</code> 对象中所包含数据的大小（字节）。<br><code>[Blob.type](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/type)</code> ：只读一个字符串，表明该 <code>Blob</code> 对象所包含数据的 MIME 类型。如果类型未知，则该值为空字符串</p>
+<h5 id="Blob-的方法"><a href="#Blob-的方法" class="headerlink" title="Blob 的方法"></a>Blob 的方法</h5><p><code>Blob.slice()</code> 此方法返回一个新的 Blob 对象，包含了原 Blob 对象中指定范围内的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Blob</span>.<span class="title function_">slice</span>(<span class="attr">start</span>:number, <span class="attr">end</span>:number, <span class="attr">contentType</span>:string)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>start：开始索引，默认为 0</li>
+<li>end：截取结束索引（不包括 end）</li>
+<li>contentType：新 Blob 的 MIME 类型，默认为空字符串</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608112036613-4ee07b1e-8417-46df-b93f-057461af7d22.png#align=left&display=inline&height=96&margin=%5Bobject%20Object%5D&originHeight=96&originWidth=404&size=0&status=done&style=none&width=404"></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/arrayBuffer"><code>Blob.arrayBuffer()</code></a>返回一个 promise 且包含 blob 所有内容的二进制格式的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ArrayBuffer">ArrayBuffer</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">blob.<span class="title function_">arrayBuffer</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">buffer</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* buffer 处理 ArrayBuffer 数据的代码……*/</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(buffer);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/text"><code>Blob.text()</code></a>返回一个 promise 且包含 blob 所有内容的 UTF-8 格式的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/USVString">USVString</a>。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/stream"><code>Blob.stream()</code></a>返回一个能读取 blob 内容的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ReadableStream">ReadableStream</a>。</p>
+<h5 id="通过-canvas-toBlob-将-canvas-转化成-blob"><a href="#通过-canvas-toBlob-将-canvas-转化成-blob" class="headerlink" title="通过 canvas.toBlob()将 canvas 转化成 blob"></a>通过 canvas.toBlob()将 canvas 转化成 blob</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var canvas = document.getElementById(&quot;canvas&quot;);</span><br><span class="line">canvas.toBlob(function(blob)&#123;</span><br><span class="line">    console.log(blob);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用-Blob-创建一个-URL"><a href="#使用-Blob-创建一个-URL" class="headerlink" title="使用 Blob 创建一个 URL"></a>使用 Blob 创建一个 URL</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob);</span><br><span class="line"><span class="comment">// 会产生一个类似 blob:d3958f5c-0777-0845-9dcf-2cb28783acaf 这样的URL字符串</span></span><br><span class="line"><span class="comment">// 你可以像使用普通 URL 那样使用它，比如用在 img.src 上。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="从-Blob-中读取数据"><a href="#从-Blob-中读取数据" class="headerlink" title="从 Blob 中读取数据"></a>从 Blob 中读取数据</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 FileReader 将 Blob的内容作为类型数组读取：</span></span><br><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">reader.<span class="title function_">addEventListener</span>(<span class="string">&quot;loadend&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// reader.result 包含被转化为类型数组 typed array 的 blob</span></span><br><span class="line">&#125;);</span><br><span class="line">reader.<span class="title function_">readAsArrayBuffer</span>(blob);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用Response对象将Blob中的内容读取为文本</span></span><br><span class="line"><span class="keyword">var</span> text = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">Response</span>(blob).<span class="title function_">text</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><h4 id="分片上传"><a href="#分片上传" class="headerlink" title="分片上传"></a>分片上传</h4><p>File 接口基于 Blob，继承了 Blob 的功能并进行了扩展，故我们可以像使用 Blob 一样使用 File 对象。<br>通过 Blob.slice 方法，可以将大文件分片，轮循向后台提交各文件片段，即可实现文件的分片上传。<br>分片上传逻辑如下：</p>
+<ul>
+<li>获取要上传文件的 File 对象，根据 chunk（每片大小）对文件进行分片</li>
+<li>通过 post 方法轮循上传每片文件，其中 url 中拼接 querystring 用于描述当前上传的文件信息；post body 中存放本次要上传的二进制数据片段</li>
+<li>接口每次返回 offset，用于执行下次上传</li>
+</ul>
+<p>下面是分片上传的简单实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">initUpload</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化上传</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">initUpload</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> chunk = <span class="number">100</span> * <span class="number">1024</span>; <span class="comment">//每片大小</span></span><br><span class="line">  <span class="keyword">var</span> input = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file&quot;</span>); <span class="comment">//input file</span></span><br><span class="line">  input.<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> file = <span class="variable language_">this</span>.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> query = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> chunks = [];</span><br><span class="line">    <span class="keyword">if</span> (!!file) &#123;</span><br><span class="line">      <span class="keyword">var</span> start = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//文件分片</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="title class_">Math</span>.<span class="title function_">ceil</span>(file.<span class="property">size</span> / chunk); i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> end = start + chunk;</span><br><span class="line">        chunks[i] = file.<span class="title function_">slice</span>(start, end);</span><br><span class="line">        start = end;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 采用post方法上传文件</span></span><br><span class="line">      <span class="comment">// url query上拼接以下参数，用于记录上传偏移</span></span><br><span class="line">      <span class="comment">// post body中存放本次要上传的二进制数据</span></span><br><span class="line">      query = &#123;</span><br><span class="line">        <span class="attr">fileSize</span>: file.<span class="property">size</span>,</span><br><span class="line">        <span class="attr">dataSize</span>: chunk,</span><br><span class="line">        <span class="attr">nextOffset</span>: <span class="number">0</span>,</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="title function_">upload</span>(chunks, query, successPerUpload);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行上传</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">upload</span>(<span class="params">chunks, query, cb</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> queryStr = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(query)</span><br><span class="line">    .<span class="title function_">map</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> key + <span class="string">&quot;=&quot;</span> + query[key];</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">join</span>(<span class="string">&quot;&amp;&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://xxxx/opload?&quot;</span> + queryStr);</span><br><span class="line">  xhr.<span class="title function_">overrideMimeType</span>(<span class="string">&quot;application/octet-stream&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取post body中二进制数据</span></span><br><span class="line">  <span class="keyword">var</span> index = <span class="title class_">Math</span>.<span class="title function_">floor</span>(query.<span class="property">nextOffset</span> / query.<span class="property">dataSize</span>);</span><br><span class="line">  <span class="title function_">getFileBinary</span>(chunks[index], <span class="keyword">function</span> (<span class="params">binary</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.<span class="property">sendAsBinary</span>) &#123;</span><br><span class="line">      xhr.<span class="title function_">sendAsBinary</span>(binary);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      xhr.<span class="title function_">send</span>(binary);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> resp = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">        <span class="comment">// 接口返回nextoffset</span></span><br><span class="line">        <span class="comment">// resp = &#123;</span></span><br><span class="line">        <span class="comment">//     isFinish:false,</span></span><br><span class="line">        <span class="comment">//     offset:100*1024</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> cb === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">          cb.<span class="title function_">call</span>(<span class="variable language_">this</span>, resp, chunks, query);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每片上传成功后执行</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">successPerUpload</span>(<span class="params">resp, chunks, query</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (resp.<span class="property">isFinish</span> === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&quot;上传成功&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//未上传完毕</span></span><br><span class="line">    query.<span class="property">offset</span> = resp.<span class="property">offset</span>;</span><br><span class="line">    <span class="title function_">upload</span>(chunks, query, successPerUpload);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取文件二进制数据</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getFileBinary</span>(<span class="params">file, cb</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">  reader.<span class="title function_">readAsArrayBuffer</span>(file);</span><br><span class="line">  reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> cb === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      cb.<span class="title function_">call</span>(<span class="variable language_">this</span>, <span class="variable language_">this</span>.<span class="property">result</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此功能还可以更加完善，如后台需要对合并后的文件大小进行校验；或者前端加密文件，全部上传完毕后后端解密校验等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过-url-下载文件"><a href="#通过-url-下载文件" class="headerlink" title="通过 url 下载文件"></a>通过 url 下载文件</h4><p>window.URL 对象可以为 Blob 对象生成一个网络地址，结合 a 标签的 download 属性，可以实现点击 url 下载文件<br>实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">createDownload</span>(<span class="string">&quot;download.txt&quot;</span>, <span class="string">&quot;download file&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createDownload</span>(<span class="params">fileName, content</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([content]);</span><br><span class="line">  <span class="keyword">var</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">  link.<span class="property">innerHTML</span> = fileName;</span><br><span class="line">  link.<span class="property">download</span> = fileName;</span><br><span class="line">  link.<span class="property">href</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob);</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;body&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(link);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下载的txt文件内容是：download file</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过-url-显示图片"><a href="#通过-url-显示图片" class="headerlink" title="通过 url 显示图片"></a>通过 url 显示图片</h4><p>我们知道，img 的 src 属性及 background 的 url 属性，都可以通过接收图片的网络地址或 base64 来显示图片，同样的，我们也可以把图片转化为 Blob 对象，生成 URL（URL.createObjectURL(blob)），来显示图片。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1608113263260-1c5ca3c3-9c9b-4a6f-be29-85d7afcb3479.png#align=left&display=inline&height=206&margin=%5Bobject%20Object%5D&originHeight=206&originWidth=898&size=0&status=done&style=none&width=898"></p>
+<p>参考链接<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">MDN-blob</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hhhyaaon/p/5928152.html">https://www.cnblogs.com/hhhyaaon/p/5928152.html</a></p>
+<h2 id="简单理解-File"><a href="#简单理解-File" class="headerlink" title="简单理解 File"></a>简单理解 File</h2><p>File 接口提供有关文件的信息，并允许网页中的 JavaScript 访问其内容。</p>
+<p>通常情况下， File 对象是来自用户在一个 元素上选择文件后返回的 FileList 对象,也可以是来自由拖放操作生成的 DataTransfer 对象，或者来自 HTMLCanvasElement 上的 mozGetAsFile() API。</p>
+<p>File  对象是特殊类型的  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">Blob</a>，且可以用在任意的 Blob 类型的 context 中（new 的时候传的第一个参数）。比如说， <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader">FileReader</a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL">URL.createObjectURL()</a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ImageBitmapFactories/createImageBitmap">createImageBitmap()</a>, 及  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest#send()">XMLHttpRequest.send()</a>  都能处理  Blob  和  File。</p>
+<p>File 继承自 Blob，所以拥有 blob 的一切方法和属性，并且有一些自己的属性。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/lastModified"><code>File.lastModified</code></a> 只读 返回当前 <code>File</code> 对象所引用文件最后修改时间。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/lastModifiedDate"><code>File.lastModifiedDate</code></a> 只读 返回当前 <code>File</code> 对象所引用文件最后修改时间的 <code>[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)</code> 对象。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/name"><code>File.name</code></a> 只读 返回当前 <code>File</code> 对象所引用文件的名字。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/size"><code>File.size</code></a> 只读 返回文件的大小。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/webkitRelativePath"><code>File.webkitRelativePath</code></a> 只读返回 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File"><code>File</code></a> 相关的 path 或 URL。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/type"><code>File.type</code></a> 只读 返回文件的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">多用途互联网邮件扩展类型（MIME Type）</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/29/yuque/%E7%90%86%E8%A7%A3FileReader/">理解FileReader</a>
+            
+            
+            <a class="next" rel="next" href="/2020/12/17/yuque/%E7%90%86%E8%A7%A3Buffer%E5%92%8CArrayBuffer/">理解Buffer和ArrayBuffer</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

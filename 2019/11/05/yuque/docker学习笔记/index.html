@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>docker学习笔记 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">docker学习笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019-11-05,&nbsp;&nbsp;17:53:32</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>docker 本身是一个容器运行载体或者叫管理引擎。<br>image 把我们做的程序和配置，依赖打包成一个可运行的环境，这个包就叫 image。<br>容器 就是 image 生成的实例 相当于解压缩 image 这个包。<br>仓库 存放一堆镜像的地方 相当于 github。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a target="_blank" rel="noopener" href="https://docs.docker.com/">官网</a></p>
+<h2 id="hello-word"><a href="#hello-word" class="headerlink" title="hello word"></a>hello word</h2><h4 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h4><p>由于 docker hub 国外网站比较慢，所以用国内的镜像(类似 npm 的淘宝镜像)。</p>
+<ol>
+<li>注册阿里云账号，获取专属加速 链接。<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">链接</a></li>
+<li>将获取的链接地址配置进 other_args&#x3D;”–registry-mirro&#x3D;你的地址”</li>
+</ol>
+<p>vim &#x2F;etc&#x2F;sysconfig&#x2F;docke</p>
+<ol start="3">
+<li>重启 service docker restart</li>
+<li>查看是否成功 ps [-ef] grep docker</li>
+</ol>
+<h4 id="docker-run-hello-world"><a href="#docker-run-hello-world" class="headerlink" title="docker run hello-world"></a>docker run hello-world</h4><p>run 后面跟一个镜像名 先在本地找镜像 没有后从远程拉取，并在容器中运行。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1577874219795-16058ed5-ca96-4185-b9af-e7f154453c42.png#align=left&display=inline&height=271&name=image.png&originHeight=541&originWidth=1300&size=735117&status=done&style=none&width=650" alt="image.png"></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>docker info 信息<br>docker –help</p>
+<h4 id="docker-images-本地的镜像列表"><a href="#docker-images-本地的镜像列表" class="headerlink" title="docker images 本地的镜像列表"></a>docker images 本地的镜像列表</h4><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1577874745793-d7fb7203-b982-418a-953c-b37f7d75a446.png#align=left&display=inline&height=271&name=image.png&originHeight=542&originWidth=1206&size=270319&status=done&style=none&width=603" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1577874964996-41dae3ca-cb51-4f53-a820-14e60d4146c6.png#align=left&display=inline&height=106&name=image.png&originHeight=211&originWidth=874&size=65212&status=done&style=none&width=437" alt="image.png"></p>
+<h4 id="docker-search-镜像名-搜索某个镜像"><a href="#docker-search-镜像名-搜索某个镜像" class="headerlink" title="docker search 镜像名 搜索某个镜像"></a>docker search 镜像名 搜索某个镜像</h4><h4 id="docker-pull-镜像名-下载某个镜像"><a href="#docker-pull-镜像名-下载某个镜像" class="headerlink" title="docker pull 镜像名   下载某个镜像"></a>docker pull 镜像名   下载某个镜像</h4><h4 id="docker-rmi-镜像名-删除镜像-docker-rmi-f-镜像名-强制删除"><a href="#docker-rmi-镜像名-删除镜像-docker-rmi-f-镜像名-强制删除" class="headerlink" title="docker rmi 镜像名   删除镜像   docker rmi -f 镜像名 强制删除"></a>docker rmi 镜像名   删除镜像   docker rmi -f 镜像名 强制删除</h4><h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><h4 id="新建并启动-docker-run-options-image-command-arg…"><a href="#新建并启动-docker-run-options-image-command-arg…" class="headerlink" title="新建并启动 docker run [options] image [command] [arg…]"></a>新建并启动 docker run [options] image [command] [arg…]</h4><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1577876179538-437df857-1fa6-411c-abf7-2cf1c80ff75b.png#align=left&display=inline&height=230&name=image.png&originHeight=460&originWidth=678&size=224389&status=done&style=none&width=339" alt="image.png"></p>
+<h4 id="列出当前所有正在运行的容器-docker-ps-options"><a href="#列出当前所有正在运行的容器-docker-ps-options" class="headerlink" title="列出当前所有正在运行的容器 docker ps [options]"></a>列出当前所有正在运行的容器 docker ps [options]</h4><p><img src="https://cdn.nlark.com/yuque/0/2020/png/462392/1577876600833-8dc41388-1e55-44a8-8857-133ed1f56e74.png#align=left&display=inline&height=140&name=image.png&originHeight=279&originWidth=511&size=108270&status=done&style=none&width=255.5" alt="image.png"></p>
+<h4 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h4><ul>
+<li>exit  停止容器并退出</li>
+<li>ctrl+P+Q 不停止容器退出</li>
+</ul>
+<h4 id="启动容器-docker-start-容器-ID-或者容器名"><a href="#启动容器-docker-start-容器-ID-或者容器名" class="headerlink" title="启动容器 docker start 容器 ID 或者容器名"></a>启动容器 docker start 容器 ID 或者容器名</h4><h4 id="重启容器-docker-restart-容器-ID-或者容器名"><a href="#重启容器-docker-restart-容器-ID-或者容器名" class="headerlink" title="重启容器 docker restart  容器 ID 或者容器名"></a>重启容器 docker restart  容器 ID 或者容器名</h4><h4 id="停止容器-docker-stop-容器-ID-或者容器名"><a href="#停止容器-docker-stop-容器-ID-或者容器名" class="headerlink" title="停止容器 docker stop  容器 ID 或者容器名"></a>停止容器 docker stop  容器 ID 或者容器名</h4><h4 id="强制容器-docker-kill-容器-ID-或者容器名"><a href="#强制容器-docker-kill-容器-ID-或者容器名" class="headerlink" title="强制容器 docker kill  容器 ID 或者容器名"></a>强制容器 docker kill  容器 ID 或者容器名</h4><h4 id="删除已经停止容器-docker-rm-容器-ID-或者容器名"><a href="#删除已经停止容器-docker-rm-容器-ID-或者容器名" class="headerlink" title="删除已经停止容器 docker rm  容器 ID 或者容器名"></a>删除已经停止容器 docker rm  容器 ID 或者容器名</h4><p>加参数 -f  强制删除</p>
+<h4 id="查看日志-docker-logs-f-t-–tail-容器-ID"><a href="#查看日志-docker-logs-f-t-–tail-容器-ID" class="headerlink" title="查看日志 docker logs -f -t –tail  容器 ID"></a>查看日志 docker logs -f -t –tail  容器 ID</h4><ul>
+<li>-t  加入时间戳</li>
+<li>-f  跟随最新日志打印</li>
+<li>–tail  后面跟一个数字   显示最后多少条</li>
+</ul>
+<h4 id="查看容器内运行的进程-docker-top-容器-ID"><a href="#查看容器内运行的进程-docker-top-容器-ID" class="headerlink" title="查看容器内运行的进程  docker top  容器 ID"></a>查看容器内运行的进程  docker top  容器 ID</h4><h4 id="查看容器内部细节-docker-inspect-容器-ID"><a href="#查看容器内部细节-docker-inspect-容器-ID" class="headerlink" title="查看容器内部细节 docker inspect  容器 ID"></a>查看容器内部细节 docker inspect  容器 ID</h4><h4 id="进入正在运行的容器并以命令行交互"><a href="#进入正在运行的容器并以命令行交互" class="headerlink" title="进入正在运行的容器并以命令行交互"></a>进入正在运行的容器并以命令行交互</h4><ul>
+<li>docker exec -it  容器 ID &#x2F;bin&#x2F;bash。进入容器   在容器内打开新的终端，可以启动新的进程。</li>
+<li>docker attach  容器 ID  重新进入 。并启动命令行，不会启动新进程</li>
+</ul>
+<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><p>是一种联合文件系统   分层的   一层套一层的   只读的。当容器启动时，一个新的可写层被加载到镜像的顶部。<br>这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。<br>容器  <code>(container)</code>  的定义和镜像  <code>(image)</code>  几乎一模一样，也是一层套一层，唯一区别在于容器的最上面那一层是可读可写的。</p>
+<h4 id="docker-commit-提交容器副本-生成新的镜像"><a href="#docker-commit-提交容器副本-生成新的镜像" class="headerlink" title="docker commit  提交容器副本   生成新的镜像"></a>docker commit  提交容器副本   生成新的镜像</h4><p>docker commit -m&#x3D;”描述信息” -a&#x3D;”作者”  容器 ID  要创建成的镜像名: [标签]<br>案例：</p>
+<ol>
+<li>从 HUb 下载 tomcat 运行：docker run -it -p 8080:8080 tomcat</li>
+</ol>
+<p>-p  小写   表示：主机端口：docker 容器端口。<br>-P  大写   端口随机分配<br>-i  交互<br>-t  终端</p>
+<ol start="2">
+<li>docker commit -m&#x3D;”自己做的镜像” -a&#x3D;”abc”  容器 id abc&#x2F;tomcat: v1.0</li>
+</ol>
+<h3 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h3><p>可以做数据持久化   从主机的一个文件夹映射到 docker 容器里一个文件夹   改变一个   另一个也可改变。</p>
+<h4 id="docker-run-it-x2F-宿主机绝对路径：-x2F-容器内目录-镜像名称"><a href="#docker-run-it-x2F-宿主机绝对路径：-x2F-容器内目录-镜像名称" class="headerlink" title="docker run -it &#x2F;宿主机绝对路径：&#x2F;容器内目录   镜像名称"></a>docker run -it &#x2F;宿主机绝对路径：&#x2F;容器内目录   镜像名称</h4><p>例子：docker run -p 8080:80 -v $PWD&#x2F;www&#x2F;:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F; -d nginx<br>docker run -it -v &#x2F;宿主机绝对路径目录:&#x2F;容器内目录:ro 镜像名      命令(带权限)<br>可在 Dockerfile 中使用 VOLUME 指令来给镜像添加一个或多个数据卷</p>
+<h4 id="容器间传递共享-–volumes-from"><a href="#容器间传递共享-–volumes-from" class="headerlink" title="容器间传递共享(–volumes-from)"></a>容器间传递共享(–volumes-from)</h4><h2 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h2><p>Dockerfile 是用来构建 Docker 镜像的构建文件，是由一系列命令和参数构成的脚本。</p>
+<h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><ul>
+<li>保留字指令必须大写   后面必须跟至少一个参数</li>
+<li>从上到下执行</li>
+<li>#表示注释</li>
+<li>每条指令都会创建一个新的镜像，并对镜像 commit</li>
+</ul>
+<h4 id="执行-DockerFile-流程"><a href="#执行-DockerFile-流程" class="headerlink" title="执行 DockerFile 流程"></a>执行 DockerFile 流程</h4><ol>
+<li>docker 从基础镜像运行一个容器</li>
+<li>执行一条指令并对容器做出修改</li>
+<li>执行类似 docker commit 的操作   提交一个新的镜像层</li>
+<li>docker 再基于刚才提交的镜像运行一个新的容器</li>
+<li>执行 DockerFile 的下一条命令</li>
+</ol>
+<h4 id="DockerFile-的内容"><a href="#DockerFile-的内容" class="headerlink" title="DockerFile 的内容"></a>DockerFile 的内容</h4><ul>
+<li>FROM  基础镜像，当前新镜像是基于哪个镜像的</li>
+<li>MAINTAINER    镜像维护者的姓名和邮箱地址</li>
+<li>RUN   容器构建时需要运行的命令</li>
+<li>EXPOSE   当前容器对外暴露出的端口</li>
+<li>WORKDIR     指定在创建容器后，终端默认登陆进来工作目录，一个落脚点</li>
+<li>ENV    用来在构建镜像过程中设置环境变量</li>
+<li>ADD   将宿主机目录下的文件拷贝进镜像且 ADD 命令会自动处理 URL 和解压 tar 压缩包</li>
+<li>COPY   类似 ADD，拷贝文件和目录到镜像中.将从构建上下文目录中 &lt;源路径&gt; 的文件&#x2F;目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置   COPY src dest</li>
+<li>VOLUME     容器数据卷，用于数据保存和持久化工作</li>
+<li>CMD   指定一个容器启动时要运行的命令.Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换</li>
+<li>ENTRYPOINT    指定一个容器启动时要运行的命令.ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数</li>
+<li>ONBUILD    当构建一个被继承的 Dockerfile 时运行命令，父镜像在被子继承后父镜像的 onbuild 被触发</li>
+</ul>
+<h3 id="自定义镜像"><a href="#自定义镜像" class="headerlink" title="自定义镜像"></a>自定义镜像</h3><p>base 镜像(scratch)  基础镜像   大部分镜像都是就从他上边构建的。</p>
+<h4 id="构建命令：-docker-build-t-新镜像名字-tag"><a href="#构建命令：-docker-build-t-新镜像名字-tag" class="headerlink" title="构建命令： docker build -t  新镜像名字: tag"></a>构建命令： docker build -t  新镜像名字: tag</h4><p>例子：docker build -t nginx:ai -f Dockerfile .<br>-f  是指定 dockerfile 文件<br>-t  是指定镜像名称<br>.  表示当前目录</p>
+<h4 id="列出镜像历史：-docker-history-镜像名"><a href="#列出镜像历史：-docker-history-镜像名" class="headerlink" title="列出镜像历史： docker history  镜像名"></a>列出镜像历史： docker history  镜像名</h4>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/05/yuque/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux学习笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/01/yuque/ES6%E4%B9%8BProxy/">ES6之Proxy</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

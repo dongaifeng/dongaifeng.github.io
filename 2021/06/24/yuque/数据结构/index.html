@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>数据结构 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">数据结构</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-06-24,&nbsp;&nbsp;9:49:56</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>常见的数据结构有</p>
+<ul>
+<li>队列 Qyeue</li>
+<li>树 Tree</li>
+<li>堆 Heap</li>
+<li>数组 Array</li>
+<li>栈 Stack</li>
+<li>链表 LinkedList</li>
+<li>图 Graph</li>
+<li>哈希表 Hash</li>
+</ul>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>Queue 是一种受限制线性表 先进先出(FIFO) 类似于排队买票。只允许在队列头部进行删除操作，在尾部进行插入操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Queue</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">items</span> = [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 添加</span></span><br><span class="line">  <span class="title function_">enqueue</span>(<span class="params">ele</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">push</span>(ele);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 从前删除一个元素</span></span><br><span class="line">  <span class="title function_">dequeue</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">shift</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 查看前端的元素</span></span><br><span class="line">  <span class="title function_">front</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 是否为空</span></span><br><span class="line">  <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      str += <span class="variable language_">this</span>.<span class="property">items</span>[i] + <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>链表中的元素在内存中不必是连续的，<br>每一个元素本身有指针指向下一个元素和和指向上一个元素的指针。<br>创建时不必确定大小长度， 可无限添加。<br>插入，删除 时间复杂度 O（1）<br>无论访问任何位置的元素都需要从头开始查找，无法通过下标查找。</p>
+<h4 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h4><p>太简单，不写了</p>
+<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p>直接看图<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1623915460026-9ffa0f2a-7200-453e-bb9a-20cb636be1ba.png#clientId=u5e6241a1-722d-4&from=drop&id=u8cfc0e0e&margin=%5Bobject%20Object%5D&name=a.png&originHeight=192&originWidth=839&originalType=binary%E2%88%B6=1&size=34050&status=done&style=none&taskId=ud0d35ee1-1ea1-4baf-8b0f-5ec26e3450d" alt="a.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LinkenList</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">head</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">tail</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">length</span> = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加</span></span><br><span class="line">  <span class="title function_">append</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> newNode = <span class="keyword">new</span> <span class="title class_">Node</span>(data);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">tail</span> = newNode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      newNode.<span class="property">prev</span> = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">tail</span>.<span class="property">next</span> = newNode;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">tail</span> = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">length</span> += <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 插入节点</span></span><br><span class="line">  <span class="title function_">insert</span>(<span class="params">position, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> newNode = <span class="keyword">new</span> <span class="title class_">Node</span>(data);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果当前链表为空 就直接插入</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">tail</span> = newNode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 然后判断position的位置 1 在头 2 在尾 3 在中间</span></span><br><span class="line">      <span class="keyword">if</span> (position === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 先将新链表的第一个node的prev指向newNode，然后newNode的next指向 链表第一个node，然后将head指向newNode</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">head</span>.<span class="property">prev</span> = newNode;</span><br><span class="line">        newNode.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position === <span class="variable language_">this</span>.<span class="property">length</span>) &#123;</span><br><span class="line">        newNode.<span class="property">prev</span> = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tail</span>.<span class="property">next</span> = newNode;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tail</span> = newNode;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (index++ &lt; position) &#123;</span><br><span class="line">          <span class="comment">// 当index===position时 current 就是链表里position位置的node</span></span><br><span class="line">          current = current.<span class="property">next</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        newNode.<span class="property">next</span> = current;</span><br><span class="line">        newNode.<span class="property">prev</span> = current.<span class="property">prev</span>;</span><br><span class="line">        current.<span class="property">prev</span>.<span class="property">next</span> = newNode;</span><br><span class="line">        current.<span class="property">prev</span> = newNode;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">length</span> += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">get</span>(<span class="params">position</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (index++ &lt; position) &#123;</span><br><span class="line">      current = current.<span class="property">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> current.<span class="property">data</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">indexOf</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">      <span class="keyword">if</span> (current.<span class="property">data</span> === data) &#123;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">      &#125;</span><br><span class="line">      current = current.<span class="property">next</span>;</span><br><span class="line">      index += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params">position, newData</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (index++ &lt; position) &#123;</span><br><span class="line">      current = current.<span class="property">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    current.<span class="property">data</span> = newData;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">removeAt</span>(<span class="params">position</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">length</span> == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">head</span> = <span class="variable language_">this</span>.<span class="property">tail</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (position === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">head</span>.<span class="property">next</span>.<span class="property">prev</span> = <span class="literal">null</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">head</span> = <span class="variable language_">this</span>.<span class="property">head</span>.<span class="property">next</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position === <span class="variable language_">this</span>.<span class="property">length</span> - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tail</span>.<span class="property">prev</span>.<span class="property">next</span> = <span class="literal">null</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tail</span> = <span class="variable language_">this</span>.<span class="property">tail</span>.<span class="property">next</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (index++ &lt; current) &#123;</span><br><span class="line">          current = current.<span class="property">next</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        current.<span class="property">prev</span>.<span class="property">next</span> = current.<span class="property">next</span>;</span><br><span class="line">        current.<span class="property">next</span>.<span class="property">prev</span> = current.<span class="property">prev</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">length</span> -= <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">return</span> current;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">remove</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="variable language_">this</span>.<span class="title function_">indexOf</span>(data);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">removeAt</span>(index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取某节点</span></span><br><span class="line">  <span class="title function_">get</span>(<span class="params">position</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">0</span> || position &gt; <span class="variable language_">this</span>.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> flag = position &gt; <span class="variable language_">this</span>.<span class="property">length</span> / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">let</span> current = flag ? <span class="variable language_">this</span>.<span class="property">tail</span> : <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">    <span class="keyword">let</span> index = flag ? <span class="variable language_">this</span>.<span class="property">length</span> : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (index &lt; position) &#123;</span><br><span class="line">      index = flag ? --index : ++index;</span><br><span class="line">      current = flag ? current.<span class="property">prev</span> : current.<span class="property">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> current.<span class="property">data</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">backwardString</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 从前向后 输出字符串</span></span><br><span class="line">  <span class="title function_">backwardString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">      str += current.<span class="property">data</span> + <span class="string">&quot; &quot;</span>;</span><br><span class="line">      current = current.<span class="property">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 从后向前 输出字符串</span></span><br><span class="line">  <span class="title function_">forwardString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">      str += current.<span class="property">data</span> + <span class="string">&quot; &quot;</span>;</span><br><span class="line">      current = current.<span class="property">prev</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span> = data;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">next</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">prev</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>stack 是一种受限制线性表，后进先出(LIFO), 类似往木桶里装砖块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Stack</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">items</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 压栈</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">push</span> = <span class="keyword">function</span> (<span class="params">ele</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">push</span>(ele);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 从栈中拿出元素</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">pop</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">pop</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看栈顶元素</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">peek</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>[<span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否为空</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">isEmpty</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">clear</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span> = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 获取元素个数</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">size</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// toString 方法 再打印 stack时候会调用</span></span><br><span class="line"><span class="title class_">Stack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    str += <span class="variable language_">this</span>.<span class="property">items</span>[i] + <span class="string">&quot;,&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>无序的，不能重复，可以看做一种特殊的数组，里面的元素没有顺序，也不能重复。</p>
+<blockquote>
+<p>可以直接使用 ES6 的 Set 类</p>
+</blockquote>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>一一对应，js 中的对象就是字典</p>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>哈希表比数组快，没有顺序，不允许重复，空间利用率不高。</p>
+<blockquote>
+<p>数组结构 数组基于索引查找很快，基于内容查找不高，删除效率不高</p>
+</blockquote>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><h4 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h4><p>非空左子数的所有键值小于其根节点的键值<br>非空右子树的所有键值大于其根节点的键值<br>左右子树本身都是二叉搜索树<br>可能不平衡 非平衡树</p>
+<h4 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h4><p>节点是红色或者黑色，根节点都是黑色，叶子节点都是黑色空节点<br>每个红节点都有两个黑节点<br>从任何节点到他的某个叶子节点 所走的路径上遇到的黑节点 都相同</p>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><p>类似树，只是每个节点直接都可以访问。每个节点交<strong>顶点</strong>，节点与节点的连线叫做<strong>边</strong></p>
+<h4 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h4><ul>
+<li>广度优先搜索 BFS<br>从 A 开始向下一层一层遍历</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1623916872758-5a9bc96d-b213-4437-bd76-14d575ef8e4f.png#clientId=u5e6241a1-722d-4&from=drop&id=u1b3ff97a&margin=%5Bobject%20Object%5D&name=d.png&originHeight=321&originWidth=476&originalType=binary%E2%88%B6=1&size=51822&status=done&style=none&taskId=u58245d88-ee0b-4f83-86b1-2e0caecaa2f" alt="d.png"></p>
+<ul>
+<li>深度优先搜索 DFS<br>从 A 开始向下一层 B, B 有两个边，然后再向 B 的第一个边 E 访问，等 E 这条线访问完，再访问 B 上的第二个边，然后 B 访问完了，再访问 A 的第二个边，依次这样下去</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1623916720850-788aadda-55a2-41c1-98b9-44fad8933168.png#clientId=u5e6241a1-722d-4&from=paste&height=287&id=ua1e1e7d3&margin=%5Bobject%20Object%5D&name=f.png&originHeight=287&originWidth=386&originalType=binary%E2%88%B6=1&size=34177&status=done&style=none&taskId=u64602802-745a-4316-8999-770ed3ca7ce&width=386" alt="f.png"></p>
+<h4 id="邻接矩阵表示图"><a href="#邻接矩阵表示图" class="headerlink" title="邻接矩阵表示图"></a>邻接矩阵表示图</h4><p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/462392/1623916773346-130bbe3c-cc1f-44a1-a050-51b0cc30882d.jpeg#clientId=u5e6241a1-722d-4&from=paste&height=423&id=u64a54621&margin=%5Bobject%20Object%5D&name=b.jpg&originHeight=423&originWidth=835&originalType=binary%E2%88%B6=1&size=87079&status=done&style=none&taskId=u3cc607ae-836d-46f1-a2ae-a0679c156dc&width=835" alt="b.jpg"><br>如果 A - B 交叉的节点数字是 1 ，表示 A B 之间有边，若果 A - B 交叉的节点数字是 0 ，表示 A B 之前无边</p>
+<blockquote>
+<p>邻接矩阵，只能表示无向图，而且 A A 的交叉点会浪费空间。</p>
+</blockquote>
+<h4 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h4><p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1623916783511-74f019d1-2f41-4105-8a6c-0c8e8a99cd8c.png#clientId=u5e6241a1-722d-4&from=paste&height=520&id=u9411dbe1&margin=%5Bobject%20Object%5D&name=c.png&originHeight=520&originWidth=846&originalType=binary%E2%88%B6=1&size=85848&status=done&style=none&taskId=u70e23e07-14e7-4a70-99ba-c502667757e&width=846" alt="c.png"></p>
+<p>A 对应的是一个数组，里面放着 B，C，D。表示 A-&gt;B, A-&gt;C, A-&gt;D.他们指向是右边，且有方向。</p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h3 id="大-O-表示法"><a href="#大-O-表示法" class="headerlink" title="大 O 表示法"></a>大 O 表示法</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O(1)</td>
+<td>常数的</td>
+</tr>
+<tr>
+<td>O(log(n))</td>
+<td>对数的</td>
+</tr>
+<tr>
+<td>O(n)</td>
+<td>线性的</td>
+</tr>
+<tr>
+<td>O(nlog(n))</td>
+<td>线性和对数乘积</td>
+</tr>
+<tr>
+<td>O(n*n)</td>
+<td>平方</td>
+</tr>
+</tbody></table>
+<p>规则</p>
+<ul>
+<li>用常量 1 取代运行时间中所有的加法常量</li>
+<li>在修改后的运行次数函数中，只保留最高阶项</li>
+<li>如果最高存在而且不为 1，则去除与这个项相乘的常数</li>
+</ul>
+<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>拿到下标 0,跟相邻的下标 1 的元素比较，如果 0 的位置元素大，那就互换位置，然后下标 1 再和下标 2 的元素比较，如果 1 位置的元素大，那就互换，这样遍历一遍，最大的那个元素肯定放到最后了。然后再从 0 和 1 的位置开始比较，这次遍历到下标 length-2 的位置，因为最后的那个元素最大不用比较了，这次遍历完，length-3 的位置就是第二大的元素。据这样依次找到个元素的位置.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ArrayList</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">bubbleSort</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> length = <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span>;</span><br><span class="line">  <span class="comment">// 反向遍历 设置内层循环的终点</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> k = length - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--) &#123;</span><br><span class="line">    <span class="comment">// 遍历 比较 i， i+1 位置的元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">arr</span>[i] &gt; <span class="variable language_">this</span>.<span class="property">arr</span>[i + <span class="number">1</span>]) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">swap</span>(i, i + <span class="number">1</span>); <span class="comment">// 交换位置</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对于 N 个数据的数组，一共比较 (N - 1) + (N - 2) + (N - 3) + … + 1 &#x3D; N * (N - 1) &#x2F; 2。<br>用大 O 表示法表示:</p>
+<ol>
+<li>根据规则 2 只保留最高阶项。N * (N - 1) &#x2F; 2 &#x3D; N²&#x2F;2 - N&#x2F;2 也就是  N²&#x2F;2</li>
+<li>根据规则 3 如果最高阶项存在并且不是 1，则去除与这个项相乘的乘数。 那就是 N²&#x2F;2 去除 1&#x2F;2。也就是 N²</li>
+<li>因为冒泡排序的大 O 是 O(N²)</li>
+</ol>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>拿出下标为 0 位置的数据，跟后边所有的数据依次比较，只要找到比他小的就互换，这样遍历下来，下标为 0 的，肯定是最小的。然后拿出下标为 1 的依次跟后面的比较，这样就找到第二小的数据。<br><strong>选择排序的交换次数只有 N-1 次, 用大 O 表示法就是 O(N)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">selectSort</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; arr.<span class="property">length</span> - <span class="number">1</span>; j++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = j;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = j + <span class="number">1</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[minIndex] &gt; arr[i]) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> temp = arr[j];</span><br><span class="line">    arr[j] = arr[minIndex];</span><br><span class="line">    arr[minIndex] = temp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>我们假如 0 的位置到数组头部的数都是有序的。拿出下标 1 位置的数，作为基数，去跟他之前的数比较，如果他之前的数比他大，就互换，一直比到比他小的位置。然后再拿出 2 位置的数跟他之前的数比较。这样就做到了基数之前的数都是有序的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = arr[i];</span><br><span class="line">    <span class="keyword">let</span> j = i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (temp &lt; arr[j - <span class="number">1</span>] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">      j--;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔算法是在插入排序的基础上，做了一层分组。<br>先找一个增量（一般是长度的一半），从头开始以增量的长度分组。</p>
+<blockquote>
+<p>比如 0， 0+增量，0+增量+增量 是一组。1， 1+增量，1+增量+增量是一组</p>
+</blockquote>
+<p>然后每组再进行插入排序。<br>然后增量减小，再分组，再插入排序。<br>最后增量为 1，就是正确的排序了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ArrayList</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">shellSort</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> length = <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span>;</span><br><span class="line">  <span class="comment">// 计算增量 步长</span></span><br><span class="line">  <span class="keyword">let</span> gap = <span class="title class_">Math</span>.<span class="title function_">floor</span>(length / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 增量不断减小， 直到为1</span></span><br><span class="line">  <span class="keyword">while</span> (gap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 插入排序 这里不是比较基数之前的数了，</span></span><br><span class="line">    <span class="comment">// 而是把 0， 0+gap， 0+gap+gap ...等拿出来依次比较</span></span><br><span class="line">    <span class="comment">// 相当于 基数跟 基数-gap比较大小互换，再跟 基数-2*gap比较</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = gap; i &lt; length; i++) &#123;</span><br><span class="line">      <span class="keyword">let</span> j = i; <span class="comment">// 保存基数的位置，也就是第一个增量的位置</span></span><br><span class="line">      <span class="keyword">let</span> temp = <span class="variable language_">this</span>.<span class="property">arr</span>[i]; <span class="comment">// 保存基数值</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 当基数比 基数-gap位置的值小，就互换，直到gap位置</span></span><br><span class="line">      <span class="keyword">while</span> (j &gt; gap - <span class="number">1</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">arr</span>[j - gap] &gt; temp) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">arr</span>[j] = <span class="variable language_">this</span>.<span class="property">arr</span>[j - gap];</span><br><span class="line">        j -= gap;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">arr</span>[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 重新计算步长，相当于减小步长</span></span><br><span class="line">    gap = <span class="title class_">Math</span>.<span class="title function_">floor</span>(gap / <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快排的思想是：<br>找一个基准点，然后将小于基准点的所有数放到基准点的左边，大于基准点的数放到右边。<br>这样基准点就找到了它正确的位置。<br>然后把左边部分和右边部分递归执行以上操作。<br>代码分析：</p>
+<ol>
+<li>从 quickSort 开始，两个指针分别是数组的头，尾。</li>
+<li>然后 if（i &lt; j）设置结束递归条件。</li>
+<li>然后，从尾部向前找比基准点小的数，找到了就赋值给 i 的位置，此时 i 位置上的数已经被保存为 piovt。而 j 位置已经空了。</li>
+<li>然后从头部向尾部出发，找比基准点大的数，找到了就赋值给 j 位置。此时 j 位置在上一步已经是空的了。这样就完成了互换。</li>
+<li>然后再从第 3 步重新开始，最后 i &#x3D; j 时退出循环，这时候 i 的位置就是基准点的正确位置。</li>
+<li>然后左边部分，右边部分递归执行以上操作。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ArrayList</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">quickSort</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">quick</span>(<span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> - <span class="number">1</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ArrayList</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">quick</span> = <span class="keyword">function</span> (<span class="params">i, j</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="keyword">let</span> left = i;</span><br><span class="line">    <span class="keyword">let</span> right = j;</span><br><span class="line">    <span class="keyword">let</span> pivot = <span class="variable language_">this</span>.<span class="property">arr</span>[left];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">      <span class="keyword">while</span> (<span class="variable language_">this</span>.<span class="property">arr</span>[j] &gt;= pivot &amp;&amp; i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 从后往前找比基准小的数</span></span><br><span class="line">        j--;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">arr</span>[i++] = <span class="variable language_">this</span>.<span class="property">arr</span>[j];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> (<span class="variable language_">this</span>.<span class="property">arr</span>[i] &lt;= pivot &amp;&amp; i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 从前往后找比基准大的数</span></span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">arr</span>[j--] = <span class="variable language_">this</span>.<span class="property">arr</span>[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">arr</span>[i] = pivot;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">quick</span>(left, i - <span class="number">1</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">quick</span>(i + <span class="number">1</span>, right);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/24/yuque/ES6%E4%B9%8Bclass%EF%BC%8CMap%EF%BC%8CSet/">ES6之class，Map，Set</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/24/yuque/%E5%8D%B1%E6%80%A5%E5%80%BC%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">危急值微前端框架项目总结</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

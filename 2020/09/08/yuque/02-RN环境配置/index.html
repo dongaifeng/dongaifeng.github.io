@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>02-RN环境配置 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">02-RN环境配置</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:45</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>————-如果你使用的是 Mac OS 系统，请参照以下步骤———–</strong></p>
+<h6 id="安装前注意："><a href="#安装前注意：" class="headerlink" title="安装前注意："></a>安装前注意：</h6><ul>
+<li>在 Max OS X 系统中，homebrew 在安装软件时可能会碰到&#x2F;usr&#x2F;local 目录不可写的权限问题。可以使用下面的命令修复：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R `whoami` /usr/local</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果命令行提示 command not found，请加上 sudo 获得最高权限</li>
+</ul>
+<p>####一、环境需求</p>
+<p>######1） 安装 Homebrew</p>
+<p>Homebrew 是 OS X 的套件(包)管理器，用于安装 Node.js 和一些其他必须的工具软件。</p>
+<ul>
+<li>安装方式:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>######2）   安装 npm 和 Node.js</p>
+<p>Node.js 最好安装最新版本，node 安装成功后 npm 自动也就有了，直接下载安装 Node.js，网址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a> ，可以以软件形式安装，或者命令行形式安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br></pre></td></tr></table></figure>
+
+<p>######3） 安装 WatchMan</p>
+<p>WatchMan 是由 Facebook 提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager 可以快速捕捉文件的变化从而实现实时刷新）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install watchman</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证是否安装成功</li>
+</ul>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img03.jpg#alt=%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"></p>
+<p>####二、React Native 安装</p>
+<p>######1）Yarn、React Native 的命令行工具（react-native-cli）</p>
+<p>Yarn 是 Facebook 提供的替代 npm 的工具，可以加速 node 模块的下载。React Native 的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务。</p>
+<p>######2）查看是否安装成功</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img04.jpg#alt=%E5%85%A8%E5%B1%80node_moudules%E4%B8%AD%E6%9F%A5%E7%9C%8B"></p>
+<p>####三、Xcode 安装</p>
+<p>React Native 目前需要 Xcode 10 或更高版本。我们可以通过 App Store 或是到 Apple 开发者官网上下载。安装完 Xcode 会同时安装 Xcode IDE、Xcode 的命令行工具和 iOS 模拟器。</p>
+<p>####四、JDK 和 Android Studio</p>
+<p>######1） 安装最新版的 JDK</p>
+<p>在命令行中输入<code>javac -version</code>来查看你当前安装的 JDK 版本。下载安装地址：<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> （资料中已经存放）</p>
+<ul>
+<li>安装 Android studio，在安装过程中请严格执行以下选项：</li>
+</ul>
+<p>1、选择 Custom 选项</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img05.jpg#alt=image"></p>
+<p>2、勾选<code>Performance</code>和<code>Android Virtual Device</code></p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img06.jpg#alt=image"></p>
+<p>3、安装完成后，在 Android Studio 的启动欢迎界面中选择 Configure | SDK Manager</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img07.jpg#alt=image"></p>
+<p>4、在<code>SDK Platforms</code>窗口中，选择<code>Show Package Details</code>，然后在<code>Android 9.0 (Pie)</code>中勾选下图所示并安装。</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img08.jpg#alt=image"></p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img09.jpg#alt=image"></p>
+<p>5、在<code>SDK Tools</code>窗口中，选择<code>Show Package Details</code>，然后在<code>Android SDK Build Tools</code>中勾选<code>Android SDK Build-Tools 28.0.3</code>（必须有这个版本）。</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img10.jpg#alt=image"></p>
+<p>6、ANDROID_HOME 环境变量</p>
+<p>React Native 需要通过环境变量来了解你系统中的 Android SDK 装在什么路径，从而正常进行编译。具体的做法是把下面的命令加入到~&#x2F;.bash_profile 文件中，使用  vi ~&#x2F;.bash_profile。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。</span><br><span class="line">export ANDROID_HOME=$HOME/Library/Android/sdk</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/tools</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/tools/bin</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/platform-tools</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/emulator</span><br></pre></td></tr></table></figure>
+
+<p>######2） 安装 Genymotion</p>
+<p>Genymotion 是一个第三方模拟器，它比 Google 官方的模拟器更易设置且性能更好。但是，它只针对个人用户免费(可能需要 VPN)。</p>
+<ul>
+<li>下载并安装 Genymotion(<a target="_blank" rel="noopener" href="https://www.genymotion.com/">https://www.genymotion.com/</a>)</li>
+<li>打开 Genymotion,如果你尚未安装 VirtualBox,它有可能会提示你安装</li>
+<li>创建一个模拟器并启动</li>
+<li>按下 ⌘+M 可以打开开发者菜单(在安装并启动了 React Native 应用之后)</li>
+</ul>
+<h6 id="3）Gradle-Daemon"><a href="#3）Gradle-Daemon" class="headerlink" title="3）Gradle Daemon"></a>3）Gradle Daemon</h6><p>开启 Gradle Daemon 可以极大地提升 java 代码的增量编译速度。</p>
+<p><strong>————-如果你使用的是 Windows 系统,请参照以下步骤———–</strong></p>
+<p>####一、确保所有的命令行操作都在管理员权限下操作</p>
+<p>####二、需要安装的插件</p>
+<h6 id="1）-Chocolatey"><a href="#1）-Chocolatey" class="headerlink" title="1） Chocolatey"></a>1） Chocolatey</h6><p>Chocolatey 是一个 Windows 上的包管理器，类似于 Mac 上的 watchMan。一般的安装步骤应该是下面这样, 如果国内访问失败, 请使用翻墙工具:</p>
+<h6 id="2）-Python-2"><a href="#2）-Python-2" class="headerlink" title="2） Python 2"></a>2） Python 2</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install python2</span><br></pre></td></tr></table></figure>
+
+<h6 id="3）Node"><a href="#3）Node" class="headerlink" title="3）Node"></a>3）Node</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install nodejs.install</span><br></pre></td></tr></table></figure>
+
+<p>打开命令提示符窗口，使用 Chocolatey 来安装 NodeJS，或者通过软件安装。安装完 node 后建议设置 npm 镜像以加速后面的过程（或使用科学上网工具）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org --globalnpm</span><br><span class="line">npm config set disturl https://npm.taobao.org/dist --global</span><br></pre></td></tr></table></figure>
+
+<p>————-创建并运行 React Native 项目———–</p>
+<h4 id="一、-React-Native-的第一个应用"><a href="#一、-React-Native-的第一个应用" class="headerlink" title="一、 React Native 的第一个应用"></a>一、 React Native 的第一个应用</h4><h6 id="1）执行命令-生成一个工程"><a href="#1）执行命令-生成一个工程" class="headerlink" title="1）执行命令,生成一个工程"></a>1）执行命令,生成一个工程</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init 项目名称</span><br></pre></td></tr></table></figure>
+
+<p>注意:由于众所周知的网络原因，需要等待一段时间（具体视网络情况而定）。react-native 命令行从 npm 官方源拖代码时会遇上麻烦，可以将 npm 仓库源替换为国内镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">npm config set disturl https://npm.taobao.org/dist</span><br></pre></td></tr></table></figure>
+
+<h6 id="2）运行截图"><a href="#2）运行截图" class="headerlink" title="2）运行截图"></a>2）运行截图</h6><p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img11.jpg#alt=image"></p>
+<h6 id="3）运行工程文件"><a href="#3）运行工程文件" class="headerlink" title="3）运行工程文件"></a>3）运行工程文件</h6><p>不管是 iOS 还是 Android，在开发调试阶段，都需要在 Mac 上启动一个 HTTP 服务，称为<code>Debug Server</code>，默认运行在<code>8081</code>端口，APP 通 <code>Debug Server</code>加载 js。</p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img12.jpg#alt=%E5%9B%BE1%20-%20%E5%90%AF%E5%8A%A8React%20native%20%E6%9C%8D%E5%8A%A1%E5%99%A8"></p>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img13.jpg#alt=%E5%9B%BE2%20-%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%90%E8%A1%8C%E7%95%8C%E9%9D%A2"></p>
+<h6 id="4）-把-React-Native-创建的应用跑在-Android-上"><a href="#4）-把-React-Native-创建的应用跑在-Android-上" class="headerlink" title="4） 把 React Native 创建的应用跑在 Android 上"></a>4） 把 React Native 创建的应用跑在 Android 上</h6><ul>
+<li>命令行执行 cd MyRNDemo,路径切换到项目主目录</li>
+<li>命令行执行 react-native run-android 进行加载运行 android 应用。</li>
+<li>使用编辑器进行打开和修改 index.android.js 文件，接着通过菜单按钮选择 Reload JS 来进行刷新修改</li>
+</ul>
+<p>####二、管理 React Native 库的版本</p>
+<p>在开发中，会经常的去控制 React Native 的版本库，得以适配各种条件下的开发，那该如何查看、控制 ReactNative 的版本呢？</p>
+<h6 id="1）查看本地的-React-Native-的版本"><a href="#1）查看本地的-React-Native-的版本" class="headerlink" title="1）查看本地的 React Native 的版本"></a>1）查看本地的 React Native 的版本</h6><ul>
+<li>命令行输入:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native --version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令行效果:</li>
+</ul>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img14.jpg#alt=image"></p>
+<p>######2） 更新本地的 React Native 的版本</p>
+<ul>
+<li>命令行输入:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g react-native-cli</span><br></pre></td></tr></table></figure>
+
+<h6 id="3）查询-react-native-的-npm-包最新版本"><a href="#3）查询-react-native-的-npm-包最新版本" class="headerlink" title="3）查询 react-native 的 npm 包最新版本"></a>3）查询 react-native 的 npm 包最新版本</h6><p>NPM 的全称是 Node Package Manager ，是一个 NodeJS 包管理和分发工具，已经成为了非官方的发布 Node 模块（包）的标准。</p>
+<ul>
+<li>npm 包地址 ：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.npmjs.com/package/react-native</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令行查询：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm info react-native</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询效果：</li>
+</ul>
+<p><img src="/Users/a123/Desktop/React-Native/%E7%AC%94%E8%AE%B0/images/img15.jpg#alt=image"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96!%E7%BD%91%E8%B7%AF%E5%8D%8F%E8%AE%AE/">性能优化/网路协议</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/antd-pro%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">antd-pro学习笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

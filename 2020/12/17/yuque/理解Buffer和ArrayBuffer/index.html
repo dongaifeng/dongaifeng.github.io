@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>理解Buffer和ArrayBuffer | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">理解Buffer和ArrayBuffer</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-12-17,&nbsp;&nbsp;11:47:13</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>现代计算机中操作二进制数据的基本单位是字节（byte），故二进制数据一般以字节数组的形式存在于程序中。如：Java 中的 InputStream 于 OutputStream 类，允许通过指定大小的字节数组（如：<code>byte[] bytes = new byte[1024]</code>）对文件进行读写。<br>然而回到 JS，其设计之初也没有想过要处理二进制，故对于字节的概念并不清晰。再加上 JS 对数据类型的弱化，即使要表示字节数组，也只能通过普通数组的方式表示。<br>HTML5 的建立对前端而言是颠覆性的，一方面基于 XHR2， 使上传下载二进制内容成为可能；另一方面，WebGL&#x2F;Canvas 等新技术需要 JS 与显卡之间进行大量的、实时的数据交换，而其数据通信的形式必须是二进制。这样，JS 操作二进制成为了必然。<br>在 JS 中，可以通过 ArrayBuffer 和类型化数组（Typed Array）在内存中对二进制数据进行操作。</p>
+<h2 id="ArrayBuffer"><a href="#ArrayBuffer" class="headerlink" title="ArrayBuffer"></a>ArrayBuffer</h2><p>ArrayBuffer 是一段连续的长度固定的字节序列，如：通过实例化 ArrayBuffer 对象在内存中创建一段二进制存储空间（或叫二进制缓冲区），</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 创建一段字节长度为8的内存空间</span><br><span class="line">var buffer = new ArrayBuffer(8);</span><br><span class="line">// 获取字节长度</span><br><span class="line">console.log(buffer.byteLength); // 8</span><br></pre></td></tr></table></figure>
+
+<p>由于是连续的内存空间，故在其上进行的读写操作都会比普通 JS Array 快很多。<br>但需要说明的是：ArrayBuffer 只是存储数据的区域，无法进行读写。若想进行访问，需要借助类型化数组（Typed Array）<br>故可以理解为：类型化数组是访问 ArrayBuffer 中数据的接口</p>
+<h2 id="类型化数组"><a href="#类型化数组" class="headerlink" title="类型化数组"></a>类型化数组</h2><p>类型化数组（或称视图 view）是读写 ArrayBuffer 中数据的接口,JS 可以通过 8 种不同的接口创建类型化数组，分别为：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>字节长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Int8Array</td>
+<td>8 位有符号整数</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Uint8Array</td>
+<td>8 位无符号整数</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Int16Array</td>
+<td>16 位有符号整数</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Uint16Array</td>
+<td>16 位无符号整数</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Int32Array</td>
+<td>32 位有符号整数</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Uint32Array</td>
+<td>32 位无符号整数</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Float32Array</td>
+<td>32 位浮点数</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Float64Array</td>
+<td>64 位浮点数</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<p>通过类型化数组可以对 ArrayBuffer 中的数据进行读写，一段 ArrayBuffer 上可以重叠多个类型化数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 创建一段12字节的ArrayBuffer</span><br><span class="line">var b = new ArrayBuffer(12);</span><br><span class="line">// 在b上创建一个视图v1，视图中每个元素类型为Uint8（占1字节），开始于字节索引0，结束于ArrayBuffer结尾</span><br><span class="line">var v1 = new Uint8Array(b);</span><br><span class="line">// 在b上创建一个视图v2，视图中每个元素类型为Uint32（占4字节），开始于字节索引4，结束于ArrayBuffer结尾</span><br><span class="line">var v2 = new Uint32Array(b,4);</span><br><span class="line">// 在b上创建一个视图v3，视图中每个元素类型为Uint16（占2字节），开始于字节索引2，视图长度为2，结束于字节索引5</span><br><span class="line">var v3 = new Uint16Array(b,2,2);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h2><p>Buffer 是 Node.JS 中用于操作  ArrayBuffer  的视图，是  TypedArray（类型化数组）  的一种。<br>当我们创建了一个 Buffer 对象后，我们可以通过 Buffer 对象的 buffer 属性来直接访问其对应的 ArrayBuffer 对象。<br>从 Node 的代码来看，一个 Buffer 对象（或者说是 FastBuffer）继承自 Uint8Array。<br>而 Uint8Array 则是 8 位无符号整型数组（一段以 8bit 数据为单位的无符号整型数组），是 ArrayBuffer 的一种。<br>Buffer  约等于  Uint8Array  因为  Buffer  就是通过继承  Uint8Array  实现的（ Uint8Array  是 9 种  TypedArray  视图中的一种。）。<br>ArrayBuffer 是一块内存，直接存储二进制数据。打个比方，如果说 ArrayBuffer 像是一块标本，而这些视图像是一个显微镜操作台，你可以看(读)到这个 ArrayBuffer 但是你需要这些 TypedArray （或 DataView）视图来操作这些数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayBuffer 转 Buffer</span></span><br><span class="line"><span class="keyword">var</span> arrayBuffer = <span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(<span class="number">16</span>);</span><br><span class="line"><span class="keyword">const</span> buffer = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(arrayBuffer);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(buffer.<span class="property">buffer</span> === arrayBuffer); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Buffer 转 ArrayBuffer</span></span><br><span class="line"><span class="keyword">const</span> buffer = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(<span class="string">&quot;this is a test&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> arrayBuf = buffer.<span class="property">buffer</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(buffer.<span class="title function_">toString</span>()); <span class="comment">// 打印出：this is a test</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/DataView">DataView</a> 视图是一个可以从 ArrayBuffer 对象中读写多种数值类型的底层接口，使用它时，不用考虑不同平台的字节序问题。<br>即 ArrayBuffer 为二进制数据的存储区域。但是 ArrayBuffer 的读写，都需要通过 DataView 来执行。同时 DataView 提供有.buffer 可以直接返回其操作的 ArrayBuffer</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/29/yuque/%E7%90%86%E8%A7%A3Blob%EF%BC%8CFile/">理解Blob，File</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/ES6%20class/">ES6 class</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

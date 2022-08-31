@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>自定义react-redux | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">自定义react-redux</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:45</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li>用户通过 connect 传入两个参数  mapStateToProps， mapDispatchToProps</li>
+<li>mapStateToProps 是一个函数   在 connect 中被调用   返回组件要用到的 state</li>
+<li>mapDispatchToProps  返回一个对象   在 connect 中会被遍历   并加上 dispatch 方法</li>
+<li>在 connect 里  store 通过 useContext 获取到的由 createContext 产生的</li>
+<li>在 useEffect 里挂载  store.subscribe 方法   组件挂载，更新时会调用</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useContext, useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义context 用于传递store</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ReduxContext</span> = <span class="title class_">React</span>.<span class="title function_">createContext</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">Provider</span>(<span class="params">&#123; store, children &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// children 组件复合</span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ReduxContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;store&#125;</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">ReduxContext.Provider</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户传入两个参数mapStateToProps， mapDispatchToProps</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> connect = <span class="keyword">function</span> (<span class="params"></span></span><br><span class="line"><span class="params">  mapStateToProps = (state) =&gt; state,</span></span><br><span class="line"><span class="params">  mapDispatchToProps = &#123;&#125;</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 返回一个函数 处理用户传入的组件</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">Cmp</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 返回的函数组件</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 获取Provider传入的store</span></span><br><span class="line">      <span class="keyword">const</span> store = <span class="title function_">useContext</span>(<span class="title class_">ReduxContext</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 处理用户传入的参数 返回真正的state，dispatch</span></span><br><span class="line">      <span class="keyword">const</span> <span class="title function_">getMoreProps</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 这里对应 用户写的mapDispatchToProps</span></span><br><span class="line">        <span class="keyword">const</span> stateProps = <span class="title function_">mapStateToProps</span>(store.<span class="title function_">getState</span>());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// mapDispatchToProps是用户传入的对象&#123;add： &#123;type: &#x27;add&#125;&#125; &#123;type: &#x27;add&#125;&#125;是action 循环这个对象给add 便规定dispatch(&#123;type: &#x27;add&#125;&#125;)</span></span><br><span class="line">        <span class="keyword">const</span> dispatchToProps = <span class="title function_">bindActionCreators</span>(</span><br><span class="line">          mapDispatchToProps,</span><br><span class="line">          store.<span class="property">dispatch</span></span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          ...stateProps,</span><br><span class="line">          ...dispatchToProps,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> [moreProps, setMoreProps] = <span class="title function_">useState</span>(<span class="title function_">getMoreProps</span>());</span><br><span class="line"></span><br><span class="line">      <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        store.<span class="title function_">subscribe</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="title function_">setMoreProps</span>(&#123;</span><br><span class="line">            ...moreProps,</span><br><span class="line">            ...<span class="title function_">getMoreProps</span>(),</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Cmp</span> &#123;<span class="attr">...props</span>&#125; &#123;<span class="attr">...moreProps</span>&#125; /&gt;</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bindActionCreators</span>(<span class="params">actionCreators, dispatch</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> actionCreators) &#123;</span><br><span class="line">    obj[key] = <span class="title function_">bindActionCreator</span>(actionCreators[key], dispatch);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 给actionCreators所有的方法绑定上dispatch</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bindActionCreator</span>(<span class="params">actionCreator, dispatch</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> <span class="title function_">dispatch</span>(<span class="title function_">actionCreator</span>(...args));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/%E5%AD%A6%E4%B9%A0%E7%A2%8E%E7%89%87/">学习碎片</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/%E8%87%AA%E5%AE%9A%E4%B9%89react/">自定义react</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

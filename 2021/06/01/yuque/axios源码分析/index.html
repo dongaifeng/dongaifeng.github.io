@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
 <head>
     <meta charset="UTF-8">
 <meta name="viewport"
@@ -13,7 +23,7 @@
 
 
 
-<title>Hello World | Hexo</title>
+<title>axios源码分析 | Hexo</title>
 
 
 
@@ -196,7 +206,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">axios源码分析</h1>
             
                 <div class="post-meta">
                     
@@ -205,7 +215,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">2022-08-29,&nbsp;&nbsp;15:48:34</a>
+                        Date: <a href="#">2021-06-01,&nbsp;&nbsp;17:00:16</a>
                         </span>
                     
                     
@@ -214,19 +224,21 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <h3 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h3><p>源码中导出的 axios 是通过 createInstance 创建的实例。使用的默认 options<br>axios.create 方法也是调用的 createInstance 函数，使用的默认 options 合并用户 options。<br>axios.Axios 等于 Axios 类。<br>createInstance 函数里面是 new Axios。并合并了 Axios.prototype。</p>
+<h3 id="构造函数-Axios"><a href="#构造函数-Axios" class="headerlink" title="构造函数 Axios"></a>构造函数 Axios</h3><p>Axios 函数有 interceptors 对象包含 request 数组，response 数组。用来收集用户定义的拦截器。<br>Axios.prototype.request 方法中组装一个 chain 数组，形态大概是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chain = [</span><br><span class="line">  <span class="string">&quot;请求成功拦截2&quot;</span>,</span><br><span class="line">  <span class="string">&quot;请求失败拦截2&quot;</span>,</span><br><span class="line">  <span class="string">&quot;请求成功拦截1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;请求失败拦截1&quot;</span>,</span><br><span class="line">  dispatch,</span><br><span class="line">  <span class="literal">undefined</span>,</span><br><span class="line">  <span class="string">&quot;响应成功拦截1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;响应失败拦截1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;响应成功拦截2&quot;</span>,</span><br><span class="line">  <span class="string">&quot;响应失败拦截2&quot;</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>然后遍历这个 chain，形成一个长的 promise，形态大概是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(config);</span><br><span class="line">promise</span><br><span class="line">  .<span class="title function_">then</span>(<span class="string">&quot;请求成功拦截2&quot;</span>, <span class="string">&quot;请求失败拦截2&quot;</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="string">&quot;请求成功拦截1&quot;</span>, <span class="string">&quot;请求失败拦截1&quot;</span>)</span><br><span class="line">  .<span class="title function_">then</span>(dispatchRequest, <span class="literal">undefined</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="string">&quot;响应成功拦截1&quot;</span>, <span class="string">&quot;响应失败拦截1&quot;</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="string">&quot;响应成功拦截2&quot;</span>, <span class="string">&quot;响应失败拦截2&quot;</span>)</span><br><span class="line"></span><br><span class="line">  .<span class="title function_">then</span>(<span class="string">&quot;用户写的业务处理函数&quot;</span>)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="string">&quot;用户写的报错业务处理函数&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>所以 request 发生的时候执行长的 promise，会先执行请求拦截 —–&gt; 请求 ——&gt;响应拦截。</p>
+<h3 id="dispatchRequest"><a href="#dispatchRequest" class="headerlink" title="dispatchRequest"></a>dispatchRequest</h3><p>dispatchRequest 是真正发送请求的函数。它内部的流程如下：</p>
+<ol>
+<li>对请求头和请求数据做一些处理，组装成 config</li>
+<li>返回适配器 adapter.then(resolve,reject)</li>
+</ol>
+<p>adapter 是适配器，里面会判断如果是浏览器就使用 XMLHttpRequest。如果是 node 就使用 http。在 xhr 文件中对 XHRHttpRequest 做了封装。比如对请求头字段 Content-Type, auth, 的处理，还有一些事件如：timeout，onerror，onreadystatechange。</p>
+<p>本文只是对源码流程做了基本的阐述，更详细的源码分析请参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GNYpgHo97xml0NxT93dHxQ">https://mp.weixin.qq.com/s/GNYpgHo97xml0NxT93dHxQ</a></p>
 
         </div>
 
@@ -259,6 +271,10 @@
         </section>
         <section class="post-nav">
             
+                <a class="prev" rel="prev" href="/2021/06/01/yuque/koa%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">koa源码分析</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/01/yuque/keep-alive/">keep-alive</a>
             
         </section>
 

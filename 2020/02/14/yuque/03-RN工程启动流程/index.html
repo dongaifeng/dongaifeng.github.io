@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>03-RN工程启动流程 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">03-RN工程启动流程</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-02-14,&nbsp;&nbsp;16:33:58</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="一、React-Native-工程结构分析"><a href="#一、React-Native-工程结构分析" class="headerlink" title="一、React Native 工程结构分析"></a>一、React Native 工程结构分析</h4><h6 id="1-初始化-RN-工程"><a href="#1-初始化-RN-工程" class="headerlink" title="1) 初始化 RN 工程"></a>1) 初始化 RN 工程</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init LKDemo2</span><br></pre></td></tr></table></figure>
+
+<h6 id="2-工程目录结构图"><a href="#2-工程目录结构图" class="headerlink" title="2) 工程目录结构图"></a>2) 工程目录结构图</h6><p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img16.png#alt=%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%9B%BE"></p>
+<h6 id="3）工程启动流程分析"><a href="#3）工程启动流程分析" class="headerlink" title="3）工程启动流程分析"></a>3）工程启动流程分析</h6><ul>
+<li>iOS 工程或安卓工程一启动，就会加载目录中<code>index.js</code>文件，通过<code>AppRegistry</code>去注册组件，并且把注册完成的组件输出给 iOS 端或 Android 端：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 引入注册组件模块</span><br><span class="line">import &#123;AppRegistry&#125; from &#x27;react-native&#x27;;</span><br><span class="line">// 引入组件汇总模块</span><br><span class="line">import App from &#x27;./App&#x27;;</span><br><span class="line">// 引入输出组件名称</span><br><span class="line">import &#123;name as appName&#125; from &#x27;./app.json&#x27;;</span><br><span class="line"></span><br><span class="line">// 注册组件，程序主入口</span><br><span class="line">// appName: 注册模块名称</span><br><span class="line">// () =&gt; App: 组件类，程序启动会自动加载该类实例化的组件对象</span><br><span class="line">AppRegistry.registerComponent(appName, () =&gt; App);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过 Xcode 打开 iOS 工程，或者 Android Studio 打开 Android 工程，此处以 iOS 端为例子。找到 AppDelegate.m 文件，查看客户端加载方法：</li>
+</ul>
+<p><img src="/Users/a123/Desktop/Flutter/LearnFlutterNodes/images/img17.png#alt=AppDelegate.m"></p>
+<ul>
+<li>代理文件中通过该方法加载 JS 端输出的模块，注意模块的名称两端必须保持一致：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initWithBridge:bridge moduleName:@&quot;MyRNDemo&quot; initialProperties:nil</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代理文件解析加载注释如下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</span><br><span class="line">&#123;</span><br><span class="line">  // 1. 获取桥接文件</span><br><span class="line">  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];</span><br><span class="line">  // 2. 根据模块加载根视图</span><br><span class="line">  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge</span><br><span class="line">                                                   moduleName:@&quot;MyRNDemo&quot;</span><br><span class="line">                                            initialProperties:nil];</span><br><span class="line"></span><br><span class="line">  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];</span><br><span class="line"></span><br><span class="line">  // 3. 设置窗口</span><br><span class="line">  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</span><br><span class="line"></span><br><span class="line">  // 4. 设置窗口根控制器的view</span><br><span class="line">  UIViewController *rootViewController = [UIViewController new];</span><br><span class="line">  rootViewController.view = rootView;</span><br><span class="line">  self.window.rootViewController = rootViewController;</span><br><span class="line"></span><br><span class="line">  // 5. 显示窗口</span><br><span class="line">  [self.window makeKeyAndVisible];</span><br><span class="line">  return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="4）App-js-文件运行步骤"><a href="#4）App-js-文件运行步骤" class="headerlink" title="4）App.js 文件运行步骤"></a>4）App.js 文件运行步骤</h6><ul>
+<li>加载 React 模块，使用其内部的 API，比如：jsx 语法；</li>
+<li>加载 React Native 原生组件，比如：<code>SafeAreaView, StyleSheet, View, Text,Image</code>等；</li>
+<li>自定义组件类，作为模块的输出；</li>
+<li>创建样式对象，传入样式对象，根据样式中的对象描述，创建样式表</li>
+<li>导出当前模块</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 撩课学院</span><br><span class="line"> * https://itlike.com</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// 1. 加载React模块</span><br><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line"></span><br><span class="line">// 2. 加载原生组件</span><br><span class="line">import &#123;</span><br><span class="line">  SafeAreaView,</span><br><span class="line">  StyleSheet,</span><br><span class="line">  View,</span><br><span class="line">  Text,</span><br><span class="line">  StatusBar,</span><br><span class="line">  Image</span><br><span class="line">&#125; from &#x27;react-native&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 3. 自定义组件（程序入口组件）</span><br><span class="line">const App: () =&gt; React$Node = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;StatusBar barStyle=&quot;dark-content&quot; /&gt;</span><br><span class="line">      &lt;SafeAreaView style=&#123;styles.safeView&#125;&gt;</span><br><span class="line">         &lt;View style=&#123;styles.viewStyle&#125;&gt;</span><br><span class="line">           &lt;Image</span><br><span class="line">               style=&#123;&#123;width: 168, height: 168&#125;&#125;</span><br><span class="line">               source=&#123;&#123;uri: &#x27;http://www.itlike.com/template/simple/res/404/img/xiaoliao.png&#x27;&#125;&#125;</span><br><span class="line">           /&gt;</span><br><span class="line">           &lt;Text style=&#123;styles.textStyle&#125;&gt;小撩陪你开启RN学习之旅！&lt;/Text&gt;</span><br><span class="line">         &lt;/View&gt;</span><br><span class="line">      &lt;/SafeAreaView&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 4. 创建样式对象</span><br><span class="line">// 传入样式对象，根据样式中的对象描述，创建样式表</span><br><span class="line">const styles = StyleSheet.create(&#123;</span><br><span class="line">  safeView: &#123;</span><br><span class="line">    flex: 1</span><br><span class="line">  &#125;,</span><br><span class="line">  viewStyle: &#123;</span><br><span class="line">    display: &#x27;flex&#x27;,</span><br><span class="line">    flex: 1,</span><br><span class="line">    justifyContent:&#x27;center&#x27;,</span><br><span class="line">    alignItems: &#x27;center&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  textStyle: &#123;</span><br><span class="line">    fontSize: 20</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 5. 导出当前模块</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二、React-Native-语法分析"><a href="#二、React-Native-语法分析" class="headerlink" title="二、React Native 语法分析"></a>二、React Native 语法分析</h4><h6 id="1）JSX-语法"><a href="#1）JSX-语法" class="headerlink" title="1）JSX 语法"></a>1）JSX 语法</h6><p>JSX 语法是一个比较高级但很直观的 JS 语法糖。我们在创建 View 的结构是，可以用类似 HTML 标签的形式创建，当然最终在编译是还是会转换成 JS 代码。</p>
+<ul>
+<li>函数中只要返回组件，都需要用()包裹</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const App: () =&gt; React$Node = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">      &lt;View&gt;&lt;/View&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数中除字符串以外，赋值时都需要用{}包裹</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;SafeAreaView style=&#123;styles.safeView&#125;&gt; &lt;/SafeAreaView&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image style=&#123;&#123;width: 168, height: 168&#125;&#125; source=&#123;&#123;uri: &#x27;http://www.itlike.com/template/simple/res/404/img/xiaoliao.png&#x27;&#125;&#125;</span><br><span class="line">          /&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组件内使用变量时，都需要用大括号包裹，否则会被当成普通字符串处理。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const str = &#x27;引擎计划&#x27;;</span><br><span class="line">&lt;Text&gt;&#123;str&#125;&lt;/Text&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="2）样式对象文件"><a href="#2）样式对象文件" class="headerlink" title="2）样式对象文件"></a>2）样式对象文件</h6><p>内部以键值对的形式，取值如同 JS 中的对象调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const styles = StyleSheet.create(&#123;</span><br><span class="line">  viewStyle: &#123;</span><br><span class="line">    display: &#x27;flex&#x27;,</span><br><span class="line">    flex: 1,</span><br><span class="line">    justifyContent:&#x27;center&#x27;,</span><br><span class="line">    alignItems: &#x27;center&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">编译过程</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/14/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

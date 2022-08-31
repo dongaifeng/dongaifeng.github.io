@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>antd-pro学习笔记 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">antd-pro学习笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:45</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="1-全局样式"><a href="#1-全局样式" class="headerlink" title="1 全局样式"></a>1 全局样式</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">24px</span>;</span><br><span class="line"></span><br><span class="line">  :<span class="selector-tag">global</span> &#123;</span><br><span class="line">    <span class="selector-class">.ant-legacy-form-item</span> <span class="selector-class">.ant-legacy-form-item-control-wrapper</span> &#123;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 定义全局样式 */</span></span><br><span class="line">:<span class="selector-tag">global</span>(.text) &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>:globa 表示这是定义的全局样式。他被 .card 包裹表示 只有在这个 class 下才生效。</p>
+<h4 id="2-dva-loading-的使用"><a href="#2-dva-loading-的使用" class="headerlink" title="2 dva-loading 的使用"></a>2 dva-loading 的使用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">connect</span>(</span><br><span class="line">  <span class="comment">// mapStateToProps ：(state) =&gt; (&#123; &#125;)</span></span><br><span class="line">  <span class="function">(<span class="params">&#123; loading &#125;: P</span>) =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">submitting</span>: loading.<span class="property">effects</span>[<span class="string">&quot;gaojiForm/submit&quot;</span>],</span><br><span class="line">  &#125;)</span><br><span class="line">)(<span class="title class_">GaojiForm</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在异步请求是 loading 变量会为 true，完成后会变成 false，用来控制加载动画。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_42338962/article/details/98340667?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase">参考链接</a></p>
+<h4 id="3-antd-的-Form"><a href="#3-antd-的-Form" class="headerlink" title="3 antd 的 Form"></a>3 antd 的 Form</h4><p>设置了  <code>name</code>  属性的  <code>Form.Item</code>  包装的控件，表单控件会自动添加  <code>value</code>（或  <code>valuePropName</code>  指定的其他属性） <code>onChange</code>（或  <code>trigger</code>  指定的其他属性），数据同步将被 Form 接管。<br>使用方式：<br>你不再需要也不应该用 onChange 来做数据收集同步（你可以使用 Form 的 onValuesChange），但还是可以继续监听 onChange 事件。<br>你不能用控件的 value 或 defaultValue 等属性来设置表单域的值，默认值可以用 Form 里的 initialValues 来设置。注意 initialValues 不能被 setState 动态更新，你需要用 setFieldsValue 来更新。<br>你不应该用 setState，可以使用 form.setFieldsValue 来动态改变表单值。</p>
+<h4 id="4-newData-filter"><a href="#4-newData-filter" class="headerlink" title="4 newData?.filter()"></a>4 newData?.filter()</h4><p>这里的  ?.  意思是：newData 存在不为空才执行 filter  相当于  if(newData) { newData.filter }</p>
+<h4 id="5-lt-Table"><a href="#5-lt-Table" class="headerlink" title="5 &lt;Table"></a>5 &lt;Table<TableFormDateType></h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeScript 2.9 之后也可以这样写</span></span><br><span class="line"><span class="comment">// https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html#generic-type-arguments-in-jsx-elements</span></span><br><span class="line">&lt;<span class="title class_">Table</span>&lt;<span class="title class_">User</span>&gt; columns=&#123;columns&#125; dataSource=&#123;data&#125; /&gt;</span><br><span class="line">&lt;<span class="title class_">Table</span>&lt;<span class="title class_">User</span>&gt; dataSource=&#123;data&#125;&gt;</span><br><span class="line">  &lt;<span class="title class_">Table</span>.<span class="property">Column</span>&lt;<span class="title class_">User</span>&gt; key=<span class="string">&quot;name&quot;</span> title=<span class="string">&quot;Name&quot;</span> dataIndex=<span class="string">&quot;name&quot;</span> /&gt;</span><br><span class="line">&lt;/<span class="title class_">Table</span>&gt;</span><br><span class="line"></span><br><span class="line">其实就是给这个类加类型</span><br><span class="line">相当于下面</span><br><span class="line"><span class="comment">// 使用 JSX 风格的 API</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NameColumn</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Table.Column</span>&lt;<span class="title class_">User</span>&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="title class_">UserTable</span> dataSource=&#123;data&#125;&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">NameColumn</span> <span class="attr">key</span>=<span class="string">&quot;name&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Name&quot;</span> <span class="attr">dataIndex</span>=<span class="string">&quot;name&quot;</span> /&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">UserTable</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-类型断言-as"><a href="#6-类型断言-as" class="headerlink" title="6 类型断言 as"></a>6 类型断言 as</h4><p>意思是告诉编译器，这个变量我知道是什么类型，我推断他的类型为 as 后面的类型。它只在编译时候起作用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">val</span>: <span class="built_in">any</span> = <span class="string">&quot;hello word&quot;</span>;</span><br><span class="line"><span class="comment">// 两种方式类型断言</span></span><br><span class="line"><span class="keyword">let</span> len = (&lt;<span class="built_in">string</span>&gt;val).<span class="property">length</span>;</span><br><span class="line"><span class="keyword">let</span> len = (val <span class="keyword">as</span> <span class="built_in">string</span>).<span class="property">length</span>; <span class="comment">// tsx中只有as被允许</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-event-persist"><a href="#7-event-persist" class="headerlink" title="7 event.persist()"></a>7 event.persist()</h4><p>如果在 react 中想异步访问事件属性（如在 setTimeout 内），应该在是处理事件时调用 event.persist()，这会从事件池中移除该合成函数并允许对该合成事件的引用被保留下来.</p>
+<h4 id="删除对象属性"><a href="#删除对象属性" class="headerlink" title="删除对象属性"></a>删除对象属性</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除对象属性</span></span><br><span class="line"><span class="keyword">delete</span> target.<span class="property">isNew</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-model-的写法"><a href="#8-model-的写法" class="headerlink" title="8 model 的写法"></a>8 model 的写法</h4><p>1 写 ModelState 的 interface。<br>2 写 ModelType 的 interface。包括 namespace， state 的类型就是 ModelState。effects 中每一个的类型用从 umi 中引入的 Effect，reducer 也是从 umi 中引入 Reducer。但是要用泛型方式传入 ModelState。<br>3 写 model，model 里无论添加了 state，reducer，effects 都要去 interface 里添加类型。effects 里的每个函数参数为：action 和 effects(dva 封装的 saga 方法)。reducer 里也是函数参数为 state， action。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Reducer</span>, <span class="title class_">Effect</span> &#125; <span class="keyword">from</span> <span class="string">&quot;umi&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CurrentUser</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./data.d&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">ModelState</span> &#123;</span><br><span class="line">  <span class="attr">currentUser</span>: <span class="title class_">CurrentUser</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ModelType</span> &#123;</span><br><span class="line">  <span class="attr">namespace</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">state</span>: <span class="title class_">ModelState</span>;</span><br><span class="line">  <span class="attr">effects</span>: &#123;</span><br><span class="line">    <span class="attr">fetchCurrent</span>: <span class="title class_">Effect</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="attr">reducers</span>: &#123;</span><br><span class="line">    <span class="attr">saveCurrentUser</span>: <span class="title class_">Reducer</span>&lt;<span class="title class_">ModelState</span>&gt;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Model</span>: <span class="title class_">ModelType</span> = &#123;</span><br><span class="line">  <span class="attr">namespace</span>: <span class="string">&quot;center&quot;</span>,</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">    <span class="attr">currentUser</span>: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">effects</span>: &#123;</span><br><span class="line">    *<span class="title function_">fetchCurrent</span>(<span class="params">action, &#123; call, put &#125;</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">yield</span> <span class="title function_">call</span>(<span class="string">&quot;/api&quot;</span>, &#123; <span class="attr">params</span>: action.<span class="property">payload</span> &#125;);</span><br><span class="line">      <span class="title function_">put</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;saveCurrentUser&quot;</span>,</span><br><span class="line">        <span class="attr">payload</span>: res,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">reducers</span>: &#123;</span><br><span class="line">    <span class="title function_">saveCurrentUser</span>(<span class="params">state, action</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        ...state,</span><br><span class="line">        <span class="attr">currentUser</span>: action.<span class="property">payload</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Model</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-用函数封装部分-jsx"><a href="#9-用函数封装部分-jsx" class="headerlink" title="9 用函数封装部分 jsx"></a>9 用函数封装部分 jsx</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 如果逻辑比较复杂 可以把这部分拿出来 用函数封装</span></span><br><span class="line">  renderUserInfo = <span class="function">(<span class="params">currentUser: CurrentUser</span>) =&gt;</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;styles.detail&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          &#123;</span></span><br><span class="line"><span class="language-xml">            // (currentUser.geographic || &#123; province: &#123; label: &#x27;&#x27; &#125; &#125;).province.label</span></span><br><span class="line"><span class="language-xml">            currentUser.geographic?.province?.label</span></span><br><span class="line"><span class="language-xml">          &#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&#123; <span class="variable language_">this</span>.<span class="title function_">renderUserInfo</span>(currentUser) &#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-接口类型也可以使用某个接口里面某一个属性"><a href="#10-接口类型也可以使用某个接口里面某一个属性" class="headerlink" title="10 接口类型也可以使用某个接口里面某一个属性"></a>10 接口类型也可以使用某个接口里面某一个属性</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">CurrentUser</span> = &#123;</span><br><span class="line">  <span class="attr">tags</span>: <span class="title class_">TagType</span>[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">TagProps</span> &#123;</span><br><span class="line">  <span class="attr">tags</span>: <span class="title class_">CurrentUser</span>[<span class="string">&quot;tags&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-useEffect"><a href="#11-useEffect" class="headerlink" title="11 useEffect"></a>11 useEffect</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(</span><br><span class="line">  <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 做一些事</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行effect&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return的函数用于清楚effect</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">clear</span>(<span class="string">&quot;effect&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 依赖项</span></span><br><span class="line">  []</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>1 使用 useEffect，useEffect 里面的所有东西都是每次 render 都是独立的，里面有独立的 state、effects、function。<br>2 react-hooks 的作用是一种同步的作用，同步函数 hooks 函数内的内容与外部的 props 以及 state，<br>3 所以才会在每次 render 之后执行 useEffect 里面的函数，这时可以获取到当前 render 结束后的 props 和 state，来保持一种同步<br>4 依赖项的比较是浅比较，如果 state 是一个对象，那么对象只要指向不发生变化，那么就不会执行 effect 里面的函数</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/02-RN%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">02-RN环境配置</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/react-redux%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">react-redux简单使用</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

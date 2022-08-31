@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>ES6之class，Map，Set | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES6之class，Map，Set</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021-06-24,&nbsp;&nbsp;9:49:56</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">  &#125;</span><br><span class="line">  z = <span class="string">&quot;z&quot;</span>;</span><br><span class="line">  <span class="title function_">bar</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 两种方式相同</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">z</span> = <span class="string">&quot;z&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Fn</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">bar</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>class 的 constructor 相当于 Fn 的 prototype.constructor<br>在 constructor 里定义属性 相当于 在 Fn 里面定义 比如 x，y<br>在 constructor 外定义属性 相当于 在 Fn 的 prototype 比如：bar<br>但是在 constructor 外定义定义变量 相当于在 constructor 定义的。 比如 z 等同于 this.z &#x3D; ‘z’<br>class 上除了自定义的 constructor 外 还有一个 toString<br>无论是 class  还是 Fn  new 出来的实例对象 都可以通过* proto*  找到 他的构造函数的 原型对象（prototype）<br>并可以修改上面的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">p1.<span class="property">__proto__</span>.<span class="property">printName</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;Oops&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">p1.<span class="title function_">printName</span>(); <span class="comment">// &quot;Oops&quot;</span></span><br><span class="line">p2.<span class="title function_">printName</span>(); <span class="comment">// &quot;Oops&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>{}.hasOwnProperty(‘prop’) 这个对象自身上有没有 prop 这个属性 如果通过<strong>proto</strong>的属性 则返回 false<br>类不存在变量提升， 先声明 再使用<br>类的方法内部如果含有 this，它默认指向类的实例，如果单独拿来使用会找不到 this。</p>
+<p>在构造方法中绑定 this 或者箭头函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Logger &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.printName = this.printName.bind(this);</span><br><span class="line">    this.getThis = () =&gt; this;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加上 static 关键字，就表示该方法不会被实例对象继承，而是直接通过类来调用<br>静态方法包含 this 关键字，这个 this 指的是类本身，而不是实例对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Foo &#123;</span><br><span class="line">  static classMethod() &#123;</span><br><span class="line">    return &#x27;hello&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Foo.classMethod() // &#x27;hello&#x27;</span><br><span class="line">var foo = new Foo();</span><br><span class="line">foo.classMethod() // 找不到</span><br></pre></td></tr></table></figure>
+
+<p>父类的静态方法，可以被子类继承，通过 extends。<br>静态方法也是可以从 super 对象上调用的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Foo</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">classMethod</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">super</span>.<span class="title class_">FooMethod</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Class 内部只有静态方法，没有静态属性  <br>静态属性定义: Foo.name &#x3D; ‘static name’<br>如果通过 new 调用这个函数 new.target 指向这个函数，否则是 undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">new</span>.<span class="property">target</span> !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;必须使用 new 命令生成实例&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>super 关键字，它在下面这里表示父类的构造函数，也就是父类的 constructor，并重新定义父类 constructor 里面的属性。然后子类再继承到自己身上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">bbb</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">//  谁调用 就指向谁</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Father</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(x); <span class="comment">// 直接去调Father的constructor</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = <span class="string">&quot;son prop&quot;</span>; <span class="comment">// 优先使用自己的属性</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子类必须在 constructor 方法中调用 super 方法，否则新建实例时会报错。这是因为子类自己的 this 对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工，加上子类自己的实例属性和方法。如果不调用 super 方法，子类就得不到 this 对象。</p>
+<p>在子类的构造函数中，只有调用 super 之后，才可以使用 this 关键字，否则会报错。这是因为子类实例的构建，基于父类实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ColorPoint</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Point</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x, y, color</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color; <span class="comment">// ReferenceError</span></span><br><span class="line">    <span class="variable language_">super</span>(x, y);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color; <span class="comment">// 正确</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>{} instanceof Fn  对象是不是 Fn 构造出来的<br>Object.getPrototypeOf ()    从子类上获取父类    Object.getPrototypeOf(Son) &#x3D;&#x3D;&#x3D; Father  <br>子类里调用 super()  相当于 Father.prototype.constructor.call(this)<br>super 也可做为对象用。也可在子类 constructor 外使用。  super 指向父类的原型对象 super &#x3D; Father.prototype, 但是不能调用定义在父类 constructor 里的属性</p>
+<p>在子类静态方法之中，super 将指向父类(Father)，而不是父类的原型对象, super.fn 会去找 Father 的静态方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="title function_">myMethod</span>(<span class="params">msg</span>) &#123;  <span class="comment">// 子类的静态方法</span></span><br><span class="line">    <span class="variable language_">super</span>.<span class="title function_">myMethod</span>(msg); <span class="comment">// 会去找父类 static 的方法</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>子类的<strong>proto</strong>总是指向父类。<br>子类 prototype.<strong>proto</strong>，表示方法的继承，总是指向父类的 prototype 属性。</p>
+<h2 id="Map，Set"><a href="#Map，Set" class="headerlink" title="Map，Set"></a>Map，Set</h2><h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>Set 是一种数据结构。类似数组，但是成员的值都唯一。Set 是一个能够存储 <strong>无重复值的有序列表</strong> 的容器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="string">&quot;a&quot;</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">5</span>);</span><br><span class="line">set.<span class="title function_">delete</span>(<span class="number">3</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set); <span class="comment">// &#123;1, &quot;a&quot;, 4, 5&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set.<span class="property">size</span>); <span class="comment">// 4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set.<span class="title function_">has</span>(<span class="number">1</span>)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">set.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">value, key, ownerSet</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 1 1 a a 4 4 5 5</span></span><br><span class="line"><span class="comment">// 还有  keys()：返回键名。</span></span><br><span class="line"><span class="comment">// values()：返回键值。</span></span><br><span class="line"><span class="comment">// entries()：返回键值对</span></span><br></pre></td></tr></table></figure>
+
+<p>WeakSet 结构与 Set 类似，也是不重复的值的集合，WeakSet 的成员只能是对象，而不能是其他类型的值。<br>WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用。也就是说 WeakSet 里面的引用，都不计入垃圾回收机制的引用计数。<br>没有 size 属性，不能 forEach，keys，values。不能遍历。其他与 Set 一样。</p>
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p>Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">  [<span class="number">0</span>, <span class="string">&quot;张三&quot;</span>],</span><br><span class="line">  [<span class="literal">true</span>, <span class="string">&quot;Author&quot;</span>],</span><br><span class="line">  [&#123;&#125;, &#123; <span class="attr">a</span>: <span class="string">&quot;aaa&quot;</span> &#125;],</span><br><span class="line">  [obj, &#123; <span class="attr">a</span>: <span class="string">&quot;aaa&quot;</span> &#125;],</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map); <span class="comment">// &#123;0 =&gt; &quot;张三&quot;, true =&gt; &quot;Author&quot;, &#123;…&#125; =&gt; &#123;…&#125;&#125;</span></span><br><span class="line">map.<span class="property">size</span>; <span class="comment">// 4</span></span><br><span class="line">map.<span class="title function_">has</span>(&#123;&#125;); <span class="comment">// false</span></span><br><span class="line">map.<span class="title function_">has</span>(obj); <span class="comment">// true</span></span><br><span class="line">map.<span class="title function_">get</span>(<span class="literal">true</span>); <span class="comment">// Author</span></span><br><span class="line"></span><br><span class="line">map.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value, key, ownerMap</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  张三</span></span><br><span class="line"><span class="comment">//  0</span></span><br><span class="line"><span class="comment">//  Author</span></span><br><span class="line"><span class="comment">//  true</span></span><br><span class="line"><span class="comment">//  &#123;a: &quot;aaa&quot;&#125;</span></span><br><span class="line"><span class="comment">//  &#123;&#125;</span></span><br><span class="line"></span><br><span class="line">map.<span class="title function_">set</span>(<span class="literal">null</span>, <span class="string">&quot;bbb&quot;</span>);</span><br><span class="line"><span class="comment">// &#123;0 =&gt; &quot;张三&quot;, true =&gt; &quot;Author&quot;, &#123;…&#125; =&gt; &#123;…&#125;, &#123;…&#125; =&gt; &#123;…&#125;, null =&gt; &quot;bbb&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>WeakMap 只接受对象作为键名（null 除外），不接受其他类型的值作为键名。<br>键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。（只针对键名）。<br>WeakMap 没有遍历操作。没有 size 属性</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/07/22/yuque/vue-router%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">vue-router源码分析</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/24/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

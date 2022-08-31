@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>通俗易懂的https知识点 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">通俗易懂的https知识点</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2022-06-10,&nbsp;&nbsp;13:58:56</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h2 id="前提知识"><a href="#前提知识" class="headerlink" title="前提知识"></a>前提知识</h2><h3 id="了解-tcp，http"><a href="#了解-tcp，http" class="headerlink" title="了解 tcp，http"></a>了解 tcp，http</h3><blockquote>
+<p>HTTP 协议是 Hyper Text Transfer Protocol（超文本传输协议），基于 TCP&#x2F;IP 通信协议来传递数据。<br>TCP&#x2F;IP 协议按层次分别分为以下 4 层，（也有说五层，物理层）。OSI 是 7 层。</p>
+</blockquote>
+<p>应用层：负责处理特定的应用程序细节。DNS 解析域名，FTP 下载文件，HTTP 超文本传输。<br>传输层：主要为两台主机上的应用建立连接，TCP 协议<br>安全层：CA 认证，加密数据，SSL 就是应用层跟传输层之间的一层协议，主要是对数据加密<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1636616689648-02cbd2c0-5f16-4e07-a532-5b3f833e43b0.png#clientId=ua51f9617-d999-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=266&id=u132837c1&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%B1%8F2021-11-10%2019.51.19.png&originHeight=563&originWidth=1346&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=134964&status=done&style=none&taskId=u97fd03fa-ccfe-44ac-a248-32705603546&title=&width=635" alt="截屏2021-11-10 19.51.19.png"><br><strong>三次握手</strong><br>第一次握手：<br>客户端发送 SYN 包(seq&#x3D;x)到服务器，并进入 SYN_SEND 状态，等待服务器确认。<br>第二次握手：<br>服务器收到 SYN 包，必须确认客户的 SYN(ack&#x3D;x+1)，同时自己也发送一个 SYN 包(seq&#x3D;y)，即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态。<br>第三次握手：<br>客户端收到服务器的 SYN+ACK 包，向服务器发送确认包 ACK(ack&#x3D;y+1)，此包发送完毕，客户端和服务器进入 ESTABLISHED 状态，完成三次握手。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1636615509129-a301ca07-b613-4012-be33-749b19041553.png#clientId=uecb0f350-2197-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=431&id=u1aa77288&margin=%5Bobject%20Object%5D&name=ca6dbfa7901458f8abb62e9704d295df.png&originHeight=610&originWidth=734&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=33314&status=done&style=none&taskId=u8a1829cc-328e-4695-bc42-39382d5af9a&title=&width=519" alt="ca6dbfa7901458f8abb62e9704d295df.png"><br><strong>四次挥手</strong><br>第一次挥手：<br>主动关闭方发送一个 FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不会再给你发数据了(当 然，在 fin 包之前发送出去的数据，如果没有收到对应的 ack 确认报文，主动关闭方依然会重发这些数据)，但此时主动关闭方还可以接受数据。<br>第二次挥手：<br>被动关闭方收到 FIN 包后，发送一个 ACK 给对方，确认序号为收到序号+1(与 SYN 相同，一个 FIN 占用一个序号)。<br>第三次挥手：<br>被动关闭方发送一个 FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。<br>第四次挥手：<br>主动关闭方收到 FIN 后，发送一个 ACK 给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/462392/1636615568710-3c8bfe18-29c5-4c43-9c71-648ed861dc00.png#clientId=uecb0f350-2197-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=477&id=uc50a7efd&margin=%5Bobject%20Object%5D&name=851c5465701a9220100681120c61609e.png&originHeight=638&originWidth=665&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=37532&status=done&style=none&taskId=u24bcf015-a1a6-40a1-9047-7f7c980bf1b&title=&width=497" alt="851c5465701a9220100681120c61609e.png"><br>四层协议<br>抓包工具</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><blockquote>
+<p>采用单钥密码系统的加密方法，同一个密钥用来加密和解密。</p>
+</blockquote>
+<p>常见的对称加密：DES，AES，3DES，RC<br>前端解决方案：<a target="_blank" rel="noopener" href="https://github.com/brix/crypto-js">crypto.js</a></p>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><blockquote>
+<p>非对称加密需要两个密钥：公钥 (publickey) 和私钥 (privatekey)。公钥和私钥是一对，用公钥对数据加密，只能用对应的私钥解密。如果用私钥对数据加密，只能用对应的公钥进行解密。</p>
+</blockquote>
+<p>常见的非对称加密：DH, DSA, RSA, ECC<br>前端非对称加密方案：<a target="_blank" rel="noopener" href="https://github.com/travist/jsencrypt">jsencrypt</a><br><strong>摘要算法</strong></p>
+<blockquote>
+<p>摘要算法又称哈希算法，它表示输入任意长度的数据，输出固定长度的数据，相同的输入数据始终得到相同的输出，不同的输入数据尽量得到不同的输出（碰撞问题）</p>
+</blockquote>
+<p>消息摘要采用单向 Hash 函数将需加密的明文”摘要”成一串固定位数的密文，具有不可逆性。又叫指纹，签名。<br>常见的摘要算法：MD5，SHA1，SHA2</p>
+<h2 id="理解概念"><a href="#理解概念" class="headerlink" title="理解概念"></a>理解概念</h2><h4 id="CA-机构，证书"><a href="#CA-机构，证书" class="headerlink" title="CA 机构，证书"></a>CA 机构，证书</h4><p>数字证书颁发机构，负责管理和签发 CA 证书的第三方机构。<br>CA 证书，也叫 SSL 证书，就是 CA 机构颁发的证书。SSL 使用 X.509 格式，X.509 是一种数字证书格式的标准。证书中包含的信息：</p>
+<ul>
+<li>服务器的公钥</li>
+<li>签名算法</li>
+<li>签名</li>
+<li>证书有效日期</li>
+<li>CA 机构的名称</li>
+</ul>
+<p>CA 证书的分类：</p>
+<ul>
+<li>DV 证书，只验证申请者的域名所有权</li>
+<li>OV 证书，需要验证申请者的身份，域名所有权</li>
+<li>EV 证书，严格的验证申请者的身份，域名所有权，商业信息</li>
+</ul>
+<h4 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h4><p>CA 机构用哈希算法对 服务器公钥 生成 摘要 1（哈希值）。加密后得到签名，也叫指纹。这里的加密是非对称加密（CA 机构的私钥）。<br>浏览器用 哈希算法 对 服务器公钥 生成 摘要 2（哈希值），然后解密上面得到的指纹，然后对比摘要 1 和 摘要 2 ，来验证证书的合法性，这里的解密用的是上面用到的非对称加密（CA 机构的公钥）。<br><strong>整体流程</strong><br><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/462392/1636960604328-958899fc-7464-4928-8c9c-ec56382af200.jpeg"><br><strong>第一步：</strong><br>服务方申请人向第三方机构 CA 提交公钥、组织信息、个人信息(域名)等信息并申请认证；<br><strong>第二步：</strong><br>CA 机构通过线上、线下等多种手段验证申请者提供信息的真实性，比如组织是否存在、企业是否合法，是否拥有域名的所有权等；<br><strong>第三步：</strong><br>如信息审核通过，CA 机构会向申请人签发 CA 证书。证书包含以下信息：申请者公钥、申请者的组织信息和个人信息、签发机构 CA 的信息、有效时间、证书序列号等信息的明文，同时包含一个签名；<br>制作签名的过程：</p>
+<ol>
+<li>首先，使用哈希算法对服务器的公钥计算，生产哈希值（摘要）。</li>
+<li>然后，采用非对称加密 + CA 的私钥对哈希值（摘要）进行加密，密文即签名。</li>
+</ol>
+<p><strong>第四步：</strong><br>浏览器向服务器发出请求时，服务器返回证书文件；<br><strong>第五步：</strong><br>浏览器读取证书中的相关的明文信息，然后开始验证证书。过程如下：</p>
+<ol>
+<li>采用相同的哈希算法对服务器的公钥计算，生产哈希值（摘要）。</li>
+<li>然后使用对应 CA 机构 的公钥（公钥保存在电脑本地）解密证书中的签名，得到证书中的哈希值（摘要）。</li>
+<li>对比 a 步骤产生的摘要，b 步骤产生的摘要，相同即证书合法；</li>
+</ol>
+<p>需要注意的点：</p>
+<ul>
+<li>申请 CA 证书需要提供公钥，并且私钥保存在服务器不得外传。</li>
+<li>CA 机构也是采用非对称加密，保证证书合法。</li>
+<li>电脑系统本地都会保存一份 CA 机构的根证书，里面有 CA 机构的公钥。</li>
+</ul>
+<h4 id="CSR"><a href="#CSR" class="headerlink" title="CSR"></a>CSR</h4><p>CSR 是由申请人为获得 SSL 证书提交给 CA 的申请，是一段编码信息。包含一个公钥以及申请人信息。</p>
+<p>可以使用 OpenSSL 工具创建 CSR。<br>运行以下命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -nodes -keyout private.key -out server.csr</span><br></pre></td></tr></table></figure>
+
+<p>将得到两个输出文件:</p>
+<ul>
+<li><strong>private.key</strong>: 这是你的私钥。你应该将其存储在服务器的安全位置，安装证书时需要用到。</li>
+<li><strong>server.csr</strong>: 证书签发申请(CSR)，将被提交给 CA</li>
+</ul>
+<h4 id="SSL-x2F-TLS"><a href="#SSL-x2F-TLS" class="headerlink" title="SSL&#x2F;TLS"></a>SSL&#x2F;TLS</h4><p>SSL（Secure Sockets Layer），安全套接字层，是一种在应用层和传输层之间加密数据的一种加密协议。<br>TLS（Transport Layer Security），传输层安全性协议。TLS 是 SSL 协议的升级版。<br>TLS&#x2F;SSL 协议中使用了非对称加密，对称加密以及 HASH 算法。</p>
+<h4 id="公钥，密钥"><a href="#公钥，密钥" class="headerlink" title="公钥，密钥"></a>公钥，密钥</h4><h2 id="四次握手过程"><a href="#四次握手过程" class="headerlink" title="四次握手过程"></a>四次握手过程</h2><p>HTTPS 的整体过程分为证书验证和数据传输阶段，证书验证阶段也可叫做四次握手。<br>常用的对称加密方法，非对称加密方法。</p>
+<h3 id="证书验证阶段"><a href="#证书验证阶段" class="headerlink" title="证书验证阶段"></a>证书验证阶段</h3><p>第一步：<br>浏览器向服务器发送请求比如：<a href="https://www.baidu.com。发送的内容包括：">https://www.baidu.com。发送的内容包括：</a></p>
+<ul>
+<li>浏览器支持的 SSL 协议版本号。</li>
+<li>浏览器支持的加密算法</li>
+<li>一个随机数</li>
+<li>会话的相关数据</li>
+</ul>
+<p>第二步：<br>https 的默认端口是 443，所以当 443 端口接受到请求后，会向浏览器发送内容：</p>
+<ul>
+<li>SSL 版本号，确认与浏览器使用同一版本的协议。</li>
+<li>加密算法，确认与浏览器使用同一种加密方法。</li>
+<li>一个随机数，用于生产“会话密钥”</li>
+<li>SSL 证书，CA 机构颁发的证书，里面包换公钥，网站管理者的一些信息。</li>
+</ul>
+<p>第三步：<br>浏览器收到证书后，判断证书是否合法。<br>第四步：<br>如果合法，浏览器会从中取出公钥，并生成第三个随机数。然后再用证书里面的公匙加密随机数发送给服务器。发送的内容有：</p>
+<ul>
+<li>加密后的随机数，这个随机数会和前面两个随机数通过事先商定的加密方法加工成“会话密钥”。</li>
+<li>编码改变通知，表示随后的信息将使用对称加密传输。</li>
+<li>结束握手通知。</li>
+</ul>
+<p>第五步：<br>服务器接收到密文后，用私匙解密，得到第三个随机数，然后也会通过事先商定的加密方法计算出“会话密钥”。后面的数据传输阶段就用对称加密算法加上“会话密钥”传输数据。然后返回数据：</p>
+<ul>
+<li>编码改变通知，表示随后的信息将使用对称加密传输。</li>
+<li>结束握手通知。</li>
+</ul>
+<p>到这里证书验证阶段结束，后面的数据传输就会使用对称加密传输。<br><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/462392/1636961029652-11ec8dc0-9a77-4c92-9a03-7e5377064922.jpeg"></p>
+<p>ssl 四次握手之前需要 tcp 的三次握手。<br>tcp 的三次握手前两次是不能携带数据的。<br>SLL 协议是建立在 TCP 协议之上的。</p>
+<h2 id="升级网站为-https"><a href="#升级网站为-https" class="headerlink" title="升级网站为 https"></a>升级网站为 https</h2><p><a target="_blank" rel="noopener" href="https://github.com/wsdo/local-https-cert">https://github.com/wsdo/local-https-cert</a><br><a target="_blank" rel="noopener" href="https://www.aliyun.com/product/cas">阿里云</a></p>
+<h2 id="https-弊端，优化"><a href="#https-弊端，优化" class="headerlink" title="https 弊端，优化"></a>https 弊端，优化</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/29/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/">Hello World</a>
+            
+            
+            <a class="next" rel="next" href="/2022/06/10/yuque/%E9%87%8D%E5%AD%A6css/">重学css</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

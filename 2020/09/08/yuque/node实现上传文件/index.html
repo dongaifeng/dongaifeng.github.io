@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>node实现上传文件 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">node实现上传文件</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-09-08,&nbsp;&nbsp;18:59:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>file test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> files = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;input&quot;</span>),</span></span><br><span class="line"><span class="language-javascript">          len = files.<span class="property">length</span>,</span></span><br><span class="line"><span class="language-javascript">          file;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">          file = files[i];</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">if</span> (file.<span class="property">type</span> !== <span class="string">&quot;file&quot;</span>) <span class="keyword">continue</span>; <span class="comment">// 不是文件类型的控件跳过</span></span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 监听文件改变，向后台发送请求（xhr 方式），设置请求头为上传文件的name</span></span></span><br><span class="line"><span class="language-javascript">          file.<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> _files = <span class="variable language_">this</span>.<span class="property">files</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (!_files.<span class="property">length</span>) <span class="keyword">return</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (_files.<span class="property">length</span> === <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="comment">// 选择单个文件</span></span></span><br><span class="line"><span class="language-javascript">              <span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">              xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://localhost:3000/upload&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">              <span class="keyword">var</span> filePath = files[<span class="number">0</span>].<span class="property">value</span>;</span></span><br><span class="line"><span class="language-javascript">              <span class="comment">// 设置请求头加入 文件名称项 后台可以获取请求头里的name</span></span></span><br><span class="line"><span class="language-javascript">              xhr.<span class="title function_">setRequestHeader</span>(</span></span><br><span class="line"><span class="language-javascript">                <span class="string">&quot;file-name&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                filePath.<span class="title function_">substring</span>(filePath.<span class="title function_">lastIndexOf</span>(<span class="string">&quot;\\&quot;</span>) + <span class="number">1</span>)</span></span><br><span class="line"><span class="language-javascript">              );</span></span><br><span class="line"><span class="language-javascript">              xhr.<span class="title function_">send</span>(_files[<span class="number">0</span>]);</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">          &#125;;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">      &#125;;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;file1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> chunk = []; <span class="comment">// 用于存放Buffe格式的数据</span></span><br><span class="line"><span class="keyword">let</span> size = <span class="number">0</span>; <span class="comment">// Buffer的长度</span></span><br><span class="line"><span class="keyword">const</span> server = http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; pathname &#125; = <span class="built_in">require</span>(<span class="string">&quot;url&quot;</span>).<span class="title function_">parse</span>(request.<span class="property">url</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 判断是不是上传</span></span><br><span class="line">  <span class="keyword">if</span> (pathname === <span class="string">&quot;/upload&quot;</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;upload....&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取文件的name</span></span><br><span class="line">    <span class="keyword">const</span> fileName = request.<span class="property">headers</span>[<span class="string">&quot;file-name&quot;</span>]</span><br><span class="line">      ? request.<span class="property">headers</span>[<span class="string">&quot;file-name&quot;</span>]</span><br><span class="line">      : <span class="string">&quot;abc.png&quot;</span>;</span><br><span class="line">    <span class="comment">// 定义前台传来的文件 的绝对路径</span></span><br><span class="line">    <span class="keyword">const</span> outputFile = path.<span class="title function_">resolve</span>(__dirname, fileName);</span><br><span class="line">    <span class="comment">// 创建一个写入流 写入干菜创建的文件目录</span></span><br><span class="line">    <span class="keyword">const</span> fis = fs.<span class="title function_">createWriteStream</span>(outputFile);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Buffer方式接收文件</span></span><br><span class="line">    <span class="comment">// Buffer connect</span></span><br><span class="line">    <span class="comment">// request.on(&#x27;data&#x27;,data =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     chunk.push(data)</span></span><br><span class="line">    <span class="comment">//     size += data.length</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;data:&#x27;,data ,size)</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    <span class="comment">// request.on(&#x27;end&#x27;,() =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;end...&#x27;)</span></span><br><span class="line">    <span class="comment">//     const buffer = Buffer.concat(chunk,size)</span></span><br><span class="line">    <span class="comment">//     size = 0</span></span><br><span class="line">    <span class="comment">//     fs.writeFileSync(outputFile,buffer)</span></span><br><span class="line">    <span class="comment">//     response.end()</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 流事件写入</span></span><br><span class="line">    <span class="comment">// request.on(&#x27;data&#x27;, data =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;data:&#x27;,data)</span></span><br><span class="line">    <span class="comment">//     fis.write(data)</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    <span class="comment">// request.on(&#x27;end&#x27;, () =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     fis.end()</span></span><br><span class="line">    <span class="comment">//     response.end()</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 管道方式 直接对接request</span></span><br><span class="line">    request.<span class="title function_">pipe</span>(fis);</span><br><span class="line">    response.<span class="title function_">end</span>();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 获取文件的路径 顺便设置了首页</span></span><br><span class="line">    <span class="keyword">const</span> filename = pathname === <span class="string">&quot;/&quot;</span> ? <span class="string">&quot;index.html&quot;</span> : pathname.<span class="title function_">substring</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 获取文件后缀 并判断 返回要设置的response Content_Type 格式</span></span><br><span class="line">    <span class="keyword">var</span> type = (<span class="keyword">function</span> (<span class="params">_type</span>) &#123;</span><br><span class="line">      <span class="keyword">switch</span> (</span><br><span class="line">        _type <span class="comment">// 扩展名</span></span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;html&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;htm&quot;</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;text/html charset=UTF-8&quot;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;js&quot;</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;application/javascript charset=UTF-8&quot;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;css&quot;</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;text/css charset=UTF-8&quot;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;txt&quot;</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;text/plain charset=UTF-8&quot;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;manifest&quot;</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;text/cache-manifest charset=UTF-8&quot;</span>;</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;application/octet-stream&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)(filename.<span class="title function_">substring</span>(filename.<span class="title function_">lastIndexOf</span>(<span class="string">&quot;.&quot;</span>) + <span class="number">1</span>));</span><br><span class="line">    <span class="comment">// 异步读取文件,并将内容作为单独的数据块传回给回调函数</span></span><br><span class="line">    <span class="comment">// 对于确实很大的文件,使用API fs.createReadStream()更好</span></span><br><span class="line">    fs.<span class="title function_">readFile</span>(filename, <span class="keyword">function</span> (<span class="params">err, content</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="comment">// 如果由于某些原因无法读取文件</span></span><br><span class="line">        response.<span class="title function_">writeHead</span>(<span class="number">404</span>, &#123; <span class="string">&quot;Content-type&quot;</span>: <span class="string">&quot;text/plain charset=UTF-8&quot;</span> &#125;);</span><br><span class="line">        response.<span class="title function_">write</span>(err.<span class="property">message</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 否则读取文件成功</span></span><br><span class="line">        response.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123; <span class="string">&quot;Content-type&quot;</span>: type &#125;);</span><br><span class="line">        response.<span class="title function_">write</span>(content); <span class="comment">// 把文件内容作为响应主体</span></span><br><span class="line">      &#125;</span><br><span class="line">      response.<span class="title function_">end</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">server.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/08/yuque/express%E7%9A%84%E8%B7%AF%E7%94%B1/">express的路由</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/08/yuque/node%E6%A8%A1%E5%9D%97PATH/">node模块PATH</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
