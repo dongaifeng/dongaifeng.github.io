@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;9:54:38</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在更新过程中的 beginWork 阶段，分别执行各类tags的组件的 update函数，末尾都会调用 reconcileChildren 进入到 fiber的 diff 流程</p>
+<p>diff的过程是 oldFiber 和 newChildren（jsx 转成的 虚拟dom）的对比，相同就复用fiber，否则就新建fiber，这就是 workInProgress的生成过程。生成的fiber上会打上标记，在commit阶段进行dom操作。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Placement</span> = <span class="comment">/*                    */</span> <span class="number">0b00000000000000000000000010</span>; <span class="comment">// 移动，新增</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Update</span> = <span class="comment">/*                       */</span> <span class="number">0b00000000000000000000000100</span>; <span class="comment">// 更新</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Deletion</span> = <span class="comment">/*                     */</span> <span class="number">0b00000000000000000000001000</span>; <span class="comment">// 删除</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ChildDeletion</span> = <span class="comment">/*                */</span> <span class="number">0b00000000000000000000010000</span>; <span class="comment">// 删除子节点</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ContentReset</span> = <span class="comment">/*                 */</span> <span class="number">0b00000000000000000000100000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1769070370841-dc067422-2fdf-43d7-b9fb-848fabd02062.jpeg" alt="画板"></p>
+<p>子节点diff过程函数</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reconcileChildrenArray</span>(<span class="params"></span></span><br><span class="line"><span class="params">  returnFiber: Fiber,</span></span><br><span class="line"><span class="params">  currentFirstChild: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">  newChildren: <span class="built_in">Array</span>&lt;*&gt;,</span></span><br><span class="line"><span class="params">  lanes: Lanes,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> | <span class="literal">null</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> <span class="attr">resultingFirstChild</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span> = <span class="literal">null</span>;  <span class="comment">// 生成的第一个子节点</span></span><br><span class="line">  <span class="keyword">let</span> <span class="attr">previousNewFiber</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span> = <span class="literal">null</span>;     <span class="comment">// 上一个 新节点</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> oldFiber = currentFirstChild;              <span class="comment">// 旧的第一个子节点</span></span><br><span class="line">  <span class="keyword">let</span> lastPlacedIndex = <span class="number">0</span>;                       <span class="comment">// 上一个被移动的节点的索引</span></span><br><span class="line">  <span class="keyword">let</span> newIdx = <span class="number">0</span>;                                <span class="comment">// 新节点的索引</span></span><br><span class="line">  <span class="keyword">let</span> nextOldFiber = <span class="literal">null</span>;                       <span class="comment">// 下一个旧节点</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第一遍循环，尝试将新节点和旧节点一一对应起来，如果一一对应不上，则跳出循环</span></span><br><span class="line">  <span class="keyword">for</span> (; oldFiber !== <span class="literal">null</span> &amp;&amp; newIdx &lt; newChildren.<span class="property">length</span>; newIdx++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (oldFiber.<span class="property">index</span> &gt; newIdx) &#123;</span><br><span class="line">      nextOldFiber = oldFiber;</span><br><span class="line">      oldFiber = <span class="literal">null</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      nextOldFiber = oldFiber.<span class="property">sibling</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 通过对比 elementType，key 来判断旧节点是否可以复用</span></span><br><span class="line">    <span class="comment">// 可以，根据旧fiber，创建新fiber，并复用ref</span></span><br><span class="line">    <span class="keyword">const</span> newFiber = <span class="title function_">updateSlot</span>( returnFiber, oldFiber, newChildren[newIdx], lanes,);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 没有找到 旧退出循环</span></span><br><span class="line">    <span class="keyword">if</span> (newFiber === <span class="literal">null</span>) &#123; </span><br><span class="line">      <span class="keyword">if</span> (oldFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">        oldFiber = nextOldFiber;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">      <span class="keyword">if</span> (oldFiber &amp;&amp; newFiber.<span class="property">alternate</span> === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// We matched the slot, but we didn&#x27;t reuse the existing fiber, so we</span></span><br><span class="line">        <span class="comment">// need to delete the existing child.</span></span><br><span class="line">        <span class="title function_">deleteChild</span>(returnFiber, oldFiber);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断该节点是否需要移动，并返回最新的 lastPlacedIndex</span></span><br><span class="line">    lastPlacedIndex = <span class="title function_">placeChild</span>(newFiber, lastPlacedIndex, newIdx);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">      resultingFirstChild = newFiber;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      previousNewFiber.<span class="property">sibling</span> = newFiber;</span><br><span class="line">    &#125;</span><br><span class="line">    previousNewFiber = newFiber;</span><br><span class="line">    oldFiber = nextOldFiber;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 新节点遍历完，剩余的旧节点全部删除</span></span><br><span class="line">  <span class="keyword">if</span> (newIdx === newChildren.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="title function_">deleteRemainingChildren</span>(returnFiber, oldFiber); <span class="comment">// 标记删除节点</span></span><br><span class="line">    <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 旧节点遍历完，新节点还有剩余，剩余的新节点全部创建</span></span><br><span class="line">  <span class="keyword">if</span> (oldFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (; newIdx &lt; newChildren.<span class="property">length</span>; newIdx++) &#123;</span><br><span class="line">      <span class="keyword">const</span> newFiber = <span class="title function_">createChild</span>(returnFiber, newChildren[newIdx], lanes);</span><br><span class="line">      <span class="keyword">if</span> (newFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      lastPlacedIndex = <span class="title function_">placeChild</span>(newFiber, lastPlacedIndex, newIdx);</span><br><span class="line">      <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">        resultingFirstChild = newFiber;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        previousNewFiber.<span class="property">sibling</span> = newFiber;</span><br><span class="line">      &#125;</span><br><span class="line">      previousNewFiber = newFiber;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 旧节点还有剩余，新节点也还有剩余 建立旧节点的map表，以便快速查找旧节点</span></span><br><span class="line">  <span class="keyword">const</span> existingChildren = <span class="title function_">mapRemainingChildren</span>(returnFiber, oldFiber);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第二遍循环，处理剩余的新节点</span></span><br><span class="line">  <span class="keyword">for</span> (; newIdx &lt; newChildren.<span class="property">length</span>; newIdx++) &#123;</span><br><span class="line">    <span class="comment">// 尝试从旧节点map中获取对应的旧节点，通过key，type对比，并根据旧节点生成新节点，没有找到的会新建节点</span></span><br><span class="line">    <span class="keyword">const</span> newFiber = <span class="title function_">updateFromMap</span>(</span><br><span class="line">      existingChildren,</span><br><span class="line">      returnFiber,</span><br><span class="line">      newIdx,</span><br><span class="line">      newChildren[newIdx],</span><br><span class="line">      lanes,</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以复用的，map表中会删除对应的旧节点</span></span><br><span class="line">    <span class="keyword">if</span> (newFiber !== <span class="literal">null</span>) &#123;在·</span><br><span class="line">      <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">        <span class="keyword">if</span> (newFiber.<span class="property">alternate</span> !== <span class="literal">null</span>) &#123;</span><br><span class="line">          existingChildren.<span class="title function_">delete</span>(    <span class="comment">// map表中会删除对应的旧节点</span></span><br><span class="line">            newFiber.<span class="property">key</span> === <span class="literal">null</span> ? newIdx : newFiber.<span class="property">key</span>,</span><br><span class="line">          );</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 判断该节点是否需要移动，并返回最新的 lastPlacedIndex</span></span><br><span class="line">      lastPlacedIndex = <span class="title function_">placeChild</span>(newFiber, lastPlacedIndex, newIdx);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 更新 previousNewFiber</span></span><br><span class="line">      <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">        resultingFirstChild = newFiber;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        previousNewFiber.<span class="property">sibling</span> = newFiber;</span><br><span class="line">      &#125;</span><br><span class="line">      previousNewFiber = newFiber;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除map表中剩余的节点</span></span><br><span class="line">  <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">    existingChildren.<span class="title function_">forEach</span>(<span class="function"><span class="params">child</span> =&gt;</span> <span class="title function_">deleteChild</span>(returnFiber, child));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对比节点</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateSlot</span>(<span class="params"></span></span><br><span class="line"><span class="params">  returnFiber: Fiber,</span></span><br><span class="line"><span class="params">  oldFiber: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">  newChild: <span class="built_in">any</span>,</span></span><br><span class="line"><span class="params">  lanes: Lanes,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> | <span class="literal">null</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> key = oldFiber !== <span class="literal">null</span> ? oldFiber.<span class="property">key</span> : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 文本节点处理</span></span><br><span class="line">  <span class="keyword">if</span> ((<span class="keyword">typeof</span> newChild === <span class="string">&#x27;string&#x27;</span> &amp;&amp; newChild !== <span class="string">&#x27;&#x27;</span>) || <span class="keyword">typeof</span> newChild === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (key !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">updateTextNode</span>(returnFiber, oldFiber, <span class="string">&#x27;&#x27;</span> + newChild, lanes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> newChild === <span class="string">&#x27;object&#x27;</span> &amp;&amp; newChild !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (newChild.<span class="property">$$typeof</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="attr">REACT_ELEMENT_TYPE</span>: &#123;</span><br><span class="line">        <span class="keyword">if</span> (newChild.<span class="property">key</span> === key) &#123; <span class="comment">// 比较key</span></span><br><span class="line"></span><br><span class="line">          <span class="comment">// 函数内会比较elementType，调用useFiber 创建新fiber，并复用老iber的 stateNode，tag，updateQueue等等</span></span><br><span class="line">          <span class="keyword">return</span> <span class="title function_">updateElement</span>(returnFiber, oldFiber, newChild, lanes);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="attr">REACT_PORTAL_TYPE</span>: </span><br><span class="line">        </span><br><span class="line">      <span class="keyword">case</span> <span class="attr">REACT_LAZY_TYPE</span>: &#123;</span><br><span class="line">        <span class="keyword">const</span> payload = newChild.<span class="property">_payload</span>;</span><br><span class="line">        <span class="keyword">const</span> init = newChild.<span class="property">_init</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">updateSlot</span>(returnFiber, oldFiber, <span class="title function_">init</span>(payload), lanes);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isArray</span>(newChild) || <span class="title function_">getIteratorFn</span>(newChild)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateFragment</span>(returnFiber, oldFiber, newChild, lanes, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">throwOnInvalidObjectType</span>(returnFiber, newChild);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>标记 Placement</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">placeChild</span>(<span class="params"></span></span><br><span class="line"><span class="params">  newFiber: Fiber,</span></span><br><span class="line"><span class="params">  lastPlacedIndex: <span class="built_in">number</span>,</span></span><br><span class="line"><span class="params">  newIndex: <span class="built_in">number</span>,</span></span><br><span class="line"><span class="params"></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">  newFiber.<span class="property">index</span> = newIndex;</span><br><span class="line">  <span class="keyword">if</span> (!shouldTrackSideEffects) &#123;</span><br><span class="line">    newFiber.<span class="property">flags</span> |= <span class="title class_">Forked</span>;</span><br><span class="line">    <span class="keyword">return</span> lastPlacedIndex;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> current = newFiber.<span class="property">alternate</span>;</span><br><span class="line">  <span class="keyword">if</span> (current !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> oldIndex = current.<span class="property">index</span>;</span><br><span class="line">    <span class="comment">// 如果老节点的index小于上一个被移动的节点的index，说明该节点需要被移动</span></span><br><span class="line">    <span class="comment">// 否则说明该节点可以继续留在原地，不需要移动</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">if</span> (oldIndex &lt; lastPlacedIndex) &#123;</span><br><span class="line">      <span class="comment">// This is a move.</span></span><br><span class="line">      newFiber.<span class="property">flags</span> |= <span class="title class_">Placement</span>;  <span class="comment">// 标记该节点需要被移动</span></span><br><span class="line">      <span class="keyword">return</span> lastPlacedIndex;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// This item can stay in place.</span></span><br><span class="line">      <span class="keyword">return</span> oldIndex;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// This is an insertion.</span></span><br><span class="line">    newFiber.<span class="property">flags</span> |= <span class="title class_">Placement</span>;</span><br><span class="line">    <span class="keyword">return</span> lastPlacedIndex;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateFromMap</span>(<span class="params"></span></span><br><span class="line"><span class="params">  existingChildren: <span class="built_in">Map</span>&lt;<span class="built_in">string</span> | <span class="built_in">number</span>, Fiber&gt;,</span></span><br><span class="line"><span class="params">  returnFiber: Fiber,</span></span><br><span class="line"><span class="params">  newIdx: <span class="built_in">number</span>,</span></span><br><span class="line"><span class="params">  newChild: <span class="built_in">any</span>,</span></span><br><span class="line"><span class="params">  lanes: Lanes,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> | <span class="literal">null</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    (<span class="keyword">typeof</span> newChild === <span class="string">&#x27;string&#x27;</span> &amp;&amp; newChild !== <span class="string">&#x27;&#x27;</span>) ||</span><br><span class="line">    <span class="keyword">typeof</span> newChild === <span class="string">&#x27;number&#x27;</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">const</span> matchedFiber = existingChildren.<span class="title function_">get</span>(newIdx) || <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">updateTextNode</span>(returnFiber, matchedFiber, <span class="string">&#x27;&#x27;</span> + newChild, lanes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> newChild === <span class="string">&#x27;object&#x27;</span> &amp;&amp; newChild !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (newChild.<span class="property">$$typeof</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="attr">REACT_ELEMENT_TYPE</span>: &#123;</span><br><span class="line">        <span class="comment">// 从map中根据key获取对应的旧节点，判断key，index是否相等，不相等则返回null</span></span><br><span class="line">        <span class="keyword">const</span> matchedFiber =   </span><br><span class="line">          existingChildren.<span class="title function_">get</span>(</span><br><span class="line">            newChild.<span class="property">key</span> === <span class="literal">null</span> ? newIdx : newChild.<span class="property">key</span>,</span><br><span class="line">          ) || <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">updateElement</span>(returnFiber, matchedFiber, newChild, lanes);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="attr">REACT_PORTAL_TYPE</span>: </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isArray</span>(newChild) || <span class="title function_">getIteratorFn</span>(newChild)) &#123;</span><br><span class="line">      <span class="keyword">const</span> matchedFiber = existingChildren.<span class="title function_">get</span>(newIdx) || <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateFragment</span>(returnFiber, matchedFiber, newChild, lanes, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">throwOnInvalidObjectType</span>(returnFiber, newChild);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除子节点，打标记 ChildDeletion，收集deletions</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deleteChild</span>(<span class="params">returnFiber: Fiber, childToDelete: Fiber</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!shouldTrackSideEffects) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> deletions = returnFiber.<span class="property">deletions</span>;</span><br><span class="line">  <span class="keyword">if</span> (deletions === <span class="literal">null</span>) &#123;</span><br><span class="line">    returnFiber.<span class="property">deletions</span> = [childToDelete];</span><br><span class="line">    returnFiber.<span class="property">flags</span> |= <span class="title class_">ChildDeletion</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    deletions.<span class="title function_">push</span>(childToDelete);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deleteRemainingChildren</span>(<span class="params"></span></span><br><span class="line"><span class="params">  returnFiber: Fiber,</span></span><br><span class="line"><span class="params">  currentFirstChild: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params"></span>): <span class="literal">null</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!shouldTrackSideEffects) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> childToDelete = currentFirstChild;</span><br><span class="line">  <span class="keyword">while</span> (childToDelete !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="title function_">deleteChild</span>(returnFiber, childToDelete);</span><br><span class="line">    childToDelete = childToDelete.<span class="property">sibling</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/03/06/yuque/React%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B/"></a>
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/yuque/React%E4%B8%AD%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

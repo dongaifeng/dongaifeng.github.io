@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;9:55:25</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>commit阶段是针对 finishedWork 每个节点fiber上的标记，做相应的处理，生命周期函数调用，hook的调用，dom操作，和标记，状态重置等。</p>
+<p>render流程中beginWork给每个节点打flags，在<code>completeWork</code>的时候收集自己子节点上的<code>flags</code>作为自己的<code>subtreeFlags</code>，通过subtreeFlags 可以知道自己的子节点副作用的情况</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> type <span class="title class_">Flags</span> = number;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">NoFlags</span> = <span class="comment">/*                      */</span> <span class="number">0b0000000000000000000000000000</span>;</span><br><span class="line"><span class="comment">// 移动、新增</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Placement</span> = <span class="comment">/*                    */</span> <span class="number">0b0000000000000000000000000010</span>;</span><br><span class="line"><span class="comment">// 更新</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Update</span> = <span class="comment">/*                       */</span> <span class="number">0b0000000000000000000000000100</span>;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ChildDeletion</span> = <span class="comment">/*                */</span> <span class="number">0b0000000000000000000000010000</span>;</span><br><span class="line"><span class="comment">// 内容重置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ContentReset</span> = <span class="comment">/*                 */</span> <span class="number">0b0000000000000000000000100000</span>;</span><br><span class="line"><span class="comment">// 回调</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Callback</span> = <span class="comment">/*                     */</span> <span class="number">0b0000000000000000000001000000</span>;</span><br><span class="line"><span class="comment">// 引用</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Ref</span> = <span class="comment">/*                          */</span> <span class="number">0b0000000000000000001000000000</span>;</span><br><span class="line"><span class="comment">// 快照</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Snapshot</span> = <span class="comment">/*                     */</span> <span class="number">0b0000000000000000010000000000</span>;</span><br><span class="line"><span class="comment">// Hook</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Passive</span> = <span class="comment">/*                      */</span> <span class="number">0b0000000000000000100000000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生命周期相关</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">LifecycleEffectMask</span> =</span><br><span class="line">  <span class="title class_">Passive</span> | <span class="title class_">Update</span> | <span class="title class_">Callback</span> | <span class="title class_">Ref</span> | <span class="title class_">Snapshot</span> ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 快照相关</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">BeforeMutationMask</span>: number = <span class="title class_">Update</span> | <span class="title class_">Snapshot</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 改变，转变相关</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">MutationMask</span> =</span><br><span class="line">  <span class="title class_">Placement</span> |</span><br><span class="line">  <span class="title class_">Update</span> |</span><br><span class="line">  <span class="title class_">ChildDeletion</span> |</span><br><span class="line">  <span class="title class_">ContentReset</span> |</span><br><span class="line">  <span class="title class_">Ref</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 布局相关</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">LayoutMask</span> = <span class="title class_">Update</span> | <span class="title class_">Callback</span> | <span class="title class_">Ref</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// useEffect相关</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">PassiveMask</span> = <span class="title class_">Passive</span> | <span class="title class_">Visibility</span> | <span class="title class_">ChildDeletion</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>React将commit阶段分为三个子阶段:</p>
+<ol>
+<li>BeforeMutation: 处理带有<code>BeforeMutationMask</code>flags标记的副作用节点，class组件会调用getSnapshotBeforeUpdate钩子，</li>
+<li>mutation: 处理副作用队列中<code>MutationMask</code>flag标记的副作用，主要包括 Placement ，Update ，ChildDeletion ，ContentReset ，Ref。主要工作包括：移动节点、删除节点、清除内容、添加节点；执行被删除组件的销毁钩子函数，执行被删除组件的<code>componentWillUnmount</code>；更新ref引用，执行layoutEffect的destory函数等等</li>
+<li>Layout: 处理标记LayoutMask 包括：Update ，Callback ， Ref。 <font style="color:rgb(89, 89, 89);">执行 </font><code>useLayoutEffect</code>的create，调用生命周期componentDidMount，componentDidUpdate，调用setState的callback</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768900663536-54d5439f-e0a4-44b8-8d92-11035a3eff93.jpeg" alt="画板"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">commitRootImpl</span>(<span class="params">root,recoverableErrors,transitions, renderPriorityLevel</span>) &#123;</span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="title function_">flushPassiveEffects</span>(); <span class="comment">// 把上次渲染没有执行完的副作用执行完</span></span><br><span class="line">  &#125; <span class="keyword">while</span> (rootWithPendingPassiveEffects !== <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> finishedWork = root.<span class="property">finishedWork</span>;</span><br><span class="line">  <span class="keyword">const</span> lanes = root.<span class="property">finishedLanes</span>;</span><br><span class="line"></span><br><span class="line">  root.<span class="property">finishedWork</span> = <span class="literal">null</span>; <span class="comment">// 重置finishWork</span></span><br><span class="line">  root.<span class="property">finishedLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line"></span><br><span class="line">  root.<span class="property">callbackNode</span> = <span class="literal">null</span>;</span><br><span class="line">  root.<span class="property">callbackPriority</span> = <span class="title class_">NoLane</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> remainingLanes = <span class="title function_">mergeLanes</span>(finishedWork.<span class="property">lanes</span>, finishedWork.<span class="property">childLanes</span>);</span><br><span class="line">  <span class="keyword">const</span> concurrentlyUpdatedLanes = <span class="title function_">getConcurrentlyUpdatedLanes</span>();</span><br><span class="line">  remainingLanes = <span class="title function_">mergeLanes</span>(remainingLanes, concurrentlyUpdatedLanes);</span><br><span class="line">  <span class="title function_">markRootFinished</span>(root, remainingLanes);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (root === workInProgressRoot) &#123;</span><br><span class="line">    workInProgressRoot = <span class="literal">null</span>;</span><br><span class="line">    workInProgress = <span class="literal">null</span>;</span><br><span class="line">    workInProgressRootRenderLanes = <span class="title class_">NoLanes</span>;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步执行本次commit的副作用</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    (finishedWork.<span class="property">subtreeFlags</span> &amp; <span class="title class_">PassiveMask</span>) !== <span class="title class_">NoFlags</span> ||</span><br><span class="line">    (finishedWork.<span class="property">flags</span> &amp; <span class="title class_">PassiveMask</span>) !== <span class="title class_">NoFlags</span></span><br><span class="line">  ) &#123;</span><br><span class="line">      <span class="title function_">scheduleCallback</span>(<span class="title class_">NormalSchedulerPriority</span>, <span class="function">() =&gt;</span> &#123; <span class="title function_">flushPassiveEffects</span>(); &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> subtreeHasEffects =finishedWork.<span class="property">subtreeFlags</span> &amp; <span class="title class_">PassiveMask</span> !== <span class="title class_">NoFlags</span>;</span><br><span class="line">  <span class="keyword">const</span> rootHasEffect =finishedWork.<span class="property">flags</span> &amp; <span class="title class_">PassiveMask</span> !== <span class="title class_">NoFlags</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果本轮 有副作用。开始mutation</span></span><br><span class="line">  <span class="keyword">if</span> (subtreeHasEffects || rootHasEffect) &#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// Before Mutation 阶段</span></span><br><span class="line">    <span class="title function_">setCurrentUpdatePriority</span>(<span class="title class_">DiscreteEventPriority</span>);</span><br><span class="line">    <span class="keyword">const</span> shouldFireAfterActiveInstanceBlur = <span class="title function_">commitBeforeMutationEffects</span>(               </span><br><span class="line">      root,</span><br><span class="line">      finishedWork,</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">     <span class="comment">// Mutation 阶段</span></span><br><span class="line">    <span class="title function_">commitMutationEffects</span>(root, finishedWork, lanes);                                     </span><br><span class="line"></span><br><span class="line">    <span class="title function_">resetAfterCommit</span>(root.<span class="property">containerInfo</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 完成</span></span><br><span class="line">    root.<span class="property">current</span> = finishedWork;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Layout 阶段</span></span><br><span class="line">    <span class="title function_">commitLayoutEffects</span>(finishedWork, root, lanes);                                                       </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求浏览器绘制  直接调用Scheduler的requestPaint</span></span><br><span class="line">    <span class="title function_">requestPaint</span>();                                                                            </span><br><span class="line"></span><br><span class="line">    <span class="title function_">setCurrentUpdatePriority</span>(previousPriority);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> rootDidHavePassiveEffects = rootDoesHavePassiveEffects;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 每次commit阶段完成后，再执行一遍ensureRootIsScheduled，确保是否还有任务需要被调度。</span></span><br><span class="line"><span class="comment">  * 例如，高优先级插队的更新完成后，commit完成后，还会再执行一遍，保证之前跳过的低优先级任务</span></span><br><span class="line"><span class="comment">  * 重新调度</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * */</span></span><br><span class="line">  <span class="title function_">ensureRootIsScheduled</span>(root, <span class="title function_">now</span>());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    <span class="title function_">includesSomeLane</span>(pendingPassiveEffectsLanes, <span class="title class_">SyncLane</span>) &amp;&amp;</span><br><span class="line">    root.<span class="property">tag</span> !== <span class="title class_">LegacyRoot</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="title function_">flushPassiveEffects</span>(); <span class="comment">// 再检查一遍useEffect 有没有没执行的</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">flushSyncCallbacks</span>(); <span class="comment">//  再检查一遍setState的回调函数 有没有没执行的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BeforeMutation阶段"><a href="#BeforeMutation阶段" class="headerlink" title="BeforeMutation阶段"></a>BeforeMutation阶段</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">commitBeforeMutationEffects</span>(<span class="params"></span></span><br><span class="line"><span class="params">  root: FiberRoot,</span></span><br><span class="line"><span class="params">  firstChild: Fiber,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  focusedInstanceHandle = <span class="title function_">prepareForCommit</span>(root.<span class="property">containerInfo</span>);</span><br><span class="line"></span><br><span class="line">  nextEffect = firstChild;</span><br><span class="line">  <span class="title function_">commitBeforeMutationEffects_begin</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// We no longer need to track the active instance fiber</span></span><br><span class="line">  <span class="keyword">const</span> shouldFire = shouldFireAfterActiveInstanceBlur;</span><br><span class="line">  shouldFireAfterActiveInstanceBlur = <span class="literal">false</span>;</span><br><span class="line">  focusedInstanceHandle = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> shouldFire;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">commitBeforeMutationEffects_begin</span>(<span class="params"></span>) &#123;   </span><br><span class="line">  <span class="keyword">while</span> (nextEffect !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> fiber = nextEffect;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// This phase is only used for beforeActiveInstanceBlur.</span></span><br><span class="line">    <span class="comment">// Let&#x27;s skip the whole loop if it&#x27;s off.</span></span><br><span class="line">    <span class="keyword">if</span> (enableCreateEventHandleAPI) &#123;</span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> Should wrap this in flags check, too, as optimization</span></span><br><span class="line">      <span class="keyword">const</span> deletions = fiber.<span class="property">deletions</span>;</span><br><span class="line">      <span class="keyword">if</span> (deletions !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; deletions.<span class="property">length</span>; i++) &#123;</span><br><span class="line">          <span class="keyword">const</span> deletion = deletions[i];</span><br><span class="line">          <span class="title function_">commitBeforeMutationEffectsDeletion</span>(deletion);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> child = fiber.<span class="property">child</span>;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">      (fiber.<span class="property">subtreeFlags</span> &amp; <span class="title class_">BeforeMutationMask</span>) !== <span class="title class_">NoFlags</span> &amp;&amp;</span><br><span class="line">      child !== <span class="literal">null</span></span><br><span class="line">    ) &#123;</span><br><span class="line">      child.<span class="property">return</span> = fiber;</span><br><span class="line">      nextEffect = child;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">commitBeforeMutationEffects_complete</span>(); <span class="comment">// 调用 commitBeforeMutationEffectsOnFiber</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">commitBeforeMutationEffectsOnFiber</span>(<span class="params">finishedWork: Fiber</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> current = finishedWork.<span class="property">alternate</span>;</span><br><span class="line">  <span class="keyword">const</span> flags = finishedWork.<span class="property">flags</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ((flags &amp; <span class="title class_">Snapshot</span>) !== <span class="title class_">NoFlags</span>) &#123;</span><br><span class="line">    <span class="title function_">setCurrentDebugFiberInDEV</span>(finishedWork);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (finishedWork.<span class="property">tag</span>) &#123;</span><br><span class="line"> </span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ClassComponent</span>: &#123;</span><br><span class="line">        <span class="keyword">if</span> (current !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="keyword">const</span> prevProps = current.<span class="property">memoizedProps</span>;</span><br><span class="line">          <span class="keyword">const</span> prevState = current.<span class="property">memoizedState</span>;</span><br><span class="line">          <span class="keyword">const</span> instance = finishedWork.<span class="property">stateNode</span>;</span><br><span class="line">   </span><br><span class="line">          <span class="keyword">const</span> snapshot = instance.<span class="title function_">getSnapshotBeforeUpdate</span>(  <span class="comment">// 调用生命周期钩子</span></span><br><span class="line">            finishedWork.<span class="property">elementType</span> === finishedWork.<span class="property">type</span></span><br><span class="line">              ? prevProps</span><br><span class="line">              : <span class="title function_">resolveDefaultProps</span>(finishedWork.<span class="property">type</span>, prevProps),</span><br><span class="line">            prevState,</span><br><span class="line">          );</span><br><span class="line">  </span><br><span class="line">          instance.<span class="property">__reactInternalSnapshotBeforeUpdate</span> = snapshot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="mutation-阶段"><a href="#mutation-阶段" class="headerlink" title="mutation 阶段"></a>mutation 阶段</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">commitMutationEffects</span>(<span class="params">root,finishedWork,committedLanes</span>) &#123;</span><br><span class="line">  <span class="title function_">commitMutationEffectsOnFiber</span>(finishedWork, root, committedLanes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">commitMutationEffectsOnFiber</span>(<span class="params"></span></span><br><span class="line"><span class="params">  finishedWork: Fiber,</span></span><br><span class="line"><span class="params">  root: FiberRoot,</span></span><br><span class="line"><span class="params">  lanes: Lanes,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> current = finishedWork.<span class="property">alternate</span>;</span><br><span class="line">  <span class="keyword">const</span> flags = finishedWork.<span class="property">flags</span>;</span><br><span class="line">  <span class="keyword">switch</span> (finishedWork.<span class="property">tag</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">FunctionComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ForwardRef</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MemoComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">SimpleMemoComponent</span>: &#123;</span><br><span class="line">      <span class="title function_">recursivelyTraverseMutationEffects</span>(root, finishedWork, lanes);</span><br><span class="line">      <span class="title function_">commitReconciliationEffects</span>(finishedWork);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (flags &amp; <span class="title class_">Update</span>) &#123;</span><br><span class="line">        <span class="title function_">commitHookEffectListUnmount</span>(  <span class="comment">// 执行effect的 destory函数</span></span><br><span class="line">          <span class="title class_">HookInsertion</span> | <span class="title class_">HookHasEffect</span>,</span><br><span class="line">          finishedWork,</span><br><span class="line">          finishedWork.<span class="property">return</span>,</span><br><span class="line">        );</span><br><span class="line">        <span class="title function_">commitHookEffectListMount</span>(  <span class="comment">// 执行effect的 create函数</span></span><br><span class="line">          <span class="title class_">HookInsertion</span> | <span class="title class_">HookHasEffect</span>,</span><br><span class="line">          finishedWork,</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ClassComponent</span>: &#123;</span><br><span class="line">      <span class="title function_">recursivelyTraverseMutationEffects</span>(root, finishedWork, lanes);</span><br><span class="line">      <span class="title function_">commitReconciliationEffects</span>(finishedWork);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostComponent</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostText</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostRoot</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostPortal</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">SuspenseComponent</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">OffscreenComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">SuspenseListComponent</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ScopeComponent</span>:</span><br><span class="line">    <span class="attr">default</span>: &#123;</span><br><span class="line">      <span class="title function_">recursivelyTraverseMutationEffects</span>(root, finishedWork, lanes);</span><br><span class="line">      <span class="title function_">commitReconciliationEffects</span>(finishedWork);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="layout阶段"><a href="#layout阶段" class="headerlink" title="layout阶段"></a><font style="color:rgb(25, 27, 31);">layout阶段</font></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">commitLayoutEffects</span>(<span class="params">root,finishedWork,committedLanes</span>) &#123;</span><br><span class="line">  <span class="title function_">commitLayoutEffects_begin</span>(finishedWork, root, committedLanes);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">commitLayoutEffects_begin</span>(<span class="params"></span></span><br><span class="line"><span class="params">  subtreeRoot: Fiber,</span></span><br><span class="line"><span class="params">  root: FiberRoot,</span></span><br><span class="line"><span class="params">  committedLanes: Lanes,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">while</span> (nextEffect !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> fiber = nextEffect;</span><br><span class="line">    <span class="keyword">const</span> firstChild = fiber.<span class="property">child</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">      enableSuspenseLayoutEffectSemantics &amp;&amp;</span><br><span class="line">      fiber.<span class="property">tag</span> === <span class="title class_">OffscreenComponent</span> &amp;&amp;</span><br><span class="line">      isModernRoot</span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="comment">// Keep track of the current Offscreen stack&#x27;s state.</span></span><br><span class="line">      <span class="keyword">const</span> isHidden = fiber.<span class="property">memoizedState</span> !== <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">const</span> newOffscreenSubtreeIsHidden = isHidden || offscreenSubtreeIsHidden;</span><br><span class="line">      <span class="keyword">if</span> (newOffscreenSubtreeIsHidden) &#123;</span><br><span class="line">        <span class="comment">// The Offscreen tree is hidden. Skip over its layout effects.</span></span><br><span class="line">        <span class="title function_">commitLayoutMountEffects_complete</span>(subtreeRoot, root, committedLanes);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> child = firstChild;</span><br><span class="line">        <span class="keyword">while</span> (child !== <span class="literal">null</span>) &#123;</span><br><span class="line">          nextEffect = child;</span><br><span class="line">          <span class="title function_">commitLayoutEffects_begin</span>(</span><br><span class="line">            child, <span class="comment">// New root; bubble back up to here and stop.</span></span><br><span class="line">            root,</span><br><span class="line">            committedLanes,</span><br><span class="line">          );</span><br><span class="line">          child = child.<span class="property">sibling</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">commitLayoutMountEffects_complete</span>(subtreeRoot, root, committedLanes);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ((fiber.<span class="property">subtreeFlags</span> &amp; <span class="title class_">LayoutMask</span>) !== <span class="title class_">NoFlags</span> &amp;&amp; firstChild !== <span class="literal">null</span>) &#123;</span><br><span class="line">      firstChild.<span class="property">return</span> = fiber;</span><br><span class="line">      nextEffect = firstChild;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">commitLayoutMountEffects_complete</span>(subtreeRoot, root, committedLanes);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/03/06/yuque/React%E6%9B%B4%E6%96%B0%E6%B5%81%E7%A8%8B/"></a>
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/yuque/React%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

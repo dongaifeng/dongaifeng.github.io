@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;9:55:41</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>触发条件</p>
+<p>setState，useState，forceUpdate</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1770172535009-ce0384d8-3fdc-4ff0-b6aa-49c596ac92be.jpeg" alt="画板"></p>
+<p>整体流程：</p>
+<ol>
+<li>调用dispatcher，触发更新</li>
+<li>获取优先级，创建更新对象，加入到更新队列</li>
+<li>开启调度，合并任务，scheduler开始调度</li>
+<li>在下一次事件循环中开始renderRoot，workLoop，commit过程</li>
+</ol>
+<p>useState调用会返回dispatcher方法来更新state</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> dispatchSetState&lt;S, A&gt;(</span><br><span class="line">  <span class="attr">fiber</span>: <span class="title class_">Fiber</span>,</span><br><span class="line">  <span class="attr">queue</span>: <span class="title class_">UpdateQueue</span>&lt;S, A&gt;,</span><br><span class="line">  <span class="attr">action</span>: A,</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="comment">// 获取 currentUpdatePriority全局变量 更新优先级 </span></span><br><span class="line">  <span class="keyword">const</span> lane = <span class="title function_">requestUpdateLane</span>(fiber);</span><br><span class="line">  <span class="comment">// 创建更新对象</span></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">update</span>: <span class="title class_">Update</span>&lt;S, A&gt; = &#123;</span><br><span class="line">    lane,</span><br><span class="line">    action,</span><br><span class="line">    <span class="attr">hasEagerState</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">eagerState</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">next</span>: (<span class="attr">null</span>: any),</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 判断 alternate 属性， 判断是否是初始化流程</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isRenderPhaseUpdate</span>(fiber)) &#123;</span><br><span class="line">    <span class="title function_">enqueueRenderPhaseUpdate</span>(queue, update);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;   <span class="comment">// 更新流程</span></span><br><span class="line">    <span class="keyword">const</span> alternate = fiber.<span class="property">alternate</span>;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">      fiber.<span class="property">lanes</span> === <span class="title class_">NoLanes</span> &amp;&amp;</span><br><span class="line">      (alternate === <span class="literal">null</span> || alternate.<span class="property">lanes</span> === <span class="title class_">NoLanes</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="comment">// The queue is currently empty, which means we can eagerly compute the</span></span><br><span class="line">      <span class="comment">// next state before entering the render phase. If the new state is the</span></span><br><span class="line">      <span class="comment">// same as the current state, we may be able to bail out entirely.</span></span><br><span class="line">      <span class="keyword">const</span> lastRenderedReducer = queue.<span class="property">lastRenderedReducer</span>;</span><br><span class="line">      <span class="keyword">if</span> (lastRenderedReducer !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> prevDispatcher;</span><br><span class="line">        <span class="keyword">const</span> <span class="attr">currentState</span>: S = (queue.<span class="property">lastRenderedState</span>: any);        <span class="comment">// 旧的 state</span></span><br><span class="line">        <span class="keyword">const</span> eagerState = <span class="title function_">lastRenderedReducer</span>(currentState, action);  <span class="comment">// 新的 state</span></span><br><span class="line">  </span><br><span class="line">        update.<span class="property">hasEagerState</span> = <span class="literal">true</span>;</span><br><span class="line">        update.<span class="property">eagerState</span> = eagerState;</span><br><span class="line">          <span class="comment">// 判断state 是否相等  相等就取消这次更新任务</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">is</span>(eagerState, currentState)) &#123;  </span><br><span class="line">            <span class="title function_">enqueueConcurrentHookUpdateAndEagerlyBailout</span>(fiber,queue,update,lane);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">// 更新对象加入队列， queue.interleaved = update update是一个环形链表，并标记本节点优先级，父节点优先级</span></span><br><span class="line">    <span class="keyword">const</span> root = <span class="title function_">enqueueConcurrentHookUpdate</span>(fiber, queue, update, lane);</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> eventTime = <span class="title function_">requestEventTime</span>();</span><br><span class="line">      <span class="title function_">scheduleUpdateOnFiber</span>(root, fiber, lane, eventTime); <span class="comment">// 开启调度</span></span><br><span class="line">      <span class="title function_">entangleTransitionUpdate</span>(root, queue, lane);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调度开始scheduleUpdateOnFiber中调用 ensureRootIsScheduled 这个函数中 会把更新任务加入到scheduler中调度，但是连续调用多次setState，虽然会生成多个更新，但是在这里会判断更新优先级，合并成一个调度任务。这就是<strong>批量更新</strong></p>
+<p>当开始调度前，如果有调度任务，会取消当前任务，重新生成任务</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ensureRootIsScheduled</span>(<span class="params">root: FiberRoot, currentTime: number</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> existingCallbackNode = root.<span class="property">callbackNode</span>;</span><br><span class="line">  <span class="title function_">markStarvedLanesAsExpired</span>(root, currentTime);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取最高优先级</span></span><br><span class="line">  <span class="keyword">const</span> newCallbackPriority = <span class="title function_">getHighestPriorityLane</span>(nextLanes); </span><br><span class="line">  <span class="comment">// 获取当前回调优先级</span></span><br><span class="line">  <span class="keyword">const</span> existingCallbackPriority = root.<span class="property">callbackPriority</span>;  </span><br><span class="line">  <span class="keyword">if</span> (existingCallbackPriority === newCallbackPriority ) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 有任务在调度，取消当前任务，创建新的调度任务</span></span><br><span class="line">  <span class="keyword">if</span> (existingCallbackNode != <span class="literal">null</span>) &#123;  </span><br><span class="line">    <span class="title function_">cancelCallback</span>(existingCallbackNode);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> newCallbackNode; <span class="comment">// 新调度任务</span></span><br><span class="line">  <span class="comment">// 如果新的任务是同步优先级，比如用户操作，点击事件都是同步优先级</span></span><br><span class="line">  <span class="keyword">if</span> (newCallbackPriority === <span class="title class_">SyncLane</span>) &#123;</span><br><span class="line">    <span class="comment">// 将 performSyncWorkOnRoot  加入到 syncQueue</span></span><br><span class="line">    <span class="title function_">scheduleSyncCallback</span>(performSyncWorkOnRoot.<span class="title function_">bind</span>(<span class="literal">null</span>, root));      </span><br><span class="line">   <span class="comment">// 判断环境是否支持微任务，支持就用微任务调度，不支持就用宏任务</span></span><br><span class="line">    <span class="keyword">if</span> (supportsMicrotasks) &#123;</span><br><span class="line">        <span class="title function_">scheduleMicrotask</span>(<span class="function">() =&gt;</span> &#123; <span class="title function_">flushSyncCallbacks</span>(); &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">scheduleCallback</span>(<span class="title class_">ImmediateSchedulerPriority</span>, flushSyncCallbacks);</span><br><span class="line">    &#125;</span><br><span class="line">    newCallbackNode = <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 其他情况会根据当前事件优先级，生成调度优先级，再调度</span></span><br><span class="line">    <span class="keyword">let</span> schedulerPriorityLevel;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="title function_">lanesToEventPriority</span>(nextLanes)) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">DiscreteEventPriority</span>:</span><br><span class="line">        schedulerPriorityLevel = <span class="title class_">ImmediateSchedulerPriority</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ContinuousEventPriority</span>:</span><br><span class="line">        schedulerPriorityLevel = <span class="title class_">UserBlockingSchedulerPriority</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">DefaultEventPriority</span>:</span><br><span class="line">        schedulerPriorityLevel = <span class="title class_">NormalSchedulerPriority</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">IdleEventPriority</span>:</span><br><span class="line">        schedulerPriorityLevel = <span class="title class_">IdleSchedulerPriority</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="attr">default</span>:</span><br><span class="line">        schedulerPriorityLevel = <span class="title class_">NormalSchedulerPriority</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    newCallbackNode = <span class="title function_">scheduleCallback</span>(</span><br><span class="line">      schedulerPriorityLevel,</span><br><span class="line">      performConcurrentWorkOnRoot.<span class="title function_">bind</span>(<span class="literal">null</span>, root),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  root.<span class="property">callbackPriority</span> = newCallbackPriority;</span><br><span class="line">  root.<span class="property">callbackNode</span> = newCallbackNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在class组件中调用setState方法时，会调用原型链上绑定的 enqueueSetState 方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> classComponentUpdater = &#123;</span><br><span class="line">  isMounted,</span><br><span class="line">  <span class="title function_">enqueueSetState</span>(<span class="params">inst, payload, callback</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> fiber = <span class="title function_">getInstance</span>(inst); <span class="comment">// 当前class组件的fiber</span></span><br><span class="line">    <span class="keyword">const</span> eventTime = <span class="title function_">requestEventTime</span>();</span><br><span class="line">    <span class="keyword">const</span> lane = <span class="title function_">requestUpdateLane</span>(fiber);<span class="comment">// 更新优先级</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> update = <span class="title function_">createUpdate</span>(eventTime, lane);  <span class="comment">//  创建一个更新对象</span></span><br><span class="line">    update.<span class="property">payload</span> = payload;</span><br><span class="line">    <span class="keyword">if</span> (callback !== <span class="literal">undefined</span> &amp;&amp; callback !== <span class="literal">null</span>) &#123;</span><br><span class="line">      update.<span class="property">callback</span> = callback;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> root = <span class="title function_">enqueueUpdate</span>(fiber, update, lane);   <span class="comment">// 将更新对象插入到更新队列中</span></span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="title function_">scheduleUpdateOnFiber</span>(root, fiber, lane, eventTime);   <span class="comment">// 调度更新</span></span><br><span class="line">      <span class="title function_">entangleTransitions</span>(root, fiber, lane);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (enableSchedulingProfiler) &#123;</span><br><span class="line">      <span class="title function_">markStateUpdateScheduled</span>(fiber, lane);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">enqueueReplaceState</span>(<span class="params">inst, payload, callback</span>) &#123;&#125;,</span><br><span class="line">  <span class="title function_">enqueueForceUpdate</span>(<span class="params">inst, callback</span>) &#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>接下来beginWork调用updateClassComponent函数，处理state的时候调用getStateFromUpdate来更新state，并且会绑定到fiber.memoizedState</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> getStateFromUpdate&lt;<span class="title class_">State</span>&gt;(</span><br><span class="line">  <span class="attr">workInProgress</span>: <span class="title class_">Fiber</span>,</span><br><span class="line">  <span class="attr">queue</span>: <span class="title class_">UpdateQueue</span>&lt;<span class="title class_">State</span>&gt;,</span><br><span class="line">  <span class="attr">update</span>: <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt;,</span><br><span class="line">  <span class="attr">prevState</span>: <span class="title class_">State</span>,</span><br><span class="line">  <span class="attr">nextProps</span>: any,</span><br><span class="line">  <span class="attr">instance</span>: any,</span><br><span class="line">): any &#123;</span><br><span class="line">  <span class="keyword">switch</span> (update.<span class="property">tag</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">CaptureUpdate</span>: &#123;</span><br><span class="line">      workInProgress.<span class="property">flags</span> =(workInProgress.<span class="property">flags</span> &amp; ~<span class="title class_">ShouldCapture</span>) | <span class="title class_">DidCapture</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 更新state </span></span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">UpdateState</span>: &#123;</span><br><span class="line">      <span class="keyword">const</span> payload = update.<span class="property">payload</span>;</span><br><span class="line">      <span class="keyword">let</span> partialState;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> payload === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        partialState = payload.<span class="title function_">call</span>(instance, prevState, nextProps);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        partialState = payload;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (partialState === <span class="literal">null</span> || partialState === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> prevState;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 将新的 state 和旧的 state 进行合并</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">assign</span>(&#123;&#125;, prevState, partialState);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ForceUpdate</span>: &#123;</span><br><span class="line">      hasForceUpdate = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> prevState;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> prevState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/03/06/yuque/React%E4%B8%AD%E7%9A%84%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/"></a>
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/yuque/React%E7%9A%84commit%E9%98%B6%E6%AE%B5/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

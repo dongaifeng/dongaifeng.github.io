@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>nextTick | dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">nextTick</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020-04-24,&nbsp;&nbsp;10:26:01</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="event-loop"><a href="#event-loop" class="headerlink" title="event loop"></a>event loop</h4><p>理解 vue 的 nextTick 之前首先要理解浏览器的 event loop 事件循环机制。</p>
+<ul>
+<li>宏任务 macrotask 也叫 tasks。比如 setTimeout，setImmediate（node 独有），UI rendering（浏览器独有）</li>
+<li>微任务 microtask 也叫 jobs。比如 promise，MutationObserver。</li>
+</ul>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><ol>
+<li>执行全局 script 同步代码</li>
+<li>同步代码执行完，调用栈 Stack 空了</li>
+<li>执行微任务队列里的任务。<strong>执行过程中产生的微任务会放到队尾，在这个周期里调用</strong></li>
+<li>从宏任务里取出<strong>一个</strong>，放到执行栈 Stack 中执行。</li>
+<li>看看微任务队列里有没有任务，有就执行。</li>
+<li>微任务执行完，重复 4 的步骤。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016278115?utm_source=tag-newest">参考文章</a><br><a target="_blank" rel="noopener" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">参考文章</a></p>
+<h4 id="解读源码"><a href="#解读源码" class="headerlink" title="解读源码"></a>解读源码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存放异步函数</span></span><br><span class="line"><span class="keyword">const</span> callbacks = [];</span><br><span class="line"><span class="comment">// 调用标志</span></span><br><span class="line"><span class="keyword">let</span> pending = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 清空callbacks函数的方法，循环执行里面存的异步函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">flushCallbacks</span>(<span class="params"></span>) &#123;</span><br><span class="line">  pending = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">const</span> copies = callbacks.<span class="title function_">slice</span>(<span class="number">0</span>);</span><br><span class="line">  callbacks.<span class="property">length</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; copies.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    copies[i]();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成timerFunc</span></span><br><span class="line"><span class="comment">// 如果平台支持Promise，就用Promise做异步，把函数放到微任务队列里</span></span><br><span class="line"><span class="comment">// 如果不是IE 而且支持MutationObserver 就用MutationObserver，他是微任务</span></span><br><span class="line"><span class="comment">// 如果平台支持setImmediate，就用setImmediate，他是宏任务</span></span><br><span class="line"><span class="comment">// 最后保底的使用setTimeout，他是宏任务</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> timerFunc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">Promise</span> !== <span class="string">&quot;undefined&quot;</span> &amp;&amp; <span class="title function_">isNative</span>(<span class="title class_">Promise</span>)) &#123;</span><br><span class="line">  <span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    p.<span class="title function_">then</span>(flushCallbacks);</span><br><span class="line">  &#125;;</span><br><span class="line">  isUsingMicroTask = <span class="literal">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">  !isIE &amp;&amp;</span><br><span class="line">  <span class="keyword">typeof</span> <span class="title class_">MutationObserver</span> !== <span class="string">&quot;undefined&quot;</span> &amp;&amp;</span><br><span class="line">  (<span class="title function_">isNative</span>(<span class="title class_">MutationObserver</span>) ||</span><br><span class="line">    <span class="comment">// PhantomJS and iOS 7.x</span></span><br><span class="line">    <span class="title class_">MutationObserver</span>.<span class="title function_">toString</span>() === <span class="string">&quot;[object MutationObserverConstructor]&quot;</span>)</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">let</span> counter = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(flushCallbacks);</span><br><span class="line">  <span class="keyword">const</span> textNode = <span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(<span class="title class_">String</span>(counter));</span><br><span class="line">  observer.<span class="title function_">observe</span>(textNode, &#123;</span><br><span class="line">    <span class="attr">characterData</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    counter = (counter + <span class="number">1</span>) % <span class="number">2</span>;</span><br><span class="line">    textNode.<span class="property">data</span> = <span class="title class_">String</span>(counter);</span><br><span class="line">  &#125;;</span><br><span class="line">  isUsingMicroTask = <span class="literal">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> setImmediate !== <span class="string">&quot;undefined&quot;</span> &amp;&amp; <span class="title function_">isNative</span>(setImmediate)) &#123;</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setImmediate</span>(flushCallbacks);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(flushCallbacks, <span class="number">0</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">nextTick</span>(<span class="params">cb?: <span class="built_in">Function</span>, ctx?: <span class="built_in">Object</span></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> _resolve;</span><br><span class="line">  <span class="comment">// 把用户传来的函数cb添加进callbacks里</span></span><br><span class="line">  <span class="comment">// 调用timerFunc函数，因为timerFunc是异步的，会等到所有同步任务执行完再执行</span></span><br><span class="line">  <span class="comment">// timerFunc里面会调用flushCallbacks</span></span><br><span class="line">  callbacks.<span class="title function_">push</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        cb.<span class="title function_">call</span>(ctx);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="title function_">handleError</span>(e, ctx, <span class="string">&quot;nextTick&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_resolve) &#123;</span><br><span class="line">      <span class="title function_">_resolve</span>(ctx);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (!pending) &#123;</span><br><span class="line">    pending = <span class="literal">true</span>;</span><br><span class="line">    <span class="title function_">timerFunc</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// $flow-disable-line</span></span><br><span class="line">  <span class="keyword">if</span> (!cb &amp;&amp; <span class="keyword">typeof</span> <span class="title class_">Promise</span> !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      _resolve = resolve;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/24/yuque/%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B/">整体流程</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/14/yuque/03-RN%E5%B7%A5%E7%A8%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">03-RN工程启动流程</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

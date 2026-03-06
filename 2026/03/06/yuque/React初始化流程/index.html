@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;9:55:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>  版本：18.3.1</p>
+<p>react的初始化流程包括：createRoot，render两部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一步：创建root</span></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;root&quot;</span>));</span><br><span class="line"><span class="comment">// 第二步：渲染</span></span><br><span class="line">root.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="createRoot"><a href="#createRoot" class="headerlink" title="createRoot"></a>createRoot</h3><p>createRoot是为 render 阶段做准备</p>
+<p><strong>创建root节点</strong></p>
+<p>fiberRoot全局唯一单例，root.current 指向当前正在展示fiber，workInProgress指向更新时创建的fiber。这就是双缓存机制</p>
+<p>containerInfo: 创建当前节点时的dom节点</p>
+<p><strong>创建HostRootFiber</strong></p>
+<p>hostRootFiber 为根fiber，每次更新都是从根节点开始</p>
+<p>**建立FiberRoot与HostRootFiber关系   **</p>
+<p><strong>并且会在root根节点上绑定所有的事件</strong></p>
+<pre><code>流程图
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768275827339-9520d84f-af4e-4d5f-bd62-591c9078f0fa.jpeg" alt="画板"></p>
+<p>初始函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createRoot</span>(<span class="params">container,options</span>): <span class="title class_">RootType</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建容器</span></span><br><span class="line">  <span class="keyword">const</span> root = <span class="title function_">createContainer</span>(</span><br><span class="line">    container,</span><br><span class="line">    <span class="title class_">ConcurrentRoot</span>,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    isStrictMode,</span><br><span class="line">    concurrentUpdatesByDefaultOverride,</span><br><span class="line">    identifierPrefix,</span><br><span class="line">    onUncaughtError,</span><br><span class="line">    onCaughtError,</span><br><span class="line">    onRecoverableError,</span><br><span class="line">    onDefaultTransitionIndicator,</span><br><span class="line">    transitionCallbacks,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> rootContainerElement = container;</span><br><span class="line">  <span class="title function_">listenToAllSupportedEvents</span>(rootContainerElement);  <span class="comment">// 在根节点监听所有事件</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ReactDOMRoot</span>(root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>root 创建以及属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FiberRootNode</span>(<span class="params"></span></span><br><span class="line"><span class="params">   containerInfo,</span></span><br><span class="line"><span class="params">   tag,</span></span><br><span class="line"><span class="params">   hydrate,</span></span><br><span class="line"><span class="params">   identifierPrefix,</span></span><br><span class="line"><span class="params">   onRecoverableError</span></span><br><span class="line"><span class="params"> </span>) &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">tag</span> = tag; <span class="comment">// leagcyRoot/concurrentRoot </span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">containerInfo</span> = containerInfo; <span class="comment">// root根节点</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pendingChildren</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">current</span> = <span class="literal">null</span>; <span class="comment">// 当前视图的Fiber树</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pingCache</span> = <span class="literal">null</span>; <span class="comment">// </span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">finishedWork</span> = <span class="literal">null</span>; <span class="comment">// 被提交的fiberTree</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">timeoutHandle</span> = noTimeout; <span class="comment">// 定时器任务（宏任务）</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">context</span> = <span class="literal">null</span>; <span class="comment">// 上下文</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pendingContext</span> = <span class="literal">null</span>; <span class="comment">// getContextForSubtree(parentComponent) 的值</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">callbackNode</span> = <span class="literal">null</span>; <span class="comment">// scheduler 体系的 Task 类型</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">callbackPriority</span> = <span class="title class_">NoLane</span>; <span class="comment">// scheduler 体系的 优先级 1、2、3、4、5</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">eventTimes</span> = <span class="title function_">createLaneMap</span>(<span class="title class_">NoLanes</span>); </span><br><span class="line">   <span class="comment">// 长度32位的数据 number[]32 , 某个事件触发的时间点 markRootUpdated 在finished的时候再清除。</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">expirationTimes</span> = <span class="title function_">createLaneMap</span>(<span class="title class_">NoTimestamp</span>); </span><br><span class="line">   <span class="comment">// 长度32位的数据 number[]32 , 某个事件触发的过期时间 markStarvedLanesAsExpired </span></span><br><span class="line">   <span class="comment">// 在finished的时候再清除，根据lane 和 eventTime 算出来的。</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// 优先级调度相关</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pendingLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">suspendedLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pingedLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">expiredLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">mutableReadLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">finishedLanes</span> = <span class="title class_">NoLanes</span>; <span class="comment">// commit  render </span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">entangledLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">entanglements</span> = <span class="title function_">createLaneMap</span>(<span class="title class_">NoLanes</span>);</span><br><span class="line">   <span class="comment">// 就是一个标识字符，一般为空</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">identifierPrefix</span> = identifierPrefix;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">onRecoverableError</span> = onRecoverableError;</span><br><span class="line"></span><br><span class="line">   &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">mutableSourceEagerHydrationData</span> = <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">effectDuration</span> = <span class="number">0</span>;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">passiveEffectDuration</span> = <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">memoizedUpdaters</span> = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">     <span class="keyword">var</span> pendingUpdatersLaneMap = (<span class="variable language_">this</span>.<span class="property">pendingUpdatersLaneMap</span> = []);</span><br><span class="line">     <span class="comment">// 只有在 addFiberToLanesMap  movePendingFibersToMemoized 才会用到，</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> _i = <span class="number">0</span>; _i &lt; <span class="title class_">TotalLanes</span>; _i++) &#123;</span><br><span class="line">       pendingUpdatersLaneMap.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">Set</span>());</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>hostRootFiber 创建</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FiberNode</span>(<span class="params">tag, pendingProps, key, mode</span>) &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">tag</span> = tag; <span class="comment">// 其实就是fiber类型 26种</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">key</span> = key; <span class="comment">// 开发者指定的key，可以为null</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">elementType</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">type</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">stateNode</span> = <span class="literal">null</span>; <span class="comment">// Fiber</span></span><br><span class="line">   <span class="comment">// 结构属性</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">return</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">child</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">sibling</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">index</span> = <span class="number">0</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">ref</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="comment">// 状态属性</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">pendingProps</span> = pendingProps;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">memoizedProps</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">updateQueue</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">memoizedState</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">dependencies</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">mode</span> = mode; <span class="comment">// Effects</span></span><br><span class="line">   <span class="comment">// 优先级 副作用</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">flags</span> = <span class="title class_">NoFlags</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">subtreeFlags</span> = <span class="title class_">NoFlags</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">deletions</span> = <span class="literal">null</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">lanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">childLanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">alternate</span> = <span class="literal">null</span>;</span><br><span class="line">   ...</span><br><span class="line"> &#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="render流程"><a href="#render流程" class="headerlink" title="render流程"></a>render流程</h3><p><font style="color:rgb(89, 89, 89);">前期准备完成后，开始 render 的过程。就是reconciler和Scheduler的过程，首先获取当前更新优先级，创建更新对象，将更新对象加入UpdateQueue中，</font></p>
+<p><font style="color:rgb(89, 89, 89);">然后开启调度，调度会在下个宏任务的时候执行workLoop。</font></p>
+<p><font style="color:rgb(89, 89, 89);">workLoop过程就是递归执行每个节点的beginWork，completeWork的过程，beginWork会给每个节点创建workInProgress的fiber，这是向下递的过程。</font></p>
+<p><font style="color:rgb(89, 89, 89);">completeWork会从下向上依次生成Dom树，并会打上副作用标记，直到根节点，这是归的过程。</font></p>
+<p><font style="color:rgb(89, 89, 89);">然后进入commit阶段，commit会经历三个阶段</font></p>
+<ol>
+<li><font style="color:rgb(89, 89, 89);">beforeMutation</font></li>
+<li><font style="color:rgb(89, 89, 89);">mutation</font></li>
+<li><font style="color:rgb(89, 89, 89);">layout</font></li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768267988701-c08ebd7a-b516-47df-8ca4-156e9a8d3168.jpeg" alt="画板"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768287759093-ba9d2cd4-6861-4789-9f33-8a24b97eb40d.jpeg" alt="画板"></p>
+<h3 id="beginWork"><a href="#beginWork" class="headerlink" title="beginWork"></a>beginWork</h3><p>beginWork函数就是根据不同的节点类型（如函数组件、类组件、html 标签、树的根节点等），调用不同的函数，来得到下一个将要处理的 fiber 节点。后续再通过这个新的 fiber 节点，递归后续的 jsx，直到全部遍历完</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768962108605-c36ee4bc-6d78-437a-9378-8bd17c5af688.jpeg" alt="画板"></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">beginWork</span>(<span class="params">current,workInProgress, renderLanes,</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (current !== <span class="literal">null</span>) &#123;</span><br><span class="line">;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    !hasScheduledUpdateOrContext &amp;&amp;</span><br><span class="line">    (workInProgress.<span class="property">flags</span> &amp; <span class="title class_">DidCapture</span>) === <span class="title class_">NoFlags</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    didReceiveUpdate = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">attemptEarlyBailoutIfNoScheduledUpdate</span>(</span><br><span class="line">      current,</span><br><span class="line">      workInProgress,</span><br><span class="line">      renderLanes,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  workInProgress.<span class="property">lanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line">  <span class="keyword">switch</span> (workInProgress.<span class="property">tag</span>) &#123; </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">LazyComponent</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">FunctionComponent</span>: &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">Component</span> = workInProgress.<span class="property">type</span>;</span><br><span class="line">      <span class="keyword">const</span> unresolvedProps = workInProgress.<span class="property">pendingProps</span>;</span><br><span class="line">      <span class="keyword">const</span> resolvedProps =  workInProgress.<span class="property">elementType</span> === <span class="title class_">Component</span> ? unresolvedProps : <span class="title function_">resolveDefaultProps</span>(<span class="title class_">Component</span>, unresolvedProps);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateFunctionComponent</span>(</span><br><span class="line">        current,</span><br><span class="line">        workInProgress,</span><br><span class="line">        <span class="title class_">Component</span>,</span><br><span class="line">        resolvedProps,</span><br><span class="line">        renderLanes,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ClassComponent</span>: &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">Component</span> = workInProgress.<span class="property">type</span>;</span><br><span class="line">      <span class="keyword">const</span> unresolvedProps = workInProgress.<span class="property">pendingProps</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateClassComponent</span>(</span><br><span class="line">        current,</span><br><span class="line">        workInProgress,</span><br><span class="line">        <span class="title class_">Component</span>,</span><br><span class="line">        resolvedProps,</span><br><span class="line">        renderLanes,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostRoot</span>:  <span class="comment">// 根root节点</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateHostRoot</span>(current, workInProgress, renderLanes);</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostComponent</span>: <span class="comment">// 原生标签div，p</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateHostComponent</span>(current, workInProgress, renderLanes);</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostText</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateHostText</span>(current, workInProgress);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="completeWork"><a href="#completeWork" class="headerlink" title="completeWork"></a>completeWork</h3><p><font style="color:rgb(102, 102, 102);">completeWork主要的作用有这么几点：</font><font style="color:rgb(89, 89, 89);">创建DOM，打标签，收集子标签，构建离屏DOM树</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768980787903-d679b8a4-f480-4bba-ab91-b3ee488ab6c6.jpeg" alt="画板"></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">completeWork</span>(<span class="params"></span></span><br><span class="line"><span class="params">  current: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">  workInProgress: Fiber,</span></span><br><span class="line"><span class="params">  renderLanes: Lanes,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> | <span class="literal">null</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> newProps = workInProgress.<span class="property">pendingProps</span>; <span class="comment">// 待处理的新属性</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">popTreeContext</span>(workInProgress);</span><br><span class="line">  <span class="keyword">switch</span> (workInProgress.<span class="property">tag</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">IndeterminateComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">LazyComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">SimpleMemoComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">FunctionComponent</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ForwardRef</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">Fragment</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">Mode</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">Profiler</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ContextConsumer</span>:</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MemoComponent</span>:</span><br><span class="line">      <span class="title function_">bubbleProperties</span>(workInProgress);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ClassComponent</span>: &#123;</span><br><span class="line">      <span class="title function_">bubbleProperties</span>(workInProgress);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostComponent</span>: &#123;</span><br><span class="line">      <span class="keyword">const</span> rootContainerInstance = <span class="title function_">getRootHostContainer</span>();</span><br><span class="line">      <span class="keyword">const</span> <span class="keyword">type</span> = workInProgress.<span class="property">type</span>; <span class="comment">// 原生标签名</span></span><br><span class="line">      <span class="keyword">if</span> (current !== <span class="literal">null</span> &amp;&amp; workInProgress.<span class="property">stateNode</span> != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="title function_">updateHostComponent</span>(     <span class="comment">// 处理原生属性更新</span></span><br><span class="line">          current,</span><br><span class="line">          workInProgress,</span><br><span class="line">          <span class="keyword">type</span>,</span><br><span class="line">          newProps,</span><br><span class="line">          rootContainerInstance,</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (current.<span class="property">ref</span> !== workInProgress.<span class="property">ref</span>) &#123;   <span class="comment">// 处理ref</span></span><br><span class="line">          <span class="title function_">markRef</span>(workInProgress);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">const</span> instance = <span class="title function_">createInstance</span>(      <span class="comment">// 创建原生节点</span></span><br><span class="line">            <span class="keyword">type</span>,</span><br><span class="line">            newProps,</span><br><span class="line">            rootContainerInstance,</span><br><span class="line">            currentHostContext,</span><br><span class="line">            workInProgress,</span><br><span class="line">          );</span><br><span class="line">          <span class="title function_">appendAllChildren</span>(instance, workInProgress, <span class="literal">false</span>, <span class="literal">false</span>); <span class="comment">// 子dom加入到当前dom</span></span><br><span class="line">          workInProgress.<span class="property">stateNode</span> = instance;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (</span><br><span class="line">            <span class="title function_">finalizeInitialChildren</span>(   <span class="comment">// 给标签添加属性</span></span><br><span class="line">              instance,</span><br><span class="line">              <span class="keyword">type</span>,</span><br><span class="line">              newProps,</span><br><span class="line">              rootContainerInstance,</span><br><span class="line">              currentHostContext,</span><br><span class="line">            )</span><br><span class="line">          ) &#123;</span><br><span class="line">            <span class="title function_">markUpdate</span>(workInProgress);</span><br><span class="line">          &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (workInProgress.<span class="property">ref</span> !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">// If there is a ref on a host node we need to schedule a callback</span></span><br><span class="line">          <span class="title function_">markRef</span>(workInProgress);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">bubbleProperties</span>(workInProgress);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="update类型"><a href="#update类型" class="headerlink" title="update类型"></a>update类型</h3><p>初始阶段，类组件的setState，forceUpdate 会去创建Update对象</p>
+<p>函数组件的 Update，UpdateQueue 略有不同。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt; = &#123;</span><br><span class="line">  <span class="attr">eventTime</span>: <span class="built_in">number</span>,</span><br><span class="line">  <span class="attr">lane</span>: <span class="title class_">Lane</span>, <span class="comment">// 优先级</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">tag</span>: <span class="number">0</span> | <span class="number">1</span> | <span class="number">2</span> | <span class="number">3</span>, <span class="comment">// 更新类型</span></span><br><span class="line">  <span class="attr">payload</span>: <span class="built_in">any</span>, <span class="comment">// 携带的参数</span></span><br><span class="line">  <span class="attr">callback</span>: (<span class="function">() =&gt;</span> mixed) | <span class="literal">null</span>,  <span class="comment">// setState的回调</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">next</span>: <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt; | <span class="literal">null</span>, <span class="comment">// 下一个</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">SharedQueue</span>&lt;<span class="title class_">State</span>&gt; = &#123;|</span><br><span class="line">  <span class="attr">pending</span>: <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt; | <span class="literal">null</span>,  <span class="comment">// 新收集的，单向循环链表</span></span><br><span class="line">  <span class="attr">lanes</span>: <span class="title class_">Lanes</span>,  <span class="comment">// 所有的update的合集</span></span><br><span class="line">|&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">UpdateQueue</span>&lt;<span class="title class_">State</span>&gt; = &#123;</span><br><span class="line">  <span class="attr">baseState</span>: <span class="title class_">State</span>, <span class="comment">// 老的，基本状态，子节点</span></span><br><span class="line">  <span class="attr">firstBaseUpdate</span>: <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt; | <span class="literal">null</span>, <span class="comment">// 第一个，单向链表</span></span><br><span class="line">  <span class="attr">lastBaseUpdate</span>: <span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt; | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">shared</span>: <span class="title class_">SharedQueue</span>&lt;<span class="title class_">State</span>&gt;, <span class="comment">// 新的 queue</span></span><br><span class="line">  <span class="attr">effects</span>: <span class="title class_">Array</span>&lt;<span class="title class_">Update</span>&lt;<span class="title class_">State</span>&gt;&gt; | <span class="literal">null</span>,</span><br><span class="line">|&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">UpdateState</span> = <span class="number">0</span>;  <span class="comment">// 初次渲染</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ReplaceState</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">ForceUpdate</span> = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">CaptureUpdate</span> = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/03/06/yuque/React%E7%9A%84commit%E9%98%B6%E6%AE%B5/"></a>
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/yuque/React%E4%B8%AD%E7%9A%84diff%E7%AE%97%E6%B3%95/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

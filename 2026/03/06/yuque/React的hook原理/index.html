@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;9:53:51</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><font style="color:rgb(89, 89, 89);">hook规则：不能在循环，条件判断，嵌套函数中调用hook，只能函数顶层调用。</font></p>
+<p><font style="color:rgb(89, 89, 89);">在每个fiber 节点上有一个属性</font>**<font style="color:rgb(142, 0, 75);">memoizedState </font>**保存这本节点的hook单向链表，react用链表的顺序来指定hook。</p>
+<h3 id="hook的类型"><a href="#hook的类型" class="headerlink" title="hook的类型"></a>hook的类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Hook</span> = &#123;</span><br><span class="line">  <span class="attr">memoizedState</span>: <span class="built_in">any</span>, <span class="comment">// 不同hook，取值不同，useState、useReducer存state，useEffect，useLayoutEffect存effect单向循环链表</span></span><br><span class="line">  <span class="attr">baseState</span>: <span class="built_in">any</span>,</span><br><span class="line">  <span class="attr">baseQueue</span>: <span class="title class_">Update</span>&lt;<span class="built_in">any</span>, <span class="built_in">any</span>&gt; | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">queue</span>: <span class="built_in">any</span>,  <span class="comment">// 当前hook的更新队列</span></span><br><span class="line">  <span class="attr">next</span>: <span class="title class_">Hook</span> | <span class="literal">null</span>, <span class="comment">// 下一个hook指针，为null，表示最后一个hook</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数组件有单独定义的Update， UpdateQueue</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Update</span>&lt;S, A&gt; = &#123;</span><br><span class="line">  <span class="attr">lane</span>: <span class="title class_">Lane</span>,</span><br><span class="line">  <span class="attr">action</span>: A,</span><br><span class="line">  <span class="attr">hasEagerState</span>: <span class="built_in">boolean</span>,</span><br><span class="line">  <span class="attr">eagerState</span>: S | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">next</span>: <span class="title class_">Update</span>&lt;S, A&gt;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">UpdateQueue</span>&lt;S, A&gt; = &#123;</span><br><span class="line">  <span class="attr">pending</span>: <span class="title class_">Update</span>&lt;S, A&gt; | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">lanes</span>: <span class="title class_">Lanes</span>,</span><br><span class="line">  <span class="attr">dispatch</span>: (<span class="function"><span class="params">A</span> =&gt;</span> mixed) | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">lastRenderedReducer</span>: (<span class="function">(<span class="params">S, A</span>) =&gt;</span> S) | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">lastRenderedState</span>: S | <span class="literal">null</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(89, 89, 89);"></font></p>
+<p>组件进入<code>render</code>阶段，根据tags标记分别处理，updateFunctionComponent处理函数组件，其中会调用<code>renderWithHooks</code>开始hook的处理</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/jpeg/462392/1768549637965-1c9fdd27-f56e-41fd-9057-12e61371c5a9.jpeg" alt="画板"></p>
+<p>hook的内存表现</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/462392/1768895605801-9f54d965-3ec9-4d83-96df-270c9a160e01.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> renderWithHooks&lt;<span class="title class_">Props</span>, <span class="title class_">SecondArg</span>&gt;(</span><br><span class="line">  <span class="attr">current</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">workInProgress</span>: <span class="title class_">Fiber</span>,</span><br><span class="line">  <span class="title class_">Component</span>: <span class="function">(<span class="params">p: Props, arg: SecondArg</span>) =&gt;</span> any,</span><br><span class="line">  <span class="attr">props</span>: <span class="title class_">Props</span>,</span><br><span class="line">  <span class="attr">secondArg</span>: <span class="title class_">SecondArg</span>,</span><br><span class="line">  <span class="attr">nextRenderLanes</span>: <span class="title class_">Lanes</span>,</span><br><span class="line">): any &#123;</span><br><span class="line">  renderLanes = nextRenderLanes;</span><br><span class="line">  currentlyRenderingFiber = workInProgress; <span class="comment">// 全局变量，记录当前fiber节点，当此函数组件处理完会清空</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  workInProgress.<span class="property">memoizedState</span> = <span class="literal">null</span>; <span class="comment">// 初始化 hooks 单向链表</span></span><br><span class="line">  workInProgress.<span class="property">updateQueue</span> = <span class="literal">null</span>;</span><br><span class="line">  workInProgress.<span class="property">lanes</span> = <span class="title class_">NoLanes</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 全局变量， 所有hook的实现函数，区分mount和update</span></span><br><span class="line">  <span class="title class_">ReactCurrentDispatcher</span>.<span class="property">current</span> =    </span><br><span class="line">      current === <span class="literal">null</span> || current.<span class="property">memoizedState</span> === <span class="literal">null</span></span><br><span class="line">        ? <span class="title class_">HooksDispatcherOnMount</span></span><br><span class="line">        : <span class="title class_">HooksDispatcherOnUpdate</span>;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> children = <span class="title class_">Component</span>(props, secondArg);  <span class="comment">// 执行函数</span></span><br><span class="line"></span><br><span class="line">  <span class="title class_">ReactCurrentDispatcher</span>.<span class="property">current</span> = <span class="title class_">ContextOnlyDispatcher</span>;</span><br><span class="line"></span><br><span class="line">  renderLanes = <span class="title class_">NoLanes</span>; <span class="comment">// 重置全局变量</span></span><br><span class="line">  currentlyRenderingFiber = (<span class="attr">null</span>: any);</span><br><span class="line"></span><br><span class="line">  currentHook = <span class="literal">null</span>;</span><br><span class="line">  workInProgressHook = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> children;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化阶段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> mountReducer&lt;S, I, A&gt;(</span><br><span class="line">  <span class="attr">reducer</span>: <span class="function">(<span class="params">S, A</span>) =&gt;</span> S,</span><br><span class="line">  <span class="attr">initialArg</span>: I,</span><br><span class="line">  init?: <span class="function"><span class="params">I</span> =&gt;</span> S,</span><br><span class="line">): [S, <span class="title class_">Dispatch</span>&lt;A&gt;] &#123;</span><br><span class="line">  <span class="comment">// 创建hook对象,并赋值给fiber.memoizedState和全局变量workInProgressHook</span></span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">mountWorkInProgressHook</span>(); </span><br><span class="line">  <span class="keyword">let</span> initialState;</span><br><span class="line">  <span class="comment">// 计算初始 state</span></span><br><span class="line">  <span class="keyword">if</span> (init !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    initialState = <span class="title function_">init</span>(initialArg);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    initialState = ((<span class="attr">initialArg</span>: any): S);</span><br><span class="line">  &#125;</span><br><span class="line">  hook.<span class="property">memoizedState</span> = hook.<span class="property">baseState</span> = initialState; <span class="comment">// 初始state，赋值给hook对象的 memoizedState 和 baseState</span></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">queue</span>: <span class="title class_">UpdateQueue</span>&lt;S, A&gt; = &#123;   <span class="comment">// 创建queue，并赋值给hook.queue</span></span><br><span class="line">    <span class="attr">pending</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">lanes</span>: <span class="title class_">NoLanes</span>,</span><br><span class="line">    <span class="attr">dispatch</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">lastRenderedReducer</span>: reducer,</span><br><span class="line">    <span class="attr">lastRenderedState</span>: (<span class="attr">initialState</span>: any),</span><br><span class="line">  &#125;;</span><br><span class="line">  hook.<span class="property">queue</span> = queue;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">dispatch</span>: <span class="title class_">Dispatch</span>&lt;A&gt; = (queue.<span class="property">dispatch</span> = (dispatchReducerAction.<span class="title function_">bind</span>(</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    currentlyRenderingFiber,</span><br><span class="line">    queue,</span><br><span class="line">  ): any));</span><br><span class="line">  <span class="keyword">return</span> [hook.<span class="property">memoizedState</span>, dispatch];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> dispatchReducerAction&lt;S, A&gt;(</span><br><span class="line">  <span class="attr">fiber</span>: <span class="title class_">Fiber</span>,</span><br><span class="line">  <span class="attr">queue</span>: <span class="title class_">UpdateQueue</span>&lt;S, A&gt;,</span><br><span class="line">  <span class="attr">action</span>: A,</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> lane = <span class="title function_">requestUpdateLane</span>(fiber); <span class="comment">// 获取优先级</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">update</span>: <span class="title class_">Update</span>&lt;S, A&gt; = &#123;  <span class="comment">// 创建更新对象</span></span><br><span class="line">    lane,</span><br><span class="line">    action,</span><br><span class="line">    <span class="attr">hasEagerState</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">eagerState</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">next</span>: (<span class="attr">null</span>: any),</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isRenderPhaseUpdate</span>(fiber)) &#123;</span><br><span class="line">    <span class="title function_">enqueueRenderPhaseUpdate</span>(queue, update); </span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 更新对象暂存到concurrentQueues 数组中</span></span><br><span class="line">    在render阶段finishQueueingConcurrentUpdates中，会加入到fiber的queue中</span><br><span class="line">    <span class="keyword">const</span> root = <span class="title function_">enqueueConcurrentHookUpdate</span>(fiber, queue, update, lane);</span><br><span class="line">    <span class="keyword">if</span> (root !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> eventTime = <span class="title function_">requestEventTime</span>();</span><br><span class="line">      <span class="comment">// 调度更新</span></span><br><span class="line">      <span class="title function_">scheduleUpdateOnFiber</span>(root, fiber, lane, eventTime);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新阶段</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> updateReducer&lt;S, I, A&gt;(</span><br><span class="line">  <span class="attr">reducer</span>: <span class="function">(<span class="params">S, A</span>) =&gt;</span> S,</span><br><span class="line">  <span class="attr">initialArg</span>: I,</span><br><span class="line">  init?: <span class="function"><span class="params">I</span> =&gt;</span> S,</span><br><span class="line">): [S, <span class="title class_">Dispatch</span>&lt;A&gt;] &#123;</span><br><span class="line">  <span class="comment">// 根据 当前hook，复制出一个新hook 并赋值给fiber.memoizedState和全局变量workInProgressHook</span></span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">updateWorkInProgressHook</span>();  </span><br><span class="line">  <span class="keyword">const</span> queue = hook.<span class="property">queue</span>; <span class="comment">// hook上的 updateQueue</span></span><br><span class="line"></span><br><span class="line">  queue.<span class="property">lastRenderedReducer</span> = reducer;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// queue.pending 赋值给 hook.baseQueue，然后将 queue.pending 置空</span></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">current</span>: <span class="title class_">Hook</span> = (<span class="attr">currentHook</span>: <span class="built_in">any</span>);</span><br><span class="line">  <span class="keyword">let</span> baseQueue = current.<span class="property">baseQueue</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> pendingQueue = queue.<span class="property">pending</span>;</span><br><span class="line">  <span class="keyword">if</span> (pendingQueue !== <span class="literal">null</span>) &#123;</span><br><span class="line">    current.<span class="property">baseQueue</span> = baseQueue = pendingQueue;</span><br><span class="line">    queue.<span class="property">pending</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (baseQueue !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> first = baseQueue.<span class="property">next</span>;</span><br><span class="line">    <span class="keyword">let</span> newState = current.<span class="property">baseState</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> newBaseState = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> newBaseQueueFirst = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> newBaseQueueLast = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> update = first;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历baseQueue中的update对象，计算出新的state，并赋值给hook.memoizedState</span></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line"> </span><br><span class="line">      <span class="keyword">if</span> (update.<span class="property">hasEagerState</span>) &#123;</span><br><span class="line">        newState = ((update.<span class="property">eagerState</span>: <span class="built_in">any</span>): S); <span class="comment">// 针对函数形式的setState</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> action = update.<span class="property">action</span>;</span><br><span class="line">        newState = <span class="title function_">reducer</span>(newState, action);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      update = update.<span class="property">next</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (update !== <span class="literal">null</span> &amp;&amp; update !== first);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (newBaseQueueLast === <span class="literal">null</span>) &#123;</span><br><span class="line">      newBaseState = newState;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      newBaseQueueLast.<span class="property">next</span> = (<span class="attr">newBaseQueueFirst</span>: <span class="built_in">any</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新hook状态，并返回</span></span><br><span class="line">    hook.<span class="property">memoizedState</span> = newState;</span><br><span class="line">    hook.<span class="property">baseState</span> = newBaseState;</span><br><span class="line">    hook.<span class="property">baseQueue</span> = newBaseQueueLast;</span><br><span class="line">    queue.<span class="property">lastRenderedState</span> = newState;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">dispatch</span>: <span class="title class_">Dispatch</span>&lt;A&gt; = (queue.<span class="property">dispatch</span>: <span class="built_in">any</span>);</span><br><span class="line">  <span class="keyword">return</span> [hook.<span class="property">memoizedState</span>, dispatch];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="副作用Effect"><a href="#副作用Effect" class="headerlink" title="副作用Effect"></a>副作用Effect</h3><p><font style="color:rgb(89, 89, 89);">调用</font><code>&lt;font style=&quot;color:rgb(255, 80, 44);background-color:rgb(255, 245, 245);&quot;&gt;useEffect&lt;/font&gt;</code><font style="color:rgb(89, 89, 89);">hook实际上仅仅只是将相关信息保存在fiber上，然后打上标签。</font></p>
+<p><font style="color:rgb(89, 89, 89);">真正执行副作用的时候是在</font><code>&lt;font style=&quot;color:rgb(255, 80, 44);background-color:rgb(255, 245, 245);&quot;&gt;commit&lt;/font&gt;</code><font style="color:rgb(89, 89, 89);">阶段</font></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Effect</span> = &#123;</span><br><span class="line">  <span class="attr">tag</span>: <span class="title class_">HookFlags</span>,</span><br><span class="line">  <span class="attr">create</span>: <span class="function">() =&gt;</span> (<span class="function">() =&gt;</span> <span class="built_in">void</span>) | <span class="built_in">void</span>, <span class="comment">// 回调函数</span></span><br><span class="line">  <span class="attr">destroy</span>: (<span class="function">() =&gt;</span> <span class="built_in">void</span>) | <span class="built_in">void</span>, <span class="comment">// 销毁函数</span></span><br><span class="line">  <span class="attr">deps</span>: <span class="title class_">Array</span>&lt;mixed&gt; | <span class="literal">null</span>, <span class="comment">// 依赖</span></span><br><span class="line">  <span class="attr">next</span>: <span class="title class_">Effect</span>, <span class="comment">// 下一个effect</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>初始化阶段在 useEffect，useLayoutEffect，不仅会创建hook对象 加入到 fiber.memoizedState 的hook链表中。还会在fiber.updateQueue 添加此effect副作用</p>
+<p>fiber.updateQueue对象只有两个属性一个是lastEffect, stores。 lastEffect指向最后一个effect，lastEffect.next 就是第一个effect。并且他是一个单向循环链表</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">mountLayoutEffect</span>(<span class="params"></span></span><br><span class="line"><span class="params">  create: () =&gt; (() =&gt; <span class="built_in">void</span>) | <span class="built_in">void</span>,</span></span><br><span class="line"><span class="params">  deps: <span class="built_in">Array</span>&lt;mixed&gt; | <span class="built_in">void</span> | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params"></span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="attr">fiberFlags</span>: <span class="title class_">Flags</span> = <span class="title class_">UpdateEffect</span>;</span><br><span class="line">  <span class="keyword">if</span> (enableSuspenseLayoutEffectSemantics) &#123;</span><br><span class="line">    fiberFlags |= <span class="title class_">LayoutStaticEffect</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// HookLayout 表示此为useLayoutEffect</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">mountEffectImpl</span>(fiberFlags, <span class="title class_">HookLayout</span>, create, deps);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">mountEffect</span>(<span class="params"></span></span><br><span class="line"><span class="params">  create: () =&gt; (() =&gt; <span class="built_in">void</span>) | <span class="built_in">void</span>,</span></span><br><span class="line"><span class="params">  deps: <span class="built_in">Array</span>&lt;mixed&gt; | <span class="built_in">void</span> | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params"></span>): <span class="built_in">void</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">mountEffectImpl</span>(</span><br><span class="line">      <span class="title class_">PassiveEffect</span> | <span class="title class_">PassiveStaticEffect</span>,</span><br><span class="line">      <span class="title class_">HookPassive</span>,  <span class="comment">//  HookPassive表示此hook是useEffect</span></span><br><span class="line">      create,</span><br><span class="line">      deps,</span><br><span class="line">    );</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">mountEffectImpl</span>(<span class="params">fiberFlags, hookFlags, create, deps</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="comment">// 初始化创建hook 并赋值给 fiber.memoizedState</span></span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">mountWorkInProgressHook</span>();</span><br><span class="line">  <span class="keyword">const</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps; <span class="comment">// 依赖项</span></span><br><span class="line">  currentlyRenderingFiber.<span class="property">flags</span> |= fiberFlags;</span><br><span class="line">  hook.<span class="property">memoizedState</span> = <span class="title function_">pushEffect</span>(</span><br><span class="line">    <span class="title class_">HookHasEffect</span> | hookFlags,</span><br><span class="line">    create,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    nextDeps,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">pushEffect</span>(<span class="params">tag, create, destroy, deps</span>) &#123;</span><br><span class="line">  <span class="comment">// 创建effect对象</span></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">effect</span>: <span class="title class_">Effect</span> = &#123; tag, create, destroy,  deps, <span class="attr">next</span>: (<span class="attr">null</span>: <span class="built_in">any</span>), &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取fiber上的updateQueue</span></span><br><span class="line">  <span class="keyword">let</span> <span class="attr">componentUpdateQueue</span>: <span class="literal">null</span> | <span class="title class_">FunctionComponentUpdateQueue</span> = (currentlyRenderingFiber.<span class="property">updateQueue</span>: <span class="built_in">any</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 如果 updateQueue不存在就初始化 只有两个属性lastEffect, stores,</span></span><br><span class="line">  <span class="comment">// 并把当前effect挂载到lastEffect上</span></span><br><span class="line">  <span class="keyword">if</span> (componentUpdateQueue === <span class="literal">null</span>) &#123;</span><br><span class="line">    componentUpdateQueue = <span class="title function_">createFunctionComponentUpdateQueue</span>();  </span><br><span class="line">    currentlyRenderingFiber.<span class="property">updateQueue</span> = (<span class="attr">componentUpdateQueue</span>: <span class="built_in">any</span>);</span><br><span class="line">    componentUpdateQueue.<span class="property">lastEffect</span> = effect.<span class="property">next</span> = effect;</span><br><span class="line">    <span class="comment">// 如果存在就加入到循环链表的最后</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> lastEffect = componentUpdateQueue.<span class="property">lastEffect</span>;</span><br><span class="line">    <span class="keyword">if</span> (lastEffect === <span class="literal">null</span>) &#123;</span><br><span class="line">      componentUpdateQueue.<span class="property">lastEffect</span> = effect.<span class="property">next</span> = effect;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> firstEffect = lastEffect.<span class="property">next</span>;</span><br><span class="line">      lastEffect.<span class="property">next</span> = effect;</span><br><span class="line">      effect.<span class="property">next</span> = firstEffect;</span><br><span class="line">      componentUpdateQueue.<span class="property">lastEffect</span> = effect;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> effect;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新阶段，也是同样的流程，只是根据deps的变化，tags会有所不同</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateEffectImpl</span>(<span class="params">fiberFlags, hookFlags, create, deps</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="comment">// 根据当前hook,创建新hook, 并把新hook挂载到链表上</span></span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">updateWorkInProgressHook</span>();</span><br><span class="line">  <span class="keyword">const</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">  <span class="keyword">let</span> destroy = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentHook !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> prevEffect = currentHook.<span class="property">memoizedState</span>;  <span class="comment">// 旧的 effect 对象</span></span><br><span class="line">    destroy = prevEffect.<span class="property">destroy</span>; <span class="comment">// 旧的effect.destroy</span></span><br><span class="line">    <span class="keyword">if</span> (nextDeps !== <span class="literal">null</span>) &#123; <span class="comment">// 新的deps</span></span><br><span class="line">      <span class="keyword">const</span> prevDeps = prevEffect.<span class="property">deps</span>;  <span class="comment">// 旧的deps</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 比较新旧deps, 如果相同, 就创建effect, 加入到 updateQueue,注意这里没有 HookHasEffect 标志</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">areHookInputsEqual</span>(nextDeps, prevDeps)) &#123;</span><br><span class="line">        hook.<span class="property">memoizedState</span> = <span class="title function_">pushEffect</span>(hookFlags, create, destroy, nextDeps);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  currentlyRenderingFiber.<span class="property">flags</span> |= fiberFlags;</span><br><span class="line"><span class="comment">// 这里是deps有变化的情况, 并且 flags 加入了 HookHasEffect</span></span><br><span class="line">  hook.<span class="property">memoizedState</span> = <span class="title function_">pushEffect</span>(</span><br><span class="line">    <span class="title class_">HookHasEffect</span> | hookFlags,</span><br><span class="line">    create,</span><br><span class="line">    destroy,</span><br><span class="line">    nextDeps,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="执行副作用"><a href="#执行副作用" class="headerlink" title="执行副作用"></a>执行副作用</h3><p>useEffect 被异步执行，用scheduler调度，并且是先执行destory，再执行 create。</p>
+<p>layoutEffect也是在commit阶段被执行，render结束，浏览器绘制前。destory是在Mutation阶段，create是在Layout阶段。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// useEffect 被异步执行 </span></span><br><span class="line"> <span class="title function_">scheduleCallback</span>(<span class="title class_">NormalSchedulerPriority</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">flushPassiveEffects</span>();</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行完 destory，立即执行 create</span></span><br><span class="line"><span class="title function_">commitPassiveUnmountEffects</span>(root.<span class="property">current</span>);</span><br><span class="line"><span class="title function_">commitPassiveMountEffects</span>(root, root.<span class="property">current</span>, lanes, transitions);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">commitHookEffectListUnmount</span>(<span class="params">  <span class="comment">// 执行effect的 destory</span></span></span><br><span class="line"><span class="params">  flags: HookFlags,</span></span><br><span class="line"><span class="params">  finishedWork: Fiber,</span></span><br><span class="line"><span class="params">  nearestMountedAncestor: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// updateQueue保存了effect链表</span></span><br><span class="line">  <span class="keyword">const</span> <span class="attr">updateQueue</span>: <span class="title class_">FunctionComponentUpdateQueue</span> | <span class="literal">null</span> = (finishedWork.<span class="property">updateQueue</span>: <span class="built_in">any</span>);</span><br><span class="line">  <span class="keyword">const</span> lastEffect = updateQueue !== <span class="literal">null</span> ? updateQueue.<span class="property">lastEffect</span> : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (lastEffect !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> firstEffect = lastEffect.<span class="property">next</span>;</span><br><span class="line">    <span class="keyword">let</span> effect = firstEffect;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((effect.<span class="property">tag</span> &amp; flags) === flags) &#123;</span><br><span class="line">        <span class="comment">// Unmount</span></span><br><span class="line">        <span class="keyword">const</span> destroy = effect.<span class="property">destroy</span>;</span><br><span class="line">        effect.<span class="property">destroy</span> = <span class="literal">undefined</span>;</span><br><span class="line">        <span class="keyword">if</span> (destroy !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">       </span><br><span class="line">          <span class="comment">// 安全的执行destory</span></span><br><span class="line">          <span class="title function_">safelyCallDestroy</span>(finishedWork, nearestMountedAncestor, destroy);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      effect = effect.<span class="property">next</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (effect !== firstEffect); <span class="comment">// 循环链表退出条件，直到回到第一个节点</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">commitHookEffectListMount</span>(<span class="params">flags: HookFlags, finishedWork: Fiber</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">updateQueue</span>: <span class="title class_">FunctionComponentUpdateQueue</span> | <span class="literal">null</span> = (finishedWork.<span class="property">updateQueue</span>: <span class="built_in">any</span>);</span><br><span class="line">  <span class="keyword">const</span> lastEffect = updateQueue !== <span class="literal">null</span> ? updateQueue.<span class="property">lastEffect</span> : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (lastEffect !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> firstEffect = lastEffect.<span class="property">next</span>;</span><br><span class="line">    <span class="keyword">let</span> effect = firstEffect;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((effect.<span class="property">tag</span> &amp; flags) === flags) &#123;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Mount   执行effect的create函数</span></span><br><span class="line">        <span class="keyword">const</span> create = effect.<span class="property">create</span>;</span><br><span class="line">    </span><br><span class="line">        effect.<span class="property">destroy</span> = <span class="title function_">create</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      effect = effect.<span class="property">next</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (effect !== firstEffect);  <span class="comment">// 循环链表退出条件，直到回到第一个节点</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> mountCallback&lt;T&gt;(<span class="attr">callback</span>: T, <span class="attr">deps</span>: <span class="title class_">Array</span>&lt;mixed&gt; | <span class="keyword">void</span> | <span class="literal">null</span>): T &#123;</span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">mountWorkInProgressHook</span>();</span><br><span class="line">  <span class="keyword">const</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">  hook.<span class="property">memoizedState</span> = [callback, nextDeps];</span><br><span class="line">  <span class="keyword">return</span> callback;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> updateCallback&lt;T&gt;(<span class="attr">callback</span>: T, <span class="attr">deps</span>: <span class="title class_">Array</span>&lt;mixed&gt; | <span class="keyword">void</span> | <span class="literal">null</span>): T &#123;</span><br><span class="line">  <span class="keyword">const</span> hook = <span class="title function_">updateWorkInProgressHook</span>();</span><br><span class="line">  <span class="keyword">const</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">  <span class="keyword">const</span> prevState = hook.<span class="property">memoizedState</span>;</span><br><span class="line">  <span class="keyword">if</span> (prevState !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nextDeps !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> prevDeps = prevState[<span class="number">1</span>];</span><br><span class="line">      <span class="comment">// 比较新旧依赖， 全等返回旧的 callback，否则重新赋值 hook.memoizedState</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">areHookInputsEqual</span>(nextDeps, prevDeps)) &#123;</span><br><span class="line">        <span class="keyword">return</span> prevState[<span class="number">0</span>];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  hook.<span class="property">memoizedState</span> = [callback, nextDeps];</span><br><span class="line">  <span class="keyword">return</span> callback;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较依赖  is内部只是 ===</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areHookInputsEqual</span>(<span class="params"></span></span><br><span class="line"><span class="params">  nextDeps: <span class="built_in">Array</span>&lt;mixed&gt;,</span></span><br><span class="line"><span class="params">  prevDeps: <span class="built_in">Array</span>&lt;mixed&gt; | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; prevDeps.<span class="property">length</span> &amp;&amp; i &lt; nextDeps.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">is</span>(nextDeps[i], prevDeps[i])) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/03/06/yuque/React%E4%B8%AD%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7/"></a>
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
