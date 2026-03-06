@@ -1,3 +1,8 @@
+
+title: React的hook原理
+---
+
+
 <font style="color:rgb(89, 89, 89);">hook规则：不能在循环，条件判断，嵌套函数中调用hook，只能函数顶层调用。</font>
 
 <font style="color:rgb(89, 89, 89);">在每个fiber 节点上有一个属性</font>**<font style="color:rgb(142, 0, 75);">memoizedState </font>**保存这本节点的hook单向链表，react用链表的顺序来指定hook。

@@ -1,3 +1,12 @@
+
+---
+title: React中的diff算法
+---
+
+
+
+
+
 在更新过程中的 beginWork 阶段，分别执行各类tags的组件的 update函数，末尾都会调用 reconcileChildren 进入到 fiber的 diff 流程
 
 diff的过程是 oldFiber 和 newChildren（jsx 转成的 虚拟dom）的对比，相同就复用fiber，否则就新建fiber，这就是 workInProgress的生成过程。生成的fiber上会打上标记，在commit阶段进行dom操作。

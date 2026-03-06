@@ -1,3 +1,12 @@
+
+---
+title: React的commit阶段
+---
+
+
+
+
+
 commit阶段是针对 finishedWork 每个节点fiber上的标记，做相应的处理，生命周期函数调用，hook的调用，dom操作，和标记，状态重置等。
 
 render流程中beginWork给每个节点打flags，在`completeWork`的时候收集自己子节点上的`flags`作为自己的`subtreeFlags`，通过subtreeFlags 可以知道自己的子节点副作用的情况
