@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?1905c5d8dd7357586e96ae0921be3519";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Dongaifeng">
+
+
+
+
+
+<title>postCss原理 | dongaifeng</title>
+
+
+
+    <link rel="icon" href="/image/avatar.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Devil Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Devil Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">首页</a>
+                
+                    <a class="menu-item" href="/category">归档</a>
+                
+                    <a class="menu-item" href="/tag">分类</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">postCss原理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Dongaifeng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026-03-06,&nbsp;&nbsp;10:48:29</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>CSS 语法转换的工具，自定义 CSS 之类的语法，这些语法可以被插件理解和转换。PostCSS 的工作原理是将 CSS 解析成抽象语法树（AST），然后通过一系列插件对 AST 进行处理，最后再将 AST 转回成 CSS。</p>
+<p>插件</p>
+<p><a target="_blank" rel="noopener" href="https://postcss.nodejs.cn/docs/postcss-plugins">官网插件列表</a></p>
+<ul>
+<li>postcss-px-to-viewport 用于将 CSS 中的像素单位（px）转换为视窗单位（vw）</li>
+<li>postcss-pxtorem 将像素单位转换为 rem。</li>
+<li>autoprefixer 使用 Can I Use 中的数据为你添加浏览器前缀</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;postcss-px-to-viewport&#x27;</span>: &#123;</span><br><span class="line">      <span class="comment">// 视窗的宽度，单位为 px</span></span><br><span class="line">      <span class="attr">viewportWidth</span>: <span class="number">750</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 如果需要指定视窗的高度，也可以设置该选项，单位为 px</span></span><br><span class="line">      <span class="attr">viewportHeight</span>: <span class="number">667</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 需要转换的 CSS 属性列表，&quot;*&quot; 表示所有属性</span></span><br><span class="line">      <span class="attr">propList</span>: [<span class="string">&quot;*&quot;</span>],</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 转换后的值保留的小数位数</span></span><br><span class="line">      <span class="attr">unitPrecision</span>: <span class="number">3</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 使用的视窗单位，如 &#x27;vw&#x27; 表示视窗宽度的百分比</span></span><br><span class="line">      <span class="attr">viewportUnit</span>: <span class="string">&#x27;vw&#x27;</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 字体使用的视窗单位，一般保持与 viewportUnit 一致</span></span><br><span class="line">      <span class="attr">fontViewportUnit</span>: <span class="string">&#x27;vw&#x27;</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 需要忽略的 CSS 选择器，如 &#x27;.ignore&#x27; 将不会被转换</span></span><br><span class="line">      <span class="attr">selectorBlackList</span>: [<span class="string">&#x27;.ignore&#x27;</span>],</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 小于 1px 的值不转换</span></span><br><span class="line">      <span class="attr">minPixelValue</span>: <span class="number">1</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 是否在媒体查询中也转换 px</span></span><br><span class="line">      <span class="attr">mediaQuery</span>: <span class="literal">true</span>,</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// 需要转换的单位，默认为 &#x27;px&#x27;</span></span><br><span class="line">      <span class="attr">unitToConvert</span>: <span class="string">&#x27;px&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">autoprefixer</span>: &#123;&#125;,  <span class="comment">// Autoprefixer 插件，用于添加浏览器前缀</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">plugins</span>: </span><br><span class="line">      <span class="comment">// 兼容浏览器，添加前缀</span></span><br><span class="line">      <span class="attr">autoprefixer</span>: &#123;</span><br><span class="line">          <span class="attr">overrideBrowserslist</span>: [</span><br><span class="line">              <span class="string">&quot;Android 4.1&quot;</span>,</span><br><span class="line">              <span class="string">&quot;iOS 7.1&quot;</span>,</span><br><span class="line">              <span class="string">&quot;Chrome &gt; 31&quot;</span>,</span><br><span class="line">              <span class="string">&quot;ff &gt; 31&quot;</span>,</span><br><span class="line">              <span class="string">&quot;ie &gt;= 8&quot;</span>,</span><br><span class="line">              <span class="string">&quot;last 10 versions&quot;</span>, <span class="comment">// 所有主流浏览器最近10版本用</span></span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">grid</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&quot;postcss-pxtorem&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">rootValue</span>: <span class="number">16</span>, <span class="comment">//结果为：设计稿元素尺寸/16，比如元素宽320px,最终页面会换算成 20rem</span></span><br><span class="line">          <span class="attr">propList</span>: [<span class="string">&quot;*&quot;</span>], <span class="comment">//是一个存储哪些将被转换的属性列表，这里设置为[&#x27;*&#x27;]全部，假设需要仅对边框进行设置，可以写[&#x27;*&#x27;, &#x27;!border*&#x27;]</span></span><br><span class="line">          <span class="attr">unitPrecision</span>: <span class="number">5</span>, <span class="comment">//保留rem小数点多少位</span></span><br><span class="line">          <span class="comment">//selectorBlackList: [&#x27;.radius&#x27;],  //则是一个对css选择器进行过滤的数组，比如你设置为[&#x27;fs&#x27;]，那例如fs-xl类名，里面有关px的样式将不被转换，这里也支持正则写法。</span></span><br><span class="line">          <span class="attr">replace</span>: <span class="literal">true</span>, <span class="comment">//这个真不知到干嘛用的。有知道的告诉我一下</span></span><br><span class="line">          <span class="attr">mediaQuery</span>: <span class="literal">false</span>, <span class="comment">//媒体查询( @media screen 之类的)中不生效</span></span><br><span class="line">          <span class="attr">minPixelValue</span>: <span class="number">12</span>, <span class="comment">//px小于12的不会被转换</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Dongaifeng</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2026/03/06/React%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Dongaifeng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
